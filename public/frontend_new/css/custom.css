@@ -1,0 +1,473 @@
+/*--------------------------------------------------------------
+  Template Name: Tmart-Minimalist eCommerce HTML5 Template.
+  Template URI: #
+  Description: Tmart is a unique website template designed in HTML with a simple & beautiful look. There is an excellent solution for creating clean, wonderful and trending material design corporate, corporate any other purposes websites.
+  Author: Theme365
+  Version: 1.0
+---------------------------------------------------------------*/
+
+/* ----------------------------------------------------
+	You can put your custom css code here: 
+-------------------------------------------------------*/
+
+.addtocart-btn {
+    background-color: #050505;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 15px 100px;
+    text-decoration: none;
+    border: 0px;
+}
+.addtocart-btn:hover {
+    background: #ff4136;
+    color: #ffffff;
+}
+.addtocart-btn:active {
+    position: relative;
+    top: 0px;
+}
+.section-center {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: rgb(253, 253, 253);
+    padding: 5px 20px;
+}
+@media (max-width: 40em) {
+.section-center {
+max-width: 100%;
+}
+}
+
+.section-center__profile {
+    max-width: 996px;
+}
+
+.center-section {
+    width: 900px;
+    margin: 0 auto;
+}
+@media (max-width: 40em){
+.center-section {
+    width: 100%;
+    margin: 0 auto;
+}
+}
+.arrow {
+    margin-left: 7px;
+}
+
+/* Status of order css */
+
+.background {
+    background-color: rgb(250, 250, 250);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    max-width: 900px;
+    margin: 0 auto;
+    height: 560px;
+}
+.background .container {
+    /* background-color: #fff; */
+    max-width: 698px;
+    min-height: 530px;
+    /* border-radius: 70px 50px 100px; */
+}
+.background .container .header {
+    padding: 40px 0px 20px 0px;
+    margin-top: 140px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.background .container .header .order .order-number {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0a0a0a;
+}
+.background .container .header .order .order-status {
+    color: #f29702;
+    font-weight: 600;
+}
+.background .container .content {
+    /* border: 1px solid rgb(247, 247, 247); */
+    padding: 20px 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.background .container .content .timeline .item {
+    position: relative;
+    border-bottom: 1px solid rgb(247, 247, 247);
+    padding: 20px 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.background
+    .container
+    .content
+    .timeline
+    .item.active
+    .item-description:before {
+    background-color: #11d1a8;
+}
+.background .container .content .timeline .item:last-child {
+    border-bottom: none;
+}
+.background .container .content .timeline .item:last-child:before {
+    display: none;
+}
+.background .container .content .timeline .item:before {
+    border-left: 3px solid #11d1a8;
+    content: "";
+    z-index: 0;
+    height: 102%;
+    left: 135px;
+    position: absolute;
+    opacity: 0.4;
+}
+.background .container .content .timeline .item .item-label {
+    position: absolute;
+}
+.background .container .content .timeline .item .item-label .item-label-date {
+    color: #a6a6a6;
+    font-size: 17px;
+    font-weight: 500;
+    padding-bottom: 5px;
+}
+.background .container .content .timeline .item .item-label .item-label-hour {
+    font-weight: 600;
+    font-size: 19px;
+    float: right;
+}
+.background .container .content .timeline .item .item-description {
+    margin-left: 150px;
+    margin-bottom: 20px;
+}
+.background .container .content .timeline .item .item-description:before {
+    border: 2px solid #11d1a8;
+    width: 22px;
+    height: 22px;
+    border-radius: 100%;
+    content: "";
+    z-index: 0;
+    left: 125px;
+    position: absolute;
+    background-color: #fff;
+    display: block;
+}
+.background
+    .container
+    .content
+    .timeline
+    .item
+    .item-description
+    .item-description-status {
+    font-weight: 600;
+    font-size: 16px;
+    padding-bottom: 5px;
+}
+.background
+    .container
+    .content
+    .timeline
+    .item
+    .item-description
+    .item-description-location {
+    color: #a6a6a6;
+    font-size: 15px;
+    font-weight: 500;
+}
+.order-detail-header {
+    text-align: center;
+    padding: 3px;
+}
+
+/* Contact form */
+
+.contact-section {
+    margin: 0 auto;
+    max-width: 700px;
+    background-color: #fffefe;
+    padding: 30px 30px;
+}
+
+/* Feature request */
+.form-control-btn {
+    color: white;
+    background-color: black;
+    height: 40px;
+    width: 100%;
+
+}
+
+.sec-center {
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: rgb(253, 253, 253);
+    padding: 5px 20px;
+}
+
+.thumbsup {
+    color: #3600cc;
+}
+
+/* Custom form */
+.form__section {
+    width: 700px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 50px;
+    background-color: #fdfdfd;
+    position: relative;
+    min-height: 600px;
+}
+
+.form__body {
+    position: absolute;
+    margin: 0 auto;
+    padding: 50px;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+}
+
+.form__header {
+    margin-top: 100px;
+    text-align: left;
+    color: #000;
+}
+
+.form__header--sec {
+    margin-bottom: 15px;
+}
+
+.form__label {
+    color: #000;
+    margin: 15px;
+    margin-left: 0;
+    font-size: 15px;
+}
+
+.dropdown__header {
+    color: #fff;
+}
+
+.dropdown dd,
+.dropdown dt {
+    margin: 0px;
+    padding: 0px;
+}
+
+.dropdown ul {
+    margin: -1px 0 0 0;
+}
+
+.dropdown dd {
+    position: relative;
+}
+
+.dropdown a,
+.dropdown a:visited {
+    color: #000;
+    text-decoration: none;
+    outline: none;
+    font-size: 12px;
+}
+
+.dropdown dt a {
+    background-color: rgb(214, 213, 213, 0.1);
+    display: block;
+    padding: 8px 20px 5px 10px;
+    min-height: 25px;
+    line-height: 24px;
+    overflow: hidden;
+    border: 0;
+    width: 400px;
+}
+
+.dropdown dt a p {
+    margin-bottom: 10px;
+}
+
+.dropdown dt a span,
+.multiSel span {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.dropdown dd ul {
+    background-color: #4f6877;
+    border: 0;
+    color: #fff;
+    display: none;
+    padding: 2px 15px 2px 5px;
+    width: 290px;
+    position: absolute;
+    list-style: none;
+    height: 100px;
+    overflow: auto;
+    margin-top: 5px;
+}
+
+.dropdown span.value {
+    display: none;
+}
+
+.dropdown dd ul li a {
+    padding: 5px;
+    display: block;
+}
+
+.dropdown dd ul li a:hover {
+    background-color: #fff;
+}
+
+.form__submit {
+    background-color: #050505;
+    display: block;
+    width: 100%;
+    border: 0;
+    padding: 10px 0;
+    margin: 5px 0;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.form__skip {
+    display: inline-block;
+    width: 100%;
+    border: 0;
+    padding: 10px 0;
+    margin: 5px 0;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.form__submit:hover {
+    background: rgb(250, 250, 250);
+    color: #000;
+}
+
+/* User Profile style */
+.card__content {
+    background-color: #fff;
+    background-clip: border-box;
+    /* border: 1px solid rgba(0, 0, 0, 0.125); */
+    border-radius: 3px;
+}
+
+.custom-file {
+    display: inline-block;
+    max-width: 100%;
+    height: 2.5rem;
+    margin-bottom: 0;
+}
+
+.custom-file-input {
+    min-width: 14rem;
+    max-width: 100%;
+    height: 2.5rem;
+    margin: 0;
+    opacity: 0;
+}
+
+.custom-file-control {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 5;
+    height: 2.5rem;
+    padding: 0.5rem 1rem;
+    line-height: 1.5;
+    color: #495057;
+    pointer-events: none;
+    user-select: none;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+}
+.custom-file-control:lang(en):empty::after {
+    content: "Choose file...";
+}
+.custom-file-control::before {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    z-index: 6;
+    display: block;
+    height: 2.5rem;
+    padding: 0.5rem 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #e9ecef;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0 3px 3px 0;
+}
+.custom-file-control:lang(en)::before {
+    content: "Browse";
+}
+
+.form__label {
+    font-size: 18px;
+    margin-bottom: 25px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+}
+
+.image__container {
+    margin-bottom: 30px;
+}
+
+.form__field {
+    margin-bottom: 30px;
+}
+
+@media screen and (min-width: 768px) {
+    .bio__column {
+        margin-left: 30px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .bio__column {
+        margin-left: 60px;
+    }
+
+}
+
+.section-center__profile {
+    margin-top: 40px;
+}
+
+.image-preview__container {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.name__label {
+    margin-top: 50px;
+}
+
+@media screen and (min-width: 768px) {
+    
+    .name__label {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 40em) {
+.element {
+display: none;
+}
+}

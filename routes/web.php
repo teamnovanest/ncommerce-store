@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // All routes that needs to be protected by the customer roles goes inside this function
 
@@ -28,4 +28,13 @@ Route::group(['middleware' => ['role:customer']], function () {
     
 });
 
+Route::get("/", "App\Http\Controllers\HomeController@index");
+
+// Search Route
+Route::get('/product/search', ["CartController::class","search"])->name('product.search');
+
+
+// Cart
+Route::get('/product/cart', ['CartController::class','showCart'])->name('show.cart');
+Route::get('/user/checkout/', ['CartController::class','checkout'])->name('user.checkout');
 
