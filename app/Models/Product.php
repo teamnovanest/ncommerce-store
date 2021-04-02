@@ -34,7 +34,7 @@ class Product extends Model
      */
     public function subcategory()
     {
-        return $this->hasOne(Subategory::class);
+        return $this->hasOne(Subcategory::class);
     }
 
      /**
@@ -43,5 +43,16 @@ class Product extends Model
     public function merchant()
     {
         return $this->belongsTo(Merchant::class);
+    }
+
+
+    public function getSellingPriceAttribute($price)
+    {
+        return $price / 100;
+    }
+
+    public function setSellingPriceAttribute($price)
+    {
+        $this->attributes['selling_price'] = $price * 100;
     }
 }

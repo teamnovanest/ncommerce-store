@@ -26,6 +26,7 @@ class ProductFactory extends Factory
         $title = $this->faker->words(4, true);
         $colours = ['red', 'purple','green', 'move', 'orange'];
         $size = ["XS",'S', 'M','L', 'XL', 'XXL'];
+        $status = [0,1];
         return [
             "category_id" => \App\Models\Category::all()->random()->id,
             "subcategory_id" =>  \App\Models\Subcategory::all()->random()->id,
@@ -41,11 +42,12 @@ class ProductFactory extends Factory
             "product_size" => $this->faker->randomElement($size),
             "selling_price" => $this->faker->randomNumber(6, false),
             "image_one_public_id" => $this->faker->word(),
-            "image_one_secure_url" => "https://loremflickr.com/320/240random=",
+            "image_one_secure_url" => "https://loremflickr.com/320/240/random=1",
             "image_two_public_id" => $this->faker->word(),
-            "image_two_secure_url" => "https://loremflickr.com/320/240random=",
+            "image_two_secure_url" => "https://loremflickr.com/320/240/random=",
             "image_three_public_id" => $this->faker->word(),
-            "image_three_secure_url" => "https://loremflickr.com/320/240random=",
+            "image_three_secure_url" => "https://loremflickr.com/320/240/random=",
+            "status" => $this->faker->randomElement($status),
         ];
     }
 }

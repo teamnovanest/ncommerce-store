@@ -24,6 +24,7 @@ class SubcategoryFactory extends Factory
         return [
             
             "category_id" =>  \App\Models\Category::all()->random()->id,
+            "subcategory_name" => $this->faker->word(2, true),
             "subcategory_id" => $this->faker->randomDigit(),
             "merchant_organization_id" => \App\Models\Merchant::all()->random()->id
         ];
