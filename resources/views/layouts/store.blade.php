@@ -1,6 +1,6 @@
  <!-- @php
-$setting = DB::table('sitesetting')->first();
- @endphp -->
+$setting = DB::table('sitesettings')->first();
+ @endphp  -->
 
 
  <!DOCTYPE html>
@@ -269,7 +269,7 @@ $setting = DB::table('sitesetting')->first();
 @yield('content')
     <!-- Footer -->
  @php
-$setting = DB::table('sitesetting')->first();
+$setting = DB::table('sitesettings')->first();
  @endphp
 
      <!-- Start Footer Area -->
@@ -329,7 +329,7 @@ $setting = DB::table('sitesetting')->first();
                             <div class="ft__widget">
                                 <h2 class="ft__title">Categories</h2>
                                 @php
-                                $category = DB::table('category')->get();
+                                $category = DB::table('categories')->get();
                                 @endphp
                                 <ul class="footer-categories">
                             @foreach($category as $cat)
