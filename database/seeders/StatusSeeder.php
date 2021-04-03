@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class OrderDetailSeeder extends Seeder
+class StatusSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class OrderDetailSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\OrderDetail::factory->create();
+        //
     }
 }
