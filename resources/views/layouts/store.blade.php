@@ -82,7 +82,7 @@ $setting = DB::table('sitesetting')->first();
                                     <li class="drop"><a href="blog.html">Feature Brands</a>
                                        
                                     </li> -->
-                                    <li class="drop"><a href="shop.html">Pages</a>
+                                    <li class="drop"><a href="#">Pages</a>
                                     
                                        
                                     </li>

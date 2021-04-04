@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
@@ -43,6 +44,8 @@ Route::get('/product/search', [CartController::class,'search'])->name('product.s
 Route::get('/product/cart', [CartController::class,'showCart'])->name('show.cart');
 Route::get('/user/checkout/', [CartController::class,'checkout'])->name('user.checkout');
 Route::post('/user/apply/coupon/', [CartController::class, 'coupon'])->name('apply.coupon');
+Route::get('remove/cart/{rowId}', [CartController::class, 'removeCart']);
+
 
 // Product 
 Route::get('/product/details/{id}', [ProductController::class, 'productView']);
@@ -57,3 +60,8 @@ Route::get('/order/{id}/status', [OrderDetailsController::class,'viewOrderStatus
 // Feature Request Route
 Route::get('/feature-request/index', [FeatureRequestController::class,'index'])->name('feature.index');
 Route::get('/feature-request/create', [FeatureRequestController::class,'create'])->name('feature.create');
+
+// Contact page routes
+Route::get('contact/page', [ContactController::class, 'contact'])->name('contact.page');
+Route::post('contact/form', [ContactController::class, 'contactForm' ])->name('contact.form');
+
