@@ -13,9 +13,6 @@
                             </div>
                         <div class="category-menu-list">
                          <ul>
-                     @php
-$category = DB::table('category')->get();
-   @endphp
 
             
             @foreach($category as $cat)
@@ -24,7 +21,7 @@ $category = DB::table('category')->get();
                 <ul>
 
     @php
-  $subcategory = DB::table('subcategory')->where('category_id',$cat->id)->get();
+      $subcategory = DB::table('subcategories')->where('category_id',$cat->id)->get();
     @endphp
 
     <div class="category-menu-dropdown">

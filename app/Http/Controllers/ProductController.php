@@ -3,21 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Category;
 use DB;
 use Cart;
 use Response;
+
 
 class ProductController extends Controller
 {
     public function productView($id)
     {
-        $product = DB::table('products')
-    			->join('category','products.category_id','category.id')
-    			->join('subcategory','products.subcategory_id','subcategory.id')
-    			->join('brand','products.brand_id','brand.id')
-    			->select('products.*','category.category_name','subcategory.subcategory_name','brand.brand_name')
+        /* $product = DB::table('products')
+    			->join('categories','products.category_id','categories.id')
+    			->join('subcategories','products.subcategory_id','subcategories.id')
+    			->join('brand_options','products.brand_id','brand_options.id')
+    			->select('products.*','categories.category_name','subcategories.subcategory_name','brand_options.brand_name')
     			->where('products.id',$id)
-    			->first();
+    			->first(); */
+				$product = Product::whereId($id)->first();
+				//dd($p);
 
     	$color = $product->product_color;
     	$product_color = explode(',', $color);
