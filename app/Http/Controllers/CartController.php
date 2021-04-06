@@ -11,12 +11,22 @@ use Session;
 
 class CartController extends Controller
 {
-    public function search(){
-        
+    public function search(Request $request){
+      $item = $request->search;
+      $products = DB::table('products')
+        ->where('product_name','LIKE',"%$item%")
+        ->paginate(20);
+
+    return view('pages.search',compact('products'));  
     }
+
+
     public function showCart(){
-        
+        $cart = Cart::content();
+    	  return view('pages.cart',compact('cart'));
     }
+
+
     public function checkout(){
          if (Auth::check()) {
 
@@ -31,6 +41,8 @@ class CartController extends Controller
         return Redirect()->route('login')->with($notification);
   } 
     }
+
+
 
      public function coupon(Request $request){
    	$coupon = $request->coupon;
@@ -57,5 +69,15 @@ class CartController extends Controller
                        return Redirect()->back()->with($notification);
     }
 
+   }
+
+
+   public function removeCart($rowId){
+     Cart::remove($rowId);
+    	$notification=array(
+                        'messege'=>'Product Remove from Cart',
+                        'alert-type'=>'success'
+                         );
+                       return Redirect()->back()->with($notification);
    }
 }
