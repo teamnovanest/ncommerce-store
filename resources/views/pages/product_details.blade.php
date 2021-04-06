@@ -92,6 +92,37 @@
     <!-- END QUICKVIEW PRODUCT -->
 
 
+<section>
+    <div class="container"> 
+    <div class="row">
+    <div class="col-lg-10">
+        <ul>
+            
+            @foreach($credit_offers as $offer)
+                            
+                            <li class="h3">
+                            <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="{{ $offer->id}}" value="{ $offer->id}}" >
+                            <label class="form-check-label" for="{ $offer->id}}">
+                              
+                         
+                            
+                            <p>
+                            {{ $offer->lender->registered_name}}  finances  at  {{ $offer->percentage }}%  for {{ $offer->payment_period }} months
+                            </p>
+                            <p>Total financed  {{ (($offer->percentage  * $product->selling_price) / 100 ) +  $product->selling_price }}</p>
+                            </label>
+                            </div>
+                            </li>
+                            <hr/>
+            @endforeach
+        </ul>
+
+    </div>
+    </div>
+    </div>
+</section>
+
 
 
 

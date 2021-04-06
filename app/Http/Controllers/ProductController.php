@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\LenderOffering;
 use DB;
 use Cart;
 use Response;
@@ -35,7 +36,13 @@ class ProductController extends Controller
 		// 	'color' => $product_color,
 		// 	'size' => $product_size,
 		// ));
-    	return view('pages.product_details',compact('product','product_color','product_size'));
+
+
+		// ['registered_name', 'payment_period', "percentage", "max_financed"]
+		$credit_offers = LenderOffering::with(['lender'])->orderBy('percentage', 'ASC')->get();
+		//dd($credit_offers);
+
+    	return view('pages.product_details',compact('product','product_color','product_size', 'credit_offers'));
     }
 
 public function addCart(Request $request, $id){

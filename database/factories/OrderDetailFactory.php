@@ -21,7 +21,7 @@ class OrderDetailFactory extends Factory
      */
     public function definition()
     {
-        $baseTotal = $this->faker->randomNumber(5, false);
+        $baseTotal = $this->faker->randomNumber(3, false);
         return [
             "order_id" => \App\Models\Order::all()->random()->id,
             "product_id" => \App\Models\Product::all()->random()->id,
@@ -31,7 +31,7 @@ class OrderDetailFactory extends Factory
             "size" => null,
             "quantity" => $this->faker->randomNumber(3, false),
             "singleprice" => $baseTotal,
-            "singleprice" => $baseTotal + 10,
+            "totalprice" => ($baseTotal + 10),
         ];
     }
 }
