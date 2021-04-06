@@ -39,9 +39,10 @@ class DatabaseSeeder extends Seeder
           \App\Models\Lender::factory(4)->create();
           \App\Models\CustomerFinanceOrganizationAffiliation::factory(20)->create();
           \App\Models\Product::factory(1000)->create();
-          \App\Models\Order::factory(10)->create();
-          \App\Models\OrderDetail::factory(10)->create();
+          \App\Models\Order::factory(40)->create();
+          \App\Models\OrderDetail::factory(40)->create();
           \App\Models\Sitesetting::factory(1)->create();
+          \App\Models\LenderOffering::factory(40)->create();
           //\App\Models\Wishlist::factory()->create();
     }
 }

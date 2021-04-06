@@ -48,6 +48,7 @@ class Product extends Model
 
     public function getSellingPriceAttribute($price)
     {
+        //return number_format($price / 100,2);
         return $price / 100;
     }
 
