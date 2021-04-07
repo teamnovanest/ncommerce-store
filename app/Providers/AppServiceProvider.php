@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             View::composer('*', function ($view) {
           if (Auth::user()) {
               $profile = DB::table('profile_images')->where('user_id',Auth::id())->first();
-              $profileImage = !is_null($profile) ? $profile["profile_secure_url"]:"";
+              $profileImage = !is_null($profile) ? $profile->profile_secure_url:"";
               $cart = Cart::content();
               $view->with(['cart'=>$cart,'profileImage'=>$profileImage]);
           }else{

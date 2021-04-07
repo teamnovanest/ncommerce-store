@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderDetailsController;
 use App\Http\Controllers\FeatureRequestController;
@@ -44,7 +45,7 @@ Route::get('/product/search', [CartController::class,'search'])->name('product.s
 Route::get('/product/cart', [CartController::class,'showCart'])->name('show.cart');
 Route::get('/user/checkout/', [CartController::class,'checkout'])->name('user.checkout');
 Route::post('/user/apply/coupon/', [CartController::class, 'coupon'])->name('apply.coupon');
-Route::get('remove/cart/{rowId}', [CartController::class, 'removeCart']);
+Route::get('/remove/cart/{rowId}', [CartController::class, 'removeCart']);
 
 
 // Product 
@@ -62,6 +63,14 @@ Route::get('/feature-request/index', [FeatureRequestController::class,'index'])-
 Route::get('/feature-request/create', [FeatureRequestController::class,'create'])->name('feature.create');
 
 // Contact page routes
-Route::get('contact/page', [ContactController::class, 'contact'])->name('contact.page');
-Route::post('contact/form', [ContactController::class, 'contactForm' ])->name('contact.form');
+Route::get('/contact/page', [ContactController::class, 'contact'])->name('contact.page');
+Route::post('/contact/form', [ContactController::class, 'contactForm' ])->name('contact.form');
 
+//  Wishlist
+Route::get('/add/wishlist/{id}', [WishlistController::class, 'addWishlist']);
+Route::get('/user/wishlist/', [WishlistController::class, 'index'])->name('user.wishlist');
+
+
+// All Product details Page 
+Route::get('/products/{id}', [ProductController::class, 'productsView']);
+Route::get('/allcategory/{id}', [ProductController::class, 'categoryView']);
