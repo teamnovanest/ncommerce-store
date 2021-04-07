@@ -25,6 +25,7 @@ class OrderFinancingFactory extends Factory
             "user_id" => \App\Models\User::all()->random()->id,
             "lender_organization_id" => \App\Models\Lender::all()->random()->id,
             "payment_period" => \App\Models\LenderOffering::all()->random()->payment_period,
+            "percentage" => \App\Models\LenderOffering::all()->random()->percentage,
         ];
     }
 }

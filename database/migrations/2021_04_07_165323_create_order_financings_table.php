@@ -18,6 +18,7 @@ class CreateOrderFinancingsTable extends Migration
             $table->integer('user_id');
             $table->integer('lender_organization_id');
             $table->integer('payment_period');
+            $table->integer('percentage');
             $table->softDeletes();
             $table->timestamps();
         });
