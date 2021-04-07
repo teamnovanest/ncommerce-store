@@ -2,7 +2,7 @@
 @section('content')
 
 @php 
- $site = DB::table('sitesetting')->first();
+ $site = DB::table('sitesettings')->first();
 
 @endphp 
 <!-- Start Bradcaump area -->
@@ -40,7 +40,7 @@
                                             <span class="ti-location-pin"></span>
                                         </div>
                                         <div class="contact__details">
-                                            {{-- <p>Location : <br> {{ $site->company_address }}</p> --}}
+                                            <p>Location : <br> {{ $site->company_address }}</p>
                                         </div>
                                     </div>
                                     <!-- End Single Adress -->
@@ -52,7 +52,7 @@
                                             <span class="ti-mobile"></span>
                                         </div>
                                         <div class="contact__details">
-                                            {{-- <p> Phone : <br><a href="#">{{ $site->phone_one }} </a></p> --}}
+                                            <p> Phone : <br><a href="#">{{ $site->phone_one }} </a></p>
                                         </div>
                                     </div>
                                     <!-- End Single Adress -->
@@ -62,7 +62,7 @@
                                             <span class="ti-email"></span>
                                         </div>
                                         <div class="contact__details">
-                                            {{-- <p> Mail :<br><a href="#">{{ $site->email }}</a></p> --}}
+                                            <p> Mail :<br><a href="#">{{ $site->email }}</a></p>
                                         </div>
                                     </div>
                                     <!-- End Single Adress -->
