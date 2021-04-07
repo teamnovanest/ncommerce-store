@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
           \App\Models\OrderDetail::factory(40)->create();
           \App\Models\Sitesetting::factory(1)->create();
           \App\Models\LenderOffering::factory(40)->create();
+          \App\Models\OrderFinancing::factory(5)->create();
           //\App\Models\Wishlist::factory()->create();
     }
 }
