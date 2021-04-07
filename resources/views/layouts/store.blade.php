@@ -329,7 +329,7 @@ $setting = DB::table('sitesettings')->first();
                             <div class="ft__widget">
                                 <h2 class="ft__title">Categories</h2>
                                 @php
-                                $category = DB::table('categories')->get();
+                                $category = DB::table('category_options')->get();
                                 @endphp
                                 <ul class="footer-categories">
                             @foreach($category as $cat)

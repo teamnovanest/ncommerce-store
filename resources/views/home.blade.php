@@ -21,7 +21,7 @@
                 <ul>
 
     @php
-      $subcategory = DB::table('subcategories')->where('category_id',$cat->id)->get();
+      $subcategory = DB::table('subcategory_options')->where('category_id',$cat->id)->get();
     @endphp
 
     <div class="category-menu-dropdown">
