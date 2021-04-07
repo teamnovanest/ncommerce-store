@@ -20,7 +20,7 @@ class HomeController extends Controller
         //     ->join('brand','products.brand_id','brand.id')
         //     ->select('products.*','brand.brand_name')
         //     ->where('main_slider',1)->orderBy('id','DESC')->first();
-        $category = DB::table('categories')->get();
+        $category = DB::table('category_options')->get();
         // $subcategory = DB::table('subcategory')->where('category_id',$cat->id)->get();
 
 

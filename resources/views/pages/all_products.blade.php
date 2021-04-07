@@ -34,7 +34,7 @@
                                 <h4 class="section-title-4">PRODUCT CATEGORIES</h4>
                                 <ul class="sidebar__list">
                                          @php
-                                         $category = DB::table('categories')->get();
+                                         $category = DB::table('category_options')->get();
                                             @endphp
                                     @foreach($category as $cat)
 				                    <li><a href="{{ url('allcategory/'.$cat->id) }}">{{ $cat->category_name }}</a></li>
