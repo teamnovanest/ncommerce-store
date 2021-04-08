@@ -282,7 +282,7 @@ $setting = DB::table('sitesettings')->first();
                             <div class="ft__widget">
                                 <div class="ft__logo">
                                     <a href="#">
-                                      {{-- $setting->company_name --}}
+                                      {{ $setting->company_name }}
                                        NCOMMERCE
                                     </a>
                                    
@@ -294,7 +294,7 @@ $setting = DB::table('sitesettings')->first();
                                                 <i class="zmdi zmdi-pin"></i>
                                             </div>
                                             <div class="address-text">
-                                                <p>{{--$setting->company_address--}}</p>
+                                                <p>{{ $setting->company_address }}</p>
                                             </div>
                                         </li>
                                         <li>
@@ -302,7 +302,7 @@ $setting = DB::table('sitesettings')->first();
                                                 <i class="zmdi zmdi-email"></i>
                                             </div>
                                             <div class="address-text">
-                                                <a href="#"> {{-- $setting->email --}}</a>
+                                                <a href="#"> {{ $setting->email }}</a>
                                             </div>
                                         </li>
                                         <li>
@@ -310,16 +310,16 @@ $setting = DB::table('sitesettings')->first();
                                                 <i class="zmdi zmdi-phone-in-talk"></i>
                                             </div>
                                             <div class="address-text">
-                                                <p>{{-- $setting->phone_one --}}</p>
+                                                <p>{{ $setting->phone_one }}</p>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
                                 <ul class="social__icon">
-                                    <li><a href="{{-- $setting->twitter --}}"><i class="zmdi zmdi-twitter"></i></a></li>
-                                    <li><a href="{{-- $setting->instagram --}}"><i class="zmdi zmdi-instagram"></i></a></li>
-                                    <li><a href="{{-- $setting->facebook --}}"><i class="zmdi zmdi-facebook"></i></a></li>
-                                    <li><a href="{{-- $setting->facebook --}}"><i class="zmdi zmdi-google-plus"></i></a></li>
+                                    <li><a href="{{ $setting->twitter }}"><i class="zmdi zmdi-twitter"></i></a></li>
+                                    <li><a href="{{ $setting->instagram }}"><i class="zmdi zmdi-instagram"></i></a></li>
+                                    <li><a href="{{ $setting->facebook }}"><i class="zmdi zmdi-facebook"></i></a></li>
+                                    <li><a href="{{ $setting->facebook }}"><i class="zmdi zmdi-google-plus"></i></a></li>
                                 </ul>
                             </div>
                         </div>
