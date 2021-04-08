@@ -19,7 +19,7 @@ class CheckoutController extends Controller
        $content = Cart::content();
        $data = array();
        $data['user_id'] = Auth::id();
-       $data['total'] = Cart::Subtotal();
+       $data['total'] = floatval(Cart::Subtotal()) * 100;
        $data['status_code'] = mt_rand(100000,999999);
        $data['order_code'] = rand();
        $data['status_id'] = 0;
@@ -27,7 +27,7 @@ class CheckoutController extends Controller
        if (Session::has('coupon')) {
            $data['subtotal'] = Session::get('coupon')['balance'];
         }else{
-            $data['subtotal'] = Cart::Subtotal();
+            $data['subtotal'] = floatval(Cart::Subtotal()) * 100;
         }
         $data['status'] = 'ORDER PENDING';
         $data['date'] = date('d-m-y');
@@ -59,7 +59,7 @@ class CheckoutController extends Controller
     $details['totalprice'] = $row->qty*$row->price;
     $details['merchant_organization_id'] = $row->options->merchant_organization_id;
     $data['created_at'] = \Carbon\Carbon::now();
-    DB::table('orders_details')->insert($details); 
+    DB::table('order_details')->insert($details); 
 
     }
 
@@ -71,7 +71,7 @@ class CheckoutController extends Controller
       $status['merchant_organization_id'] = $row->options->merchant_organization_id;
       $status['updated_by'] = Auth::id();
       $status['created_at'] = \Carbon\Carbon::now();
-      DB::table('order_status_history')->insert($status);
+      DB::table('order_status_histories')->insert($status);
     }
 
     Cart::destroy();

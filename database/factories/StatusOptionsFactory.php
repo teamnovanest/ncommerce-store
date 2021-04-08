@@ -21,7 +21,7 @@ class StatusOptionsFactory extends Factory
      */
     public function definition()
     {
-        $status = ["ORDER_RECIVED", "ORDER_ACCEPTED", "FINANCING_REQUESTED", "FINANCING_APPROVED", "PAYMENT_RELEASED", "PAYMENT_RECIVED", "ORDER_FULFILED"];
+        $status = ["ORDER_RECEIVED", "ORDER_ACCEPTED", "FINANCING_REQUESTED", "FINANCING_APPROVED", "PAYMENT_RELEASED", "PAYMENT_RECEIVED", "ORDER_FULFILLED"];
 
         return [
             "status_name" => $this->faker->randomElement($status),
