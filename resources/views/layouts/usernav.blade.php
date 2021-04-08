@@ -100,7 +100,7 @@
                     <nav class="nav">
                       <a href="#" class="nav-link">Change Password</a>
                       <a href="#" class="nav-link">Edit Profile</a>
-                      <a href="#" class="nav-link">Logout</a>
+                      <a href="{{route('user.logout')}}" class="nav-link">Logout</a>
                     </nav>
                   </div>
                 </div><!-- container -->
