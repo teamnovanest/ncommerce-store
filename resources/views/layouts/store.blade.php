@@ -457,6 +457,7 @@ $setting = DB::table('sitesettings')->first();
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 <script src="{{ asset('/frontend/js/product_custom.js')}}"></script>
+<script src="{{ asset('js/custom.js')}}"></script>
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script> -->

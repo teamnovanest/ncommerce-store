@@ -78,7 +78,37 @@
                                     </tbody>
                                 </table>
                             </div>
-                          	
+                            <div class="row">
+                                   <div class="col-md-4">
+                                        <select name="lender_organization_select" id="lender_organization_select" class="form-control">
+                                            <option>Select your finance organization</option>
+                                            @foreach ($lender_organizations as $organization)  
+                                            <option value="{{$organization->id}}">{{$organization->registered_name}}({{$organization->trade_name}})</option>
+                                            @endforeach
+                                        </select>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <select name="" id="" class="form-control">
+                                                <option>Period</option>
+                                                @foreach ($payment_periods as $period)  
+                                                <option value="{{$period->Payment_period}}">{{$period->Payment_period}} Months</option>
+                                                @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                            <select name="" id="" class="form-control">
+                                                <option>Percentage</option>
+                                                @foreach ($percentages as $row)  
+                                                <option value="{{$row->percentage}}">{{$row->percentage}} %</option>
+                                                @endforeach
+                                            </select>
+                                            </div>
+                                        </div>
+                                   
+                                    </div>
+                            </div>
+                          	<br><br>
 								<div class="row">
                                     <div class="col-md-8 col-sm-7 col-xs-12">
                                           @if(Session::has('coupon'))
@@ -97,11 +127,6 @@
           	                       @endif
 			                         </div>
 								<div class="col-md-4 col-sm-5 col-xs-12">
-                                    {{-- <div class="row">
-                                        <input type="text" class="form-control">
-                                        <br>
-                                        <input type="text" class="form-control">
-                                    </div> --}}
                                     <div class="cart_totals">
                                         <h2>Cart Totals</h2>
                                         <ul>
