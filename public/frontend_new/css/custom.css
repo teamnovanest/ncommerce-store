@@ -471,3 +471,28 @@ max-width: 100%;
 display: none;
 }
 }
+
+.credit-offers-card{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  /* max-width: 900px; */
+  margin: auto;
+  text-align: left;
+  font-family: arial;
+  padding-top: 17px;
+}
+
+.card-hover:hover{
+color: dodgerblue;
+text-decoration: underline;
+}
+
+.offer-header{
+  text-align: center;
+  margin: auto;
+  padding-bottom: 25px;
+  font-size: 25px;
+}
+
+.feature{
+    color: blue;
+}
