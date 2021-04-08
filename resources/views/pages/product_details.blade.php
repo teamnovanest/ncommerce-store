@@ -162,7 +162,7 @@
     <!-- END QUICKVIEW PRODUCT -->
 
 
-<!-- <section>
+<section>
     <div class="container credit-offers-card">
         <h1 class="offer-header">Select Preferred offer</h1>
         <div class="row">
@@ -188,7 +188,7 @@
             @endforeach
         </div>
     </div>
-</section> -->
+</section>
 <br>
 
     <!-- Start Product Details -->
