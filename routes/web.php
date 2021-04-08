@@ -38,6 +38,8 @@ Route::group(['middleware' => ['role:customer']], function () {
 
 Route::get("/", "App\Http\Controllers\HomeController@index");
 Route::get('/user/logout', [HomeController::class, 'logout'])->name('user.logout');
+Route::get('/select/finance-institutions', [HomeController::class,'selectFinanceInstitution']);
+Route::post('/institutions/save', [HomeController::class,'saveFinanceInstitution'])->name('save-finance_institution');
 
 // Search Route
 Route::get('/product/search', [CartController::class,'search'])->name('product.search');

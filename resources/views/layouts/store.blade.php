@@ -36,6 +36,8 @@ $setting = DB::table('sitesettings')->first();
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
     <!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
     <!-- vendor css -->
     <!-- <link href="{{ asset('../lib/fontawesome-free/css/all.min.css')}}" rel="stylesheet"> -->
