@@ -29,7 +29,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-12">
-                        <form action="#">               
+                        {{-- <form action="#">                --}}
                             <div class="table-content table-responsive">
                                 <table>
                                     <thead>
@@ -77,7 +77,8 @@
                                         
                                     </tbody>
                                 </table>
-                            </div>	
+                            </div>
+                          	
 								<div class="row">
                                     <div class="col-md-8 col-sm-7 col-xs-12">
                                           @if(Session::has('coupon'))
@@ -96,6 +97,11 @@
           	                       @endif
 			                         </div>
 								<div class="col-md-4 col-sm-5 col-xs-12">
+                                    {{-- <div class="row">
+                                        <input type="text" class="form-control">
+                                        <br>
+                                        <input type="text" class="form-control">
+                                    </div> --}}
                                     <div class="cart_totals">
                                         <h2>Cart Totals</h2>
                                         <ul>
@@ -127,7 +133,7 @@
                                     </div>                 
                                 </div>
                             </div>
-                        </form>
+                        {{-- </form> --}}
                 </div>
             </div>
         </div>
