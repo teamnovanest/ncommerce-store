@@ -17,10 +17,10 @@ class OrderDetailsController extends Controller
     ->where('orders.id', $order_id)->first();
      
     $order_status = DB::table('orders')
-    ->join('order_status_history', 'order_status_history.order_id','=', 'orders.id')
-    ->leftJoin('status', 'order_status_history.status_id', '=', 'status.id')
-    ->select('status.status_name', 'status.description','order_status_history.updated_at','orders.created_at')
-    ->where('orders.id',$order_id)->where('order_status_history.user_id', Auth::id())->get();
+    ->join('order_status_histories', 'order_status_histories.order_id','=', 'orders.id')
+    ->leftJoin('status', 'order_status_histories.status_id', '=', 'status.id')
+    ->select('status.status_name', 'status.description','order_status_histories.updated_at','orders.created_at')
+    ->where('orders.id',$order_id)->where('order_status_histories.user_id', Auth::id())->get();
     
     return view('pages.order_status',compact('order_status','order_code','current_status'));
 
