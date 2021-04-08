@@ -85,8 +85,8 @@ $setting = DB::table('sitesettings')->first();
                                     <li class="drop"><a href="#">Pages</a>
                                     
                                        
-                                    </li>
-                                    <li class="drop"><a href="#">Blog</a>
+                                    <!-- </li>
+                                    <li class="drop"><a href="#">Blog</a> -->
                                        
                                     </li>
                                     <li><a href="/contact/page">Contact</a></li>
@@ -102,7 +102,7 @@ $setting = DB::table('sitesettings')->first();
                                         <li><a href="#">Pages</a>
                                         </li>
 
-                                        <li><a href="#">Blog</a>
+                                        <!-- <li><a href="#">Blog</a></li> -->
 
 
                                         <li><a href="/contact/page">Contact</a></li>
