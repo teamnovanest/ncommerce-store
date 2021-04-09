@@ -8,6 +8,7 @@ use Cart;
 use Session;
 use Response;
 use Illuminate\Http\Request;
+use App\Models\LenderOffering;
 
 class CartController extends Controller
 {
@@ -29,27 +30,17 @@ class CartController extends Controller
 
     public function checkout(){
     if (Auth::check()) {
-    $lender_organizations = DB::table('customer_finance_organization_affiliations')
+    $credit_offers = DB::table('customer_finance_organization_affiliations')
     ->join('users','customer_finance_organization_affiliations.user_id','=','users.id')
     ->join('lenders','customer_finance_organization_affiliations.lender_organization_id','=','lenders.id')
-    ->select('lenders.id','lenders.registered_name','lenders.trade_name')
+    ->join('lender_offerings','lender_offerings.lender_organization_id','=','lenders.id')
+    ->select('lenders.id as lender_organization_gId','lender_offerings.id','lenders.registered_name','lenders.trade_name','lender_offerings.payment_period','lender_offerings.percentage')
+    ->orderBy('percentage', 'ASC')
     ->where('customer_finance_organization_affiliations.user_id',Auth::id())->get();
-
-    $payment_periods = DB::table('lender_offerings')
-    ->where('lender_organization_id',$lender_organizations[0]->id)
-    ->distinct()
-    ->orderBy('Payment_period','ASC')
-    ->get('Payment_period');
-
-    $percentages = DB::table('lender_offerings')
-    ->where('lender_organization_id',$lender_organizations[0]->id)
-    ->distinct()
-    ->orderBy('percentage','ASC')
-    ->get('percentage');
-
     
   	$cart = Cart::content();
-    	return view('pages.checkout',compact('cart','lender_organizations','payment_periods','percentages'));
+  
+    return view('pages.checkout',compact('cart','credit_offers'));
 
   }else{
   	$notification=array(

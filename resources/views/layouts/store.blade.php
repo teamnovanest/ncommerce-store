@@ -48,6 +48,8 @@ $setting = DB::table('sitesettings')->first();
 
      <script src="https://js.stripe.com/v3/"></script>
 
+     <link rel='stylesheet' href="https://unpkg.com/nprogress@0.2.0/nprogress.css" />
+
     <!-- Modernizr JS -->
     <script src="{{ asset('/frontend_new/js/vendor/modernizr-2.8.3.min.js')}}"></script>
 </head>
@@ -455,12 +457,14 @@ $setting = DB::table('sitesettings')->first();
     <script src="{{ asset('/frontend_new/js/main.js')}}"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 <script src="{{ asset('/frontend/js/product_custom.js')}}"></script>
 <script src="{{ asset('js/custom.js')}}"></script>
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-  <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> -->
+  <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
+  <script src="{{ asset('https://unpkg.com/nprogress@0.2.0/nprogress.js')}}"></script>
 
 <!-- cus dashboard script -->
    <script src="../lib/jquery/jquery.min.js"></script>

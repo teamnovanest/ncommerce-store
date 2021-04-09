@@ -10,6 +10,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderDetailsController;
 use App\Http\Controllers\FeatureRequestController;
+use App\Http\Controllers\LenderOfferingController;
 
 
 /*
@@ -76,3 +77,5 @@ Route::get('/user/wishlist/', [WishlistController::class, 'index'])->name('user.
 // All Product details Page 
 Route::get('/products/{id}', [ProductController::class, 'productsView']);
 Route::get('/allcategory/{id}', [ProductController::class, 'categoryView']);
+
+Route::get('/lender-offerings/{orgId}', [LenderOfferingController::class, 'lenderOfferings']);

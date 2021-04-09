@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    alert("Welcome");
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -24,53 +23,90 @@ $(document).ready(function () {
         NProgress.done();
     });
 
-    //order update js
-    $("#lender_organization_select").change(function () {
-        console.log("Change");
-        // var selected_status = $("select[name=selected_status]").val();
-        // var user_id = $("input[name=user_id]").val();
-        // var orderId = $("input[name=order_id]").val();
-        // var merchant_organization_id = $("input[name=organization_id]").val();
-        // var data_order_id = $(this).attr("data-order-id");
+    //checkout process
+    $("#checkout").click(function () {
+        var selectedOfferId = $(
+            'input[name="lenderOfferingRadio"]:checked'
+        ).val();
 
-        // if (selected_status && user_id && orderId && merchant_organization_id) {
-        //     $.ajax({
-        //         url: "/order/" + orderId + "/update/",
-        //         type: "POST",
-        //         dataType: "json",
-        //         data: {
-        //             selected_status,
-        //             user_id,
-        //             orderId,
-        //             merchant_organization_id,
-        //         },
-        //         success: function (data) {
-        //             if (!data.message) {
-        //                 if (
-        //                     data.status_name === "ORDER RECEIVED" ||
-        //                     data.status_name === "ORDER APPROVED" ||
-        //                     data.status_name === "ORDER COMPLETED"
-        //                 ) {
-        //                     $(".statusdiv").empty();
-        //                     $(".statusdiv").append(
-        //                         `<h2 class='text-success font-weight-bold'>${data.status_name}</h2>`
-        //                     );
-        //                 } else {
-        //                     $(".statusdiv").empty();
-        //                     $(".statusdiv").append(
-        //                         `<h2 class='text-danger font-weight-bold'>${data.status_name}</h2>`
-        //                     );
-        //                 }
-        //                 swal("Success", "Order update successful", "success");
-        //             } else {
-        //                 swal("Error", data.message, "error");
-        //             }
-        //         },
-        //     });
-        // } else {
-        //     swal("Nothing selected", "Select a status and try again", "error");
-        // }
+        console.log("offerId", selectedOfferId);
+        if (selectedOfferId) {
+            $.ajax({
+                url: "/user/checkout/process/",
+                type: "GET",
+                dataType: "json",
+                cache: false,
+                data: {
+                    selectedOfferId,
+                },
+                success: function (data) {
+                    if (data.message) {
+                        swal("Success", data.message, "success");
+                        window.location.href = "/dashboard";
+                    } else {
+                        swal("Error", "An error occured", "error");
+                    }
+                },
+                error: function (err) {
+                    swal("Error", "An error occured", "error");
+                },
+            });
+        } else {
+            swal("Error", "Please select a payment plan", "error");
+        }
     });
+
+    //order update js
+    // $("#lender_organization_select").change(function () {
+    //     var orgId = $("#lender_organization_select").val();
+
+    //     if (orgId) {
+    //         $.ajax({
+    //             url: "/lender-offerings/" + orgId,
+    //             type: "GET",
+    //             dataType: "json",
+    //             data: {
+    //                 orgId,
+    //             },
+    //             success: function (data) {
+    //                 console.log("PERCENTAGE", data.percentages);
+    //                 console.log("PAYMENT PERIOD", data.payment_periods);
+    //                 if (data) {
+    //                     $("#period_select").empty();
+    //                     // $("#period_select").append(
+    //                     $.each(data.payment_periods, function (key, value) {
+    //                         $("#period_select").append(
+    //                             '<option value="' +
+    //                                 value.Payment_period +
+    //                                 '">' +
+    //                                 value.Payment_period +
+    //                                 "months" +
+    //                                 "</option>"
+    //                         );
+    //                     });
+    //                     // );
+    //                     $("#percent_select").empty();
+    //                     $("#percent_select").append(
+    //                         $.each(data.percentages, function (key, value) {
+    //                             $("#percent_select").append(
+    //                                 '<option value="' +
+    //                                     value.percentage +
+    //                                     '">' +
+    //                                     value.percentage +
+    //                                     "%" +
+    //                                     "</option>"
+    //                             );
+    //                         })
+    //                     );
+    //                 } else {
+    //                     swal("Error", "An error occured", "error");
+    //                 }
+    //             },
+    //         });
+    //     } else {
+    //         swal("Nothing selected", "Select a status and try again", "error");
+    //     }
+    // });
 
     $(".like-btn").click(function () {
         var id = $(this).attr("data-request-id");
