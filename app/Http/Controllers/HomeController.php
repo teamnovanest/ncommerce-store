@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+
     public function index(){
         $featured = DB::table('products')->where('status',1)->orderBy('id','desc')->limit(100)->get();
         $trend = DB::table('products')->where('status',1)->where('trend',1)->orderBy('id','desc')->limit(8)->get();

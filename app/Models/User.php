@@ -70,4 +70,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(CustomerFinanceOrganizationAffiliation::class, 'user_id');
     }
+
+    public function customerFinanceOrganizationSelected() {
+        return $this->hasMany(UserFinanceAffiliation::class, 'user_id');
+    }
 }
