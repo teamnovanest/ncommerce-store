@@ -34,7 +34,7 @@ class CartController extends Controller
     ->join('users','customer_finance_organization_affiliations.user_id','=','users.id')
     ->join('lenders','customer_finance_organization_affiliations.lender_organization_id','=','lenders.id')
     ->join('lender_offerings','lender_offerings.lender_organization_id','=','lenders.id')
-    ->select('lenders.id as lender_organization_gId','lender_offerings.id','lenders.registered_name','lenders.trade_name','lender_offerings.payment_period','lender_offerings.percentage')
+    ->select('lenders.id as lender_organization_id','lender_offerings.id','lenders.registered_name','lenders.trade_name','lender_offerings.payment_period','lender_offerings.percentage','lender_offerings.max_financed')
     ->orderBy('percentage', 'ASC')
     ->where('customer_finance_organization_affiliations.user_id',Auth::id())->get();
     

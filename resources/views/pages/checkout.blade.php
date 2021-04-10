@@ -91,29 +91,39 @@
             <h4 class="pb--30 text-center">FINANCE PAYMENT PLANS</h4>
             <div class="row">
                 <div class="col-md-12">
-                    <ul>
+                    <ul class="">
 
                         @foreach($credit_offers as $offer)
 
                         <li class="h3">
                             <div class="form-check">
                                 <div class="row">
-                                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
-                                        <input class="form-check-input" type="radio" name="lenderOfferingRadio"
-                                            id="{{$offer->id}}" value="{{$offer->id}}" data-id="{{$offer->id}}">
-                                </div>
-                                    <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10">
-                                        <label class="form-check-label" for="{ $offer->id}}">
-                                            <p>
-                                                {{ $offer->registered_name}} finances at {{ $offer->percentage }}% for
-                                                {{ $offer->payment_period }} months
-                                            </p>
-                                            @foreach($cart as $row)
-                                            <p>Total financed GHC
-                                                {{ (($offer->percentage  * $row->price) / 100 ) +  $row->price }}</p>
-                                            @endforeach
-                                        </label>
-                                    </div>
+                                    @foreach($cart as $row)
+                                    @if (((($offer->percentage  * ($row->price * $row->qty)) / 100 ) +  ($row->price * $row->qty)) <= $offer->max_financed)
+                                        <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+                                            <input class="form-check-input" type="radio" name="lenderOfferingRadio"
+                                                id="{{$offer->id}}" value="{{$offer->id}}" data-id="{{$offer->id}}">
+                                        </div>
+                                        <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10">
+                                            <label class="form-check-label" for="{{$offer->id}}">
+                                                <p>
+                                                    {{ $offer->registered_name}} finances at {{ $offer->percentage }}%
+                                                    for
+                                                    {{ $offer->payment_period }} months
+                                                </p>
+
+
+                                                <p>Total financed GHC
+                                                    {{ (($offer->percentage  * ($row->price * $row->qty)) / 100 ) +  ($row->price * $row->qty) }}
+                                                </p>
+
+                                                <p>
+                                                    Commission GHC {{(($offer->percentage  * ($row->price * $row->qty)) / 100 )}}
+                                                </p>
+                                            </label>
+                                        </div>
+                                        @endif
+                                        @endforeach
                                 </div>
                             </div>
                         </li>

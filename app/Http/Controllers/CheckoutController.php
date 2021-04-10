@@ -62,8 +62,8 @@ class CheckoutController extends Controller
     $details['color'] = $row->options->color;
     $details['size'] = $row->options->size;
     $details['quantity'] = $row->qty;
-    $details['singleprice'] = $row->price;
-    $details['totalprice'] = $row->qty*$row->price;
+    $details['singleprice'] = floatval($row->price) * 100;
+    $details['totalprice'] = floatval($row->price) * $row->qty * 100;
     $details['merchant_organization_id'] = $row->options->merchant_organization_id;
     $data['created_at'] = now();
     DB::table('order_details')->insert($details); 
@@ -96,7 +96,7 @@ class CheckoutController extends Controller
     }
     DB::commit();
 
-      return response()->json(['message'=>'You have successfully placed and order']);
+      return response()->json(['message'=>'You have successfully placed your order']);
   
        } catch (\Throwable $th) {
          DB::rollback();
