@@ -85,15 +85,13 @@ $('.mutliSelect input[type="checkbox"]').on('click', function() {
   } else {
    
     $('span[title="' + title + '"]').remove();
-    var ret = $(".hida");
-    console.log(userInstitution);
+    var ret = $(".hida")
     const index = selectedInstitutions.indexOf(userInstitution);
     
     if (index > -1) {
   selectedInstitutions.splice(index, 1);
 }
     
-    console.log(selectedInstitutions);
     $('.dropdown dt a').append(ret);
   }
 });
