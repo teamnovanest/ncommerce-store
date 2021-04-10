@@ -92,7 +92,7 @@
                                             <div class="product__inner">
                                                 <div class="pro__thumb">
                                                     <a href="#">
-                                                        <img src="{{ asset($pro->image_one) }}" alt="product images">
+                                                        <img src="{{ asset($pro->image_one_secure_url) }}" alt="product images">
                                                     </a>
                                                 </div>
                                                 
@@ -149,7 +149,7 @@
                                         <div class="col-md-4 col-lg-4 col-xl-3 col-sm-5 col-12">
                                             <div class="list__thumb">
                                                 <a href="product-details.html">
-                                                    <img src="{{ asset($pro->image_one) }}" alt="Product Image">
+                                                    <img src="{{ asset($pro->image_one_secure_url) }}" alt="Product Image">
                                                 </a>
                                             </div>
                                         </div>
@@ -213,7 +213,7 @@
        $('#psub').text(data.product.subcategory_name);
        $('#pbrand').text(data.product.brand_name);
        $('#pname').text(data.product.product_name);
-       $('#pimage').attr('src',data.product.image_one);
+       $('#pimage').attr('src',data.product.image_one_secure_url);
        $('#product_id').val(data.product.id);
 
        var d = $('select[name="color"]').empty();

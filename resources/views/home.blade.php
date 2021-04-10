@@ -56,7 +56,7 @@
                                                 <div class="slider__inner">
                                                     <h1>New Product <span class="text--theme">Collection</span></h1>
                                                     <div class="slider__btn">
-                                                        <a class="htc__btn" href="cart.html">shop now</a>
+                                                        <a class="htc__btn" href="#">shop now</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -111,7 +111,7 @@
                                         </div>
                                     </div>
                                     <div class="product__details">
-                                        <h2><a href="product-details.html">{{$row->product_name}} </a></h2>
+                                        <h2><a href="{{ url('/product/details/'.$row->id) }}">{{$row->product_name}} </a></h2>
                                         <ul class="product__price">
                                              @if($row->discount_price == NULL)
                                             <li >GH₵ {{$row->selling_price }}</li>
