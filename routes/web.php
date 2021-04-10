@@ -10,6 +10,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderDetailsController;
 use App\Http\Controllers\FeatureRequestController;
+use App\Http\Controllers\LenderOfferingController;
 
 
 /*
@@ -80,3 +81,5 @@ Route::get('/allcategory/{id}', [ProductController::class, 'categoryView']);
 // Selecting finance organizations route
 // Route::get('/select/finance-institutions', [HomeController::class, 'selectFinanceInstitution']);
 Route::post('/institutions/save', [DashboardController::class,'saveFinanceInstitution'])->name('save-finance_institution');
+
+Route::get('/lender-offerings/{orgId}', [LenderOfferingController::class, 'lenderOfferings']);

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LenderOffering;
 use Illuminate\Http\Request;
+use App\Models\LenderOffering;
+use Illuminate\Support\Facades\DB;
 
 class LenderOfferingController extends Controller
 {
@@ -12,9 +13,25 @@ class LenderOfferingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function lenderOfferings($orgId)
     {
-        //
+        
+        $payment_periods = DB::table('lender_offerings')
+        ->where('lender_organization_id',$orgId)
+        ->distinct()
+        ->orderBy('Payment_period','ASC')
+        ->get('Payment_period');
+
+        $percentages = DB::table('lender_offerings')
+        ->where('lender_organization_id',$orgId)
+        ->distinct()
+        ->orderBy('percentage','ASC')
+        ->get('percentage');
+
+        return response()->json([
+        'payment_periods' => $payment_periods,
+        'percentages' => $percentages,
+        ]);
     }
 
     /**

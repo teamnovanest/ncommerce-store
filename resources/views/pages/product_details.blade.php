@@ -141,8 +141,8 @@
 
            	<div class="col-lg-4">
           	 <div class="form-group">
-          		   <h2 class="title__5">Quantity</h2>
-          		      <input class="form-control" type="number" value="1" pattern="[0-9]" name="qty">	
+          		   <label for="exampleFormControlSelect1">Quantity</label>
+          		      <input class="form-control" type="number" value="1" pattern="[0-9]" name="qty" min="1">	
           	  </div> 
           	</div>    
         </div> 
@@ -171,7 +171,7 @@
                 <ul>
                     <li class="h3">
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="{{ $offer->id}}" value="{ $offer->id}" >
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="{{ $offer->id}}" value="{{$offer->id}" >
                         </div>
                     </li>    
                 </ul>
