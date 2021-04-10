@@ -13,6 +13,13 @@ use App\Mail\InvoiceMail;
 class CheckoutController extends Controller
 {
      public function checkout(Request $request){
+      $selectedOfferId = $request->selectedOfferId;
+
+      #select the payment period and percentag from the lender offering table
+      $lenderOffering = DB::table('lender_offerings')->select('payment_period','percentage','max_financed','lender_organization_id')->where('id',$selectedOfferId)->first();
+
+      //TODO :: check if the total price is greater than the max financed amount from the table 
+      
      DB::begintransaction();
      try {
        //code...
@@ -55,10 +62,10 @@ class CheckoutController extends Controller
     $details['color'] = $row->options->color;
     $details['size'] = $row->options->size;
     $details['quantity'] = $row->qty;
-    $details['singleprice'] = $row->price;
-    $details['totalprice'] = $row->qty*$row->price;
+    $details['singleprice'] = floatval($row->price) * 100;
+    $details['totalprice'] = floatval($row->price) * $row->qty * 100;
     $details['merchant_organization_id'] = $row->options->merchant_organization_id;
-    $data['created_at'] = \Carbon\Carbon::now();
+    $data['created_at'] = now();
     DB::table('order_details')->insert($details); 
 
     }
@@ -70,20 +77,26 @@ class CheckoutController extends Controller
       $status['status_id'] = 0;
       $status['merchant_organization_id'] = $row->options->merchant_organization_id;
       $status['updated_by'] = Auth::id();
-      $status['created_at'] = \Carbon\Carbon::now();
+      $status['created_at'] = now();
       DB::table('order_status_histories')->insert($status);
     }
+
+    #inserting into the order financing table with the offer the user selected
+    $offerdetail = array();
+    $offerdetail['user_id'] = Auth::id();
+    $offerdetail['percentage'] = $lenderOffering->percentage;
+    $offerdetail['payment_period'] = $lenderOffering->payment_period;
+    $offerdetail['lender_organization_id'] = $lenderOffering->lender_organization_id;
+    $offerdetail['created_at'] = now();
+    DB::table('order_financings')->insert($offerdetail);
 
     Cart::destroy();
     if (Session::has('coupon')) {
     	Session::forget('coupon');
     }
     DB::commit();
-    $notification=array(
-                        'messege'=>'Order Processed Successfully',
-                        'alert-type'=>'success'
-                         );
-                       return Redirect()->to('/dashboard')->with($notification);
+
+      return response()->json(['message'=>'You have successfully placed your order']);
   
        } catch (\Throwable $th) {
          DB::rollback();
