@@ -40,10 +40,9 @@
                     </form>
                 </div>
                 
-                <div class="flex justify-between p-8 text-sm border-t border-gray-300 bg-gray-100">
+                <div class="flex iems-center p-8 text-sm border-t border-gray-300 bg-gray-100">
+                    <span class="pr-2 font-thin">Already have an account?</span>
                     <a href="{{ route('login') }}" class="font-medium text-indigo-500">Login</a>
-
-                    <a href="#" class="text-gray-600">Forgot password?</a>
                 </div>
             </div>
         </div>
