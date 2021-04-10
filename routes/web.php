@@ -78,4 +78,8 @@ Route::get('/user/wishlist/', [WishlistController::class, 'index'])->name('user.
 Route::get('/products/{id}', [ProductController::class, 'productsView']);
 Route::get('/allcategory/{id}', [ProductController::class, 'categoryView']);
 
+// Selecting finance organizations route
+// Route::get('/select/finance-institutions', [HomeController::class, 'selectFinanceInstitution']);
+Route::post('/institutions/save', [DashboardController::class,'saveFinanceInstitution'])->name('save-finance_institution');
+
 Route::get('/lender-offerings/{orgId}', [LenderOfferingController::class, 'lenderOfferings']);
