@@ -77,7 +77,7 @@
           <ul class="nav">
             <li class="nav-item"><a href="/" class="nav-link "><i class="typcn typcn-home-outline"></i>Home</a></li>
             <li class="nav-item active show">
-              <a href="/home" class="nav-link"><i class="typcn typcn-chart-area-outline"></i> Dashboard</a>
+              <a href="/dashboard" class="nav-link"><i class="typcn typcn-chart-area-outline"></i> Dashboard</a>
             </li>
             <li class="nav-item">
               <a href="" class="nav-link with-sub"><i class="typcn typcn-book"></i> Feature Request <span class="arrow"><i class="typcn typcn-arrow-sorted-down"></i></span></a>
@@ -99,7 +99,7 @@
                   <div>
                     <nav class="nav">
                       <a href="{{ route('password.change') }}" class="nav-link">Change Password</a>
-                      <a href="#" class="nav-link">Edit Profile</a>
+                      <a href="{{route('user.profile.show')}}" class="nav-link">Edit Profile</a>
                       <a href="{{route('user.logout')}}" class="nav-link">Logout</a>
                     </nav>
                   </div>

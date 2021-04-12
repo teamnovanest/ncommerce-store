@@ -99,3 +99,7 @@ Route::get('/lender-offerings/{orgId}', [LenderOfferingController::class, 'lende
 // Password Reset route
 Route::get('/password/change', [DashboardController::class, 'changePassword'])->name('password.change');
 Route::post('/password/update', [DashboardController::class,'updatePassword'])->name('password.update');
+
+// User profile route
+Route::get('/user/profile', [DashboardController::class,'showProfile'])->name('user.profile.show');
+Route::post('user/profile/update', [DashboardController::class,'updateProfile'])->name('user.profile.update');
