@@ -80,4 +80,15 @@ class CartController extends Controller
                          );
                        return Redirect()->back()->with($notification);
    }
+
+   public function updateCart(Request $request){
+     $rowId = $request->productid;
+    	$qty = $request->qty;
+    	Cart::update($rowId,$qty);
+    	$notification=array(
+      'messege'=>'Product Quantity Updated',
+      'alert-type'=>'success'
+      );
+      return Redirect()->back()->with($notification);
+   }
 }
