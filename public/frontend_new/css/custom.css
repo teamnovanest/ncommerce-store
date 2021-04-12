@@ -502,3 +502,14 @@ text-decoration: underline;
 .feature{
     color: blue;
 }
+
+.shop-category{
+    display: inline-flex;
+    padding: 10px;
+    font-size: 15px;
+    box-shadow: 0 4px 5px 0 rgba(175, 172, 172, 0.2);
+}
+
+.shop-category a{
+  color: black;
+}

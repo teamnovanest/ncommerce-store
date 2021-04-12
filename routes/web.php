@@ -49,6 +49,7 @@ Route::get('/product/cart', [CartController::class,'showCart'])->name('show.cart
 Route::get('/user/checkout/', [CartController::class,'checkout'])->name('user.checkout');
 Route::post('/user/apply/coupon/', [CartController::class, 'coupon'])->name('apply.coupon');
 Route::get('/remove/cart/{rowId}', [CartController::class, 'removeCart']);
+Route::post('/update/cart/{rowId}', [CartController::class, 'updateCart']);
 
 
 // Product 
@@ -77,6 +78,12 @@ Route::get('/user/wishlist/', [WishlistController::class, 'index'])->name('user.
 // All Product details Page 
 Route::get('/products/{id}', [ProductController::class, 'productsView']);
 Route::get('/allcategory/{id}', [ProductController::class, 'categoryView']);
+
+
+// shop
+Route::get('/shop', [HomeController::class, 'shop']);
+Route::get('/shop/{id}', [HomeController::class, 'shopView']);
+
 
 // Selecting finance organizations route
 // Route::get('/select/finance-institutions', [HomeController::class, 'selectFinanceInstitution']);

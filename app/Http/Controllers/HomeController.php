@@ -40,4 +40,23 @@ class HomeController extends Controller
             );
         return Redirect()->route('login')->with($notification);
     }
+
+
+     public function shop(){
+        $cat = DB::table('products');
+        $allProducts = DB::table('products')->where('status',1)->orderBy('id','desc')->paginate(50);
+	
+       $category = DB::table('category_options')->get();
+
+       return view('pages.shop',compact('category', 'allProducts'));
+    }
+
+    public function shopView($id){
+       $allProducts = DB::table('products')->where('status',1)->where('category_id',$id)->orderBy('id','desc')->paginate(10);
+	
+       $category = DB::table('category_options')->get();
+
+       return view('pages.shop',compact('category', 'allProducts'));
+	   
+	}
 }
