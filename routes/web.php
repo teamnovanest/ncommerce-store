@@ -65,6 +65,11 @@ Route::get('/order/{id}/status', [OrderDetailsController::class,'viewOrderStatus
 // Feature Request Route
 Route::get('/feature-request/index', [FeatureRequestController::class,'index'])->name('feature.index');
 Route::get('/feature-request/create', [FeatureRequestController::class,'create'])->name('feature.create');
+Route::post('/feature-request/save', [FeatureRequestController::class,'save'])->name('feature.save');
+Route::post('/feature-request/{requestId}/save', [FeatureRequestController::class,'requestLike']);
+Route::get('/feature-request/{id}/edit', [FeatureRequestController::class,'editFeature'])->name('feature.edit');
+Route::post('/feature-request/{id}/update', [FeatureRequestController::class,'updateRequest'])->name('feature.update');
+
 
 // Contact page routes
 Route::get('/contact/page', [ContactController::class, 'contact'])->name('contact.page');
