@@ -95,3 +95,7 @@ Route::get('/shop/{id}', [HomeController::class, 'shopView']);
 Route::post('/institutions/save', [DashboardController::class,'saveFinanceInstitution'])->name('save-finance_institution');
 
 Route::get('/lender-offerings/{orgId}', [LenderOfferingController::class, 'lenderOfferings']);
+
+// Password Reset route
+Route::get('/password/change', [DashboardController::class, 'changePassword'])->name('password.change');
+Route::post('/password/update', [DashboardController::class,'updatePassword'])->name('password.update');
