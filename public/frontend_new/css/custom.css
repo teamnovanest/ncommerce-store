@@ -37,9 +37,9 @@
     padding: 5px 20px;
 }
 @media (max-width: 40em) {
-.section-center {
-max-width: 100%;
-}
+    .section-center {
+        max-width: 100%;
+    }
 }
 
 .section-center__profile {
@@ -50,11 +50,11 @@ max-width: 100%;
     width: 900px;
     margin: 0 auto;
 }
-@media (max-width: 40em){
-.center-section {
-    width: 100%;
-    margin: 0 auto;
-}
+@media (max-width: 40em) {
+    .center-section {
+        width: 100%;
+        margin: 0 auto;
+    }
 }
 .arrow {
     margin-left: 7px;
@@ -199,7 +199,6 @@ max-width: 100%;
     background-color: black;
     height: 40px;
     width: 100%;
-
 }
 
 .sec-center {
@@ -443,7 +442,6 @@ max-width: 100%;
     .bio__column {
         margin-left: 60px;
     }
-
 }
 
 .section-center__profile {
@@ -460,16 +458,24 @@ max-width: 100%;
 }
 
 @media screen and (min-width: 768px) {
-    
     .name__label {
         margin-top: 0;
     }
 }
 
 @media (max-width: 40em) {
-.element {
-display: none;
+    .element {
+        display: none;
+    }
 }
+
+.checkout-btn {
+    height: 50px;
+    background: black !important;
+    color: white !important;
+}
+.checkout-btn:hover {
+    background: tomato !important;
 }
 
 .credit-offers-card{

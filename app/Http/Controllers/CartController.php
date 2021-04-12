@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use DB;
-use Cart;
-use Response;
 use Auth;
+use Cart;
 use Session;
+use Response;
+use Illuminate\Http\Request;
+use App\Models\LenderOffering;
 
 class CartController extends Controller
 {
@@ -28,10 +29,18 @@ class CartController extends Controller
 
 
     public function checkout(){
-         if (Auth::check()) {
-
+    if (Auth::check()) {
+    $credit_offers = DB::table('customer_finance_organization_affiliations')
+    ->join('users','customer_finance_organization_affiliations.user_id','=','users.id')
+    ->join('lenders','customer_finance_organization_affiliations.lender_organization_id','=','lenders.id')
+    ->join('lender_offerings','lender_offerings.lender_organization_id','=','lenders.id')
+    ->select('lenders.id as lender_organization_id','lender_offerings.id','lenders.registered_name','lenders.trade_name','lender_offerings.payment_period','lender_offerings.percentage','lender_offerings.max_financed')
+    ->orderBy('percentage', 'ASC')
+    ->where('customer_finance_organization_affiliations.user_id',Auth::id())->get();
+    
   	$cart = Cart::content();
-    	return view('pages.checkout',compact('cart'));
+  
+    return view('pages.checkout',compact('cart','credit_offers'));
 
   }else{
   	$notification=array(
