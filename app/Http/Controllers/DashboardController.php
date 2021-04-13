@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\UserFinanceAffiliation;
 use App\Models\CustomerFinanceOrganizationAffiliation;
 use Cloudinary;
+use Cart;
 
 class DashboardController extends Controller
 {   
