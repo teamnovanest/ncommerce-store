@@ -86,13 +86,9 @@
                         </div>
                     </div>
                     <!-- Start Load More BTn -->
-                    <div class="row mt--60">
-                        <div class="col-md-12">
-                            <div class="htc__loadmore__btn">
-                                <a href="#">load more</a>
+                            <div class="center-pagination">
+                                    {{ $allProducts->links() }}
                             </div>
-                        </div>
-                    </div>
                     <!-- End Load More BTn -->
                 </div>
             </div>

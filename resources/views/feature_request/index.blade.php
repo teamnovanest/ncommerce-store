@@ -40,6 +40,9 @@
         </div>
     </div>
 </div>
+<div class="center-pagination">
+    {{ $requests->links() }}
+</div>
 </div>
 </div>
 @endsection

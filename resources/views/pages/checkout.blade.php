@@ -61,7 +61,7 @@
                                     <td class="product-quantity">{{ $row->options->size }}</td>
                                     @endif
                                     <td>
-                                        <form method="post" action="{{ route('user.checkout') }}">
+                                        <form method="post" action="/update/cart/item">
                                             @csrf
                                             <input type="hidden" name="productid" value="{{ $row->rowId }}">
                                             <input type="number" name="qty" value="{{ $row->qty }}"

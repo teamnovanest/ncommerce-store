@@ -125,11 +125,14 @@
                                 </div>
                             </div>
                              @endforeach   
-
+                             
+                            </div>
                         </div>
                     </div>
+                    <div class="center-pagination">
+                        {{ $featured->links() }}
+                    </div>
                 </div>
-            </div>
         </section>
 
 

@@ -44,6 +44,9 @@
         </div><!-- container -->
     </div><!-- az-footer -->
 </div><!-- az-content-body -->
+<div class="center-pagination">
+    {{ $order->links() }}
+</div>
 </div>
 </div>
 @endsection

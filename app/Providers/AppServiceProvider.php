@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Cart;
-use View;
 use DB;
 use Auth;
+use Cart;
+use View;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -43,6 +44,9 @@ class AppServiceProvider extends ServiceProvider
         } catch (\Throwable $th) {
             $cart = null;
             $profileImage = null;
-        }
+        };
+
+        Paginator::useBootstrap();
+
     }
 }
