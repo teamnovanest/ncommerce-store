@@ -355,7 +355,7 @@
 
         <section>
     <div class="container">
-        <h1 class="offer-header">Offer's</h1>
+        <h1 class="offer-header">Financial Institution Offer's</h1>
         <div class="row">
             @foreach($credit_offers as $offer)
             <div class="col-lg-1">
