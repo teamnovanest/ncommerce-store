@@ -185,15 +185,4 @@ class DashboardController extends Controller
 
       }
 
-       public function Logout()
-       {
-       Auth::logout();
-       Cart::destroy();
-       $notification=array(
-       'messege'=>'Successfully Logout',
-       'alert-type'=>'success'
-       );
-       return Redirect()->route('login')->with($notification);
-       }
-
 }

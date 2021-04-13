@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
@@ -38,7 +39,7 @@ Route::group(['middleware' => ['role:customer']], function () {
 });
 
 Route::get("/", "App\Http\Controllers\HomeController@index");
-Route::get('/user/logout', [DashboardController::class, 'logout'])->name('user.logout');
+Route::get('/user/logout', [LogoutController::class, 'logout'])->name('user.logout');
 
 // Search Route
 Route::get('/product/search', [CartController::class,'search'])->name('product.search');
