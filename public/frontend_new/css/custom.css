@@ -513,3 +513,8 @@ text-decoration: underline;
 .shop-category a{
   color: black;
 }
+
+
+.center-pagination{
+    float: right;
+}

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class FeatureRequestController extends Controller
 {
       public function index(){
-    $requests = DB::table('feature_requests')->get();
+    $requests = DB::table('feature_requests')->paginate(10);
     return view('feature_request.index', compact('requests'));
     }
 
