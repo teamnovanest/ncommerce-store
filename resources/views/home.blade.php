@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <!-- End Product MEnu -->
-                    <div class="product__list another-product-style ">
+                    <div class="another-product-style ">
                         <div class="row">
                         
                              @foreach($featured as $row)

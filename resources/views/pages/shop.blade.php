@@ -48,7 +48,7 @@
                     </div>
                    
                     <!-- End Product MEnu -->
-                    <div class="product__list another-product-style">
+                    <div class="another-product-style">
                         <div class="row">
                             <!-- Start Single Product -->
                              @foreach($allProducts as $row)
