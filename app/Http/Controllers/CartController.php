@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use DB;
+
 use Auth;
 use Cart;
 use Session;
 use Response;
 use Illuminate\Http\Request;
 use App\Models\LenderOffering;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {

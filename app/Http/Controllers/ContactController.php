@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
 {
@@ -18,7 +19,7 @@ class ContactController extends Controller
   	$data['email'] = $request->email;
   	$data['phone'] = $request->phone;
   	$data['message'] = $request->message;
-  	DB::table('contact')->insert($data);
+  	DB::table('contacts')->insert($data);
   	$notification=array(
             'messege'=>'Message  Sent',
             'alert-type'=>'success'
