@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Cart;
 
 class HomeController extends Controller
 {
@@ -29,16 +30,6 @@ class HomeController extends Controller
 
 
         return view('home', compact('featured', 'trend' , 'best', 'hot', 'category'));
-    }
-
-     public function Logout()
-    {
-        Auth::logout();
-        $notification=array(
-        'messege'=>'Successfully Logout',
-        'alert-type'=>'success'
-            );
-        return Redirect()->route('login')->with($notification);
     }
 
 

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\UserFinanceAffiliation;
 use App\Models\CustomerFinanceOrganizationAffiliation;
 use Cloudinary;
+use Cart;
 
 class DashboardController extends Controller
 {   
@@ -183,5 +184,16 @@ class DashboardController extends Controller
       return Redirect()->back()->with($notification);
 
       }
+
+       public function Logout()
+       {
+       Auth::logout();
+       Cart::destroy();
+       $notification=array(
+       'messege'=>'Successfully Logout',
+       'alert-type'=>'success'
+       );
+       return Redirect()->route('login')->with($notification);
+       }
 
 }
