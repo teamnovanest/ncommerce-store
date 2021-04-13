@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\UserFinanceAffiliation;
 use App\Models\CustomerFinanceOrganizationAffiliation;
 use Cloudinary;
+use Cart;
 
 class DashboardController extends Controller
 {   
@@ -61,7 +62,7 @@ class DashboardController extends Controller
     return view('auth.change_password');
     }
 
-    public function updatePassword(Request $request)
+    public function resetPassword(Request $request)
     {
     $password=Auth::user()->password;
     $oldpass=$request->oldpass;

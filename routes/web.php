@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
@@ -38,7 +39,7 @@ Route::group(['middleware' => ['role:customer']], function () {
 });
 
 Route::get("/", "App\Http\Controllers\HomeController@index");
-Route::get('/user/logout', [HomeController::class, 'logout'])->name('user.logout');
+Route::get('/user/logout', [LogoutController::class, 'logout'])->name('user.logout');
 
 // Search Route
 Route::get('/product/search', [CartController::class,'search'])->name('product.search');
@@ -98,7 +99,7 @@ Route::get('/lender-offerings/{orgId}', [LenderOfferingController::class, 'lende
 
 // Password Reset route
 Route::get('/password/change', [DashboardController::class, 'changePassword'])->name('password.change');
-Route::post('/password/update', [DashboardController::class,'updatePassword'])->name('password.update');
+Route::post('/reset/password', [DashboardController::class,'resetPassword'])->name('password.new');
 
 // User profile route
 Route::get('/user/profile', [DashboardController::class,'showProfile'])->name('user.profile.show');
