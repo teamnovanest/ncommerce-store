@@ -171,7 +171,7 @@
                 <ul>
                     <li class="h3">
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="{{ $offer->id}}" value="{{$offer->id}" >
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="{{ $offer->id}}" value="{{$offer->id}}" >
                         </div>
                     </li>    
                 </ul>
