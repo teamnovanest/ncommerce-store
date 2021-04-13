@@ -61,7 +61,7 @@ class DashboardController extends Controller
     return view('auth.change_password');
     }
 
-    public function updatePassword(Request $request)
+    public function resetPassword(Request $request)
     {
     $password=Auth::user()->password;
     $oldpass=$request->oldpass;
