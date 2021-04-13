@@ -13,7 +13,7 @@
                 <div class="card-header">{{ __('Change Your Password') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}" aria-label="{{ __('Reset Password') }}">
+                    <form method="POST" action="{{ route('password.new') }}" aria-label="{{ __('Reset Password') }}">
                         @csrf
 
 
