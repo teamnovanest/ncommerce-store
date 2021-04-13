@@ -65,7 +65,7 @@
                                             @csrf
                                             <input type="hidden" name="productid" value="{{ $row->rowId }}">
                                             <input type="number" name="qty" value="{{ $row->qty }}"
-                                                style="width: 50px;">
+                                                style="width: 50px;" min="1">
                                             <button type="submit" class="btn btn-success btn-sm"><i
                                                     class="fas fa-check-square"></i>✔</button>
                                         </form>
