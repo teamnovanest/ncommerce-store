@@ -26,23 +26,27 @@ class CheckoutController extends Controller
        $content = Cart::content();
        $data = array();
        $data['user_id'] = Auth::id();
-       $data['total'] = floatval(Cart::Subtotal()) * 100;
-       $data['status_code'] = mt_rand(100000,999999);
+      //  $data['total'] = floatval(Cart::Subtotal()) * 100;
+       $data['status_code'] = mt_rand(100000,999999);  //comment for now
        $data['order_code'] = rand();
-       $data['status_id'] = 0;
+       $data['status_id'] = 1;
        
        if (Session::has('coupon')) {
            $data['subtotal'] = Session::get('coupon')['balance'];
         }else{
-            $data['subtotal'] = floatval(Cart::Subtotal()) * 100;
+          foreach ($content as $row) {
+            // $data['subtotal'] = floatval(Cart::Subtotal()) * 100;
+            $data['subtotal'] = floatval($row->price) * 100;
+          }
         }
-        $data['status'] = 'ORDER PENDING';
+        $data['status'] = 'ORDER_PENDING';
         $data['date'] = date('d-m-y');
         $data['month'] = date('F');
         $data['year'] = date('Y');
         $data['created_at'] = \Carbon\Carbon::now();
         foreach ($content as $item) {
           $data['merchant_organization_id'] = $item->options->merchant_organization_id;
+          $data['total'] = floatval($item->price) * 100;
         }
         
     $order_id = DB::table('orders')->insertGetId($data);
@@ -66,7 +70,7 @@ class CheckoutController extends Controller
     $details['totalprice'] = floatval($row->price) * $row->qty * 100;
     $details['merchant_organization_id'] = $row->options->merchant_organization_id;
     $data['created_at'] = now();
-    DB::table('order_details')->insert($details); 
+    DB::table('order_details')->insert($details);
 
     }
 
@@ -74,7 +78,7 @@ class CheckoutController extends Controller
     foreach ($content as $row) {
       $status['user_id'] = Auth::id();
       $status['order_id'] = $order_id;
-      $status['status_id'] = 0;
+      $status['status_id'] = 1;
       $status['merchant_organization_id'] = $row->options->merchant_organization_id;
       $status['updated_by'] = Auth::id();
       $status['created_at'] = now();

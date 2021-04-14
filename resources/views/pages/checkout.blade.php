@@ -1,8 +1,6 @@
 @extends('layouts.store')
 
 @section('content')
-
-
 <div>
     <!-- Start Bradcaump area -->
     <div class="ht__bradcaump__area"
@@ -100,10 +98,10 @@
                                 <div class="row">
                                     @foreach($cart as $row)
                                     @if (((($offer->percentage  * ($row->price * $row->qty)) / 100 ) +  ($row->price * $row->qty)) <= $offer->max_financed)
-                                        <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
-                                            <input class="form-check-input" type="radio" name="lenderOfferingRadio"
-                                                id="{{$offer->id}}" value="{{$offer->id}}" data-id="{{$offer->id}}">
-                                        </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+                                        <input class="form-check-input" type="radio" name="lenderOfferingRadio"
+                                        id="{{$offer->id}}" value="{{$offer->id}}" data-id="{{$offer->id}}">
+                                    </div>
                                         <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10">
                                             <label class="form-check-label" for="{{$offer->id}}">
                                                 <p>

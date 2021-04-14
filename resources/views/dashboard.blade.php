@@ -1,4 +1,4 @@
-  @extends('layouts.usernav')
+@extends('layouts.usernav')
 @section('content')
 
 <div class="order-detail-header">
@@ -27,13 +27,16 @@
                 <tr>
                   <td><a href="{{ url('product/details/'.$row->product_id) }}" target="_blank"><img style="height: 100px" src="{{ asset( $row->image_one_secure_url )}}" alt="product images"></a></td>
                   <th>{{ $row->date }}</th>
-                  <td>{{ $row->total }}$</td>
+                  <td>GHC {{ $row->total}}</td>
                   <td>{{ $row->order_code }}</td>
                   <td> 
-                    @if($row->status_name === null) 
-                      <span class="badge badge-warning">Pending</span>
+                    @if($row->status_id === 0) 
+                      <span class="badge badge-danger">ORDER_REJECTED</span>
+                    @elseif ($row->status_id === 1)
+                    <span class="badge badge-warning">{{$row->status_name}}</span>
+                    @else
+                    <span class="badge badge-success">{{$row->status_name}}</span>
                     @endif
-                      <span class="badge badge-warning">{{$row->status_name}}</span>
                   </td>
                   <td><a href="{{ route('order.status',['id'=>$row->id])}}" class="btn btn-sm btn-info"> View</a></td>
                 </tr>
