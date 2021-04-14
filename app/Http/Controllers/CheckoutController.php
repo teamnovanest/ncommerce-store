@@ -39,7 +39,7 @@ class CheckoutController extends Controller
             $data['subtotal'] = floatval($row->price) * 100;
           }
         }
-        $data['status'] = 'PENDING';
+        $data['status'] = 'ORDER_PENDING';
         $data['date'] = date('d-m-y');
         $data['month'] = date('F');
         $data['year'] = date('Y');

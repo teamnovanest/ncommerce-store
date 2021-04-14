@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\DashboardController;
@@ -102,5 +103,5 @@ Route::get('/password/change', [DashboardController::class, 'changePassword'])->
 Route::post('/reset/password', [DashboardController::class,'resetPassword'])->name('password.new');
 
 // User profile route
-Route::get('/user/profile', [DashboardController::class,'showProfile'])->name('user.profile.show');
-Route::post('user/profile/update', [DashboardController::class,'updateProfile'])->name('user.profile.update');
+Route::get('/user/profile', [ProfileController::class,'showProfile'])->name('user.profile.show');
+Route::post('user/profile/update', [ProfileController::class,'updateProfile'])->name('user.profile.update');
