@@ -80,6 +80,7 @@ Route::post('/contact/form', [ContactController::class, 'contactForm' ])->name('
 //  Wishlist
 Route::get('/add/wishlist/{id}', [WishlistController::class, 'addWishlist']);
 Route::get('/user/wishlist/', [WishlistController::class, 'index'])->name('user.wishlist');
+Route::get('/delete/wishlist/{id}', [WishlistController::class, 'deleteWishlist']);
 
 
 // All Product details Page 
