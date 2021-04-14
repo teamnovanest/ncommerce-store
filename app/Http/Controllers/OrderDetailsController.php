@@ -13,16 +13,20 @@ class OrderDetailsController extends Controller
     [$order_code] = $order_codes;
     
     $current_status = DB::table('orders')
-    ->join('status', 'orders.status_id', '=', 'status.id')
+    ->join('status_options', 'orders.status_id', '=', 'status_options.id')
     ->where('orders.id', $order_id)->first();
+   
+    $reason = DB::table('orders')
+    ->select('reason_for_rejection')
+    ->where('orders.id',$order_id)->first();
      
     $order_status = DB::table('orders')
     ->join('order_status_histories', 'order_status_histories.order_id','=', 'orders.id')
-    ->leftJoin('status', 'order_status_histories.status_id', '=', 'status.id')
-    ->select('status.status_name', 'status.description','order_status_histories.updated_at','orders.created_at')
+    ->leftJoin('status_options', 'order_status_histories.status_id', '=', 'status_options.id')
+    ->select('status_options.status_name', 'status_options.description', 'order_status_histories.status_id','order_status_histories.updated_at','orders.created_at')
     ->where('orders.id',$order_id)->where('order_status_histories.user_id', Auth::id())->get();
     
-    return view('pages.order_status',compact('order_status','order_code','current_status'));
+    return view('pages.order_status',compact('order_status','order_code','current_status','reason'));
 
     }
 }
