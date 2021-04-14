@@ -518,3 +518,16 @@ text-decoration: underline;
 .center-pagination{
     float: right;
 }
+
+.text-left{
+  position: absolute;
+  top: 70px;
+  /* right: -36px; */
+}
+
+@media (max-width: 640px) {
+    .text-left {
+        position: absolute;
+        top: -10px;
+    }
+}
