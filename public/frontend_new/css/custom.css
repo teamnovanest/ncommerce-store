@@ -531,3 +531,7 @@ text-decoration: underline;
         top: -10px;
     }
 }
+
+.addwishlist {
+    cursor: pointer;
+}

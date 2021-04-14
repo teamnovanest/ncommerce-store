@@ -464,7 +464,7 @@ $setting = DB::table('sitesettings')->first();
 <script src="{{ asset('/frontend/js/product_custom.js')}}"></script>
 <script src="{{ asset('js/custom.js')}}"></script>
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
   <script src="{{ asset('https://unpkg.com/nprogress@0.2.0/nprogress.js')}}"></script>
 

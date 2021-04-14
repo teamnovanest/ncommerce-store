@@ -44,8 +44,8 @@
                                         <tbody>
                                               @foreach($product as $row)
                                             <tr>
-                                                <td class="product-remove"><a href="#">×</a></td>
-                                                <td class="product-thumbnail"><a href="#"><img src="{{ asset($row->image_one) }}" alt="" /></a></td>
+                                                <td class="product-remove"><a href="{{ url('delete/wishlist/'.$row->id)}}">×</a></td>
+                                                <td class="product-thumbnail"><a href="#"><img src="{{ asset($row->image_one_secure_url) }}" alt="" /></a></td>
                                                 <td class="product-name">{{ $row->product_name  }}</td>
 												@if($row->product_color == NULL)
                                                 <td><span></span></td>

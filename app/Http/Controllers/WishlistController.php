@@ -45,77 +45,32 @@ class WishlistController extends Controller
 
     );
 
-			  if (Auth::Check()) {
-             
-             if ($check) {
-              return \Response::json(['error' => 'Product Already Added To Wishlist']);	 
-             }else{
-             	DB::table('wishlists')->insert($data);
-          return \Response::json(['success' => 'Product Added To wishlist']);
- 
-             }
-             
-			  	 
-			  }else{
-          return \Response::json(['error' => 'At first login your account']);      
+        if (Auth::Check()) {
+        
+        if ($check) {
+        return \Response::json(['error' => 'Product Already Added To Wishlist']);	 
+        }else{
+        DB::table('wishlists')->insert($data);
+        return \Response::json(['success' => 'Product Added To wishlist']);
 
-			  } 
+        }
+        
+            
+        }else{
+        return \Response::json(['error' => 'At first login your account']);      
+
+        } 
 
    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Wishlist  $wishlist
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Wishlist $wishlist)
+    public function deleteWishlist($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Wishlist  $wishlist
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Wishlist $wishlist)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Wishlist  $wishlist
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Wishlist $wishlist)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Wishlist  $wishlist
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Wishlist $wishlist)
-    {
-        //
+        DB::table('wishlists')->where('product_id', $id)->delete();
+        $notification=array(
+        'messege'=>'Product removed from wishlist',
+        'alert-type'=>'success'
+        );
+        return redirect()->back()->with($notification);
     }
 }
