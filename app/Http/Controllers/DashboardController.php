@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\UserFinanceAffiliation;
 use App\Models\CustomerFinanceOrganizationAffiliation;
 use Cloudinary;
+use Cart;
 
 class DashboardController extends Controller
 {   
@@ -28,7 +29,7 @@ class DashboardController extends Controller
               ->join('order_details', 'order_details.order_id', '=', 'orders.id')
               ->join('products','order_details.product_id', '=', 'products.id')
               ->select('orders.*','status_options.status_name','products.image_one_secure_url','order_details.product_id')
-              ->where('orders.user_id',Auth::id())->orderBy('orders.id','DESC')->limit(10)->get();
+              ->where('orders.user_id',Auth::id())->orderBy('orders.id','DESC')->limit(10)->paginate(10);
 
               return view('dashboard',compact('order'));
         }else{ 
@@ -61,7 +62,7 @@ class DashboardController extends Controller
     return view('auth.change_password');
     }
 
-    public function updatePassword(Request $request)
+    public function resetPassword(Request $request)
     {
     $password=Auth::user()->password;
     $oldpass=$request->oldpass;

@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Cart;
 
 class HomeController extends Controller
 {
 
     public function index(){
-        $featured = DB::table('products')->where('status',1)->orderBy('id','desc')->limit(100)->get();
+        $featured = DB::table('products')->where('status',1)->orderBy('id','desc')->limit(100)->paginate(12);
         $trend = DB::table('products')->where('status',1)->where('trend',1)->orderBy('id','desc')->limit(8)->get();
         $best = DB::table('products')->where('status',1)->where('best_rated',1)->orderBy('id','desc')->limit(8)->get();
         $hot = DB::table('products')
@@ -31,20 +32,10 @@ class HomeController extends Controller
         return view('home', compact('featured', 'trend' , 'best', 'hot', 'category'));
     }
 
-     public function Logout()
-    {
-        Auth::logout();
-        $notification=array(
-        'messege'=>'Successfully Logout',
-        'alert-type'=>'success'
-            );
-        return Redirect()->route('login')->with($notification);
-    }
-
 
      public function shop(){
         $cat = DB::table('products');
-        $allProducts = DB::table('products')->where('status',1)->orderBy('id','desc')->paginate(50);
+        $allProducts = DB::table('products')->where('status',1)->orderBy('id','desc')->paginate(54);
 	
        $category = DB::table('category_options')->get();
 
@@ -52,7 +43,7 @@ class HomeController extends Controller
     }
 
     public function shopView($id){
-       $allProducts = DB::table('products')->where('status',1)->where('category_id',$id)->orderBy('id','desc')->paginate(10);
+       $allProducts = DB::table('products')->where('status',1)->where('category_id',$id)->orderBy('id','desc')->paginate(12);
 	
        $category = DB::table('category_options')->get();
 

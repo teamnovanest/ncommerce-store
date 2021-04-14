@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <!-- End Product MEnu -->
-                    <div class="product__list another-product-style ">
+                    <div class="another-product-style ">
                         <div class="row">
                         
                              @foreach($featured as $row)
@@ -125,11 +125,14 @@
                                 </div>
                             </div>
                              @endforeach   
-
+                             
+                            </div>
                         </div>
                     </div>
+                    <div class="center-pagination">
+                        {{ $featured->links() }}
+                    </div>
                 </div>
-            </div>
         </section>
 
 

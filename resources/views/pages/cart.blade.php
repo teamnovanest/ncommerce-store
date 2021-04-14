@@ -63,7 +63,7 @@
                                             <td>
                                                 <form method="post" action="/update/cart/item">
            	                                        <input type="hidden" name="productid" value="{{ $row->rowId }}">
-           	                                        <input type="number" name="qty" value="{{ $row->qty }}" style="width: 50px;">
+           	                                        <input type="number" name="qty" pattern="[0-9]" value="{{ $row->qty }}" style="width: 50px;" min="1">
                                                     <i class="fas fa-check-square"></i>
                                                       <input type="hidden" name="_token" value="{{ csrf_token() }}" />
            	                                        <button type="submit" class="btn btn-success btn-sm">✔</button>
