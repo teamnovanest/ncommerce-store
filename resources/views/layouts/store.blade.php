@@ -80,12 +80,6 @@ $setting = DB::table('sitesettings')->first();
                                 <ul class="main__menu">
                                     <li class="drop"><a href="/">Home</a>
                                     </li>
-                                    <!-- <li class="drop"><a href="portfolio-gutter-box-3.html">Super Deals</a>
-                                       
-                                    </li>
-                                    <li class="drop"><a href="blog.html">Feature Brands</a>
-                                       
-                                    </li> -->
                                     <li class="drop"><a href="/shop">Shop</a>
                                     
                                        
@@ -242,7 +236,7 @@ $setting = DB::table('sitesettings')->first();
                                 </a>
                             </div>
                             <div class="shp__pro__details">
-                                <h2><a href="product-details.html">{{ $row->name  }}</a></h2>
+                                <h2><a href="#">{{ $row->name  }}</a></h2>
                                 <span class="quantity">QTY: {{ $row->qty }}</span>
                                 <span class="shp__price">GH₵ {{ $row->price*$row->qty }}</span>
                             </div>
@@ -397,8 +391,8 @@ $setting = DB::table('sitesettings')->first();
                                 </div>
                                 <ul class="footer__menu">
                                     <li><a href="/">Home</a></li>
-                                    <li><a href="shop.html">Product</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
+                                    <li><a href="/shop">Product</a></li>
+                                    <li><a href="/contact/page">Contact Us</a></li>
                                 </ul>
                             </div>
                         </div>

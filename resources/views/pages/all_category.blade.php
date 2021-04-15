@@ -161,7 +161,7 @@
                                     <div class="row">
                                         <div class="col-md-4 col-lg-4 col-xl-3 col-sm-5 col-12">
                                             <div class="list__thumb">
-                                                <a href="product-details.html">
+                                                <a href="{{ url('product/details/'.$pro->id) }}">
                                                     <img src="{{ asset($pro->image_one_secure_url) }}" alt="Product Image">
                                                 </a>
                                             </div>
