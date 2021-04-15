@@ -4,15 +4,51 @@ namespace App\Http\Controllers;
 
 
 use Auth;
-use Cart;
 use Session;
 use Response;
+use Cart;
 use Illuminate\Http\Request;
 use App\Models\LenderOffering;
 use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
+   public function AddCart($id){
+
+   $product = DB::table('products')->where('id',$id)->first();
+
+   $data = array();
+
+   if ($product->discount_price == NULL) {
+   $data['id'] = $product->id;
+   $data['name'] = $product->product_name;
+   $data['qty'] = 1;
+   $data['price'] = $product->selling_price;
+   $data['weight'] = 1;
+   $data['options']['image'] = $product->image_one_secure_url;
+   $data['options']['color'] = '';
+   $data['options']['size'] = '';
+   $data['options']['organization_id'] = $product->merchant_organization_id;
+   Cart::add($data);
+   return \Response::json(['success' => 'Successfully Added To Cart']);
+   }else{
+
+   $data['id'] = $product->id;
+   $data['name'] = $product->product_name;
+   $data['qty'] = 1;
+   $data['price'] = $product->discount_price;
+   $data['weight'] = 1;
+   $data['options']['image'] = $product->image_one_secure_url;
+   $data['options']['color'] = '';
+   $data['options']['size'] = '';
+   $data['options']['organization_id'] = $product->merchant_organization_id;
+   Cart::add($data);
+   return \Response::json(['success' => 'Successfully Added To Cart']);
+
+   }
+
+   }
+
     public function search(Request $request){
       $item = $request->search;
       $products = DB::table('products')

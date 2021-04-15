@@ -52,6 +52,7 @@ Route::get('/user/checkout/', [CartController::class,'checkout'])->name('user.ch
 Route::post('/user/apply/coupon/', [CartController::class, 'coupon'])->name('apply.coupon');
 Route::get('/remove/cart/{rowId}', [CartController::class, 'removeCart']);
 Route::post('/update/cart/{rowId}', [CartController::class, 'updateCart']);
+Route::get('/add/to/cart/{id}', [CartController::class,'AddCart']);
 
 
 // Product 
