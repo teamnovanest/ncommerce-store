@@ -40,7 +40,7 @@ class CheckoutController extends Controller
           }
         }
         $data['status'] = 'ORDER_PENDING';
-        $data['date'] = date('d-m-y');
+        $data['date'] = date('Y-m-d');
         $data['month'] = date('F');
         $data['year'] = date('Y');
         $data['created_at'] = \Carbon\Carbon::now();
