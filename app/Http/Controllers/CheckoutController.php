@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 class CheckoutController extends Controller
 {
      public function checkout(Request $request){
+    
       $selectedOfferId = $request->selectedOfferId;
 
       #select the payment period and percentag from the lender offering table
@@ -45,7 +46,7 @@ class CheckoutController extends Controller
         $data['year'] = date('Y');
         $data['created_at'] = \Carbon\Carbon::now();
         foreach ($content as $item) {
-          $data['merchant_organization_id'] = $item->options->merchant_organization_id;
+          $data['merchant_organization_id'] = $item->options->organization_id;
           $data['total'] = floatval($item->price) * 100;
         }
         
@@ -68,7 +69,7 @@ class CheckoutController extends Controller
     $details['quantity'] = $row->qty;
     $details['singleprice'] = floatval($row->price) * 100;
     $details['totalprice'] = floatval($row->price) * $row->qty * 100;
-    $details['merchant_organization_id'] = $row->options->merchant_organization_id;
+    $details['merchant_organization_id'] = $row->options->organization_id;
     $data['created_at'] = now();
     DB::table('order_details')->insert($details);
 
@@ -79,7 +80,7 @@ class CheckoutController extends Controller
       $status['user_id'] = Auth::id();
       $status['order_id'] = $order_id;
       $status['status_id'] = 1;
-      $status['merchant_organization_id'] = $row->options->merchant_organization_id;
+      $status['merchant_organization_id'] = $row->options->organization_id;
       $status['updated_by'] = Auth::id();
       $status['created_at'] = now();
       DB::table('order_status_histories')->insert($status);
