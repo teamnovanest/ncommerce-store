@@ -63,7 +63,7 @@
                                         <div class="product__hover__info">
                                             <ul class="product__action">
                                                 <li><a title="Quick view" href="{{ url('/product/details/'.$row->id) }}"><span class="ti-plus"></span></a></li>
-                                                <li><a title="Add to cart" href="{{ route('show.cart')}}"><span class="ti-shopping-cart"></span></a></</li>
+                                                 <li><a class="addcart" title="Add to cart"  data-id="{{ $row->id }}"><span class="ti-shopping-cart"></span></a></</li>
                                                 <li><a title="Add to wishlist" class="addwishlist" data-id="{{ $row->id }}" ><span class="ti-heart"></span></a></li>
                                             </ul>
                                         </div>
@@ -95,5 +95,61 @@
         </section>
         <!-- End Our Product Area -->
 </div>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    
+   $(document).ready(function(){
+     $('.addcart').on('click', function(){
+        var id = $(this).data('id');
+        if (id) {
+            $.ajax({
+                url: " {{ url('/add/to/cart/') }}/"+id,
+                type:"GET",
+                datType:"json",
+                success:function(data){
+             const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  onOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                  }
+                })
+                  window.location.reload();
+
+             if ($.isEmptyObject(data.error)) {
+
+                Toast.fire({
+                  icon: 'success',
+                  title: data.success
+                })
+             }else{
+                 Toast.fire({
+                  icon: 'error',
+                  title: data.error
+                })
+             }
+ 
+
+                },
+            });
+
+        }else{
+            alert('danger');
+        }
+     });
+
+   });
+
+
+</script>
 
 @endsection

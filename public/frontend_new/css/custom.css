@@ -478,51 +478,50 @@
     background: tomato !important;
 }
 
-.credit-offers-card{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  /* max-width: 900px; */
-  margin: auto;
-  text-align: left;
-  font-family: arial;
-  padding-top: 17px;
+.credit-offers-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /* max-width: 900px; */
+    margin: auto;
+    text-align: left;
+    font-family: arial;
+    padding-top: 17px;
 }
 
-.card-hover:hover{
-color: dodgerblue;
-text-decoration: underline;
+.card-hover:hover {
+    color: dodgerblue;
+    text-decoration: underline;
 }
 
-.offer-header{
-  text-align: center;
-  margin: auto;
-  padding-bottom: 25px;
-  font-size: 25px;
+.offer-header {
+    text-align: center;
+    margin: auto;
+    padding-bottom: 25px;
+    font-size: 25px;
 }
 
-.feature{
+.feature {
     color: blue;
 }
 
-.shop-category{
+.shop-category {
     display: inline-flex;
     padding: 10px;
     font-size: 15px;
     box-shadow: 0 4px 5px 0 rgba(175, 172, 172, 0.2);
 }
 
-.shop-category a{
-  color: black;
+.shop-category a {
+    color: black;
 }
 
-
-.center-pagination{
+.center-pagination {
     float: right;
 }
 
-.text-left{
-  position: absolute;
-  top: 70px;
-  /* right: -36px; */
+.text-left {
+    position: absolute;
+    top: 70px;
+    /* right: -36px; */
 }
 
 @media (max-width: 640px) {
@@ -532,6 +531,7 @@ text-decoration: underline;
     }
 }
 
-.addwishlist {
+.addwishlist,
+.addcart {
     cursor: pointer;
 }
