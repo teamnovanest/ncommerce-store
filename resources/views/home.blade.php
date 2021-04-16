@@ -182,6 +182,7 @@
                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                   }
                 })
+                window.location.reload();
 
              if ($.isEmptyObject(data.error)) {
 
