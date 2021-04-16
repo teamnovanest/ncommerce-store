@@ -6,7 +6,7 @@ use App\Models\ProfileImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Cloudinary;
 
 class ProfileController extends Controller
 {
@@ -23,14 +23,14 @@ class ProfileController extends Controller
         return view('pages.user_profile',compact('user'));
     }
 
-          public function updateProfile(Request $request) {
+    public function updateProfile(Request $request) {
       $full_name = $request->input('full_name');
       $email = $request->input('email');
       $phone = $request->input('phone_number');
       $image = $request->image;
 
       $profileImageCheck = DB::table('profile_images')->where('user_id',Auth::id())->first(); //can be null
-
+     
       $data = array();
       $imageData = array();
 
@@ -46,6 +46,7 @@ class ProfileController extends Controller
             'radius'=> 'max'
             ]
             ]);
+            
             $public_id = $uploadImage->getPublicId();
             $secure_url = $uploadImage->getSecurePath();
             $imageData['profile_public_id'] = $public_id;
@@ -57,7 +58,7 @@ class ProfileController extends Controller
             $data['phone'] = $phone;
             $data['email'] = $email;
             $data['updated_at'] = now();
-            DB::table('profile')->insert($imageData);
+            DB::table('profile_images')->insert($imageData);
             DB::table('users')->where('id',Auth::id())->update($data);
         }else{
             $publicId = $profileImageCheck->profile_public_id;// picking the profile public id from the variable
@@ -83,7 +84,7 @@ class ProfileController extends Controller
             $data['phone'] = $phone;
             $data['email'] = $email;
             $data['updated_at'] = now();
-            DB::table('profile')->where('user_id',Auth::id())->update($imageData);
+            DB::table('profile_images')->where('user_id',Auth::id())->update($imageData);
             DB::table('users')->where('id',Auth::id())->update($data);
             }
         }
