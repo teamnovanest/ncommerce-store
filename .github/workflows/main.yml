@@ -1,0 +1,50 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Ncommerce Admin 
+
+on:
+  push:
+    branches: [ develop ]
+  #pull_request:
+    #branches: [ develop ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        #node-version: [14.x]
+        php-versions: ['7.4']
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Building app ${{ matrix.php-versions }}
+      with:
+        run: npm install &&  npm run production
+      uses: actions/setup-node@v1
+    - name: Deploying to dev
+      run: |
+          echo ".................."
+          
+    - uses: akhileshns/heroku-deploy@v3.11.10 # This is the action
+      with:
+        node-version: ${{ matrix.node-version }}
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "ncommerce-store" #Must be unique in Heroku
+        heroku_email: "sixtus2000gh@yahoo.co.uk"
+        branch: "develop"
+        remote_branch: "master"
+        run: npm install &&  npm run production
+        
+    - name: Deloy to Prod
+      # Develop branch only
+      if: github.ref == 'refs/heads/main'
+      run: |
+          echo "Main checks is good "
+        
+    #- run: npm run build --if-present
+    #- run: npm test --if-present
