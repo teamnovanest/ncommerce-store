@@ -8,7 +8,9 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\LenderOffering;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
+
 
 
 class ProductController extends Controller
@@ -26,20 +28,18 @@ class ProductController extends Controller
 				//dd($p);
 
     	$color = $product->product_color;
+
     	$product_color = explode(',', $color);
     	
     	$size = $product->product_size;
+		
     	$product_size = explode(',', $size);		
 
-		//  return response::json(array(
-		// 	'product' => $product,
-		// 	'color' => $product_color,
-		// 	'size' => $product_size,
-		// ));
-
-
-		// ['registered_name', 'payment_period', "percentage", "max_financed"]
-		$credit_offers = LenderOffering::with(['lender'])->orderBy('percentage', 'ASC')->get();
+	
+		// Credit offers 
+		$credit_offers = LenderOffering::with(['lender'])
+		->where('lender_organization_id','=', Auth::user()->lender_organization_id)
+			->orderBy('percentage', 'ASC')->get();
 		//dd($credit_offers);
 
     	return view('pages.product_details',compact('product','product_color','product_size', 'credit_offers'));
