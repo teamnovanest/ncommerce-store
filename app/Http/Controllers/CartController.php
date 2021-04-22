@@ -28,7 +28,7 @@ class CartController extends Controller
    $data['options']['image'] = $product->image_one_secure_url;
    $data['options']['color'] = '';
    $data['options']['size'] = '';
-   $data['options']['organization_id'] = $product->merchant_organization_id;
+   $data['options']['merchant_organization_id'] = $product->merchant_organization_id;
    Cart::add($data);
    return \Response::json(['success' => 'Successfully Added To Cart']);
    }else{
@@ -41,7 +41,7 @@ class CartController extends Controller
    $data['options']['image'] = $product->image_one_secure_url;
    $data['options']['color'] = '';
    $data['options']['size'] = '';
-   $data['options']['organization_id'] = $product->merchant_organization_id;
+   $data['options']['merchant_organization_id'] = $product->merchant_organization_id;
    Cart::add($data);
    return \Response::json(['success' => 'Successfully Added To Cart']);
 

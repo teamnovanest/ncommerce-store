@@ -25,6 +25,7 @@ class CheckoutController extends Controller
      try {
        //code...
        $content = Cart::content();
+
        $data = array();
        $data['user_id'] = Auth::id();
       //  $data['total'] = floatval(Cart::Subtotal()) * 100;
@@ -49,7 +50,8 @@ class CheckoutController extends Controller
           $data['merchant_organization_id'] = $item->options->merchant_organization_id;
           $data['total'] = floatval($item->price) * 100;
         }
-        
+        $data['lender_organization_id'] = $lenderOffering->lender_organization_id;
+
     $order_id = DB::table('orders')->insertGetId($data);
 
    //TO DO FIX ISSUE WITH MAIL SEND
@@ -70,6 +72,7 @@ class CheckoutController extends Controller
     $details['singleprice'] = floatval($row->price) * 100;
     $details['totalprice'] = floatval($row->price) * $row->qty * 100;
     $details['merchant_organization_id'] = $row->options->merchant_organization_id;
+    $details['lender_organization_id'] = $lenderOffering->lender_organization_id;
     $data['created_at'] = now();
     DB::table('order_details')->insert($details);
 
@@ -81,6 +84,7 @@ class CheckoutController extends Controller
       $status['order_id'] = $order_id;
       $status['status_id'] = 1;
       $status['merchant_organization_id'] = $row->options->merchant_organization_id;
+      $status['lender_organization_id'] = $lenderOffering->lender_organization_id;
       $status['updated_by'] = Auth::id();
       $status['created_at'] = now();
       DB::table('order_status_histories')->insert($status);
@@ -89,6 +93,7 @@ class CheckoutController extends Controller
     #inserting into the order financing table with the offer the user selected
     $offerdetail = array();
     $offerdetail['user_id'] = Auth::id();
+    $offerdetail['order_id'] = $order_id;
     $offerdetail['percentage'] = $lenderOffering->percentage;
     $offerdetail['payment_period'] = $lenderOffering->payment_period;
     $offerdetail['lender_organization_id'] = $lenderOffering->lender_organization_id;

@@ -116,7 +116,7 @@
                                                 </p>
 
                                                 <p>
-                                                    Commission GHC {{(($offer->percentage  * ($row->price * $row->qty)) / 100 )}}
+                                                    Total Interest on price GHC {{(($offer->percentage  * ($row->price * $row->qty)) / 100 )}}
                                                 </p>
                                             </label>
                                         </div>

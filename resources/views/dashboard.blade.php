@@ -14,6 +14,7 @@
             <table class="table mg-b-0">
               <thead>
                 <tr>
+                  <th>Product name</th>
                   <th>Product image</th>
                   <th>Date </th>
                   <th>Amount </th>
@@ -25,9 +26,10 @@
               <tbody>
             @foreach($order as $row)
                 <tr>
+                  <td><a href="{{ url('product/details/'.$row->product_id) }}">{{$row->product_name}}</a></td>
                   <td><a href="{{ url('product/details/'.$row->product_id) }}" target="_blank"><img style="height: 100px" src="{{ asset( $row->image_one_secure_url )}}" alt="product images"></a></td>
                   <th>{{ $row->date }}</th>
-                  <td>GHC {{ $row->total}}</td>
+                  <td>GHC {{ $row->total / 100}}</td>
                   <td>{{ $row->order_code }}</td>
                   <td> 
                     @if($row->status_id === 0) 
