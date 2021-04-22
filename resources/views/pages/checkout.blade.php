@@ -70,8 +70,8 @@
                                     </td>
                                     <td class="product-thumbnail"><a href="#"><img
                                                 src="{{ asset($row->options->image) }}" alt="product img" /></a></>
-                                    <td class="product-price">GH₵ {{ $row->price }}</td>
-                                    <td class="product-subtotal">GH₵ {{ $row->price*$row->qty }}</td>
+                                    <td class="product-price">GH₵ {{ $row->price / 100}}</td>
+                                    <td class="product-subtotal">GH₵ {{ $row->price*$row->qty /100}}</td>
                                     <td class="product-remove"><a href="{{ url('remove/cart/'.$row->rowId ) }}">X</a>
                                     </td>
                                 </tr>
@@ -84,9 +84,55 @@
             </div>
         </div>
     </div>
+    <section>
+        <div class="container">
+            <h4 class="pb--30 text-center">FINANCE PAYMENT PLANS</h4>
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="">
+
+                        @foreach($credit_offers as $offer)
+
+                        <li class="h3">
+                            <div class="form-check">
+                                <div class="row">
+                                    @foreach($cart as $row)
+                                    @if (((($offer->percentage  * ($row->price * $row->qty)) / 100 ) +  ($row->price * $row->qty)) <= $offer->max_financed)
+                                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+                                        <input class="form-check-input" type="radio" name="lenderOfferingRadio"
+                                        id="{{$offer->id}}" value="{{$offer->id}}" data-id="{{$offer->id}}">
+                                    </div>
+                                        <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10">
+                                            <label class="form-check-label" for="{{$offer->id}}">
+                                                <p>
+                                                    {{ $offer->registered_name}} finances at {{ $offer->percentage }}%
+                                                    for
+                                                    {{ $offer->payment_period }} months
+                                                </p>
 
 
+                                                <p>Total financed GH₵
+                                                    {{ (($offer->percentage  * ($row->price * $row->qty)) / 100 ) +  ($row->price * $row->qty) }}
+                                                </p>
 
+                                                <p>
+                                                    Total Interest on price GH₵ {{(($offer->percentage  * ($row->price * $row->qty)) / 100 )}}
+                                                </p>
+                                            </label>
+                                        </div>
+                                        @endif
+                                        @endforeach
+                                </div>
+                            </div>
+                        </li>
+                        <hr />
+                        @endforeach
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </section>
     <section>
         <div class="container ptb--50">
             <div class="row">

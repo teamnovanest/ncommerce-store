@@ -13,53 +13,51 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
-  public function AddCart($id)
-  {
+   public function AddCart($id){
 
-    $product = DB::table('products')->where('id', $id)->first();
+   $product = DB::table('products')->where('id',$id)->first();
 
-    $data = array();
+   $data = array();
 
-    if ($product->discount_price == NULL) {
-      $data['id'] = $product->id;
-      $data['name'] = $product->product_name;
-      $data['qty'] = 1;
-      $data['price'] = $product->selling_price;
-      $data['weight'] = 1;
-      $data['options']['image'] = $product->image_one_secure_url;
-      $data['options']['color'] = '';
-      $data['options']['size'] = '';
-      $data['options']['organization_id'] = $product->merchant_organization_id;
+   if ($product->discount_price == NULL) {
+   $data['id'] = $product->id;
+   $data['name'] = $product->product_name;
+   $data['qty'] = 1;
+   $data['price'] = $product->selling_price;
+   $data['weight'] = 1;
+   $data['options']['image'] = $product->image_one_secure_url;
+   $data['options']['color'] = '';
+   $data['options']['size'] = '';
+   $data['options']['merchant_organization_id'] = $product->merchant_organization_id;
+   Cart::add($data);
+   return \Response::json(['success' => 'Successfully Added To Cart']);
+   }else{
 
-      Cart::add($data);
+   $data['id'] = $product->id;
+   $data['name'] = $product->product_name;
+   $data['qty'] = 1;
+   $data['price'] = $product->discount_price;
+   $data['weight'] = 1;
+   $data['options']['image'] = $product->image_one_secure_url;
+   $data['options']['color'] = '';
+   $data['options']['size'] = '';
+   $data['options']['merchant_organization_id'] = $product->merchant_organization_id;
+   Cart::add($data);
+   return \Response::json(['success' => 'Successfully Added To Cart']);
 
-      return \Response::json(['success' => 'Successfully Added To Cart']);
-    } else {
+   }
 
-      $data['id'] = $product->id;
-      $data['name'] = $product->product_name;
-      $data['qty'] = 1;
-      $data['price'] = $product->discount_price;
-      $data['weight'] = 1;
-      $data['options']['image'] = $product->image_one_secure_url;
-      $data['options']['color'] = '';
-      $data['options']['size'] = '';
-      $data['options']['organization_id'] = $product->merchant_organization_id;
-      Cart::add($data);
-      return \Response::json(['success' => 'Successfully Added To Cart']);
+   }
+
+    public function search(Request $request){
+      $item = $request->search;
+      $products = DB::table('products')
+        ->where('product_name','LIKE',"%$item%")
+        ->paginate(20);
+
+    return view('pages.search',compact('products'));  
     }
-  }
-
-  public function search(Request $request)
-  {
-    $item = $request->search;
-    $products = DB::table('products')
-      ->where('product_name', 'LIKE', "%$item%")
-      ->paginate(20);
-
-    return view('pages.search', compact('products'));
-  }
-
+  
 
   public function showCart()
   {
