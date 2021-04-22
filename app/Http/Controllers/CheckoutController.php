@@ -38,7 +38,7 @@ class CheckoutController extends Controller
         }else{
           foreach ($content as $row) {
             // $data['subtotal'] = floatval(Cart::Subtotal()) * 100;
-            $data['subtotal'] = floatval($row->price) * 100;
+            $data['subtotal'] = floatval($row->price);
           }
         }
         $data['status'] = 'ORDER_PENDING';
@@ -48,7 +48,7 @@ class CheckoutController extends Controller
         $data['created_at'] = \Carbon\Carbon::now();
         foreach ($content as $item) {
           $data['merchant_organization_id'] = $item->options->merchant_organization_id;
-          $data['total'] = floatval($item->price) * 100;
+          $data['total'] = floatval($item->price * $item->qty);
         }
         $data['lender_organization_id'] = $lenderOffering->lender_organization_id;
 
@@ -69,8 +69,8 @@ class CheckoutController extends Controller
     $details['color'] = $row->options->color;
     $details['size'] = $row->options->size;
     $details['quantity'] = $row->qty;
-    $details['singleprice'] = floatval($row->price) * 100;
-    $details['totalprice'] = floatval($row->price) * $row->qty * 100;
+    $details['singleprice'] = floatval($row->price);
+    $details['totalprice'] = floatval($row->price) * $row->qty;
     $details['merchant_organization_id'] = $row->options->merchant_organization_id;
     $details['lender_organization_id'] = $lenderOffering->lender_organization_id;
     $data['created_at'] = now();
