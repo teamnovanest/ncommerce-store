@@ -108,7 +108,7 @@ $setting = DB::table('sitesettings')->first();
                                 </nav>
                             </div>                          
                         </div>
-                        <!-- End MAinmenu Ares -->
+                        <!-- End main menu Area -->
                         <div class="col-md-3 col-lg-2 col-sm-2 col-3 ">  
                             <ul class="menu-extra">
                                 <li class="search search__open d-none d-md-block d-lg-block"><span class="ti-search"></span></li>
@@ -117,11 +117,11 @@ $setting = DB::table('sitesettings')->first();
                                 <li><a href="#"><span class="ti-heart"></span></a></li>
                                 @else
                                 @php
-                                $wishlist = DB::table('wishlists')->where('user_id',Auth::id())->get();
+                                $wishlist = DB::table('wishlists')->where('user_id',Auth::id())->count();
                                 @endphp
-                                <li><a href="/user/wishlist"><span class="ti-heart">{{ count($wishlist) }}</span></a></li>
+                                <li><a href="/user/wishlist"><span class="ti-heart">{{ $wishlist > 0 ? $wishlist  : "" }}</span></a></li>
                                 @endguest
-                                <li class="cart__menu"><span class="ti-shopping-cart">{{ Cart::count() }}</span></li>
+                                <li class="cart__menu"><span class="ti-shopping-cart">{{ Cart::count() > 0 ? Cart::count(): "" }}</span></li>
                                 <li class="toggle__menu d-none d-lg-block"><span class="ti-menu"></span></li>
                             </ul>
                         </div>
@@ -463,7 +463,7 @@ $setting = DB::table('sitesettings')->first();
   <script src="{{ asset('https://unpkg.com/nprogress@0.2.0/nprogress.js')}}"></script>
 
 <!-- cus dashboard script -->
-   <script src="../lib/jquery/jquery.min.js"></script>
+   <script src="{{asset('lib/jquery/jquery.min.js')}}"></script>
     <!-- <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script> -->
     <!-- <script src="../lib/ionicons/ionicons.js"></script> -->
     <!-- <script src="../lib/jquery.flot/jquery.flot.js"></script> -->
@@ -504,8 +504,8 @@ $setting = DB::table('sitesettings')->first();
              e.preventDefault();
              var link = $(this).attr("href");
                 swal({
-                  title: "Are you Want to Return?",
-                  text: "Once Teturn, this will return your money!",
+                  title: "Are you sure want to Return?",
+                  text: "Once you procede, a refund will have to be processed!",
                   icon: "warning",
                   buttons: true,
                   dangerMode: true,

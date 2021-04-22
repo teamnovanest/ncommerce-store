@@ -352,33 +352,9 @@
         </section>
         <!-- End Product tab -->
 
-        <section>
-    <div class="container">
-        <h1 class="offer-header">Financial Institution Offers</h1>
-        <div class="row">
-            @foreach($credit_offers as $offer)
-            <div class="col-lg-1">
-                <ul>
-                    <li class="h3">
-                        <!-- <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="{{-- $offer->id --}}" value="{{-- $offer->id --}}" >
-                        </div> -->
-                    </li>    
-                </ul>
-            </div>
-            <div class="col-lg-5">
-                <label class="form-check-label" for="{ $offer->id}">
-                        <p class="card-hover title__5">
-                        {{ $offer->lender->registered_name}}  finances  at  {{ $offer->percentage }}%  for {{ $offer->payment_period }} months
-                        </p>
-                        <p>Total financed  {{ (($offer->percentage  * $product->selling_price) / 100 ) +  $product->selling_price }}</p>
-                </label>
-            <hr>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</section>
+
+
+@include('partials.finance-offerings')
 
 
 @endsection

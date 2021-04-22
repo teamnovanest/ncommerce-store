@@ -54,6 +54,17 @@ class Product extends Model
 
     public function setSellingPriceAttribute($price)
     {
-        $this->attributes['selling_price'] = $price * 100;
+        $this->attributes['discount_price'] = $price * 100;
+    }
+
+    public function getDiscountPriceAttribute($price)
+    {
+        //return number_format($price / 100,2);
+        return $price / 100;
+    }
+
+    public function setDiscountPriceAttribute($price)
+    {
+        $this->attributes['discount_price'] = $price * 100;
     }
 }

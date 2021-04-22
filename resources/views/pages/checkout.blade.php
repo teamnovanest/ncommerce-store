@@ -70,8 +70,8 @@
                                     </td>
                                     <td class="product-thumbnail"><a href="#"><img
                                                 src="{{ asset($row->options->image) }}" alt="product img" /></a></>
-                                    <td class="product-price">GH₵ {{ $row->price }}</td>
-                                    <td class="product-subtotal">GH₵ {{ $row->price*$row->qty }}</td>
+                                    <td class="product-price">GH₵ {{ $row->price / 100}}</td>
+                                    <td class="product-subtotal">GH₵ {{ $row->price*$row->qty /100}}</td>
                                     <td class="product-remove"><a href="{{ url('remove/cart/'.$row->rowId ) }}">X</a>
                                     </td>
                                 </tr>
@@ -111,12 +111,12 @@
                                                 </p>
 
 
-                                                <p>Total financed GHC
+                                                <p>Total financed GH₵
                                                     {{ (($offer->percentage  * ($row->price * $row->qty)) / 100 ) +  ($row->price * $row->qty) }}
                                                 </p>
 
                                                 <p>
-                                                    Total Interest on price GHC {{(($offer->percentage  * ($row->price * $row->qty)) / 100 )}}
+                                                    Total Interest on price GH₵ {{(($offer->percentage  * ($row->price * $row->qty)) / 100 )}}
                                                 </p>
                                             </label>
                                         </div>
