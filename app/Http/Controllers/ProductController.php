@@ -36,13 +36,13 @@ class ProductController extends Controller
     	$product_size = explode(',', $size);		
 
 	
-		// Credit offers 
-		$credit_offers = LenderOffering::with(['lender'])
-		->where('lender_organization_id','=', Auth::user()->lender_organization_id)
-			->orderBy('percentage', 'ASC')->get();
-		//dd($credit_offers);
+		// // Credit offers 
+		// $credit_offers = LenderOffering::with(['lender'])
+		// ->where('lender_organization_id','=', Auth::user()->lender_organization_id)
+		// 	->orderBy('percentage', 'ASC')->get();
+		// //dd($credit_offers);
 
-    	return view('pages.product_details',compact('product','product_color','product_size', 'credit_offers'));
+    	return view('pages.product_details',compact('product','product_color','product_size'));
     }
 
 public function addCart(Request $request, $id){

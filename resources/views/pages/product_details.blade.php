@@ -354,7 +354,7 @@
 
 
 
-@include('partials.finance-offerings')
+{{-- @include('partials.finance-offerings') --}}
 
 
 @endsection
