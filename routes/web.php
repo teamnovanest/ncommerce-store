@@ -86,7 +86,7 @@ Route::get('/delete/wishlist/{id}', [WishlistController::class, 'deleteWishlist'
 
 // All Product details Page 
 Route::get('/products/{id}', [ProductController::class, 'productsView']);
-Route::get('/allcategory/{id}', [ProductController::class, 'categoryView']);
+Route::get('/category/{id}', [ProductController::class, 'categoryView']);
 
 
 // shop

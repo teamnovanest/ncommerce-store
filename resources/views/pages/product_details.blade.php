@@ -28,11 +28,6 @@
                                         <img src="{{ asset( $product->image_three_secure_url ) }}" alt="small-image">
                                     </a>
                                 </li>
-                                <li role="presentation" class="pot-small-img">
-                                    <a href="#img-tab-4" role="tab" data-toggle="tab">
-                                        <img src="{{ asset( $product->image_one_secure_url ) }}" alt="small-image">
-                                    </a>
-                                </li>
                             </ul>
                             <!-- End Small images -->
                             <div class="product__big__images">
@@ -47,27 +42,12 @@
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade product-video-position" id="img-tab-2">
                                         <img src="{{ asset( $product->image_two_secure_url ) }}" alt="full-image">
-                                        <div class="product-video">
-                                            <a class="video-popup" href="https://www.youtube.com/watch?v=cDDWvj_q-o8">
-                                                <i class="zmdi zmdi-videocam"></i> View Video
-                                            </a>
-                                        </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade product-video-position" id="img-tab-3">
                                         <img src="{{ asset( $product->image_three_secure_url ) }}" alt="full-image">
-                                        <div class="product-video">
-                                            <a class="video-popup" href="https://www.youtube.com/watch?v=cDDWvj_q-o8">
-                                                <i class="zmdi zmdi-videocam"></i> View Video
-                                            </a>
-                                        </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade product-video-position" id="img-tab-4">
                                         <img src="{{ asset( $product->image_one_secure_url ) }}" alt="full-image">
-                                        <div class="product-video">
-                                            <a class="video-popup" href="https://www.youtube.com/watch?v=cDDWvj_q-o8">
-                                                <i class="zmdi zmdi-videocam"></i> View Video
-                                            </a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
