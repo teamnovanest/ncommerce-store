@@ -103,10 +103,10 @@
                                                 <h2><a href="{{ url('product/details/'.$pro->id.'/'.$pro->product_name) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
                                                 <ul class="product__price">
 					                                @if($pro->discount_price == NULL)
-                                                    <li class="new__price">GH₵ {{ $pro->selling_price }}</li>
+                                                    <li class="new__price">GH₵ {{ $pro->selling_price / 100}}</li>
                                                     @else
-                                                    <li class="new__price">GH₵ {{ $pro->discount_price }}</li>
-                                                    <li class="old__price">GH₵ {{ $pro->selling_price }}</li>
+                                                    <li class="new__price">GH₵ {{ $pro->discount_price / 100}}</li>
+                                                    <li class="old__price">GH₵ {{ $pro->selling_price / 100}}</li>
                                                     @endif
                                                 </ul></div>
                                         </div>
@@ -135,10 +135,10 @@
                                                 <!-- <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu sit amet…</p> -->
                                                 <ul class="product__price">
                                                 @if($pro-> discount_price == NULL)
-                                                <li class="new__price">GH₵ {{ $pro->selling_price }}</li>
+                                                <li class="new__price">GH₵ {{ $pro->selling_price / 100}}</li>
                                                     @else
-                                                    <li class="new__price">GH₵ {{ $pro->discount_price }}</li>
-                                                    <li class="old__price">GH₵ {{ $pro->selling_price }}</li>
+                                                    <li class="new__price">GH₵ {{ $pro->discount_price / 100}}</li>
+                                                    <li class="old__price">GH₵ {{ $pro->selling_price / 100}}</li>
                                                     @endif
                                                 </ul>
                                                     <br>
