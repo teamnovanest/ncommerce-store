@@ -17,7 +17,7 @@
             
             @foreach($category as $cat)
             <li>
-                <a href="{{ url('allcategory/'.$cat->id) }}">{{ $cat->category_name }}<i class="zmdi zmdi-chevron-right"></i></a>
+                <a href="{{ url('category/'.$cat->id) }}">{{ $cat->category_name }}<i class="zmdi zmdi-chevron-right"></i></a>
                 <ul>
 
     @php

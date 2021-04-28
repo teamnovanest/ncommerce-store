@@ -11,12 +11,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="bradcaump__inner text-center">
-                                <h2 class="bradcaump-title">All Products</h2>
-                                <!-- <nav class="bradcaump-inner">
-                                  <a class="breadcrumb-item" href="/">Home</a>
-                                  <span class="brd-separetor">/</span>
-                                  <span class="breadcrumb-item active">All Products</span>
-                                </nav> -->
+                                <h2 class="bradcaump-title">Products</h2>
                             </div>
                         </div>
                     </div>
@@ -30,22 +25,30 @@
                 <div class="row">
                     <div class="col-lg-3 col-xl-3 col-md-12 col-12">
 						  <!-- Start Product Cat -->
-                        <div class="htc__shop__cat">
-                                <h4 class="section-title-4">PRODUCT CATEGORIES</h4>
+                         <div class="categories-menu">
+                                <div class="category-heading">
+                               <h3>Product Categories</h3>
+                                </div>
+                            <div class="category-menu-list"> 
                                 <ul class="sidebar__list">
                                          @php
                                          $category = DB::table('category_options')->get();
                                             @endphp
                                     @foreach($category as $cat)
-				                    <li><a href="{{ url('allcategory/'.$cat->id) }}">{{ $cat->category_name }}</a></li>
+				                    <li><a href="{{ url('category/'.$cat->id) }}">{{ $cat->category_name }}</a></li>
 								    @endforeach
                                 </ul>
+                            </div>    
                         </div>
+                        <br>
                             <!-- End Product Cat -->
 							<!-- brands -->
-						<div class="sidebar_section">
-							<div class="sidebar_subtitle brands_subtitle">Brands</div>
-							<ul class="brands_list">
+						 <div class="categories-menu">
+                                <div class="category-heading">
+                               <h3>Brands</h3>
+                                </div>
+                            <div class="category-menu-list"> 
+                                <ul class="sidebar__list">
 								
                             @php
                            $brands =  DB::table('brand_options')->get();
@@ -55,32 +58,9 @@
 								@endforeach
 								 
 							</ul>
+                        </div>    
 						</div>
 							<!--brands  -->
-                        <div class="htc__shop__left__sidebar">
-                            <!-- Start Range -->
-                            <div class="htc-grid-range">
-                                <h4 class="section-title-4">FILTER BY PRICE</h4>
-                                <div class="content-shopby">
-                                    <div class="price_filter s-filter clear">
-                                        <form action="#" method="GET">
-                                            <div id="slider-range"></div>
-                                            <div class="slider__range--output">
-                                                <div class="price__output--wrap">
-                                                    <div class="price--output">
-                                                        <span>Price :</span><input type="text" id="amount" readonly>
-                                                    </div>
-                                                    <div class="price--filter">
-                                                        <a href="#">Filter</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Range -->
-                        </div>
                     </div>
                     <div class="col-lg-9 col-xl-9 col-md-12 col-12 smt-30">
                         <div class="row">
@@ -101,7 +81,7 @@
                                 <div class="row">
                                     <!-- Start Single Product -->
                                          @foreach($category_all as $pro)
-                                    <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 col-12">
+                                    <div class="col-lg-3 single__pro col-xl-3 col-md-4 col-12 col-sm-6">
                                         <div class="product">
                                             <div class="product__inner">
                                                 <div class="pro__thumb">
@@ -128,24 +108,7 @@
                                                     <li class="new__price">GH₵ {{ $pro->discount_price }}</li>
                                                     <li class="old__price">GH₵ {{ $pro->selling_price }}</li>
                                                     @endif
-                                                </ul>
-																		 <ul class="product_marks">
-       @if($pro->discount_price == NULL)
-       <li class="product_mark product_new" style="background: blue;">New</li>
-       @else
-                       <li class="product_mark product_new" style="background: red;">
-                       @php
-                         $amount = $pro->selling_price - $pro->discount_price;
-                         $discount = $amount/$pro->selling_price*100;
-
-                       @endphp
-                       
-                       {{ intval($discount) }}%
-
-                      </li>  
-                        @endif     
-            </ul>
-                                            </div>
+                                                </ul></div>
                                         </div>
                                     </div>
                                     @endforeach
@@ -177,22 +140,6 @@
                                                     <li class="new__price">GH₵ {{ $pro->discount_price }}</li>
                                                     <li class="old__price">GH₵ {{ $pro->selling_price }}</li>
                                                     @endif
-                                                </ul>
-							                    <ul class="product_marks">
-                                                       @if($pro->discount_price == NULL)
-                                                    <li class="product_mark product_new" style="background: blue;">New</li>
-                                                       @else
-                                                    <li class="product_mark product_new" style="background: red;">
-                                                       @php
-                                                            $amount = $pro->selling_price - $pro->discount_price;
-                                                            $discount = $amount/$pro->selling_price*100;
-
-                                                       @endphp
-                       
-                                                       {{ intval($discount) }}%
-
-                                                    </li>  
-                                                       @endif     
                                                 </ul>
                                                     <br>
                                                 <div class="shop__btn">

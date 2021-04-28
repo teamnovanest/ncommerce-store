@@ -535,3 +535,8 @@
 .addcart {
     cursor: pointer;
 }
+
+.category-menu-list ul li .category-menu-dropdown {
+        padding: 52px 20px;
+        width: 500px;
+}
