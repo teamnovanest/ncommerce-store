@@ -32,7 +32,7 @@
                             <div class="category-menu-list"> 
                                 <ul class="sidebar__list">
                                          @php
-                                         $category = DB::table('category_options')->get();
+                                         $category = DB::table('category_options')->where('deleted_at', NULL)->get();
                                             @endphp
                                     @foreach($category as $cat)
 				                    <li><a href="{{ url('category/'.$cat->id) }}">{{ $cat->category_name }}</a></li>
