@@ -31,7 +31,7 @@
     top: 0px;
 }
 .section-center {
-    max-width: 900px;
+    max-width: 100%;
     margin: 0 auto;
     background-color: rgb(253, 253, 253);
     padding: 5px 20px;
@@ -68,7 +68,7 @@
     padding-bottom: 10px;
     max-width: 900px;
     margin: 0 auto;
-    height: 560px;
+    /* height: 560px; */
 }
 .background .container {
     /* background-color: #fff; */
@@ -537,6 +537,6 @@
 }
 
 .category-menu-list ul li .category-menu-dropdown {
-        padding: 52px 20px;
-        width: 500px;
+    padding: 52px 20px;
+    width: 500px;
 }
