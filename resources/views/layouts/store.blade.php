@@ -238,7 +238,7 @@ $setting = DB::table('sitesettings')->first();
                             <div class="shp__pro__details">
                                 <h2><a href="#">{{ $row->name  }}</a></h2>
                                 <span class="quantity">QTY: {{ $row->qty }}</span>
-                                <span class="shp__price">GH₵ {{ $row->price*$row->qty / 100}}</span>
+                                <span class="shp__price">GH₵ {{ $row->price*$row->qty}}</span>
                             </div>
                             <div class="remove__btn">
                                 <a href="{{ url('remove/cart/'.$row->rowId ) }}"" title="Remove this item"><i class="zmdi zmdi-close"></i></a>

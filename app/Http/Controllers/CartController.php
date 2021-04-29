@@ -23,7 +23,7 @@ class CartController extends Controller
    $data['id'] = $product->id;
    $data['name'] = $product->product_name;
    $data['qty'] = 1;
-   $data['price'] = $product->selling_price;
+   $data['price'] = $product->selling_price / 100;
    $data['weight'] = 1;
    $data['options']['image'] = $product->image_one_secure_url;
    $data['options']['color'] = '';
@@ -36,7 +36,7 @@ class CartController extends Controller
    $data['id'] = $product->id;
    $data['name'] = $product->product_name;
    $data['qty'] = 1;
-   $data['price'] = $product->discount_price;
+   $data['price'] = $product->discount_price / 100;
    $data['weight'] = 1;
    $data['options']['image'] = $product->image_one_secure_url;
    $data['options']['color'] = '';
@@ -96,34 +96,6 @@ class CartController extends Controller
       return Redirect()->route('login')->with($notification);
     }
   }
-
-
-
-  public function coupon(Request $request)
-  {
-    $coupon = $request->coupon;
-
-    $check = DB::table('coupons')->where('coupon', $coupon)->first();
-    if ($check) {
-      Session::put('coupon', [
-        'name' => $check->coupon,
-        'discount' => $check->discount,
-        'balance' => Cart::Subtotal() - $check->discount
-      ]);
-      $notification = array(
-        'messege' => 'Successfully Coupon Applied',
-        'alert-type' => 'success'
-      );
-      return Redirect()->back()->with($notification);
-    } else {
-      $notification = array(
-        'messege' => 'Invalid Coupon',
-        'alert-type' => 'success'
-      );
-      return Redirect()->back()->with($notification);
-    }
-  }
-
 
   public function removeCart($rowId)
   {

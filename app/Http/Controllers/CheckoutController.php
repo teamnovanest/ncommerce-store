@@ -25,6 +25,17 @@ class CheckoutController extends Controller
      try {
        //code...
        $content = Cart::content();
+       
+      //  info: Removing product in wishlist when a customer finally purchase a product
+        foreach ($content as $row) {
+        $wishlistedProduct = DB::table('wishlists')
+        ->where('wishlists.user_id', Auth::user()->id)
+        ->where('wishlists.product_id', $row->id)
+        ->first();
+          if ($wishlistedProduct !== NULL) {
+            DB::table('wishlists')->where('wishlists.product_id', $row->id)->delete();
+          }
+        }
 
        $data = array();
        $data['user_id'] = Auth::id();

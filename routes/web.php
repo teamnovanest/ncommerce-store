@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
@@ -49,11 +50,13 @@ Route::get('/product/search', [CartController::class,'search'])->name('product.s
 // Cart
 Route::get('/product/cart', [CartController::class,'showCart'])->name('show.cart');
 Route::get('/user/checkout/', [CartController::class,'checkout'])->name('user.checkout');
-Route::post('/user/apply/coupon/', [CartController::class, 'coupon'])->name('apply.coupon');
 Route::get('/remove/cart/{rowId}', [CartController::class, 'removeCart']);
 Route::post('/update/cart/{rowId}', [CartController::class, 'updateCart']);
 Route::get('/add/to/cart/{id}', [CartController::class,'AddCart']);
 
+//coupone application routes
+Route::post('/user/apply/coupon/', [CouponController::class, 'coupon'])->name('apply.coupon'); 
+Route::post('remove/coupon/', [CouponController::class, 'couponRemove'])->name('remove.coupon'); 
 
 // Product 
 Route::get('/product/details/{id}', [ProductController::class, 'productView']);

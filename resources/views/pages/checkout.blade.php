@@ -70,8 +70,8 @@
                                     </td>
                                     <td class="product-thumbnail"><a href="#"><img
                                                 src="{{ asset($row->options->image) }}" alt="product img" /></a></>
-                                    <td class="product-price">GH₵ {{ $row->price / 100}}</td>
-                                    <td class="product-subtotal">GH₵ {{ $row->price*$row->qty /100}}</td>
+                                    <td class="product-price">GH₵ {{ $row->price }}</td>
+                                    <td class="product-subtotal">GH₵ {{ $row->price*$row->qty }}</td>
                                     <td class="product-remove"><a href="{{ url('remove/cart/'.$row->rowId ) }}">X</a>
                                     </td>
                                 </tr>
@@ -161,7 +161,7 @@
                             <li>Subtotal : <span class="amount">
                                     GH₵ {{ Session::get('coupon')['balance'] }} </span> </li>
                             <li>Coupon : ({{ Session::get('coupon')['name'] }} )
-                                <a href="{{ route('coupon.remove') }}" class="btn btn-danger btn-sm">X</a>
+                                <a href="{{ route('remove.coupon') }}" class="btn btn-danger btn-sm">X</a>
                                 <span class="amount">GH₵ {{ Session::get('coupon')['discount'] }} </span> </li>
                             @else
                             <li>Subtotal : <span class="amount">
@@ -170,7 +170,7 @@
 
                             @if(Session::has('coupon'))
                             <li>Total : <span class="amount">GH₵
-                                    {{ Session::get   ('coupon')                               ['balance']  }} </span>
+                                    {{ Session::get   ('coupon')['balance']  }} </span>
                             </li>
                             @else
                             <li>Total : <span class="amount">GH₵ {{ Cart::Subtotal()}} </span> </li>

@@ -23,6 +23,11 @@
 
                             <input type="text" placeholder="Enter a valid email" name="email" value="{{old('email')}}" class="block w-full p-3 rounded bg-gray-200 border border-transparent focus:outline-none" required>
                         </div>
+                        <div class="mb-5">
+                            <label for="phone_number" class="block mb-2 text-sm font-medium text-gray-600">Phone Number</label>
+
+                            <input type="text" placeholder="Enter Phone Number" name="phone" value="{{old('phone')}}" class="block w-full p-3 rounded bg-gray-200 border border-transparent focus:outline-none" required>
+                        </div>
                 
                         <div class="mb-5">
                             <label for="password" class="block mb-2 text-sm font-medium text-gray-600" required>Password</label>
