@@ -62,14 +62,6 @@ class CartController extends Controller
   public function showCart()
   {
     $cart = Cart::content();
-    //dd($cart);
-    // Credit offers 
-    // $credit_offers = LenderOffering::with(['lender'])
-    //   ->where('lender_organization_id', '=', Auth::user()->lender_organization_id)
-    //   ->orderBy('percentage', 'ASC')->get();
-
-    //$product = Product::whereId($id)->first();
-
     return view('pages.cart', compact('cart'));
   }
 
