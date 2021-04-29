@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderDetailsController;
 use App\Http\Controllers\FeatureRequestController;
 use App\Http\Controllers\LenderOfferingController;
@@ -110,3 +111,6 @@ Route::post('/reset/password', [DashboardController::class,'resetPassword'])->na
 // User profile route
 Route::get('/user/profile', [ProfileController::class,'showProfile'])->name('user.profile.show');
 Route::post('user/profile/update', [ProfileController::class,'updateProfile'])->name('user.profile.update');
+
+//newsletters
+Route::post('/newsletter/create', [NewsletterController::class, 'storeNewsLetter']) ->name('store.newsletter');
