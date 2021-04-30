@@ -96,7 +96,32 @@
                         <li class="h3">
                             <div class="form-check">
                                 <div class="row">
-                                    @foreach($cart as $row)
+                                    
+                                    @if (intval(str_replace(",","",Cart::Subtotal()))  <= $offer->max_financed)
+                                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+                                        <input class="form-check-input" type="radio" name="lenderOfferingRadio"
+                                        id="{{$offer->id}}" value="{{$offer->id}}" data-id="{{$offer->id}}">
+                                    </div>
+                                        <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10">
+                                            <label class="form-check-label" for="{{$offer->id}}">
+                                                <p>
+                                                    {{ $offer->registered_name}} finances at {{ $offer->percentage }}%
+                                                    for
+                                                    {{ $offer->payment_period }} months
+                                                </p>
+                                                
+                                                <p>Total financed GH₵
+                                                    {{ ((intval(str_replace(",","",Cart::Subtotal())) * $offer->percentage * ($offer->payment_period/12)) / 100) + intval(str_replace(",","",Cart::Subtotal()))}}
+                                                </p>
+
+                                                <p>
+                                                    Total Interest on price GH₵ {{((intval(str_replace(",","",Cart::Subtotal())) * $offer->percentage * ($offer->payment_period/12)) / 100)}}
+                                                </p>
+                                            </label>
+                                        </div>
+                                        @endif
+                                       
+                                    {{-- @foreach($cart as $row)
                                     @if (((($offer->percentage  * ($row->price * $row->qty)) / 100 ) +  ($row->price * $row->qty)) <= $offer->max_financed)
                                     <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
                                         <input class="form-check-input" type="radio" name="lenderOfferingRadio"
@@ -121,7 +146,7 @@
                                             </label>
                                         </div>
                                         @endif
-                                        @endforeach
+                                        @endforeach --}}
                                 </div>
                             </div>
                         </li>
