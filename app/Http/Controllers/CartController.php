@@ -77,7 +77,8 @@ class CartController extends Controller
         ->orderBy('percentage', 'ASC')
         ->where('customer_finance_organization_affiliations.user_id', Auth::id())->get();
      
-      return view('pages.checkout', compact('credit_offers'));
+      $cart = Cart::content();
+      return view('pages.checkout', compact('cart','credit_offers'));
     } else {
       $notification = array(
         'messege' => 'At first Login Your Account',
