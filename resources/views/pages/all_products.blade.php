@@ -31,11 +31,11 @@
                                 </div>
                             <div class="category-menu-list"> 
                                 <ul class="sidebar__list">
-                                         @php
-                                         $category = DB::table('category_options')->where('deleted_at', NULL)->get();
-                                            @endphp
+                                        @php
+                                        $category = DB::table('category_options')->where('deleted_at', NULL)->get();
+                                        @endphp
                                     @foreach($category as $cat)
-				                    <li><a href="{{ url('category/'.$cat->id) }}">{{ $cat->category_name }}</a></li>
+				                    <li><a href="{{ route('category.name',['id'=>$cat->id,'category_name'=> $cat->category_name]) }}">{{ $cat->category_name }}</a></li>
 								    @endforeach
                                 </ul>
                             </div>   
@@ -85,14 +85,14 @@
                                         <div class="product">
                                             <div class="product__inner">
                                                 <div class="pro__thumb">
-                                                    <a href="{{ url('product/details/'.$pro->id) }}">
+                                                    <a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}">
                                                         <img src="{{ asset($pro->image_one_secure_url) }}" alt="product images">
                                                     </a>
                                                 </div>
                                                 
                                                 <div class="product__hover__info">
                                                     <ul class="product__action">
-                                                        <li><a title="Quick View" href="{{ url('product/details/'.$pro->id) }}"><span class="ti-plus"></span></a></li>
+                                                        <li><a title="Quick View" href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}"><span class="ti-plus"></span></a></li>
                                                         <li><a class="addcart" title="Add to cart"  data-id="{{ $pro->id }}"><span class="ti-shopping-cart"></span></a></</li>
                                                         <li><a title="Add to wishlist" class="addwishlist" data-id="{{ $pro->id }}" ><span class="ti-heart"></span></a></li>
                                                     </ul>
@@ -100,7 +100,7 @@
                                                
                                             </div>
                                             <div class="product__details">
-                                                <h2><a href="{{ url('product/details/'.$pro->id.'/'.$pro->product_name) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
+                                                <h2><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
                                                 <ul class="product__price">
 					                                @if($pro->discount_price == NULL)
                                                     <li class="new__price">GH₵ {{ $pro->selling_price / 100 }}</li>
@@ -125,14 +125,14 @@
                                     <div class="row">
                                         <div class="col-md-4 col-lg-4 col-xl-3 col-sm-5 col-12">
                                             <div class="list__thumb">
-                                                <a href="{{ url('product/details/'.$pro->id) }}">
+                                                <a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}">
                                                     <img src="{{ asset($pro->image_one_secure_url) }}" alt="Product Image">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="col-md-8 col-lg-8 col-xl-9 col-sm-7 col-12">
                                             <div class="list__details__inner">
-                                                <h2><a href="{{ url('product/details/'.$pro->id.'/'.$pro->product_name) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
+                                                <h2><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
                                                 <!-- <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu sit amet…</p> -->
                                                 <ul class="product__price">
                                                 @if($pro-> discount_price == NULL)
@@ -144,7 +144,7 @@
                                                 </ul>
                                                     <br>
                                                 <div class="shop__btn">
-                                                    <a class="htc__btn" href="{{ url('product/details/'.$pro->id)}}"><span class="ti-plus"></span>View Product</a>
+                                                    <a class="htc__btn" href="{{ url('product/details/'.$pro->id.'/'.$pro->slug)}}"><span class="ti-plus"></span>View Product</a>
                                                 </div>
                                             </div>
                                         </div>
