@@ -60,7 +60,7 @@ Route::post('/user/apply/coupon/', [CouponController::class, 'coupon'])->name('a
 Route::post('remove/coupon/', [CouponController::class, 'couponRemove'])->name('remove.coupon'); 
 
 // Product 
-Route::get('/product/details/{id}', [ProductController::class, 'productView']);
+Route::get('/product/details/{id}/{slug}', [ProductController::class, 'productView']);
 Route::post('/cart/product/add/{id}', [ProductController::class, 'addCart']);
 
 // Checkout Routes
@@ -89,8 +89,8 @@ Route::get('/delete/wishlist/{id}', [WishlistController::class, 'deleteWishlist'
 
 
 // All Product details Page 
-Route::get('/products/{id}', [ProductController::class, 'productsView']);
-Route::get('/category/{id}', [ProductController::class, 'categoryView']);
+Route::get('/{category}/{id}/{subcategory_name}', [ProductController::class, 'productsView']);
+Route::get('/product/category/{id}/{category_name}', [ProductController::class, 'categoryView'])->name('category.name');
 
 
 // shop

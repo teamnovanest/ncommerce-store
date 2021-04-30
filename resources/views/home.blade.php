@@ -14,14 +14,16 @@
                         <div class="category-menu-list">
                          <ul>
 
-            
             @foreach($category as $cat)
             <li>
-                <a href="{{ url('category/'.$cat->id) }}">{{ $cat->category_name }}<i class="zmdi zmdi-chevron-right"></i></a>
+                <a href="{{route('category.name',['id'=>$cat->id,'category_name'=> $cat->category_name]) }}">{{ $cat->category_name }}<i class="zmdi zmdi-chevron-right"></i></a>
                 <ul>
 
     @php
-      $subcategory = DB::table('subcategory_options')->where('category_id',$cat->id)->where('deleted_at', NULL)->get();
+      $subcategory = DB::table('subcategory_options')
+      ->join('category_options','subcategory_options.category_id','=','category_options.id')
+      ->select('subcategory_options.*','category_options.category_name')
+      ->where('subcategory_options.category_id',$cat->id)->where('subcategory_options.deleted_at', NULL)->get();
     @endphp
 
     <div class="category-menu-dropdown">
@@ -29,7 +31,7 @@
                   @foreach($subcategory as $row)
                   <ul>
                     <li>
-                        <a href="{{ url('products/'.$row->id) }}">{{ $row->subcategory_name }}<i class="fas fa-chevron-right"></i></a>
+                        <a href="{{ url($row->category_name.'/'.$row->id.'/'.$row->subcategory_name) }}">{{ $row->subcategory_name }}<i class="fas fa-chevron-right"></i></a>
                    
                     </li>
                 </ul>
@@ -116,20 +118,20 @@
                                 <div class="product foo">
                                     <div class="product__inner">
                                         <div class="pro__thumb">
-                                            <a href="{{ url('product/details/'.$row->id)}}">
+                                            <a href="{{ url('product/details/'.$row->id.'/'.$row->slug)}}">
                                                 <img src="{{ asset( $row->image_one_secure_url )}}" alt="product images">
                                             </a>
                                         </div>
                                          <div class="product__hover__info">
                                             <ul class="product__action">
-                                                <li><a title="Quick view" href="{{ url('/product/details/'.$row->id) }}"><span class="ti-plus"></span></a></li>
+                                                <li><a title="Quick view" href="{{ url('/product/details/'.$row->id.'/'.$row->slug) }}"><span class="ti-plus"></span></a></li>
                                                 <li><a class="addcart" title="Add to cart"  data-id="{{ $row->id }}"><span class="ti-shopping-cart"></span></a></</li>
                                                 <li><a title="Add to wishlist" class="addwishlist" data-id="{{ $row->id }}" ><span class="ti-heart"></span></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="product__details">
-                                        <h2><a href="{{ url('/product/details/'.$row->id) }}">{{$row->product_name}} </a></h2>
+                                        <h2><a href="{{ url('/product/details/'.$row->id.'/'.$row->slug) }}">{{$row->product_name}} </a></h2>
                                         <ul class="product__price">
                                              @if($row->discount_price == NULL)
                                             <li >GH₵ {{$row->selling_price }}</li>
