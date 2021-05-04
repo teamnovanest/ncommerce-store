@@ -51,10 +51,10 @@
                                 <ul class="sidebar__list">
 								
                             @php
-                           $brands =  DB::table('brand_options')->get();
+                           $brands =  DB::table('brand_options')->where('deleted_at', NULL)->get();
                             @endphp
 								@foreach($brands as $row)
-			 <li class="brand"><a href="#">{{ $row->brand_name }}</a></li>
+			 <li class="brand"><a href="{{url('product/brand/'.$row->id.'/'.$row->brand_name)}}">{{ $row->brand_name }}</a></li>
 								@endforeach
 								 
 							</ul>

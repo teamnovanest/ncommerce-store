@@ -107,4 +107,11 @@ public function productsView(Request $request){
     return view('pages.all_category',compact('category_all'));
 
   }
+  
+	public function searchProductByBrand(Request $request){
+    $brandId = $request->id;
+    $products =  DB::table('products')->where('brand_id',$brandId)->paginate(10);
+    return view('pages.search_product_by_brand',compact('products'));
+
+  }
 }
