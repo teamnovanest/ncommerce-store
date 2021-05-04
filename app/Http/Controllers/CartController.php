@@ -76,9 +76,15 @@ class CartController extends Controller
         ->select('lenders.id as lender_organization_id', 'lender_offerings.id', 'lenders.registered_name', 'lenders.trade_name', 'lender_offerings.payment_period', 'lender_offerings.percentage', 'lender_offerings.max_financed')
         ->orderBy('percentage', 'ASC')
         ->where('customer_finance_organization_affiliations.user_id', Auth::id())->get();
+
+      $amount = DB::table('lender_offerings')
+      ->select('max_financed')
+      ->where('lender_offerings.lender_organization_id', Auth::user()->lender_organization_id)
+      ->first();
+      // dd($max_financed);
      
       $cart = Cart::content();
-      return view('pages.checkout', compact('cart','credit_offers'));
+      return view('pages.checkout', compact('cart','credit_offers', 'amount'));
     } else {
       $notification = array(
         'messege' => 'At first Login Your Account',
