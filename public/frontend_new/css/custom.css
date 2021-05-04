@@ -540,3 +540,21 @@
     padding: 52px 20px;
     width: 500px;
 }
+
+.finance-offer__error {
+    padding: 0 10px;
+}
+
+.finance-offer__error h3 {
+    text-align: left;
+    margin-bottom: 10px;
+    color: #545863;
+}
+
+.finance-offer__error h5 {
+    text-align: left;
+    background-image: linear-gradient(to right, #ea3546, #c7182a);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
