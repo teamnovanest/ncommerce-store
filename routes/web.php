@@ -13,6 +13,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderDetailsController;
+use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\FeatureRequestController;
 use App\Http\Controllers\LenderOfferingController;
 
@@ -114,3 +115,7 @@ Route::post('user/profile/update', [ProfileController::class,'updateProfile'])->
 
 //newsletters
 Route::post('/newsletter/create', [NewsletterController::class, 'storeNewsLetter']) ->name('store.newsletter');
+
+
+//Product Review
+Route::post('/product/review/create', [ProductReviewController::class, 'productReviewCreate'])->name('review.create');

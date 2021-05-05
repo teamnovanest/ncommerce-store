@@ -13,7 +13,6 @@ class ContactController extends Controller
 
 
       public function contactForm(Request $request){
-
   	$data = array();
   	$data['name'] = $request->name;
   	$data['email'] = $request->email;

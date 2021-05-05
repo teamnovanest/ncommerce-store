@@ -80,7 +80,7 @@
                                 <br><br>
 
                             <div class="pro__details">
-                                {{$product->product_details}}
+                                {{ substr( $product->product_details,0,900)}}
                                 <span><a href="#description">View more</a></span>
                             </div>
                             <br>
@@ -205,43 +205,21 @@
                             </div>
                             <!-- End Single Content -->
                             <!-- Start Single Content -->
+                            <br>
+                            @php
+                            $reviews = DB::table('product_reviews')->get();
+                            @endphp
                             <div role="tabpanel" id="reviews" class="product__tab__content fade">
-                                <div class="review__address__inner">
-                                    <!-- Start Single Review -->
-                                    <div class="pro__review">
-                                        <div class="review__thumb">
-                                            <img src="images/review/1.jpg" alt="review images">
-                                        </div>
-                                        <div class="review__details">
-                                            <div class="review__info">
-                                                <h4><a href="#">Gerald Barnes</a></h4>
-                                                <ul class="rating">
-                                                    <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                                </ul>
-                                                <div class="rating__send">
-                                                    <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-                                                    <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="review__date">
-                                                <span>27 Jun, 2016 at 2:30pm</span>
-                                            </div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Review -->
-                                    <!-- Start Single Review -->
+                                <div class="review__address__inner"></div>
+                                <!-- Start Single Review -->
+                                @foreach($reviews as $review)
                                     <div class="pro__review ans">
                                         <div class="review__thumb">
                                             <img src="images/review/2.jpg" alt="review images">
                                         </div>
                                         <div class="review__details">
                                             <div class="review__info">
-                                                <h4><a href="#">Gerald Barnes</a></h4>
+                                                <h4><a href="#">{{ $review->name}}</a></h4>
                                                 <ul class="rating">
                                                     <li><i class="zmdi zmdi-star"></i></li>
                                                     <li><i class="zmdi zmdi-star"></i></li>
@@ -255,11 +233,12 @@
                                                 </div>
                                             </div>
                                             <div class="review__date">
-                                                <span>27 Jun, 2016 at 2:30pm</span>
+                                                <span>{{ $review->created_at}}</span>
                                             </div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
+                                            <p> {{ $review->reviews}}</p>
                                         </div>
                                     </div>
+                                    @endforeach
                                     <!-- End Single Review -->
                                 </div>
                                 <!-- Start RAting Area -->
@@ -306,20 +285,21 @@
                                 </div>
                                 <!-- End RAting Area -->
                                 <div class="review__box">
-                                    <form id="review-form">
+                                    <form id="review-form" action="{{ route('review.create')}}" method="post">
+                                        @csrf
                                         <div class="single-review-form">
                                             <div class="review-box name">
-                                                <input type="text" placeholder="Type your name">
-                                                <input type="email" placeholder="Type your email">
+                                                <input type="text" placeholder="Type your name" name="name">
+                                                <input type="email" placeholder="Type your email" name="email">
                                             </div>
                                         </div>
                                         <div class="single-review-form">
                                             <div class="review-box message">
-                                                <textarea placeholder="Write your review"></textarea>
+                                                <textarea placeholder="Write your review" name="reviews"></textarea>
                                             </div>
                                         </div>
                                         <div class="review-btn">
-                                            <a class="fv-btn" href="#">submit review</a>
+                                            <button type="submit" class="fv-btn">submit review</button>
                                         </div>
                                     </form>                                
                                 </div>
