@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="bradcaump__inner text-center">
-                                <h2 class="bradcaump-title">Products</h2>
+                                <h2 class="bradcaump-title">Products/Brands</h2>
                             </div>
                         </div>
                     </div>
@@ -25,10 +25,10 @@
                 <div class="row">
                     <div class="col-lg-3 col-xl-3 col-md-12 col-12">
 						  <!-- Start Product Cat -->
-                         <div class="categories-menu">
+                         {{-- <div class="categories-menu">
                                 <div class="category-heading">
                                <h3>Product Categories</h3>
-                                </div>
+                                   </div>
                             <div class="category-menu-list"> 
                                 <ul class="sidebar__list">
                                          @php
@@ -40,7 +40,7 @@
                                 </ul>
                             </div>    
                         </div>
-                        <br>
+                        <br> --}}
                             <!-- End Product Cat -->
 							<!-- brands -->
 						 <div class="categories-menu">
@@ -80,7 +80,7 @@
                             <div role="tabpanel" id="grid-view" class="single-grid-view tab-pane fade show active clearfix">
                                 <div class="row">
                                     <!-- Start Single Product -->
-                                         @foreach($category_all as $pro)
+                                @foreach($products as $pro)
                                     <div class="col-lg-3 single__pro col-xl-3 col-md-4 col-12 col-sm-6">
                                         <div class="product">
                                             <div class="product__inner">
@@ -119,7 +119,7 @@
                             <!-- Start Single View -->
                             <div role="tabpanel" id="list-view" class="single-grid-view tab-pane fade clearfix">
                                 <!-- Start List Content-->
-                                        @foreach($category_all as $pro)
+                                        @foreach($products as $pro)
                                 <div class="single__list__content clearfix">
                                     <div class="row">
                                         <div class="col-md-4 col-lg-4 col-xl-3 col-sm-5 col-12">
@@ -158,7 +158,7 @@
 						<div class="shop_page_nav d-flex flex-row">
 							 
 							 
-                               {{ $category_all->links() }}
+                               {{ $products->links() }}
 							  
 							 
 						</div>

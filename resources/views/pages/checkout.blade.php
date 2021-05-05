@@ -89,6 +89,7 @@
             <h4 class="pb--30 text-center">FINANCE PAYMENT PLANS</h4>
             <div class="row">
                 <div class="col-md-12">
+                    @if (intval(str_replace(",","",Cart::Subtotal()))  <= $amount->max_financed )
                     <ul class="">
 
                         @foreach($credit_offers as $offer)
@@ -97,7 +98,7 @@
                             <div class="form-check">
                                 <div class="row">
                                     
-                                    @if (intval(str_replace(",","",Cart::Subtotal()))  <= $offer->max_financed)
+                                    {{-- @if (intval(str_replace(",","",Cart::Subtotal()))  <= $offer->max_financed) --}}
                                     <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
                                         <input class="form-check-input" type="radio" name="lenderOfferingRadio"
                                         id="{{$offer->id}}" value="{{$offer->id}}" data-id="{{$offer->id}}">
@@ -119,7 +120,7 @@
                                                 </p>
                                             </label>
                                         </div>
-                                        @endif
+                                      
                                        
                                     {{-- @foreach($cart as $row)
                                     @if (((($offer->percentage  * ($row->price * $row->qty)) / 100 ) +  ($row->price * $row->qty)) <= $offer->max_financed)
@@ -152,8 +153,15 @@
                         </li>
                         <hr />
                         @endforeach
-                    </ul>
 
+                    </ul>
+                     @else
+                     <div class="finance-offer__error">
+                       <h4>Your cart subtotal is greater than the maximum amount your organization is willing to finance</h4>
+                       <h5>Your subtotal should be less than GHC {{ $amount->max_financed }} </h5>
+                     </div>
+                     
+                    @endif
                 </div>
             </div>
         </div>

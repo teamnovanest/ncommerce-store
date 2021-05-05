@@ -9,6 +9,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsletterController;
@@ -51,7 +52,7 @@ Route::get('/product/search', [CartController::class,'search'])->name('product.s
 
 // Cart
 Route::get('/product/cart', [CartController::class,'showCart'])->name('show.cart');
-Route::get('/user/checkout/', [CartController::class,'checkout'])->name('user.checkout');
+Route::get('/user/checkout/', [PurchaseController::class,'checkout'])->name('user.checkout');
 Route::get('/remove/cart/{rowId}', [CartController::class, 'removeCart']);
 Route::post('/update/cart/{rowId}', [CartController::class, 'updateCart']);
 Route::get('/add/to/cart/{id}', [CartController::class,'AddCart']);
@@ -92,6 +93,7 @@ Route::get('/delete/wishlist/{id}', [WishlistController::class, 'deleteWishlist'
 // All Product details Page 
 Route::get('/{category}/{id}/{subcategory_name}', [ProductController::class, 'productsView']);
 Route::get('/product/category/{id}/{category_name}', [ProductController::class, 'categoryView'])->name('category.name');
+Route::get('product/brand/{id}/{brand_name}', [ProductController::class, 'searchProductByBrand']);
 
 
 // shop
@@ -115,6 +117,7 @@ Route::post('user/profile/update', [ProfileController::class,'updateProfile'])->
 
 //newsletters
 Route::post('/newsletter/create', [NewsletterController::class, 'storeNewsLetter']) ->name('store.newsletter');
+
 
 
 //Product Review
