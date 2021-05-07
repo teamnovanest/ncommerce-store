@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class FeatureRequestController extends Controller
 {
       public function index(){
-    $requests = DB::table('feature_requests')->paginate(10);
-    return view('feature_request.index', compact('requests'));
+    $requests = DB::table('feature_requests')->where('tag','user')->paginate(10);
+    $user_likes = DB::table('likes')->where('user_id',Auth::id())->get();
+    return view('feature_request.index', compact('requests','user_likes'));
     }
 
     public function create(){
@@ -38,20 +39,48 @@ class FeatureRequestController extends Controller
         return redirect()->route('feature.index')->with($notification);
     }
     
-    public function requestLike($requestId){
-       $likes = DB::table('feature_requests')->where('id',$requestId)->first('likes');
-       
-        $results = DB::table('feature_requests')
-        ->where('id',$requestId)
-        ->update([
-          'likes' => $likes->likes + 1,
-          'updated_at' => now()
-        ]);
-         
-        return response()->json($results);
+    public function requestLike(Request $request,$id){
+        #if the status  === 0,liking the request
+        $status = $request->status;
+        if ($status === '0') {
+            DB::table('likes')->insert([
+                'request_id' => $id,
+                'user_id' => Auth::id(),
+                'likes' => 1,
+                'created_at' => now(),
+                ]);
+                
+            $likes = DB::table('feature_requests')->where('id',$id)->first('likes');
+            $update = DB::table('feature_requests')
+            ->where('id',$id)
+            ->update([
+                'likes' => $likes->likes + 1,
+                'updated_at' => now()
+            ]);
+            if ($update) {
+                $results = DB::table('feature_requests')->where('id',$id)->first('likes');
+                return response()->json(['status'=>'liked','results'=>$results]);
+            }
+
+        } else {
+           #disliking the request
+            DB::table('likes')->where('request_id',$id)->where('user_id',Auth::id())->delete();
+                
+            $likes = DB::table('feature_requests')->where('id',$id)->first('likes');
+            $update = DB::table('feature_requests')
+            ->where('id',$id)
+            ->update([
+                'likes' => $likes->likes - 1,
+                'updated_at' => now()
+            ]);
+            if ($update) {
+                $results = DB::table('feature_requests')->where('id',$id)->first('likes');
+                return response()->json(['status'=>'disliked','results'=>$results]);
+            }
+        }
     }
 
-     public function editFeature($id){
+    public function editFeature($id){
     $request = DB::table('feature_requests')->where('id',$id)->first();
     return view('feature_request.edit',compact('request'));
     }
@@ -71,6 +100,18 @@ class FeatureRequestController extends Controller
         'messege'=>'Request updated Successfully',
         'alert-type'=>'success'
         );
+        return redirect()->route('feature.index')->with($notification);
+    }
+
+    public function delete($id){
+        DB::table('feature_requests')->where('id',$id)->where('user_id',Auth::id())->delete();
+        DB::table('likes')->where('request_id',$id)->where('user_id',Auth::id())->delete();
+
+        $notification=array(
+        'messege'=>'Request deleted successfully',
+        'alert-type'=>'success'
+        );
+
         return redirect()->route('feature.index')->with($notification);
     }
 }
