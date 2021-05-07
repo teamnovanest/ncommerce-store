@@ -34,8 +34,7 @@ $setting = DB::table('sitesettings')->first();
     <!-- User style -->
     <link rel="stylesheet" href="{{ asset('/frontend_new/css/custom.css') }}">
 
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('/lib/toastr/toastr.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
@@ -48,9 +47,9 @@ $setting = DB::table('sitesettings')->first();
     <!-- azia CSS -->
     <link rel="stylesheet" href="{{ asset('/lib/css/azia.css')}}">
 
-     <script src="https://js.stripe.com/v3/"></script>
+     {{-- <script src="https://js.stripe.com/v3/"></script> --}}
 
-     <link rel='stylesheet' href="https://unpkg.com/nprogress@0.2.0/nprogress.css" />
+     <link rel='stylesheet' href="{{ asset('/lib/nprogress/nprogress.css') }}" />
 
     <!-- Modernizr JS -->
     <script src="{{ asset('/frontend_new/js/vendor/modernizr-2.8.3.min.js')}}"></script>
@@ -238,7 +237,7 @@ $setting = DB::table('sitesettings')->first();
                             <div class="shp__pro__details">
                                 <h2><a href="#">{{ $row->name  }}</a></h2>
                                 <span class="quantity">QTY: {{ $row->qty }}</span>
-                                <span class="shp__price">GH₵ {{ $row->price*$row->qty}}</span>
+                                <span class="shp__price">GH₵ {{number_format( $row->price*$row->qty,2)}}</span>
                             </div>
                             <div class="remove__btn">
                                 <a href="{{ url('remove/cart/'.$row->rowId ) }}"" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
@@ -441,7 +440,14 @@ $setting = DB::table('sitesettings')->first();
 
 
     <!-- jquery latest version -->
-    <script src="{{ asset('/frontend_new/js/vendor/jquery-1.12.0.min.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="{{ asset('/lib/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('/lib/sweetalert/sweetalert.js') }}"></script>
+    <script src="{{ asset('/lib/sweetalert/sweetalert.min.js')}}"></script>
+    <script src="{{ asset('/lib/nprogress/nprogress.js')}}"></script>
+
+    {{-- <script src="{{ asset('/frontend_new/js/vendor/jquery-1.12.0.min.js')}}"></script> --}}
     <!-- Bootstrap framework js -->
     <script src="{{ asset('/frontend_new/js/bootstrap.min.js')}}"></script>
     <!-- All js plugins included in this file. -->
@@ -453,18 +459,13 @@ $setting = DB::table('sitesettings')->first();
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="{{ asset('/frontend_new/js/main.js')}}"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 <script src="{{ asset('/frontend/js/product_custom.js')}}"></script>
 <script src="{{ asset('js/custom.js')}}"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-  <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
-  <script src="{{ asset('https://unpkg.com/nprogress@0.2.0/nprogress.js')}}"></script>
-
+  
+@stack('scripts')
 <!-- cus dashboard script -->
-   <script src="{{asset('lib/jquery/jquery.min.js')}}"></script>
+   {{-- <script src="{{asset('lib/jquery/jquery.min.js')}}"></script> --}}
     <!-- <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script> -->
     <!-- <script src="../lib/ionicons/ionicons.js"></script> -->
     <!-- <script src="../lib/jquery.flot/jquery.flot.js"></script> -->

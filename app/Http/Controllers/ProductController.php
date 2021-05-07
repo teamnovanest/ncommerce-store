@@ -46,44 +46,26 @@ class ProductController extends Controller
     }
 
 public function addCart(Request $request, $id){
-$product = DB::table('products')->where('id',$id)->first();
-  $data = array();
- 
- if ($product->discount_price == NULL) {
- 	$data['id'] = $product->id;
- 	$data['name'] = $product->product_name;
- 	$data['qty'] = $request->qty;
- 	$data['price'] = $product->selling_price;
- 	$data['weight'] = 1;
- 	$data['options']['image'] = $product->image_one_secure_url;
- 	$data['options']['color'] = $request->color;
- 	$data['options']['size'] = $request->size;
-	$data['options']['merchant_organization_id'] = $product->merchant_organization_id;
- 	 Cart::add($data);
- 	$notification=array(
-                        'messege'=>'Product Added Successfully ',
-                        'alert-type'=>'success'
-                         );
-                       return Redirect()->back()->with($notification);
- }else{
+  $product = DB::table('products')->where('id',$id)->first();
 
- 	$data['id'] = $product->id;
- 	$data['name'] = $product->product_name;
- 	$data['qty'] = $request->qty;
- 	$data['price'] = $product->discount_price;
- 	$data['weight'] = 1;
- 	$data['options']['image'] = $product->image_one_secure_url;
- 	$data['options']['color'] = $request->color;
- 	$data['options']['size'] = $request->size;
-	$data['options']['merchant_organization_id'] = $product->merchant_organization_id;
- 	 Cart::add($data);
- 	 $notification=array(
-                        'messege'=>'Product Added Successfully ',
-                        'alert-type'=>'success'
-                         );
-                       return Redirect()->back()->with($notification);
+   $data = array();
 
-    }   
+   $data['id'] = $product->id;
+   $data['name'] = $product->product_name;
+   $data['qty'] = 1;
+   $data['price'] = (!$product->discount_price) ? $product->selling_price / 100 :
+   ($product->selling_price - $product->discount_price) /100;
+   $data['weight'] = 1;
+   $data['options']['image'] = $product->image_one_secure_url;
+   $data['options']['color'] = '';
+   $data['options']['size'] = '';
+   $data['options']['merchant_organization_id'] = $product->merchant_organization_id;
+   Cart::add($data);
+  	$notification=array(
+  	'messege'=>'Product Added Successfully ',
+  	'alert-type'=>'success'
+  	);
+  	return Redirect()->back()->with($notification);
 
 }
 

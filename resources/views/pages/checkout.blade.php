@@ -70,8 +70,8 @@
                                     </td>
                                     <td class="product-thumbnail"><a href="#"><img
                                                 src="{{ asset($row->options->image) }}" alt="product img" /></a></>
-                                    <td class="product-price">GH₵ {{ $row->price }}</td>
-                                    <td class="product-subtotal">GH₵ {{ $row->price*$row->qty }}</td>
+                                    <td class="product-price">GH₵ {{ number_format($row->price,2) }}</td>
+                                    <td class="product-subtotal">GH₵ {{ number_format($row->price*$row->qty,2) }}</td>
                                     <td class="product-remove"><a href="{{ url('remove/cart/'.$row->rowId ) }}">X</a>
                                     </td>
                                 </tr>
@@ -89,7 +89,7 @@
             <h4 class="pb--30 text-center">FINANCE PAYMENT PLANS</h4>
             <div class="row">
                 <div class="col-md-12">
-                    @if (intval(str_replace(",","",Cart::Subtotal()))  <= $amount->max_financed )
+                    @if (auth()->user()->lender_organization_id && floatval(str_replace(",","",Cart::Subtotal()))  <= $amount->max_financed )
                     <ul class="">
 
                         @foreach($credit_offers as $offer)
@@ -112,11 +112,11 @@
                                                 </p>
                                                 
                                                 <p>Total financed GH₵
-                                                    {{ ((intval(str_replace(",","",Cart::Subtotal())) * $offer->percentage * ($offer->payment_period/12)) / 100) + intval(str_replace(",","",Cart::Subtotal()))}}
+                                                    {{ number_format(((floatval(str_replace(",","",Cart::Subtotal())) * $offer->percentage * ($offer->payment_period/12)) / 100) + intval(str_replace(",","",Cart::Subtotal())),2)}}
                                                 </p>
 
                                                 <p>
-                                                    Total Interest on price GH₵ {{((intval(str_replace(",","",Cart::Subtotal())) * $offer->percentage * ($offer->payment_period/12)) / 100)}}
+                                                    Total Interest on price GH₵ {{number_format(((floatval(str_replace(",","",Cart::Subtotal())) * $offer->percentage * ($offer->payment_period/12)) / 100),2)}}
                                                 </p>
                                             </label>
                                         </div>
@@ -156,10 +156,12 @@
 
                     </ul>
                      @else
+                     @if (auth()->user()->lender_organization_id)    
                      <div class="finance-offer__error">
                        <h4>Your cart subtotal is greater than the maximum amount your organization is willing to finance</h4>
                        <h5>Your subtotal should be less than GHC {{ $amount->max_financed }} </h5>
                      </div>
+                     @endif
                      
                     @endif
                 </div>
