@@ -70,10 +70,10 @@
                                     <div class="s-price-box">
                                 @if($product->discount_price == NULL)
                                         
-                                        <span class="new-price" id="pdiscountPrice" >GH₵ {{ $product-> selling_price}}</span>
+                                        <span class="new-price" id="pdiscountPrice" >GH₵ {{number_format($product->selling_price,2)}}</span>
                                 @else        
-                                        <span class="new-price" id="pdiscountPrice">GH₵ {{ $product-> discount_price}}</span>
-                                        <span class="old-price" id="psellingPrice">GH₵ {{ $product-> selling_price}}</span>
+                                        <span class="new-price" id="pdiscountPrice">GH₵ {{ number_format($product->selling_price - $product->discount_price,2)}}</span>
+                                        <span class="old-price" id="psellingPrice">GH₵ {{ number_format($product->selling_price,2)}}</span>
                                 @endif        
                                     </div>
                                 </div>

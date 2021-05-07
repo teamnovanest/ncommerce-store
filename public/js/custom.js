@@ -81,4 +81,12 @@ $(document).ready(function () {
             },
         });
     });
+    // Disable quantity update button on page load
+    $("#btn-update-qty").prop("disabled", true);
+
+    // Enable quantity update button if quantity changes
+    $("#qty").on("change", function (evt) {
+        console.log($(this).val());
+        $("#btn-update-qty").prop("disabled", false);
+    });
 });

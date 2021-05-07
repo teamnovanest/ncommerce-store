@@ -19,11 +19,11 @@ class CartController extends Controller
 
    $data = array();
 
-   if ($product->discount_price == NULL) {
    $data['id'] = $product->id;
    $data['name'] = $product->product_name;
    $data['qty'] = 1;
-   $data['price'] = $product->selling_price / 100;
+   $data['price'] = (!$product->discount_price) ? $product->selling_price / 100 :
+   ($product->selling_price - $product->discount_price) /100;
    $data['weight'] = 1;
    $data['options']['image'] = $product->image_one_secure_url;
    $data['options']['color'] = '';
@@ -31,23 +31,9 @@ class CartController extends Controller
    $data['options']['merchant_organization_id'] = $product->merchant_organization_id;
    Cart::add($data);
    return \Response::json(['success' => 'Successfully Added To Cart']);
-   }else{
-
-   $data['id'] = $product->id;
-   $data['name'] = $product->product_name;
-   $data['qty'] = 1;
-   $data['price'] = $product->discount_price / 100;
-   $data['weight'] = 1;
-   $data['options']['image'] = $product->image_one_secure_url;
-   $data['options']['color'] = '';
-   $data['options']['size'] = '';
-   $data['options']['merchant_organization_id'] = $product->merchant_organization_id;
-   Cart::add($data);
-   return \Response::json(['success' => 'Successfully Added To Cart']);
-
    }
 
-   }
+
 
     public function search(Request $request){
       $item = $request->search;

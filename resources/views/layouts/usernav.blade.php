@@ -45,7 +45,7 @@
   <title>Ncommerce</title>
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+ <link rel="stylesheet" type="text/css" href="{{ asset('/lib/toastr/toastr.css') }}">
 
 
   <link rel="stylesheet" href="sweetalert2.min.css">
@@ -159,8 +159,8 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
+     <script src="{{ asset('/lib/sweetalert/sweetalert.js') }}"></script>
+    <script src="{{ asset('/lib/sweetalert/sweetalert.min.js')}}"></script>
 
     <script src="{{ asset('https://unpkg.com/nprogress@0.2.0/nprogress.js')}}"></script>
 
