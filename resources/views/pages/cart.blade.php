@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="col-md-4 col-sm-5 col-xs-12">
                                     <div class="cart_totals">
-                                        <h2>Cart Totals</h2>
+                                        <h2>Cart Total</h2>
                                         <table>
                                             <tbody>
                                                 <tr class="order-total">

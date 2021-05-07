@@ -188,7 +188,7 @@
                 </div>
                 <div class="col-md-6 col-sm-5 col-xs-12">
                     <div class="cart_totals">
-                        <h3>Cart Totals</h3>
+                        <h3>Cart Total</h3>
                         <ul>
                             @if(Session::has('coupon'))
                             <li>Subtotal : <span class="amount">

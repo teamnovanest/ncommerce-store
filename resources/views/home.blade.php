@@ -114,7 +114,7 @@
                         
                              @foreach($featured as $row)
                             <!-- Start Single Product -->
-                            <div class="col-lg-3 single__pro col-xl-3 cat--1 col-md-4 col-sm-6 col-12">
+                            <div class="col-lg-3 single__pro col-xl-3 cat--1 col-md-4 col-sm-6 col-6">
                                 <div class="product foo">
                                     <div class="product__inner">
                                         <div class="pro__thumb">
@@ -131,7 +131,7 @@
                                         </div>
                                     </div>
                                     <div class="product__details">
-                                        <h2><a href="{{ url('/product/details/'.$row->id.'/'.$row->slug) }}">{{$row->product_name}} </a></h2>
+                                        <h2><a href="{{ url('/product/details/'.$row->id.'/'.$row->slug) }}" style="white-space:nowrap; text-overflow:ellipsis;">{{$row->product_name}} </a></h2>
                                         <ul class="product__price">
                                              @if($row->discount_price == NULL)
                                             <li >GH₵ {{$row->selling_price }}</li>
