@@ -98,7 +98,7 @@
                             <div class="form-check">
                                 <div class="row">
                                     
-                                    {{-- @if (intval(str_replace(",","",Cart::Subtotal()))  <= $offer->max_financed) --}}
+                                   
                                     <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
                                         <input class="form-check-input" type="radio" name="lenderOfferingRadio"
                                         id="{{$offer->id}}" value="{{$offer->id}}" data-id="{{$offer->id}}">
@@ -112,7 +112,7 @@
                                                 </p>
                                                 
                                                 <p>Total financed GH₵
-                                                    {{ number_format(((floatval(str_replace(",","",Cart::Subtotal())) * $offer->percentage * ($offer->payment_period/12)) / 100) + intval(str_replace(",","",Cart::Subtotal())),2)}}
+                                                    {{ number_format(((floatval(str_replace(",","",Cart::Subtotal())) * $offer->percentage * ($offer->payment_period/12)) / 100) + floatval(str_replace(",","",Cart::Subtotal())),2)}}
                                                 </p>
 
                                                 <p>
