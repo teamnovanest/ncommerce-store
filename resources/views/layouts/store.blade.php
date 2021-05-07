@@ -533,3 +533,4 @@ $setting = DB::table('sitesettings')->first();
 </body>
 
 </html>
+

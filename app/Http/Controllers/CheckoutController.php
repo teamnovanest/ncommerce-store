@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\DB;
 class CheckoutController extends Controller
 {
      public function checkout(Request $request){
-    
+      
+      
       $selectedOfferId = $request->selectedOfferId;
 
       #select the payment period and percentag from the lender offering table
@@ -24,6 +25,7 @@ class CheckoutController extends Controller
      DB::begintransaction();
      try {
        //code...
+      //  throw new \Exception('This is a test error');
        $content = Cart::content();
        
       //  info: Removing product in wishlist when a customer finally purchase a product
@@ -121,8 +123,8 @@ class CheckoutController extends Controller
   
        } catch (\Throwable $th) {
          DB::rollback();
-         throw $th;
-       }
-      
+        return response()->json(['message'=>$th->getMessage()],500);
+
+       }  
   }
 }
