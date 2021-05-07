@@ -134,10 +134,10 @@
                                         <h2><a href="{{ url('/product/details/'.$row->id.'/'.$row->slug) }}" style="white-space:nowrap; text-overflow:ellipsis;">{{$row->product_name}} </a></h2>
                                         <ul class="product__price">
                                              @if($row->discount_price == NULL)
-                                            <li >GH₵ {{$row->selling_price }}</li>
+                                            <li >GH₵ {{number_format($row->selling_price,2) }}</li>
                                               @else
-                                              <li class="new__price">GH₵ {{$row->discount_price }}</li>
-                                            <li class="old__price">GH₵ {{$row->selling_price }}</li>
+                                              <li class="new__price">GH₵ {{number_format($row->selling_price - $row->discount_price,2) }}</li>
+                                            <li class="old__price">GH₵ {{number_format($row->selling_price,2) }}</li>
                                               @endif
                                         </ul>
                                        

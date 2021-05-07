@@ -74,9 +74,10 @@ Route::get('/order/{id}/status', [OrderDetailsController::class,'viewOrderStatus
 Route::get('/feature-request/index', [FeatureRequestController::class,'index'])->name('feature.index');
 Route::get('/feature-request/create', [FeatureRequestController::class,'create'])->name('feature.create');
 Route::post('/feature-request/save', [FeatureRequestController::class,'save'])->name('feature.save');
-Route::post('/feature-request/{requestId}/save', [FeatureRequestController::class,'requestLike']);
+Route::post('/feature-request/{id}/like', [FeatureRequestController::class,'requestLike']);
 Route::get('/feature-request/{id}/edit', [FeatureRequestController::class,'editFeature'])->name('feature.edit');
 Route::post('/feature-request/{id}/update', [FeatureRequestController::class,'updateRequest'])->name('feature.update');
+Route::get('/feature-request/{id}/delete', [FeatureRequestController::class,'delete'])->name('feature.delete');
 
 
 // Contact page routes

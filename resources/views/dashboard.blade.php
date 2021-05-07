@@ -28,8 +28,8 @@
                 <tr>
                   <td><a href="{{ url('product/details/'.$row->product_id) }}">{{$row->product_name}}</a></td>
                   <td><a href="{{ url('product/details/'.$row->product_id) }}" target="_blank"><img style="height: 100px" src="{{ asset( $row->image_one_secure_url )}}" alt="product images"></a></td>
-                  <th>{{ $row->date }}</th>
-                  <td>GHC {{ $row->total / 100}}</td>
+                  <th>{{date('j F, Y', strtotime($row->date)) }}</th>
+                  <td>GHC {{ number_format($row->total / 100,2)}}</td>
                   <td>{{ $row->order_code }}</td>
                   <td> 
                     @if($row->status_id === 0) 

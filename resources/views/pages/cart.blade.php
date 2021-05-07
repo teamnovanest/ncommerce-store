@@ -63,14 +63,14 @@
                                             <td>
                                                 <form method="post" action="/update/cart/item">
            	                                        <input type="hidden" name="productid" value="{{ $row->rowId }}">
-           	                                        <input type="number" name="qty" pattern="[0-9]" value="{{ $row->qty }}" style="width: 50px;" min="1">
+           	                                        <input type="number" id="qty" name="qty" pattern="[0-9]" value="{{ $row->qty }}" style="width: 50px;" min="1">
                                                     <i class="fas fa-check-square"></i>
                                                       <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-           	                                        <button type="submit" class="btn btn-success btn-sm">✔</button>
+           	                                        <button type="submit" id="btn-update-qty" class="btn btn-success btn-sm">✔</button>
                                                 </form>  
                                             </td>
-                                            <td class="product-price">GH₵ {{ $row->price }}</td>
-                                            <td class="product-subtotal">GH₵ {{ $row->price*$row->qty }}</td>
+                                            <td class="product-price">GH₵ {{ number_format($row->price,2) }}</td>
+                                            <td class="product-subtotal">GH₵ {{ number_format($row->price*$row->qty,2) }}</td>
                                             <td class="product-remove"><a href="{{ url('remove/cart/'.$row->rowId ) }}">X</a></td>
                                         </tr>
 								@endforeach
@@ -89,7 +89,7 @@
                                                 <tr class="order-total">
                                                     <th>Total</th>
                                                     <td>
-                                                        <strong><span class="amount">GH₵ {{ Cart::Subtotal() }}</span></strong>
+                                                        <strong><span class="amount">GH₵ {{ (Cart::Subtotal()) }}</span></strong>
                                                     </td>
                                                 </tr>                                           
                                             </tbody>
@@ -109,6 +109,9 @@
 	 <!-- Body main wrapper end -->
     <!-- Placed js at the end of the document so the pages load faster -->
 
+@push('scripts')
+ {{ asset('/frontend/js/cart_custom.js') }}
+@endpush
 
 
 @endsection

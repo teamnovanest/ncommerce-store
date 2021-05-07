@@ -57,7 +57,7 @@ $(document).ready(function () {
 
     $(".like-btn").click(function () {
         var id = $(this).attr("data-request-id");
-        var status = $(".like-btn").val();
+        var status = $("#thumbsup" + id).attr("data-value-id");
 
         $.ajax({
             url: "/feature-request/" + id + "/like",
@@ -66,16 +66,27 @@ $(document).ready(function () {
             dataType: "json",
             data: { id, status },
             success: function (response) {
-                if (response === 1) {
+                // console.log("response =>", response.status);
+                if (response.status === "liked") {
                     $("#thumbsup" + id).addClass("thumbsup");
-                    $(".like-btn" + id).val("1");
-                } else if (response === "disliked") {
+                    $("#thumbsup" + id).attr("data-value-id", 1);
+                    $("#likes" + id).html(response.results.likes);
+                } else if (response.status === "disliked") {
                     $("#thumbsup" + id).removeClass("thumbsup");
-                    $(".like-btn" + id).val("0");
+                    $("#thumbsup" + id).attr("data-value-id", 0);
+                    $("#likes" + id).html(response.results.likes);
                 } else {
                     swal("Error", "An error occured, try again", "error");
                 }
             },
         });
+    });
+    // Disable quantity update button on page load
+    $("#btn-update-qty").prop("disabled", true);
+
+    // Enable quantity update button if quantity changes
+    $("#qty").on("change", function (evt) {
+        console.log($(this).val());
+        $("#btn-update-qty").prop("disabled", false);
     });
 });
