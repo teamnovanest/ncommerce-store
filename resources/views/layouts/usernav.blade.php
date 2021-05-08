@@ -39,8 +39,8 @@
     <meta property="og:image:height" content="600"> -->
 
   <!-- Meta -->
-  <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
-  <meta name="author" content="BootstrapDash">
+  <meta name="description" content="">
+  <meta name="author" content=" ">
 
   <title>Ncommerce</title>
 
@@ -48,13 +48,13 @@
  <link rel="stylesheet" type="text/css" href="{{ asset('/lib/toastr/toastr.css') }}">
 
 
-  <link rel="stylesheet" href="sweetalert2.min.css">
+  <!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
 
   <!-- vendor css -->
-  <link href="{{ asset('/lib/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('/lib/ionicons/css/ionicons.min.css')}}" rel="stylesheet">
+  <!-- <link href="{{ asset('/lib/fontawesome-free/css/all.min.css')}}" rel="stylesheet"> -->
+  <!-- <link href="{{ asset('/lib/ionicons/css/ionicons.min.css')}}" rel="stylesheet"> -->
   <link href="{{ asset('/lib/typicons.font/typicons.css')}}" rel="stylesheet">
-  <link href="{{ asset('/lib/flag-icon-css/css/flag-icon.min.css')}}" rel="stylesheet">
+  <!-- <link href="{{ asset('/lib/flag-icon-css/css/flag-icon.min.css')}}" rel="stylesheet"> -->
 
   <!-- azia CSS -->
   <link rel="stylesheet" href="{{ asset('/lib/css/azia.css')}}">
@@ -107,7 +107,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link with-sub"><i class="typcn typcn-book"></i> Setting <span class="arrow"><i class="typcn typcn-arrow-sorted-down"></i></span></a>
+            <a href="" class="nav-link with-sub"><i class="typcn typcn-book"></i> {{Auth::user()->name}} <span class="arrow"><i class="typcn typcn-arrow-sorted-down"></i></span></a>
             <div class="az-menu-sub">
               <div class="container">
                 <div>
@@ -144,23 +144,23 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
     <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('/lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('/lib/ionicons/ionicons.js') }}"></script>
-    <script src="{{ asset('/lib/jquery.flot/jquery.flot.js') }}"></script>
-    <script src="{{ asset('/lib/jquery.flot/jquery.flot.resize.js') }}"></script>
-    <script src="{{ asset('/lib/chart.js/Chart.bundle.min.js') }}"></script>
-    <script src="{{ asset('/lib/peity/jquery.peity.min.js') }}"></script>
+    <!-- <script src="{{ asset('/lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script> -->
+    <!-- <script src="{{ asset('/lib/ionicons/ionicons.js') }}"></script> -->
+    <!-- <script src="{{ asset('/lib/jquery.flot/jquery.flot.js') }}"></script> -->
+    <!-- <script src="{{ asset('/lib/jquery.flot/jquery.flot.resize.js') }}"></script> -->
+    <!-- <script src="{{ asset('/lib/chart.js/Chart.bundle.min.js') }}"></script> -->
+    <!-- <script src="{{ asset('/lib/peity/jquery.peity.min.js') }}"></script> -->
 
-    <script src="{{ asset('/lib/js/azia.js')}}"></script>
-    <script src="{{ asset('/lib/js/chart.flot.sampledata.js') }}"></script>
-    <script src="{{ asset('/lib/js/dashboard.sampledata.js') }}"></script>
-    <script src="{{ asset('/lib/js/jquery.cookie.js') }}" type="text/javascript"></script>
+     <script src="{{ asset('/lib/js/azia.js')}}"></script> 
+    <!-- <script src="{{ asset('/lib/js/chart.flot.sampledata.js') }}"></script> -->
+    <!-- <script src="{{ asset('/lib/js/dashboard.sampledata.js') }}"></script>
+    <script src="{{ asset('/lib/js/jquery.cookie.js') }}" type="text/javascript"></script> -->
     <script src="{{ asset('js/custom.js')}}"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-     <script src="{{ asset('/lib/sweetalert/sweetalert.js') }}"></script>
-    <script src="{{ asset('/lib/sweetalert/sweetalert.min.js')}}"></script>
+     <!-- <script src="{{ asset('/lib/sweetalert/sweetalert.js') }}"></script>
+    <script src="{{ asset('/lib/sweetalert/sweetalert.min.js')}}"></script> -->
 
     <script src="{{ asset('https://unpkg.com/nprogress@0.2.0/nprogress.js')}}"></script>
 
