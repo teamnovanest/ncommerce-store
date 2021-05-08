@@ -31,7 +31,7 @@ $(document).ready(function () {
 
         if (selectedOfferId) {
             $.ajax({
-                url: "/user/checkout/process/",
+                url: "/user/checkout/process",
                 type: "GET",
                 dataType: "json",
                 cache: false,
@@ -47,7 +47,14 @@ $(document).ready(function () {
                     }
                 },
                 error: function (err) {
-                    swal("Error", err, "error");
+                    NProgress.done();
+                    var errorMessage =
+                        "Something didn't go right. Our engineers have been notified \nabout the error and will look into it";
+                    swal(
+                        "Order could not be placed. Please try again",
+                        errorMessage,
+                        "error"
+                    );
                 },
             });
         } else {
@@ -82,11 +89,10 @@ $(document).ready(function () {
         });
     });
     // Disable quantity update button on page load
-    $("#btn-update-qty").prop("disabled", true);
+    $(".btn-update-qty").prop("disabled", true);
 
     // Enable quantity update button if quantity changes
-    $("#qty").on("change", function (evt) {
-        console.log($(this).val());
-        $("#btn-update-qty").prop("disabled", false);
+    $(".qty").on("change", function (evt) {
+        $(this).siblings(".btn-update-qty").prop("disabled", false);
     });
 });
