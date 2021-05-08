@@ -47,9 +47,14 @@ $(document).ready(function () {
                     }
                 },
                 error: function (err) {
-                    // console.log(jqXHR);
                     NProgress.done();
-                    swal("Error", err.responseText.message, "error");
+                    var errorMessage =
+                        "Something didn't go right. Our engineers have been notified \nabout the error and will look into it";
+                    swal(
+                        "Order could not be placed. Please try again",
+                        errorMessage,
+                        "error"
+                    );
                 },
             });
         } else {
@@ -88,7 +93,6 @@ $(document).ready(function () {
 
     // Enable quantity update button if quantity changes
     $(".qty").on("change", function (evt) {
-        console.log($(this).val());
         $(this).siblings(".btn-update-qty").prop("disabled", false);
     });
 });
