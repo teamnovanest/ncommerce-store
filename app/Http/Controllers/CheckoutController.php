@@ -25,7 +25,6 @@ class CheckoutController extends Controller
      DB::begintransaction();
      try {
        //code...
-      //  throw new \Exception('This is a test error');
        $content = Cart::content();
        
       //  info: Removing product in wishlist when a customer finally purchase a product
@@ -42,8 +41,9 @@ class CheckoutController extends Controller
        $data = array();
        $data['user_id'] = Auth::id();
       //  $data['total'] = floatval(Cart::Subtotal()) * 100;
-       $data['status_code'] = mt_rand(100000,999999);  //comment for now
-       $data['order_code'] = rand();
+       //$data['status_code'] = mt_rand(100000,999999);  //comment for now
+       $data['status_code'] = crc32(uniqid());  //comment for now
+       $data['order_code'] = crc32(time());
        $data['status_id'] = 1;
        
        if (Session::has('coupon')) {
@@ -123,7 +123,8 @@ class CheckoutController extends Controller
   
        } catch (\Throwable $th) {
          DB::rollback();
-        return response()->json(['message'=>$th->getMessage()],500);
+        
+         return response()->json(['message'=>$th->getMessage()],500);
 
        }  
   }

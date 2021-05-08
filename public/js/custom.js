@@ -39,21 +39,25 @@ $(document).ready(function () {
                     selectedOfferId,
                 },
                 success: function (data) {
+                    NProgress.done();
                     if (data.message) {
-                        swal("Success", data.message, "success");
+                        Swal.fire({icon: 'success', title: data.message,   showCloseButton: true});
                         window.location.href = "/dashboard";
                     } else {
-                        swal("Error", "An error occured", "error");
+                        //swal("Error", "An error occured", "error");
+                        Swal.fire({icon: 'error', title:"An error occured",   showCloseButton: true});
                     }
                 },
-                error: function (err) {
-                    // console.log(jqXHR);
+                error: function (error) {
+                    
                     NProgress.done();
-                    swal("Error", err.responseText.message, "error");
+                    //swal("Error", error.message, "error");
+                    var parsedResponse  = JSON.parse(error);
+                    Swal.fire({icon: 'error', title: parsedResponse.message,   showCloseButton: true});
                 },
             });
         } else {
-            swal("Error", "Please select a payment plan", "error");
+            Swal.fire({icon: 'error', title:"Please select a payment plan",   showCloseButton: true});
         }
     });
 

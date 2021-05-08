@@ -34,11 +34,13 @@
                                 <div class="portfolio-full-image tab-content">
                                     <div role="tabpanel" class="tab-pane fade show active product-video-position" id="img-tab-1">
                                         <img src="{{ asset( $product->image_one_secure_url ) }}" alt="full-image">
-                                        <div class="product-video">
-                                            <a class="video-popup" href="https://www.youtube.com/watch?v=cDDWvj_q-o8">
-                                                <i class="zmdi zmdi-videocam"></i> View Video
-                                            </a>
-                                        </div>
+                                        @if($product->video_link)
+                                            <div class="product-video">
+                                                <a class="video-popup" href="{{$product->video_link}}">
+                                                    <i class="zmdi zmdi-videocam"></i> Watch video
+                                                </a>
+                                            </div>
+                                        @endif
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade product-video-position" id="img-tab-2">
                                         <img src="{{ asset( $product->image_two_secure_url ) }}" alt="full-image">
@@ -335,6 +337,10 @@
 
 
 {{-- @include('partials.finance-offerings') --}}
+
+@push('scripts')
+
+@endpush
 
 
 @endsection
