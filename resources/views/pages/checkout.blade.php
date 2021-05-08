@@ -59,7 +59,7 @@
                                     <td class="product-quantity">{{ $row->options->size }}</td>
                                     @endif
                                     <td>
-                                          @include('forms.quantity_update')
+                                          @include('partials.quantity_update')
                                     </td>
                                     <td class="product-thumbnail"><a href="#"><img
                                                 src="{{ asset($row->options->image) }}" alt="product img" /></a></>

@@ -61,7 +61,7 @@
                                             <td class="product-quantity">{{ $row->options->size }}</td>
                                             @endif
                                             <td>
-                                                @include('forms.quantity_update')
+                                                @include('partials.quantity_update')
                                             </td>
                                             <td class="product-price">GH₵ {{ number_format($row->price,2) }}</td>
                                             <td class="product-subtotal">GH₵ {{ number_format($row->price*$row->qty,2) }}</td>
