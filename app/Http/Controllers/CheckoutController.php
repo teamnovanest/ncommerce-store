@@ -25,6 +25,7 @@ class CheckoutController extends Controller
      DB::begintransaction();
      try {
        //code...
+      //  throw new \Exception('This is a test error');
        $content = Cart::content();
        
       //  info: Removing product in wishlist when a customer finally purchase a product
@@ -123,8 +124,7 @@ class CheckoutController extends Controller
   
        } catch (\Throwable $th) {
          DB::rollback();
-        
-         return response()->json(['message'=>$th->getMessage()],500);
+        return response()->json(['message'=>$th->getMessage()],500);
 
        }  
   }
