@@ -48,17 +48,15 @@ $(document).ready(function () {
                     }
                 },
                 error: function (error) {
-
+                    
                     NProgress.done();
-                    var errorMessage =
-                        "Something didn't go right. Our engineers have been notified \nabout the error and will look into it";
+                    
                     Swal.fire({
                         icon: 'error',
-                        title: "Order could not be placed. Please try again",
-                        text: errorMessage,
+                        title: "Order could not be placed. Please try again later",
+                        text: error.responseJSON.message,
                         showCloseButton: true
-                    }
-                    );
+                    });
                 },
             });
         } else {
@@ -87,7 +85,7 @@ $(document).ready(function () {
                     $("#thumbsup" + id).attr("data-value-id", 0);
                     $("#likes" + id).html(response.results.likes);
                 } else {
-                    swal("Error", "An error occured, try again", "error");
+                    Swal.fire({icon: "error", title: "An error occured, try again", showCloseButton: true });
                 }
             },
         });
