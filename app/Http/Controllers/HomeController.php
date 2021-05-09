@@ -31,7 +31,8 @@ class HomeController extends Controller
         $category = DB::table('category_options')->where('deleted_at', NULL)->get();
         // $subcategory = DB::table('subcategory')->where('category_id',$cat->id)->get();
 
-        return view('home', compact('featured', 'trend' , 'best', 'hot', 'category'));
+        //return view('home', compact('featured', 'trend' , 'best', 'hot', 'category'));
+        return view('home2', compact('featured', 'trend' , 'best', 'hot', 'category'));
     }
 
 

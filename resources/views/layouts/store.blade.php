@@ -11,6 +11,16 @@ $setting = DB::table('sitesettings')->first();
     <title>Ncommerce</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+
+
+    <!-- for the default version -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch.umd.js"></script>
+    -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/instantsearch.css@7/themes/satellite-min.css"
+    />
     
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/frontend_new/css/images/favicon.ico') }}">
@@ -41,7 +51,7 @@ $setting = DB::table('sitesettings')->first();
     <!-- vendor css -->
     <!-- <link href="{{ asset('../lib/fontawesome-free/css/all.min.css')}}" rel="stylesheet"> -->
     <!-- <link href="{{ asset('../lib/ionicons/css/ionicons.min.css')}}" rel="stylesheet"> -->
-    <link href="{{ asset('../lib/typicons.font/typicons.css')}}" rel="stylesheet">
+    <link href="{{ asset('/lib/typicons.font/typicons.css')}}" rel="stylesheet">
     <!-- <link href="{{ asset('../lib/flag-icon-css/css/flag-icon.min.css')}}" rel="stylesheet"> -->
 
     <!-- azia CSS -->
@@ -53,16 +63,44 @@ $setting = DB::table('sitesettings')->first();
 
     <!-- Modernizr JS -->
     <script src="{{ asset('/frontend_new/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+
+
+<script>
+// For the search only version
+//import   algoliasearch from 'algoliasearch/lite' ;
+//import instantsearch from 'instantsearch.js';
+
+//var index = searchClient.initIndex('product_idx');
+/* index.setSettings({
+  // Select the attributes you want to search in
+  searchableAttributes: [
+    'product_name', 'product_details'
+  ],
+  // Define business metrics for ranking and sorting
+  customRanking: [
+    'desc(popularity)'
+  ],
+  // Set up some attributes to filter results on
+  attributesForFaceting: [ 'product_color','price', 'product_size']
+}); */
+
+
+
+</script>
+
 </head>
 
 
 <body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->  
 
 
     
     <!-- Header -->
 <!-- <div class="wrapper fixed__footer"> -->
-    <div class="">
+    <div class="ais-InstantSearch"">
     <header id="header" class="htc-header header--3 bg__white clearfix">
             <!-- Start Mainmenu Area -->
             <div id="sticky-header-with-topbar" class="mainmenu__area sticky__header">
@@ -143,8 +181,11 @@ $setting = DB::table('sitesettings')->first();
                             <div class="search__inner">
                                 <form method="get" action="{{ route('product.search') }}">
                                 @csrf
-                                    <input type="text" required="required" placeholder="Search for products..." name="search">
+                                    <input type="text" id="searchbox" required="required" placeholder="Search for products..." name="search">
                                     <button type="submit"></button>
+                                    <div id="hits"></div>
+                                    <div id="hit-template"></div>
+                                    <div id="pagination"></div>
                                 </form>
                                 <div class="search__close__btn">
                                     <span class="search__close__btn_icon"><i class="zmdi zmdi-close"></i></span>
@@ -439,6 +480,15 @@ $setting = DB::table('sitesettings')->first();
 
 
 
+    <!--  Search -->
+    <!--Plyfill for IE 11 support  -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=Promise%2CObject.entries%2CObject.assign"></script>
+
+    <!-- for the search only version -->
+    <script  src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch-lite.umd.js" integrity="sha256-EXPXz4W6pQgfYY3yTpnDa3OH8/EPn16ciVsPQ/ypsjk=" crossorigin="anonymous"></script>
+    <!-- Instant search  -->
+    <script   src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.8.3/dist/instantsearch.production.min.js" integrity="sha256-LAGhRRdtVoD6RLo2qDQsU2mp+XVSciKRC8XPOBWmofM=" crossorigin="anonymous"></script>
+
     <!-- jquery latest version -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
@@ -463,6 +513,9 @@ $setting = DB::table('sitesettings')->first();
 
 <!-- <script src="{{ asset('/frontend/js/product_custom.js')}}"></script> -->
 <script src="{{ asset('js/custom.js')}}"></script>
+
+<!-- Init Search -->
+<script src="{{ asset('/js/search.js')}}"></script>
   
 @stack('scripts')
 <!-- cus dashboard script -->
