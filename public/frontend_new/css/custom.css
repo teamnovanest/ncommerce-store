@@ -558,3 +558,12 @@
     -webkit-background-clip: text;
     color: transparent;
 }
+
+
+/* Adding ellipsis to product name */
+
+.product-name{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

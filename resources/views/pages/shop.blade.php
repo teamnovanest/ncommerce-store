@@ -52,7 +52,7 @@
                         <div class="row">
                             <!-- Start Single Product -->
                              @foreach($allProducts as $row)
-                            <div class="col-lg-2 single__pro col-xl-2 col-md-4 col-12 col-sm-6">
+                            <div class="col-lg-2 single__pro col-xl-2 col-md-4 col-6 col-sm-6">
                                 <div class="product foo">
                                     <div class="product__inner">
                                         <div class="pro__thumb">
@@ -69,7 +69,7 @@
                                         </div>
                                     </div>
                                     <div class="product__details">
-                                        <h2><a href="{{ url('/product/details/'.$row->id.'/'.$row->slug) }}">{{$row->product_name}}</a></h2>
+                                        <h2 class="product-name"><a href="{{ url('/product/details/'.$row->id.'/'.$row->slug) }}" >{{$row->product_name}}</a></h2>
                                         <ul class="product__price">
                                              @if($row->discount_price == NULL)
                                             <li >GH₵ {{$row->selling_price / 100}}</li>
