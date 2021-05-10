@@ -31,7 +31,7 @@ $(document).ready(function () {
 
         if (selectedOfferId) {
             $.ajax({
-                url: "/user/checkout/process/",
+                url: "/user/checkout/process",
                 type: "GET",
                 dataType: "json",
                 cache: false,
@@ -39,19 +39,28 @@ $(document).ready(function () {
                     selectedOfferId,
                 },
                 success: function (data) {
+                    NProgress.done();
                     if (data.message) {
-                        swal("Success", data.message, "success");
+                        Swal.fire({ icon: 'success', title: data.message, showCloseButton: true });
                         window.location.href = "/dashboard";
                     } else {
-                        swal("Error", "An error occured", "error");
+                        Swal.fire({ icon: 'error', title: "An error occured", showCloseButton: true });
                     }
                 },
-                error: function (err) {
-                    swal("Error", err, "error");
+                error: function (error) {
+                    
+                    NProgress.done();
+                    
+                    Swal.fire({
+                        icon: 'error',
+                        title: "Order could not be placed. Please try again later",
+                        text: error.responseJSON.message,
+                        showCloseButton: true
+                    });
                 },
             });
         } else {
-            swal("Error", "Please select a payment plan", "error");
+            Swal.fire({ icon: 'error', title: "Please select a payment plan", showCloseButton: true });
         }
     });
 
@@ -76,17 +85,16 @@ $(document).ready(function () {
                     $("#thumbsup" + id).attr("data-value-id", 0);
                     $("#likes" + id).html(response.results.likes);
                 } else {
-                    swal("Error", "An error occured, try again", "error");
+                    Swal.fire({icon: "error", title: "An error occured, try again", showCloseButton: true });
                 }
             },
         });
     });
     // Disable quantity update button on page load
-    $("#btn-update-qty").prop("disabled", true);
+    $(".btn-update-qty").prop("disabled", true);
 
-    // Enable quantity update button if quantity changes
-    $("#qty").on("change", function (evt) {
-        console.log($(this).val());
-        $("#btn-update-qty").prop("disabled", false);
+    // Enable quantity update button if quantity input valu changes
+    $(".qty").on("change", function (evt) {
+        $(this).siblings(".btn-update-qty").prop("disabled", false);
     });
 });

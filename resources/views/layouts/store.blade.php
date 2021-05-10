@@ -443,24 +443,25 @@ $setting = DB::table('sitesettings')->first();
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="{{ asset('/lib/toastr/toastr.min.js') }}"></script>
-    <script src="{{ asset('/lib/sweetalert/sweetalert.js') }}"></script>
-    <script src="{{ asset('/lib/sweetalert/sweetalert.min.js')}}"></script>
+    <script src="{{ asset('/lib/sweetalert/sweetalert.js') }}"></script> 
+    <!-- <script src="{{ asset('/lib/sweetalert/sweetalert.min.js')}}"></script> -->
     <script src="{{ asset('/lib/nprogress/nprogress.js')}}"></script>
 
-    {{-- <script src="{{ asset('/frontend_new/js/vendor/jquery-1.12.0.min.js')}}"></script> --}}
+  <!-- <script src="{{ asset('/frontend_new/js/vendor/jquery-1.12.0.min.js')}}"></script>  -->
     <!-- Bootstrap framework js -->
     <script src="{{ asset('/frontend_new/js/bootstrap.min.js')}}"></script>
     <!-- All js plugins included in this file. -->
     <script src="{{ asset('/frontend_new/js/plugins.js')}}"></script>
-    <script src="{{ asset('/frontend_new/js/slick.min.js')}}"></script>
-    <script src="{{ asset('/frontend_new/js/owl.carousel.min.js')}}"></script>
+   <!--  <script src="{{ asset('/frontend_new/js/slick.min.js')}}"></script> -->
+    <script src="{{ asset('/frontend_new/js/owl.carousel.min.js')}}"></script>  
+   
     <!-- Waypoints.min.js. -->
-    <script src="{{ asset('/frontend_new/js/waypoints.min.js')}}"></script>
+    <!-- <script src="{{ asset('/frontend_new/js/waypoints.min.js')}}"></script> -->
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="{{ asset('/frontend_new/js/main.js')}}"></script>
 
 
-<script src="{{ asset('/frontend/js/product_custom.js')}}"></script>
+<!-- <script src="{{ asset('/frontend/js/product_custom.js')}}"></script> -->
 <script src="{{ asset('js/custom.js')}}"></script>
   
 @stack('scripts')
@@ -533,3 +534,4 @@ $setting = DB::table('sitesettings')->first();
 </body>
 
 </html>
+

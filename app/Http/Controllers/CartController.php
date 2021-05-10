@@ -15,22 +15,32 @@ class CartController extends Controller
 {
    public function AddCart($id){
 
-   $product = DB::table('products')->where('id',$id)->first();
+      try {
+        $product = DB::table('products')->where('id',$id)->first();
 
-   $data = array();
+        $data = array();
+     
+        $data['id'] = $product->id;
+        $data['name'] = $product->product_name;
+        $data['qty'] = 1;
+        $data['price'] = (!$product->discount_price) ? $product->selling_price / 100 :
+        ($product->selling_price - $product->discount_price) /100;
+        $data['weight'] = 1;
+        $data['options']['image'] = $product->image_one_secure_url;
+        $data['options']['color'] = '';
+        $data['options']['size'] = '';
+        $data['options']['merchant_organization_id'] = $product->merchant_organization_id;
+        Cart::add($data);
+        return \Response::json(['success' => 'Successfully Added To Cart']);
+     
+      } catch (\Throwable $th) {
+        if (app()->environment('production')){
+          \Sentry\captureException($th);
+        }
+       
+        // TODO Send response to user there was an error
 
-   $data['id'] = $product->id;
-   $data['name'] = $product->product_name;
-   $data['qty'] = 1;
-   $data['price'] = (!$product->discount_price) ? $product->selling_price / 100 :
-   ($product->selling_price - $product->discount_price) /100;
-   $data['weight'] = 1;
-   $data['options']['image'] = $product->image_one_secure_url;
-   $data['options']['color'] = '';
-   $data['options']['size'] = '';
-   $data['options']['merchant_organization_id'] = $product->merchant_organization_id;
-   Cart::add($data);
-   return \Response::json(['success' => 'Successfully Added To Cart']);
+      }
    }
 
 
