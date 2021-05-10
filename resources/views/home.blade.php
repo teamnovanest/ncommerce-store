@@ -131,7 +131,7 @@
                                         </div>
                                     </div>
                                     <div class="product__details">
-                                        <h2><a href="{{ url('/product/details/'.$row->id.'/'.$row->slug) }}" style="white-space:nowrap; text-overflow:ellipsis;">{{$row->product_name}} </a></h2>
+                                        <h2 class="product-name"><a href="{{ url('/product/details/'.$row->id.'/'.$row->slug) }}" >{{$row->product_name}} </a></h2>
                                         <ul class="product__price">
                                              @if($row->discount_price == NULL)
                                             <li >GH₵ {{number_format($row->selling_price,2) }}</li>

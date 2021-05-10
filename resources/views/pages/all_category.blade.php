@@ -100,7 +100,7 @@
                                                
                                             </div>
                                             <div class="product__details">
-                                                <h2><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
+                                                <h2 class="product-name"><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
                                                 <ul class="product__price">
 					                                @if($pro->discount_price == NULL)
                                                     <li class="new__price">GH₵ {{ $pro->selling_price / 100}}</li>
@@ -131,7 +131,7 @@
                                         </div>
                                         <div class="col-md-8 col-lg-8 col-xl-9 col-sm-7 col-12">
                                             <div class="list__details__inner">
-                                                <h2><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
+                                                <h2 class="product-name"><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0" >{{ $pro->product_name  }} </a></h2>
                                                 <!-- <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu sit amet…</p> -->
                                                 <ul class="product__price">
                                                 @if($pro-> discount_price == NULL)
