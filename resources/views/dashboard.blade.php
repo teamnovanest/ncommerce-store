@@ -18,6 +18,7 @@
                   <th>Product image</th>
                   <th>Date </th>
                   <th>Amount </th>
+                  <th>Total Financed</th>
                   <th>Order Code </th>
                   <th>Status  </th>
                   <th>Action </th>
@@ -30,6 +31,7 @@
                   <td><a href="{{ url('product/details/'.$row->product_id) }}" target="_blank"><img style="height: 100px" src="{{ asset( $row->image_one_secure_url )}}" alt="product images"></a></td>
                   <th>{{date('j F, Y', strtotime($row->date)) }}</th>
                   <td>GHC {{ number_format($row->total / 100,2)}}</td>
+                  <td>GHC {{ number_format(((($row->total / 100) * $row->percentage * ($row->payment_period/12)) / 100) + ($row->total/100),2)}}</td>
                   <td>{{ $row->order_code }}</td>
                   <td> 
                     @if($row->status_id === 0) 
