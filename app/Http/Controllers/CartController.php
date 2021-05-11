@@ -16,6 +16,7 @@ class CartController extends Controller
    public function AddCart($id){
 
       try {
+        // throw new Exception();
         $product = DB::table('products')->where('id',$id)->first();
 
         $data = array();
@@ -39,6 +40,10 @@ class CartController extends Controller
         }
        
         // TODO Send response to user there was an error
+      
+         return \Response::json(['error' => 'Item was not added. Try again or contact support if issue still persist'],500);
+      //    $resData['message'] = "Something didn't go right. Our engineers have been notified \nabout the issue and will look into it. If the issue persists concact support";
+      // return response()->json(['error'=>$resData[0].message]);
 
       }
    }

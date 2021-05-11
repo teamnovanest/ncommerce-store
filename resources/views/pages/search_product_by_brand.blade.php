@@ -211,43 +211,37 @@
 <script type="text/javascript">
     
    $(document).ready(function(){
-     $('.addwishlist').on('click', function(){
+     $('.addcart').on('click', function(){
         var id = $(this).data('id');
-
         if (id) {
             $.ajax({
-                url: " {{ url('add/wishlist/') }}/"+id,
+                url: " {{ url('/add/to/cart/') }}/"+id,
                 type:"GET",
                 datType:"json",
                 success:function(data){
-             const Toast = Swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 3000,
-                  timerProgressBar: true,
-                  onOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                  }
-                })
-                window.location.reload();
+                        const Toast = Swal.mixin({
+                             toast: true,
+                             position: 'top-end',
+                             showConfirmButton: false,
+                             timer: 3000,
+                             timerProgressBar: true,
+                             onOpen: (toast) => {
+                               toast.addEventListener('mouseenter', Swal.stopTimer)
+                               toast.addEventListener('mouseleave', Swal.resumeTimer)
+                             }
+                           })
+                           Toast.fire({icon:'success',title:data.success});
+                             window.location.reload();
 
-             if ($.isEmptyObject(data.error)) {
-
-                Toast.fire({
-                  icon: 'success',
-                  title: data.success
-                })
-             }else{
-                 Toast.fire({
-                  icon: 'error',
-                  title: data.error
-                })
-             }
- 
-
-                },
+                            },
+                            error:function(err){
+                                Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: err.responseJSON.error,
+                                showCloseButton: true,
+                            });
+                }
             });
 
         }else{
