@@ -41,26 +41,38 @@ $(document).ready(function () {
                 success: function (data) {
                     NProgress.done();
                     if (data.message) {
-                        Swal.fire({ icon: 'success', title: data.message, showCloseButton: true });
+                        Swal.fire({
+                            icon: "success",
+                            title: data.message,
+                            showCloseButton: true,
+                        });
                         window.location.href = "/dashboard";
                     } else {
-                        Swal.fire({ icon: 'error', title: "An error occured", showCloseButton: true });
+                        Swal.fire({
+                            icon: "error",
+                            title: "An error occured",
+                            showCloseButton: true,
+                        });
                     }
                 },
                 error: function (error) {
-                    
                     NProgress.done();
-                    
+
                     Swal.fire({
-                        icon: 'error',
-                        title: "Order could not be placed. Please try again later",
+                        icon: "error",
+                        title:
+                            "Order could not be placed. Please try again later",
                         text: error.responseJSON.message,
-                        showCloseButton: true
+                        showCloseButton: true,
                     });
                 },
             });
         } else {
-            Swal.fire({ icon: 'error', title: "Please select a payment plan", showCloseButton: true });
+            Swal.fire({
+                icon: "error",
+                title: "Please select a payment plan",
+                showCloseButton: true,
+            });
         }
     });
 
@@ -85,7 +97,11 @@ $(document).ready(function () {
                     $("#thumbsup" + id).attr("data-value-id", 0);
                     $("#likes" + id).html(response.results.likes);
                 } else {
-                    Swal.fire({icon: "error", title: "An error occured, try again", showCloseButton: true });
+                    Swal.fire({
+                        icon: "error",
+                        title: "An error occured, try again",
+                        showCloseButton: true,
+                    });
                 }
             },
         });
