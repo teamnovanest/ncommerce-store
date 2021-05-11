@@ -15,6 +15,7 @@ class HomeController extends Controller
     public function index(){
         //$featured = DB::table('products')->where('status',1)->orderBy('id','desc')->limit(100)->paginate(12);
         $featured = Product::where('status','=',1)->inRandomOrder()->paginate(12);
+        //  $featured = Product::with(['brand'])->where('status','=',1)->inRandomOrder()->paginate(12);
         $trend = Product::where('status','=',1)->where('trend',1)->inRandomOrder()->limit(8);
         $best = Product::where('status','=',1)->where('best_rated',1)->inRandomOrder()->limit(8);
         //$trend = DB::table('products')->where('status',1)->where('trend',1)->orderBy('id','desc')->limit(8)->get();
