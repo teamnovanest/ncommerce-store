@@ -22,6 +22,13 @@ class Product extends Model
 
 
     /**
+     * Get the brand associated with the product.
+     */
+    // public function brand()
+    // {
+    //     return $this->hasOne(BrandOptions::class,'brand_id','id');
+    // }
+    /**
      * Get the category associated with the product.
      */
     public function category()
