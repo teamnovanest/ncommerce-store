@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CouponController extends Controller
 {
@@ -27,7 +28,7 @@ class CouponController extends Controller
     } else {
       $notification = array(
         'messege' => 'Invalid Coupon',
-        'alert-type' => 'success'
+        'alert-type' => 'error'
       );
       return Redirect()->back()->with($notification);
     }
