@@ -42,7 +42,7 @@
                     <span class="badge badge-success">{{$row->status_name}}</span>
                     @endif
                   </td>
-                  <td><a href="{{ route('order.status',['id'=>$row->id])}}" class="btn btn-sm btn-info"> View</a></td>
+                  <td><a href="{{ route('order.status',['id'=>$row->id,'orderDetailId'=>$row->order_detail_id])}}" class="btn btn-sm btn-info"> View</a></td>
                 </tr>
                 @endforeach
               </tbody>
