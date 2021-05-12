@@ -161,6 +161,7 @@
 
      <!-- <script src="{{ asset('/lib/sweetalert/sweetalert.js') }}"></script>
     <script src="{{ asset('/lib/sweetalert/sweetalert.min.js')}}"></script> -->
+       <script src="{{ asset('/lib/sweetalert/sweetalert.js') }}"></script> 
 
     <script src="{{ asset('https://unpkg.com/nprogress@0.2.0/nprogress.js')}}"></script>
 
