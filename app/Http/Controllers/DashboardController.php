@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Cart;
+use Cloudinary;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\UserLenderSelection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\UserFinanceAffiliation;
 use App\Models\CustomerFinanceOrganizationAffiliation;
-use Cloudinary;
-use Cart;
 
 class DashboardController extends Controller
 {   
@@ -20,9 +20,9 @@ class DashboardController extends Controller
 
     public function index() {
         $lender_organizations = CustomerFinanceOrganizationAffiliation::where('user_id', Auth::id())->get();
-        // $selected_organizations = UserFinanceAffiliation::where('user_id', Auth::id())->get();
+        $selected_organizations = UserLenderSelection::where('user_id', Auth::id())->get();
         
-        // if($lender_organizations->isNotEmpty() || $selected_organizations->isNotEmpty()) {
+        if($lender_organizations->isNotEmpty() || $selected_organizations->isNotEmpty()) {
             
               $order = DB::table('orders')
               ->join('order_details', 'order_details.order_id', '=', 'orders.id')
@@ -31,33 +31,49 @@ class DashboardController extends Controller
               ->join('order_financings', 'orders.id', '=', 'order_financings.order_id')
               ->select('orders.*','order_details.status','order_details.totalprice','status_options.status_name','products.image_one_secure_url','products.product_name','order_details.product_id','products.slug','order_financings.payment_period','order_financings.percentage')
               ->where('orders.user_id',Auth::id())->orderBy('orders.id','DESC')->limit(10)->paginate(10);
-            //   dd($order);
-            //   ->select('orders.*','status_options.status_name','products.image_one_secure_url','products.product_name','order_details.product_id','products.slug','order_financings.payment_period',
-            //   'order_financings.percentage')
-            //   ->where('orders.user_id',Auth::id())->orderBy('orders.id','DESC')->limit(10)->paginate(10);
             
               return view('dashboard',compact('order'));
-        // }else{ 
-        //     $finance_institutions = DB::table('lenders')->get();
-        //     return view('pages.select_finance_institution', compact('finance_institutions'));
-        // }  
+        }else{ 
+            $finance_institutions = DB::table('lenders')->get();
+            $regions = DB::table('regions')->get();
+            
+            return view('pages.select_finance_institution', compact('finance_institutions','regions'));
+        }  
     }
 
      public function saveFinanceInstitution(Request $request) {
      $finance_institution = $request->selectedInstitutions;
+     $affiliation = $request->affiliation;
+     $region_id = $request->region_id;
+     $city_id = $request->city_id;
      $identification_card = $request->input('identification');
      $identification_number = $request->input('identification_number');
+    //  dd($request);
 
      $data = array();
-     for ($x = 0; $x < sizeof($finance_institution); $x++) { $arr=array(); $arr['user_id']=Auth::user()->id;
-         $arr['lender_organization_id'] = $finance_institution[$x];
-         $arr['identification_type'] = $identification_card;
-         $arr['identification_number'] = $identification_number;
-         $arr['created_at'] = now();
-         array_push($data, $arr);
-         }
+     if($finance_institution) {
+        
+         for ($x = 0; $x < sizeof($finance_institution); $x++) { $arr=array(); $arr['user_id']=Auth::user()->id;
+             $arr['lender_organization_id'] = $finance_institution[$x];
+             $arr['region_id'] = $region_id;
+             $arr['city_id'] = $city_id;
+             $arr['identification_type'] = $identification_card;
+             $arr['identification_number'] = $identification_number;
+             $arr['created_at'] = now();
+             array_push($data, $arr);
+             }
+     } else {
+             $arr['user_id']=Auth::user()->id;
+             $arr['affiliation'] = $affiliation;
+             $arr['region_id'] = $region_id;
+             $arr['city_id'] = $city_id;
+             $arr['identification_type'] = $identification_card;
+             $arr['identification_number'] = $identification_number;
+             $arr['created_at'] = now();
+             array_push($data, $arr);
+     }
 
-    UserFinanceAffiliation::insert($data);
+    UserLenderSelection::insert($data);
 
     $insertedId = DB::getPdo()->lastInsertId();
     return response()->json($insertedId);

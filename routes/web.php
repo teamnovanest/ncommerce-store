@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\LogoutController;
@@ -117,3 +118,6 @@ Route::post('user/profile/update', [ProfileController::class,'updateProfile'])->
 
 //newsletters
 Route::post('/newsletter/create', [NewsletterController::class, 'storeNewsLetter']) ->name('store.newsletter');
+
+// City Route
+Route::get('/city/{region_id}', [CityController::class, 'cities']);
