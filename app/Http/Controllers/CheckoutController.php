@@ -74,7 +74,7 @@ class CheckoutController extends Controller
         $details['merchant_organization_id'] = $row->options->merchant_organization_id;
         $details['lender_organization_id'] = $lenderOffering->lender_organization_id;
         $details['created_at'] = now();
-        $order_detail_ids[] = DB::table('order_details')->insertGetId($details);
+        DB::table('order_details')->insertGetId($details);
       }
 
       $status = array();
