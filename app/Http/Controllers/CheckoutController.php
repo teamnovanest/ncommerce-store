@@ -20,6 +20,7 @@ class CheckoutController extends Controller
 
   public function checkout(Request $request)
   {
+    
     $selectedOfferId = $request->selectedOfferId;
     #select the payment period and percentag from the lender offering table
     $lenderOffering = DB::table('lender_offerings')->select('payment_period', 'percentage', 'max_financed', 'lender_organization_id')->where('id', $selectedOfferId)->first();
@@ -57,12 +58,11 @@ class CheckoutController extends Controller
       $data['month'] = date('F');
       $data['year'] = date('Y');
       $data['created_at'] = \Carbon\Carbon::now();
-      foreach ($content as $item) {
+      // foreach ($content as $item) {
       //   $data['merchant_organization_id'] = $item->options->merchant_organization_id;
-        $data['total'] = floatval($item->price * $item->qty) * 100;
-      }
+        $data['total'] = intval($this->floatvalue(Cart::Subtotal()) * 100);
+      // }
        
-      // $data['total'] = 120000;
       // $data['lender_organization_id'] = $lenderOffering->lender_organization_id;
       
       $order_id = DB::table('orders')->insertGetId($data);
@@ -83,7 +83,7 @@ class CheckoutController extends Controller
         $details['merchant_organization_id'] = $row->options->merchant_organization_id;
         $details['lender_organization_id'] = $lenderOffering->lender_organization_id;
         $details['created_at'] = now();
-        DB::table('order_details')->insert($details);
+        $order_detail_ids[] = DB::table('order_details')->insertGetId($details);
       }
 
       $status = array();
@@ -91,11 +91,12 @@ class CheckoutController extends Controller
         $status['user_id'] = Auth::id();
         $status['order_id'] = $order_id;
         $status['status_id'] = 1;
+        $status['product_id'] = $row->id;
         $status['merchant_organization_id'] = $row->options->merchant_organization_id;
         $status['lender_organization_id'] = $lenderOffering->lender_organization_id;
         $status['updated_by'] = Auth::id();
         $status['created_at'] = now();
-        DB::table('order_status_histories')->insert($status);
+      DB::table('order_status_histories')->insert($status);
       }
 
       #inserting into the order financing table with the offer the user selected

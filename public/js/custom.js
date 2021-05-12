@@ -87,7 +87,6 @@ $(document).ready(function () {
             dataType: "json",
             data: { id, status },
             success: function (response) {
-                // console.log("response =>", response.status);
                 if (response.status === "liked") {
                     $("#thumbsup" + id).addClass("thumbsup");
                     $("#thumbsup" + id).attr("data-value-id", 1);

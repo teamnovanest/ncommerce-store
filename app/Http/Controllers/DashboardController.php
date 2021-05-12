@@ -28,9 +28,14 @@ class DashboardController extends Controller
               ->join('order_details', 'order_details.order_id', '=', 'orders.id')
               ->leftJoin('status_options', 'order_details.status_id', '=', 'status_options.id')
               ->join('products','order_details.product_id', '=', 'products.id')
-              ->select('orders.*','order_details.status','order_details.totalprice','status_options.status_name','products.image_one_secure_url','products.product_name','order_details.product_id')
+              ->join('order_financings', 'orders.id', '=', 'order_financings.order_id')
+              ->select('orders.*','order_details.status','order_details.totalprice','status_options.status_name','products.image_one_secure_url','products.product_name','order_details.product_id','products.slug','order_financings.payment_period','order_financings.percentage')
               ->where('orders.user_id',Auth::id())->orderBy('orders.id','DESC')->limit(10)->paginate(10);
             //   dd($order);
+            //   ->select('orders.*','status_options.status_name','products.image_one_secure_url','products.product_name','order_details.product_id','products.slug','order_financings.payment_period',
+            //   'order_financings.percentage')
+            //   ->where('orders.user_id',Auth::id())->orderBy('orders.id','DESC')->limit(10)->paginate(10);
+            
               return view('dashboard',compact('order'));
         // }else{ 
         //     $finance_institutions = DB::table('lenders')->get();
