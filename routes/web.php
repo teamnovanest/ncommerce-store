@@ -47,7 +47,7 @@ Route::get("/", "App\Http\Controllers\HomeController@index");
 Route::get('/user/logout', [LogoutController::class, 'logout'])->name('user.logout');
 
 // Search Route
-Route::get('/product/search', [CartController::class,'search'])->name('product.search');
+Route::get('/product/search', [ProductController::class,'search'])->name('product.search');
 
 
 // Cart

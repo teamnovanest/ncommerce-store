@@ -44,17 +44,6 @@ class CartController extends Controller
          return \Response::json(['error' => 'Item was not added. Try again or contact support if issue still persist'],500);
       }
    }
-
-
-
-    public function search(Request $request){
-      $item = $request->search;
-      $products = DB::table('products')
-        ->where('product_name','LIKE',"%$item%")
-        ->paginate(20);
-
-    return view('pages.search',compact('products'));  
-    }
   
 
   public function showCart()
