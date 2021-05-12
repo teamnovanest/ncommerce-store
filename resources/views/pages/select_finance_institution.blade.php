@@ -175,6 +175,16 @@ $('#btn_submit').on('click',function(event) {
                                 '<option>No data available </option>');
                       }
                     },
+                    error: function (error) {
+                    NProgress.done();
+
+                    Swal.fire({
+                        icon: "error",
+                        title: "Cities for the selected region could not be found. Please try again",
+                        text: error.responseJSON.message,
+                        showCloseButton: true,
+                    });
+                },
                 });
 
             } else {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Cart;
 use Cloudinary;
 use App\Models\User;
+use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\UserLenderSelection;
@@ -35,8 +36,7 @@ class DashboardController extends Controller
               return view('dashboard',compact('order'));
         }else{ 
             $finance_institutions = DB::table('lenders')->get();
-            $regions = DB::table('regions')->get();
-
+            $regions = Region::all();
             return view('pages.select_finance_institution', compact('finance_institutions','regions'));
         }  
     }
