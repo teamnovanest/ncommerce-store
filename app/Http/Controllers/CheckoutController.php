@@ -46,25 +46,16 @@ class CheckoutController extends Controller
       $data['user_id'] = Auth::id();
       $data['status_code'] = crc32(uniqid()); 
       $data['order_code'] = crc32(time());
-      
-      // $data['status_id'] = 1;
       if (Session::has('coupon')) {
         $data['subtotal'] = Session::get('coupon')['balance'];
       } else {
           $data['subtotal'] = intval($this->floatvalue(Cart::Subtotal()) * 100);
       }
-      // $data['status'] = 'ORDER_PENDING';
       $data['date'] = date('Y-m-d');
       $data['month'] = date('F');
       $data['year'] = date('Y');
       $data['created_at'] = \Carbon\Carbon::now();
-      // foreach ($content as $item) {
-      //   $data['merchant_organization_id'] = $item->options->merchant_organization_id;
-        $data['total'] = intval($this->floatvalue(Cart::Subtotal()) * 100);
-      // }
-       
-      // $data['lender_organization_id'] = $lenderOffering->lender_organization_id;
-      
+      $data['total'] = intval($this->floatvalue(Cart::Subtotal()) * 100);
       $order_id = DB::table('orders')->insertGetId($data);
 
       // Insert Order Details Table
