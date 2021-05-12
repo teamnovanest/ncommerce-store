@@ -20,22 +20,22 @@ class DashboardController extends Controller
 
     public function index() {
         $lender_organizations = CustomerFinanceOrganizationAffiliation::where('user_id', Auth::id())->get();
-        $selected_organizations = UserFinanceAffiliation::where('user_id', Auth::id())->get();
+        // $selected_organizations = UserFinanceAffiliation::where('user_id', Auth::id())->get();
         
-        if($lender_organizations->isNotEmpty() || $selected_organizations->isNotEmpty()) {
+        // if($lender_organizations->isNotEmpty() || $selected_organizations->isNotEmpty()) {
             
               $order = DB::table('orders')
-              ->leftJoin('status_options', 'orders.status_id', '=', 'status_options.id')
               ->join('order_details', 'order_details.order_id', '=', 'orders.id')
+              ->leftJoin('status_options', 'order_details.status_id', '=', 'status_options.id')
               ->join('products','order_details.product_id', '=', 'products.id')
-              ->select('orders.*','order_details.totalprice','status_options.status_name','products.image_one_secure_url','products.product_name','order_details.product_id')
+              ->select('orders.*','order_details.status','order_details.totalprice','status_options.status_name','products.image_one_secure_url','products.product_name','order_details.product_id')
               ->where('orders.user_id',Auth::id())->orderBy('orders.id','DESC')->limit(10)->paginate(10);
             //   dd($order);
               return view('dashboard',compact('order'));
-        }else{ 
-            $finance_institutions = DB::table('lenders')->get();
-            return view('pages.select_finance_institution', compact('finance_institutions'));
-        }  
+        // }else{ 
+        //     $finance_institutions = DB::table('lenders')->get();
+        //     return view('pages.select_finance_institution', compact('finance_institutions'));
+        // }  
     }
 
      public function saveFinanceInstitution(Request $request) {

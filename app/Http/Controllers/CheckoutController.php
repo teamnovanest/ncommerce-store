@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
 {
+  public function floatvalue($val){
+            $val = str_replace(",",".",$val);
+            $val = preg_replace('/\.(?=.*\.)/', '', $val);
+            return floatval($val);
+}
+
   public function checkout(Request $request)
   {
     $selectedOfferId = $request->selectedOfferId;
@@ -23,7 +29,7 @@ class CheckoutController extends Controller
     try {
         
       $content = Cart::content();
-      
+
        //info: Removing product in wishlist when a customer finally purchase a product
       foreach ($content as $row) {
         $wishlistedProduct = DB::table('wishlists')
@@ -44,24 +50,19 @@ class CheckoutController extends Controller
       if (Session::has('coupon')) {
         $data['subtotal'] = Session::get('coupon')['balance'];
       } else {
-        foreach ($content as $row) {
-          $data['subtotal'] = Cart::Subtotal() * 100;
-          dd(Cart::Subtotal() * 100);
-          // $data['subtotal'] = floatval($row->price) * 100;
-        }
-        
+          $data['subtotal'] = intval($this->floatvalue(Cart::Subtotal()) * 100);
       }
       // $data['status'] = 'ORDER_PENDING';
       $data['date'] = date('Y-m-d');
       $data['month'] = date('F');
       $data['year'] = date('Y');
       $data['created_at'] = \Carbon\Carbon::now();
-      // foreach ($content as $item) {
+      foreach ($content as $item) {
       //   $data['merchant_organization_id'] = $item->options->merchant_organization_id;
-      //   // $data['total'] = floatval($item->price * $item->qty) * 100;
-      // }
+        $data['total'] = floatval($item->price * $item->qty) * 100;
+      }
        
-      $data['total'] = Cart::Subtotal() * 100 ;
+      // $data['total'] = 120000;
       // $data['lender_organization_id'] = $lenderOffering->lender_organization_id;
       
       $order_id = DB::table('orders')->insertGetId($data);
@@ -119,7 +120,7 @@ class CheckoutController extends Controller
       $resData['message'] = $th->getMessage();
       // $resData['message'] = "Something didn't go right. Our engineers have been notified \nabout the issue and will look into it. If the issue persists concact support";
       // return response()->json($resData, 500);
-       return response()->json($th, 500);
+       return response()->json($resData, 500);
     }
   }
 }
