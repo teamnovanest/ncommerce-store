@@ -30,7 +30,7 @@
                   <td><a href="{{ url('product/details/'.$row->product_id.'/'.$row->slug) }}" target="_blank">{{$row->product_name}}</a></td>
                   <td><a href="{{ url('product/details/'.$row->product_id.'/'.$row->slug) }}" target="_blank"><img style="height: 100px" src="{{ asset( $row->image_one_secure_url )}}" alt="product images"></a></td>
                   <th>{{date('j F, Y', strtotime($row->date)) }}</th>
-                  <td>GHC {{ number_format($row->totalprice / 100,2)}}</td>
+                  <td>GHC {{ number_format($row->total / 100,2)}}</td>
                   <td>GHC {{ number_format(((($row->total / 100) * $row->percentage * ($row->payment_period/12)) / 100) + ($row->total/100),2)}}</>
                   <td>{{ $row->order_code }}</td>
                   <td> 
