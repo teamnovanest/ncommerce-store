@@ -60,7 +60,8 @@ $(document).ready(function () {
 
                     Swal.fire({
                         icon: "error",
-                        title: "Order could not be placed. Please try again later",
+                        title:
+                            "Order could not be placed. Please try again later",
                         text: error.responseJSON.message,
                         showCloseButton: true,
                     });
