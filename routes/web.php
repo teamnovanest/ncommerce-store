@@ -66,10 +66,10 @@ Route::get('/product/details/{id}/{slug}', [ProductController::class, 'productVi
 Route::post('/cart/product/add/{id}', [ProductController::class, 'addCart']);
 
 // Checkout Routes
-Route::get('/user/checkout/process/', [CheckoutController::class, 'checkout'])->name('checkout.process');
+Route::get('/user/checkout/process', [CheckoutController::class, 'checkout'])->name('checkout.process');
 
 // Customer Order Details route
-Route::get('/order/{id}/status', [OrderDetailsController::class,'viewOrderStatus'])->name('order.status');
+Route::get('/order/{id}/status/{orderDetailId}', [OrderDetailsController::class,'viewOrderStatus'])->name('order.status');
 
 // Feature Request Route
 Route::get('/feature-request/index', [FeatureRequestController::class,'index'])->name('feature.index');

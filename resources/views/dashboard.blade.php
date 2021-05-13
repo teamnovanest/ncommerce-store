@@ -31,7 +31,7 @@
                   <td><a href="{{ url('product/details/'.$row->product_id.'/'.$row->slug) }}" target="_blank"><img style="height: 100px" src="{{ asset( $row->image_one_secure_url )}}" alt="product images"></a></td>
                   <th>{{date('j F, Y', strtotime($row->date)) }}</th>
                   <td>GHC {{ number_format($row->total / 100,2)}}</td>
-                  <td>GHC {{ number_format(((($row->total / 100) * $row->percentage * ($row->payment_period/12)) / 100) + ($row->total/100),2)}}</td>
+                  <td>GHC {{ number_format(((($row->total / 100) * $row->percentage * ($row->payment_period/12)) / 100) + ($row->total/100),2)}}</>
                   <td>{{ $row->order_code }}</td>
                   <td> 
                     @if($row->status_id === 0) 
@@ -42,7 +42,7 @@
                     <span class="badge badge-success">{{$row->status_name}}</span>
                     @endif
                   </td>
-                  <td><a href="{{ route('order.status',['id'=>$row->id])}}" class="btn btn-sm btn-info"> View</a></td>
+                  <td><a href="{{ route('order.status',['id'=>$row->id,'orderDetailId'=>$row->order_detail_id])}}" class="btn btn-sm btn-info"> View</a></td>
                 </tr>
                 @endforeach
               </tbody>
