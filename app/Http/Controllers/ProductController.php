@@ -96,4 +96,15 @@ public function productsView(Request $request){
     return view('pages.search_product_by_brand',compact('products'));
 
   }
+
+  
+
+    public function search(Request $request){
+      $item = $request->search;
+      $products = DB::table('products')
+        ->where('product_name','LIKE',"%$item%")
+        ->paginate(20);
+
+    return view('pages.search',compact('products'));  
+    }
 }
