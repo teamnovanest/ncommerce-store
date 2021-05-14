@@ -112,4 +112,13 @@ $(document).ready(function () {
     $(".qty").on("change", function (evt) {
         $(this).siblings(".btn-update-qty").prop("disabled", false);
     });
+
+
+
+    // Hide and show browse category area on samller devices only
+    $(document).ready(function () {
+          $(".categories-menu").click(function () {
+            $(this).closest('div').find(".category-menu-list").toggle();
+        });  
+    });
 });

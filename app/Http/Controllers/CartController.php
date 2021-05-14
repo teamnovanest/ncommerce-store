@@ -48,8 +48,21 @@ class CartController extends Controller
 
   public function showCart()
   {
-    $cart = Cart::content();
-    return view('pages.cart', compact('cart'));
+    try { 
+      $cart = Cart::content();
+      return view('pages.cart', compact('cart'));
+    } catch (\Throwable $th) {
+       if (app()->environment('production')){
+          \Sentry\captureException($th);
+        }
+      
+       $notification=array(
+        'messege'=>'An error occured. Try again or contact support if issue still persist',
+        'alert-type'=>'error'
+        );
+        return Redirect()->back()->with($notification);
+    }
+    
   }
 
 
@@ -83,17 +96,27 @@ class CartController extends Controller
 
   public function removeCart($rowId)
   {
-    Cart::remove($rowId);
-    $notification = array(
+    try {      
+      Cart::remove($rowId);
+      $notification = array(
       'messege' => 'Product Remove from Cart',
       'alert-type' => 'success'
     );
     return Redirect()->back()->with($notification);
+    } catch (\Throwable $th) {
+    $notification = array(
+      'messege' => 'An error occured while removing item from your cart.',
+      'alert-type' => 'error'
+    );
+    return Redirect()->back()->with($notification);
+    }
+    
   }
 
 
   public function updateCart(Request $request)
   {
+    try {
     $rowId = $request->productid;
     $qty = $request->qty;
     Cart::update($rowId, $qty);
@@ -101,6 +124,14 @@ class CartController extends Controller
       'messege' => 'Product Quantity Updated',
       'alert-type' => 'success'
     );
-    return Redirect()->back()->with($notification);
+    return Redirect()->back()->with($notification); 
+    } catch (\Throwable $th) {
+      $notification = array(
+      'messege' => 'An error occured while updating your Product quantity',
+      'alert-type' => 'error'
+    );
+    return Redirect()->back()->with($notification); 
+    }
+    
   }
 }
