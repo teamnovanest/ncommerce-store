@@ -18,9 +18,9 @@ class DashboardController extends Controller
     public function __construct() {
         $this->middleware('auth');
     }
-
     public function index() {
-        $lender_organizations = CustomerFinanceOrganizationAffiliation::where('user_id', Auth::id())->get();
+        try {
+           $lender_organizations = CustomerFinanceOrganizationAffiliation::where('user_id', Auth::id())->get();
         $selected_organizations = UserLenderSelection::where('user_id', Auth::id())->get();
         
         if($lender_organizations->isNotEmpty() || $selected_organizations->isNotEmpty()) {
@@ -38,11 +38,22 @@ class DashboardController extends Controller
             $finance_institutions = DB::table('lenders')->get();
             $regions = Region::all();
             return view('pages.select_finance_institution', compact('finance_institutions','regions'));
-        }  
+        }    
+        } catch (\Throwable $th) {
+            if (app()->environment('production')){
+             \Sentry\captureException($th);
+             }
+             $notification = array(
+                 'messege'  => 'An error ocurred. Try again or contact support if issue still persist',
+                 'alert-type' => 'error'
+             );
+             return Redirect()->back()->with($notification);
+        }
+       
     }
 
      public function saveFinanceInstitution(Request $request) {
-     $finance_institution = $request->selectedInstitutions;
+        $finance_institution = $request->selectedInstitutions;
      $affiliation = $request->affiliation;
      $region_id = $request->region_id;
      $city_id = $request->city_id;
@@ -76,16 +87,30 @@ class DashboardController extends Controller
     UserLenderSelection::insert($data);
 
     $insertedId = DB::getPdo()->lastInsertId();
+    dd($insertedId);
     return response()->json($insertedId);
     }
 
     public function changePassword(){
-    return view('auth.change_password');
+    try {
+        return view('auth.change_password');
+    } catch (\Throwable $th) {
+        if (app()->environment('production')){
+          \Sentry\captureException($th);
+        }
+      
+       $notification=array(
+        'messege'=>'An error occured. Try again or contact support if issue still persist',
+        'alert-type'=>'error'
+        );
+        return Redirect()->back()->with($notification);
+    }
     }
 
     public function resetPassword(Request $request)
     {
-    $password=Auth::user()->password;
+    try {
+      $password=Auth::user()->password;
     $oldpass=$request->oldpass;
     $newpass=$request->password;
     $confirm=$request->password_confirmation;
@@ -114,7 +139,19 @@ class DashboardController extends Controller
     );
     return Redirect()->back()->with($notification);
     }
-
+  
+    } catch (\Throwable $th) {
+        if (app()->environment('production')){
+          \Sentry\captureException($th);
+        }
+      
+       $notification=array(
+        'messege'=>'An error occured while resetting password. Try again or contact support if issue still persist',
+        'alert-type'=>'error'
+        );
+        return Redirect()->back()->with($notification);
+    }
+    
     }
 
 }
