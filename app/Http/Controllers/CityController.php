@@ -16,7 +16,7 @@ class CityController extends Controller
              if (app()->environment('production')){
              \Sentry\captureException($th);
              }
-             $resData['message'] = "Something didn't go right. Our engineers have been notified about the issue and
+             $resData['message'] = "Something didn't go right. Our engineers have been notified \nabout the issue and
              will look into it. If the issue persists contact support";
              return response()->json($resData, 500);
         }

@@ -30,7 +30,7 @@ class ContactController extends Controller
              \Sentry\captureException($th);
              }
         $notification=array(
-          'messege'=>'Something did not go right.Try again or contact for support',
+          'messege'=>'Something did not go right.Try again',
           'alert-type'=>'error'
         );     
         return Redirect()->back()->with($notification);

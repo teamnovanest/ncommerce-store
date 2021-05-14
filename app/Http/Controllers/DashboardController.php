@@ -18,7 +18,6 @@ class DashboardController extends Controller
     public function __construct() {
         $this->middleware('auth');
     }
-
     public function index() {
         try {
            $lender_organizations = CustomerFinanceOrganizationAffiliation::where('user_id', Auth::id())->get();
@@ -54,7 +53,6 @@ class DashboardController extends Controller
     }
 
      public function saveFinanceInstitution(Request $request) {
-    try {
         $finance_institution = $request->selectedInstitutions;
      $affiliation = $request->affiliation;
      $region_id = $request->region_id;
@@ -89,18 +87,8 @@ class DashboardController extends Controller
     UserLenderSelection::insert($data);
 
     $insertedId = DB::getPdo()->lastInsertId();
+    dd($insertedId);
     return response()->json($insertedId);
-    } catch (\Throwable $th) {
-       if (app()->environment('production')){
-          \Sentry\captureException($th);
-        }
-      
-       $notification=array(
-        'messege'=>'An error occured while saving your financial institution.Try again or contact support if issue still persist',
-        'alert-type'=>'error'
-        );
-        return Redirect()->back()->with($notification);
-    }
     }
 
     public function changePassword(){
