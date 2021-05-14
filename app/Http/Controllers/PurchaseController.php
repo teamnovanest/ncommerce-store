@@ -15,7 +15,8 @@ class PurchaseController extends Controller
 
      public function checkout()
      {
-      $credit_offers = DB::table('customer_finance_organization_affiliations')
+       try {
+         $credit_offers = DB::table('customer_finance_organization_affiliations')
       ->join('users', 'customer_finance_organization_affiliations.user_id', '=', 'users.id')
       ->join('lenders', 'customer_finance_organization_affiliations.lender_organization_id', '=', 'lenders.id')
       ->join('lender_offerings', 'lender_offerings.lender_organization_id', '=', 'lenders.id')
@@ -33,5 +34,16 @@ class PurchaseController extends Controller
 
       $cart = Cart::content();
       return view('pages.checkout', compact('cart','credit_offers', 'amount'));
+       } catch (\Throwable $th) {
+          if (app()->environment('production')){
+            \Sentry\captureException($th);
+        }
+        $notification=array(
+            'messege'=>'An error occured while accessing checkout page. Try again or contact support if issue still persist',
+            'alert-type'=>'error'
+        );
+        return Redirect()->back()->with($notification);
+       }
+      
      }
 }

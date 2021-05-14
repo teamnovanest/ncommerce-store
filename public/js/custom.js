@@ -123,7 +123,7 @@ $(document).ready(function () {
     // Hide and show browse category area on samller devices only
     $(document).ready(function () {
         $(".categories-menu").click(function () {
-            $(this).closest("div").find(".category-menu-list").toggle();
+            $(this).closest("div").find(".category-menu-list").toggle(500);
         });
     });
 });
