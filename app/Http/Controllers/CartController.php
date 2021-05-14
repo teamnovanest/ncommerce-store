@@ -99,11 +99,15 @@ class CartController extends Controller
     try {      
       Cart::remove($rowId);
       $notification = array(
-      'messege' => 'Product Remove from Cart',
+      'messege' => 'Product removed from cart',
       'alert-type' => 'success'
     );
     return Redirect()->back()->with($notification);
     } catch (\Throwable $th) {
+      if (app()->environment('production')){
+          \Sentry\captureException($th);
+        }
+
     $notification = array(
       'messege' => 'An error occured while removing item from your cart.',
       'alert-type' => 'error'
@@ -121,11 +125,15 @@ class CartController extends Controller
     $qty = $request->qty;
     Cart::update($rowId, $qty);
     $notification = array(
-      'messege' => 'Product Quantity Updated',
+      'messege' => 'Product quantity updated',
       'alert-type' => 'success'
     );
     return Redirect()->back()->with($notification); 
     } catch (\Throwable $th) {
+      if (app()->environment('production')){
+          \Sentry\captureException($th);
+        }
+        
       $notification = array(
       'messege' => 'An error occured while updating your Product quantity',
       'alert-type' => 'error'
