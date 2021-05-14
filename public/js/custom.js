@@ -60,8 +60,7 @@ $(document).ready(function () {
 
                     Swal.fire({
                         icon: "error",
-                        title:
-                            "Order could not be placed. Please try again later",
+                        title: "Order could not be placed. Please try again later",
                         text: error.responseJSON.message,
                         showCloseButton: true,
                     });
@@ -103,6 +102,14 @@ $(document).ready(function () {
                     });
                 }
             },
+            error: function (err) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: err.responseJSON.error,
+                    showCloseButton: true,
+                });
+            },
         });
     });
     // Disable quantity update button on page load
@@ -113,12 +120,12 @@ $(document).ready(function () {
         $(this).siblings(".btn-update-qty").prop("disabled", false);
     });
 
-
-
     // Hide and show browse category area on samller devices only
     $(document).ready(function () {
-          $(".categories-menu").click(function () {
-            $(this).closest('div').find(".category-menu-list").toggle();
-        });  
+        $(".categories-menu").click(function () {
+            $(this).closest("div").find(".category-menu-list").toggle();
+        });
     });
 });
+
+//Feature like button
