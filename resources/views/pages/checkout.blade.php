@@ -44,7 +44,6 @@
                             </thead>
                             <tbody>
                                 @foreach($cart as $row)
-
                                 <tr>
                                     <td class="product-name">{{ $row->name  }}</td>
                                     @if($row->options->color == NULL)
@@ -78,6 +77,8 @@
         </div>
     </div>
     <section>
+        @if($cart->count() > 0)
+
         <div class="container">
             <h4 class="pb--30 text-center">FINANCE PAYMENT PLANS</h4>
             <div class="row">
@@ -160,9 +161,13 @@
                 </div>
             </div>
         </div>
+        @else
+        <div></div>
+        @endif
     </section>
     <section>
         <div class="container ptb--50">
+            @if($cart->count() > 0)
             <div class="row">
                 <div class="col-md-6 col-sm-7 col-xs-12">
                     @if(Session::has('coupon'))
@@ -180,9 +185,10 @@
                         </div>
                     </form>
                     @endif
+                    
                 </div>
                 <div class="col-md-6 col-sm-5 col-xs-12">
-                    <div class="cart_totals">
+                <div class="cart_totals">
                         <h3>Cart Total</h3>
                         <ul>
                             @if(Session::has('coupon'))
@@ -204,9 +210,9 @@
                             <li>Total : <span class="amount">GH₵ {{ Cart::Subtotal()}} </span> </li>
                             @endif
                         </ul>
+
                         <div>
                             <span class="wc-proceed-to-checkout">
-                                {{-- <a href="{{ route('checkout.process') }}" id="checkout">Checkout</a> --}}
                                 <button id="checkout" class="checkout-btn btn" type="button">CHECKOUT</button>
                             </span>
                             <span class="cart_buttons">
@@ -217,6 +223,10 @@
                     </div>
                 </div>
             </div>
+                @else
+                <div></div>
+                     
+                 @endif
         </div>
     </section>
 </div>
