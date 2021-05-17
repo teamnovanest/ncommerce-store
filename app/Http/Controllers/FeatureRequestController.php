@@ -102,7 +102,7 @@ class FeatureRequestController extends Controller
     
             } else {
                #disliking the request
-                DB::table('likes')->where('request_id',$id)->where('user_id',Auth::id())->delete();
+                DB::table('feature_request_likes')->where('request_id',$id)->where('user_id',Auth::id())->delete();
                     
                 $likes = DB::table('feature_requests')->where('id',$id)->first('likes');
                 $update = DB::table('feature_requests')

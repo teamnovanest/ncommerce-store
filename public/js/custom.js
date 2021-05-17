@@ -97,7 +97,8 @@ $(document).ready(function () {
                 } else {
                     Swal.fire({
                         icon: "error",
-                        title: "An error occured, try again",
+                        title: "Error",
+                        text: "An error occured, try again",
                         showCloseButton: true,
                     });
                 }

@@ -24,7 +24,8 @@ class CheckoutController extends Controller
     $selectedOfferId = $request->selectedOfferId;
     #select the payment period and percentag from the lender offering table
     $lenderOffering = DB::table('lender_offerings')->select('payment_period', 'percentage', 'max_financed', 'lender_organization_id')->where('id', $selectedOfferId)->first();
-    
+    // $rate = $lenderOffering->percentage;
+    // $time = $lenderOffering->payment_period;
    
     DB::begintransaction();
     try {
@@ -51,11 +52,10 @@ class CheckoutController extends Controller
       } else {
           $data['subtotal'] = intval($this->floatvalue(Cart::Subtotal()) * 100);
       }
-      $data['date'] = date('Y-m-d');
-      $data['month'] = date('F');
-      $data['year'] = date('Y');
-      $data['created_at'] = \Carbon\Carbon::now();
+      $data['created_at'] = now();
       $data['total'] = intval($this->floatvalue(Cart::Subtotal()) * 100);
+      // $data['total_financed'] = (intval($this->floatvalue(Cart::Subtotal()) * $rate * $time /100) + intval($this->floatvalue(Cart::Subtotal())) * 100) ;
+      // dd($data);
       $order_id = DB::table('orders')->insertGetId($data);
 
       // Insert Order Details Table
@@ -74,7 +74,7 @@ class CheckoutController extends Controller
         $details['merchant_organization_id'] = $row->options->merchant_organization_id;
         $details['lender_organization_id'] = $lenderOffering->lender_organization_id;
         $details['created_at'] = now();
-        DB::table('order_details')->insertGetId($details);
+        DB::table('order_details')->insert($details);
       }
 
       $status = array();
