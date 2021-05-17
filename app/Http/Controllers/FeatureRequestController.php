@@ -10,7 +10,7 @@ class FeatureRequestController extends Controller
 {
       public function index(){
     $requests = DB::table('feature_requests')->where('tag','user')->paginate(10);
-    $user_likes = DB::table('likes')->where('user_id',Auth::id())->get();
+    $user_likes = DB::table('feature_request_likes')->get();
     return view('feature_request.index', compact('requests','user_likes'));
     }
 
@@ -41,42 +41,46 @@ class FeatureRequestController extends Controller
     
     public function requestLike(Request $request,$id){
         #if the status  === 0,liking the request
-        $status = $request->status;
-        if ($status === '0') {
-            DB::table('likes')->insert([
-                'request_id' => $id,
-                'user_id' => Auth::id(),
-                'likes' => 1,
-                'created_at' => now(),
+        try {
+            $status = $request->status;
+            if ($status === '0') {
+                DB::table('feature_request_likes')->insert([
+                    'request_id' => $id,
+                    'user_id' => Auth::id(),
+                    'likes' => 1,
+                    'created_at' => now(),
+                    ]);
+                    
+                $likes = DB::table('feature_requests')->where('id',$id)->first('likes');
+                $update = DB::table('feature_requests')
+                ->where('id',$id)
+                ->update([
+                    'likes' => $likes->likes + 1,
+                    'updated_at' => now()
                 ]);
-                
-            $likes = DB::table('feature_requests')->where('id',$id)->first('likes');
-            $update = DB::table('feature_requests')
-            ->where('id',$id)
-            ->update([
-                'likes' => $likes->likes + 1,
-                'updated_at' => now()
-            ]);
-            if ($update) {
-                $results = DB::table('feature_requests')->where('id',$id)->first('likes');
-                return response()->json(['status'=>'liked','results'=>$results]);
+                if ($update) {
+                    $results = DB::table('feature_requests')->where('id',$id)->first('likes');
+                    return response()->json(['status'=>'liked','results'=>$results]);
+                }
+    
+            } else {
+               #disliking the request
+                DB::table('feature_request_likes')->where('request_id',$id)->where('user_id',Auth::id())->delete();
+                    
+                $likes = DB::table('feature_requests')->where('id',$id)->first('likes');
+                $update = DB::table('feature_requests')
+                ->where('id',$id)
+                ->update([
+                    'likes' => $likes->likes - 1,
+                    'updated_at' => now()
+                ]);
+                if ($update) {
+                    $results = DB::table('feature_requests')->where('id',$id)->first('likes');
+                    return response()->json(['status'=>'disliked','results'=>$results]);
+                }
             }
-
-        } else {
-           #disliking the request
-            DB::table('likes')->where('request_id',$id)->where('user_id',Auth::id())->delete();
-                
-            $likes = DB::table('feature_requests')->where('id',$id)->first('likes');
-            $update = DB::table('feature_requests')
-            ->where('id',$id)
-            ->update([
-                'likes' => $likes->likes - 1,
-                'updated_at' => now()
-            ]);
-            if ($update) {
-                $results = DB::table('feature_requests')->where('id',$id)->first('likes');
-                return response()->json(['status'=>'disliked','results'=>$results]);
-            }
+        } catch (\Throwable $th) {
+            return response()->json(['message'=>"Opps something went wrong, Try again"],500);
         }
     }
 
@@ -105,7 +109,7 @@ class FeatureRequestController extends Controller
 
     public function delete($id){
         DB::table('feature_requests')->where('id',$id)->where('user_id',Auth::id())->delete();
-        DB::table('likes')->where('request_id',$id)->where('user_id',Auth::id())->delete();
+        DB::table('feature_request_likes')->where('request_id',$id)->where('user_id',Auth::id())->delete();
 
         $notification=array(
         'messege'=>'Request deleted successfully',

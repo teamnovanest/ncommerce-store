@@ -60,8 +60,7 @@ $(document).ready(function () {
 
                     Swal.fire({
                         icon: "error",
-                        title:
-                            "Order could not be placed. Please try again later",
+                        title: "Order could not be placed. Please try again later",
                         text: error.responseJSON.message,
                         showCloseButton: true,
                     });
@@ -98,10 +97,20 @@ $(document).ready(function () {
                 } else {
                     Swal.fire({
                         icon: "error",
-                        title: "An error occured, try again",
+                        title: "Error",
+                        text: "An error occured, try again",
                         showCloseButton: true,
                     });
                 }
+            },
+            error: function (error) {
+                NProgress.done();
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: error.responseJSON.message,
+                    showCloseButton: true,
+                });
             },
         });
     });
