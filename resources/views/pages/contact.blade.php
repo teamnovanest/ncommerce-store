@@ -31,6 +31,7 @@
                 <div>
                     <div class="contact-section">
                         <div class="htc__contact__container">
+                            @if ($site)                               
                             <div class="htc__contact__address">
                                 <h2 class="contact__title">contact info</h2>
                                 <div class="contact__address__inner">
@@ -40,7 +41,7 @@
                                             <span class="ti-location-pin"></span>
                                         </div>
                                         <div class="contact__details">
-                                            <p>Location : <br> {{ $site->company_address }}</p>
+                                            <p>Location : <br> {{ $site->company_address ?? ''}}</p>
                                         </div>
                                     </div>
                                     <!-- End Single Adress -->
@@ -52,7 +53,7 @@
                                             <span class="ti-mobile"></span>
                                         </div>
                                         <div class="contact__details">
-                                            <p> Phone : <br><a href="#">{{ $site->phone_one }} </a></p>
+                                            <p> Phone : <br><a href="#">{{ $site->phone_one ?? ''}} </a></p>
                                         </div>
                                     </div>
                                     <!-- End Single Adress -->
@@ -62,12 +63,13 @@
                                             <span class="ti-email"></span>
                                         </div>
                                         <div class="contact__details">
-                                            <p> Mail :<br><a href="#">{{ $site->email }}</a></p>
+                                            <p> Mail :<br><a href="#">{{ $site->email ?? ''}}</a></p>
                                         </div>
                                     </div>
                                     <!-- End Single Adress -->
                                 </div>
                             </div>
+                            @endif
                             <div class="contact-form-wrap">
                             <div class="contact-title">
                                 <h2 class="contact__title">Get In Touch</h2>

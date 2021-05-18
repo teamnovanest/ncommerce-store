@@ -109,8 +109,11 @@ class CheckoutController extends Controller
       return response()->json(['message' => 'You have successfully placed your order']);
     } catch (\Throwable $th) {
       DB::rollback();
+         if (app()->environment('production')){
+            \Sentry\captureException($th);
+        }
       // $resData['message'] = $th->getMessage();
-      $resData['message'] = "Something didn't go right. Our engineers have been notified \nabout the issue and will look into it. If the issue persists concact support";
+      $resData['message'] = "Something didn't go right. Our engineers have been notified \nabout the issue and will look into it. If the issue persists contact support";
       return response()->json($resData, 500);
     }
   }
