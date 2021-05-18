@@ -113,7 +113,7 @@ class CheckoutController extends Controller
             \Sentry\captureException($th);
         }
       // $resData['message'] = $th->getMessage();
-      $resData['message'] = "Something didn't go right. Our engineers have been notified \nabout the issue and will look into it. If the issue persists concact support";
+      $resData['message'] = "Something didn't go right. Our engineers have been notified \nabout the issue and will look into it. If the issue persists contact support";
       return response()->json($resData, 500);
     }
   }
