@@ -33,12 +33,10 @@ class PurchaseController extends Controller
         ->select('max_financed')
         ->where('lender_offerings.lender_organization_id', Auth::user()->lender_organization_id)
         ->first();
-      //   dd($amount);
   
         $cart = Cart::content();
         return view('pages.checkout', compact('cart','credit_offers', 'amount'));
       } else {
-        // dd('no offers');
         $finance_institutions = DB::table('lenders')->get();
         $regions = Region::all();
         $notification=array(
