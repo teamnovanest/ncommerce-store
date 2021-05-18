@@ -41,7 +41,7 @@ class PurchaseController extends Controller
         $regions = Region::all();
         $notification=array(
         'messege'=>'You need to be affiliated with a lender before you can make a purchase',
-        'alert-type'=>'error'
+        'alert-type'=>'info'
         );
         return redirect()->action([DashboardController::class, 'index'])->with($notification);
       }
