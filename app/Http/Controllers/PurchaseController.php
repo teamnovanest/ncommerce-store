@@ -7,6 +7,7 @@ use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\DashboardController;
 
 class PurchaseController extends Controller
 {
@@ -40,7 +41,11 @@ class PurchaseController extends Controller
         // dd('no offers');
         $finance_institutions = DB::table('lenders')->get();
         $regions = Region::all();
-        return view('pages.select_finance_institution', compact('finance_institutions','regions'));
+        $notification=array(
+        'messege'=>'You need to be affiliated with a lender before you can make a purchase',
+        'alert-type'=>'error'
+        );
+        return redirect()->action([DashboardController::class, 'index'])->with($notification);
       }
        } catch (\Throwable $th) {
           if (app()->environment('production')){
