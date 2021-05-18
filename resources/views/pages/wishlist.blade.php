@@ -58,7 +58,7 @@
                                                 @else
                                                 <td><span>{{ $row->product_size }}</span></td>
 												@endif
-                                                <td class="product-add-to-cart"><a href="{{ url('product/details/'.$row->id) }}">View</a></td>
+                                                <td class="product-add-to-cart"><a href="{{ url('product/details/'.$row->id.'/'.$row->slug) }}">View</a></td>
                                             </tr>
                                         </tbody>
 										@endforeach
