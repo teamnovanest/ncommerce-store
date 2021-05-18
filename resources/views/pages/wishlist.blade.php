@@ -3,7 +3,7 @@
 @section('content')
 
         <!-- Start Bradcaump area -->
-        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/2.jpg) no-repeat scroll center center / cover ;">
+        <div class="ht__bradcaump__area">
             <div class="ht__bradcaump__wrap">
                 <div class="container">
                     <div class="row">
@@ -58,7 +58,7 @@
                                                 @else
                                                 <td><span>{{ $row->product_size }}</span></td>
 												@endif
-                                                <td class="product-add-to-cart"><a href="{{ url('product/details/'.$row->id) }}">View</a></td>
+                                                <td class="product-add-to-cart"><a href="{{ url('product/details/'.$row->id.'/'.$row->slug) }}">View</a></td>
                                             </tr>
                                         </tbody>
 										@endforeach
