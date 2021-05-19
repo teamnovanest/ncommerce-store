@@ -83,7 +83,7 @@
             <div class="row">
                 <div class="col-md-12">
                     @if (auth()->user()->lender_organization_id && floatval(str_replace(",","",Cart::Subtotal()))  <= $amount->max_financed )
-                    <ul class="">
+                    <ul>
 
                         @foreach($credit_offers as $offer)
 
@@ -98,6 +98,21 @@
                                     </div>
                                         <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10">
                                             <label class="form-check-label" for="{{$offer->id}}">
+                                            @if (Session::has('coupon'))
+                                                <p>
+                                                   {{ $offer->registered_name}} finances at {{ $offer->percentage }}% 
+                                                   for
+                                                   {{ $offer->payment_period }} months
+                                                </p>
+                                                <p>
+                                                   Total financed GH₵
+                                                   {{ number_format(((Session::get('coupon')['balance'] * $offer->percentage * ($offer->payment_period/12)) / 100) + Session::get('coupon')['balance'] ,2 )  }} 
+                                                </p>
+                                                <p>
+                                                   Total Interest on price GH₵ {{ number_format((Session::get('coupon')['balance'] * $offer->percentage * ($offer->payment_period/12) / 100) ,2
+                                                   ) }}
+                                                </p>
+                                            @else
                                                 <p>
                                                     {{ $offer->registered_name}} finances at {{ $offer->percentage }}%
                                                     for
@@ -110,7 +125,8 @@
 
                                                 <p>
                                                     Total Interest on price GH₵ {{number_format(((floatval(str_replace(",","",Cart::Subtotal())) * $offer->percentage * ($offer->payment_period/12)) / 100),2)}}
-                                                </p>
+                                                </p>    
+                                            @endif
                                             </label>
                                         </div>
                                       
@@ -192,21 +208,25 @@
                         <ul>
                             @if(Session::has('coupon'))
                             <li>Subtotal : <span class="amount">
-                                    GH₵ {{ Session::get('coupon')['balance'] }} </span> </li>
+                                GH₵ {{ number_format(Session::get('coupon')['balance'],2) }} </span> 
+                            </li>
                             <li>Coupon : ({{ Session::get('coupon')['name'] }} )
                                 <a href="{{ route('remove.coupon') }}" class="btn btn-danger btn-sm">X</a>
-                                <span class="amount">GH₵ {{ Session::get('coupon')['discount'] }} </span> </li>
+                                <span class="amount">{{ Session::get('coupon')['discount'] }} % </span> 
+                            </li>
                             @else
                             <li>Subtotal : <span class="amount">
-                                    GH₵ {{  Cart::Subtotal() }} </span> </li>
+                                GH₵ {{  Cart::Subtotal() }} </span> 
+                            </li>
                             @endif
 
                             @if(Session::has('coupon'))
-                            <li>Total : <span class="amount">GH₵
-                                    {{ Session::get   ('coupon')['balance']  }} </span>
+                            <li>Total : <span class="amount"> GH₵
+                                {{ number_format(Session::get   ('coupon')['balance'],2)  }}  </span>
                             </li>
                             @else
-                            <li>Total : <span class="amount">GH₵ {{ Cart::Subtotal()}} </span> </li>
+                            <li>Total : <span class="amount">GH₵ {{ Cart::Subtotal()}} </span> 
+                            </li>
                             @endif
                         </ul>
 

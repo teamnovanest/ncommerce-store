@@ -59,7 +59,7 @@ Route::get('/add/to/cart/{id}', [CartController::class,'AddCart']);
 
 //coupone application routes
 Route::post('/user/apply/coupon/', [CouponController::class, 'coupon'])->name('apply.coupon'); 
-Route::post('remove/coupon/', [CouponController::class, 'couponRemove'])->name('remove.coupon'); 
+Route::get('remove/coupon/', [CouponController::class, 'couponRemove'])->name('remove.coupon'); 
 
 // Product 
 Route::get('/product/details/{id}/{slug}', [ProductController::class, 'productView']);
