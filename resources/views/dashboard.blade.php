@@ -3,7 +3,7 @@
 
 <div class="order-detail-header">
 <div class="welcome-message"> 
-    <h2 class="az-dashboard-title">Hi, welcome back! {{ Auth::user()->name }}</h2>
+    <h2 class="az-dashboard-title">Hi, welcome! {{ Auth::user()->name }}</h2>
       <p class="az-dashboard-text">Dashboard.</p>
 </div>
 <div class="section-center">
