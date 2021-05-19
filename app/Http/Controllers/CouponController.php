@@ -26,7 +26,6 @@ class CouponController extends Controller
     if ($check) {
       
       foreach($content as $row){
-        // dd($row->options->merchant_organization_id);
          if ($row->options->merchant_organization_id === $check->merchant_organization_id) {
             $percentage_price = intval($check->discount / 100 * $this->floatvalue(Cart::Subtotal()));
             Session::put('coupon', [
@@ -47,20 +46,7 @@ class CouponController extends Controller
               );
               return Redirect()->back()->with($notification);
              }
-            
-            
           }
-      // $percentage_price = intval($check->discount / 100 * $this->floatvalue(Cart::Subtotal()));
-      // Session::put('coupon', [
-      //   'name' => $check->coupon_name,
-      //   'discount' => $check->discount,
-      //   'balance' =>   intval($this->floatvalue(Cart::Subtotal()) - $percentage_price)
-      // ]);
-      // $notification = array(
-      //   'messege' => 'Successfully Coupon Applied',
-      //   'alert-type' => 'success'
-      // );
-      // return Redirect()->back()->with($notification);
     } else {
       $notification = array(
         'messege' => 'Invalid Coupon',
