@@ -4,7 +4,7 @@
 
 <div>
   <div class="order-detail-header">
-  <div><h2 class="az-dashboard-title">Order Detail</h2></div>
+  <div><h2 class="az-dashboard-title">Order Tracking</h2></div>
   </div>
 <div class="background">
   <div class="container">

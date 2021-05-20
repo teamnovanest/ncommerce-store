@@ -29,7 +29,7 @@ class CheckoutController extends Controller
    
     DB::begintransaction();
     try {
-        
+        // throw new \Exception();
       $content = Cart::content();
 
        //info: Removing product in wishlist when a customer finally purchase a product
@@ -54,7 +54,7 @@ class CheckoutController extends Controller
       }
       $data['created_at'] = now();
       $data['total'] = intval($this->floatvalue(Cart::Subtotal()) * 100);
-      // $data['total_financed'] = (intval($this->floatvalue(Cart::Subtotal()) * $rate * $time /100) + intval($this->floatvalue(Cart::Subtotal())) * 100) ;
+      // $data['total_financed'] = (intval($this->floatvalue(Cart::Subtotal()) * $rate /12 * $time /100) + intval($this->floatvalue(Cart::Subtotal())) * 100) ;
       // dd($data);
       $order_id = DB::table('orders')->insertGetId($data);
 

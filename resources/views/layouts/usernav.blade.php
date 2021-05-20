@@ -46,7 +46,7 @@
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
  <link rel="stylesheet" type="text/css" href="{{ asset('/lib/toastr/toastr.css') }}">
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
 
@@ -61,8 +61,7 @@
 
   <link rel="stylesheet" href="{{ asset('/frontend_new/css/custom.css') }}">
 
-  <link rel='stylesheet' href="https://unpkg.com/nprogress@0.2.0/nprogress.css" />
-
+  <link rel='stylesheet' href="https://unpkg.com/nprogress@0.2.0/nprogress.css" /> 
 </head>
 
 <body>
@@ -142,7 +141,7 @@
     </div> -->
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
     <!-- <script src="{{ asset('/lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script> -->
     <!-- <script src="{{ asset('/lib/ionicons/ionicons.js') }}"></script> -->
