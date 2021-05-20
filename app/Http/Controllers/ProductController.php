@@ -93,10 +93,11 @@ public function addCart(Request $request, $id){
 
 
 public function productsView(Request $request){
+
   try {
     $subcategoryId = $request->id;
        $products = DB::table('products')->where('subcategory_id',$subcategoryId)->paginate(5);
-       $categorys = DB::table('categories')->get();
+       $categorys = DB::table('category_options')->get();
 	   
        $brands = DB::table('products')->where('subcategory_id',$subcategoryId)->select('brand_id')->groupBy('brand_id')->get();
 
