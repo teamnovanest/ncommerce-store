@@ -14,6 +14,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\OrderUpdateController;
 use App\Http\Controllers\OrderDetailsController;
 use App\Http\Controllers\FeatureRequestController;
 use App\Http\Controllers\LenderOfferingController;
@@ -121,3 +122,6 @@ Route::post('/newsletter/create', [NewsletterController::class, 'storeNewsLetter
 
 // City Route
 Route::get('/city/{region_id}', [CityController::class, 'cities']);
+
+//order update route
+Route::post('/order/{orderId}/{orderDetailId}/update', [OrderUpdateController::class, 'updateOrder']);

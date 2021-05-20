@@ -43,14 +43,16 @@ $(document).ready(function () {
                     if (data.message) {
                         Swal.fire({
                             icon: "success",
-                            title: data.message,
+                            title: "Success",
+                            text: data.message,
                             showCloseButton: true,
                         });
                         window.location.href = "/dashboard";
                     } else {
                         Swal.fire({
                             icon: "error",
-                            title: "An error occured",
+                            title: "Error",
+                            text: "Oops an error occured. Try again or contact support if issue persist.",
                             showCloseButton: true,
                         });
                     }
@@ -60,7 +62,7 @@ $(document).ready(function () {
 
                     Swal.fire({
                         icon: "error",
-                        title: "Order could not be placed. Please try again later",
+                        title: "Error",
                         text: error.responseJSON.message,
                         showCloseButton: true,
                     });
@@ -69,7 +71,8 @@ $(document).ready(function () {
         } else {
             Swal.fire({
                 icon: "error",
-                title: "Please select a payment plan",
+                title: "Error",
+                text: "Please select a payment plan",
                 showCloseButton: true,
             });
         }
@@ -256,5 +259,57 @@ $(document).ready(function () {
         });
     });
 
+    //customer order update js
+    $("#updateRadio").on("click", function () {
+        var statusId = $("#updateRadio").val();
+        var orderId = $("#updateRadio").attr("data-order-id");
+        var productId = $("#updateRadio").attr("data-product-id");
+        var orderDetailId = $("#updateRadio").attr("data-order-datail-id");
+
+        if (statusId && orderId && productId && orderDetailId) {
+            $.ajax({
+                url: "/order/" + orderId + "/" + orderDetailId + "/update",
+                type: "POST",
+                cache: false,
+                dataType: "json",
+                data: {
+                    statusId,
+                    productId,
+                },
+
+                success: function (data) {
+                    $("#statustd" + orderDetailId).empty();
+                    $("#statustd" + orderDetailId).append(
+                        `<span class="badge badge-success">${data.status_name}</span>`
+                    );
+                    NProgress.done();
+                    Swal.fire({
+                        icon: "success",
+                        title: "Success",
+                        text: "Order updated successfully",
+                        showCloseButton: true,
+                    });
+                    window.location.reload();
+                },
+                error: function (error) {
+                    NProgress.done();
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: error.attrresponseJSON.error,
+                        showCloseButton: true,
+                    });
+                },
+            });
+        } else {
+            NProgress.done();
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "An error occured. Try again or contact support if issue persist",
+                showCloseButton: true,
+            });
+        }
+    });
     //end of ready function
 });
