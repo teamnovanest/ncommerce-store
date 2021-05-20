@@ -106,7 +106,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link with-sub"><i class="typcn typcn-book"></i> {{Auth::user()->name}} <span class="arrow"><i class="typcn typcn-arrow-sorted-down"></i></span></a>
+            <a href="" class="nav-link with-sub"><i class="typcn typcn-user"></i> {{Auth::user()->name}} <span class="arrow"><i class="typcn typcn-arrow-sorted-down"></i></span></a>
             <div class="az-menu-sub">
               <div class="container">
                 <div>

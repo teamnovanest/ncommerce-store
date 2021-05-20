@@ -82,7 +82,7 @@
                                 <br><br>
 
                             <div class="pro__details">
-                                {{$product->product_details}}
+                                {{ substr( $product->product_details,0,900)}}
                                 <span><a href="#description">View more</a></span>
                             </div>
                             <br>

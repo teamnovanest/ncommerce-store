@@ -128,6 +128,7 @@ class CartController extends Controller
       'messege' => 'Product quantity updated',
       'alert-type' => 'success'
     );
+    Session::forget('coupon');
     return Redirect()->back()->with($notification); 
     } catch (\Throwable $th) {
       if (app()->environment('production')){

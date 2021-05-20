@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Cart;
+use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Cart;
+use App\Http\Controllers\DashboardController;
 
 class PurchaseController extends Controller
 {
@@ -25,15 +27,24 @@ class PurchaseController extends Controller
       'lender_offerings.max_financed')
       ->orderBy('percentage', 'ASC')
       ->where('customer_finance_organization_affiliations.user_id', Auth::id())->get();
-
-      $amount = DB::table('lender_offerings')
-      ->select('max_financed')
-      ->where('lender_offerings.lender_organization_id', Auth::user()->lender_organization_id)
-      ->first();
-    //   dd($amount);
-
-      $cart = Cart::content();
-      return view('pages.checkout', compact('cart','credit_offers', 'amount'));
+      
+      if($credit_offers->isNotEmpty()) {
+        $amount = DB::table('lender_offerings')
+        ->select('max_financed')
+        ->where('lender_offerings.lender_organization_id', Auth::user()->lender_organization_id)
+        ->first();
+  
+        $cart = Cart::content();
+        return view('pages.checkout', compact('cart','credit_offers', 'amount'));
+      } else {
+        $finance_institutions = DB::table('lenders')->get();
+        $regions = Region::all();
+        $notification=array(
+        'messege'=>'You need to be affiliated with a lender before you can make a purchase',
+        'alert-type'=>'info'
+        );
+        return redirect()->action([DashboardController::class, 'index'])->with($notification);
+      }
        } catch (\Throwable $th) {
           if (app()->environment('production')){
             \Sentry\captureException($th);

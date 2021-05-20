@@ -48,10 +48,12 @@ class CheckoutController extends Controller
       $data['status_code'] = crc32(uniqid()); 
       $data['order_code'] = crc32(time());
       if (Session::has('coupon')) {
-        $data['subtotal'] = Session::get('coupon')['balance'];
+        $data['subtotal'] = Session::get('coupon')['balance'] * 100;
+        $data['total'] = Session::get('coupon')['balance'] * 100;
       } else {
           $data['subtotal'] = intval($this->floatvalue(Cart::Subtotal()) * 100);
-      }
+          $data['total'] = intval($this->floatvalue(Cart::Subtotal()) * 100);
+      } 
       $data['created_at'] = now();
       $data['total'] = intval($this->floatvalue(Cart::Subtotal()) * 100);
       // $data['total_financed'] = (intval($this->floatvalue(Cart::Subtotal()) * $rate /12 * $time /100) + intval($this->floatvalue(Cart::Subtotal())) * 100) ;

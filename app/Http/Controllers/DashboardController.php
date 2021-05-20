@@ -89,7 +89,7 @@ class DashboardController extends Controller
     UserLenderSelection::insert($data);
 
     $insertedId = DB::getPdo()->lastInsertId();
-    dd($insertedId);
+
     return response()->json($insertedId);
     }
 
