@@ -220,7 +220,7 @@
     padding: 50px;
     background-color: #fdfdfd;
     position: relative;
-    min-height: 600px;
+    min-height: 800px;
 }
 
 .form__body {
@@ -295,6 +295,9 @@
 .multiSel span {
     cursor: pointer;
     display: inline-block;
+    padding-top: 5px;
+    font-size: 1.01rem;
+    font-weight: 400;
 }
 
 .dropdown dd ul {
@@ -303,7 +306,7 @@
     color: #fff;
     display: none;
     padding: 2px 15px 2px 5px;
-    width: 290px;
+    width: 400px;
     position: absolute;
     list-style: none;
     height: 100px;
@@ -354,6 +357,11 @@
 .form__submit:hover {
     background: rgb(250, 250, 250);
     color: #000;
+}
+
+.form__header--main {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
 }
 
 /* User Profile style */
