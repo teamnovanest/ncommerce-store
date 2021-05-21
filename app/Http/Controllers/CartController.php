@@ -15,54 +15,54 @@ class CartController extends Controller
 {
    public function AddCart($id){
 
-   $product = DB::table('products')->where('id',$id)->first();
+      try {
+        // throw new Exception();
+        $product = DB::table('products')->where('id',$id)->first();
 
-   $data = array();
-
-   if ($product->discount_price == NULL) {
-   $data['id'] = $product->id;
-   $data['name'] = $product->product_name;
-   $data['qty'] = 1;
-   $data['price'] = $product->selling_price / 100;
-   $data['weight'] = 1;
-   $data['options']['image'] = $product->image_one_secure_url;
-   $data['options']['color'] = '';
-   $data['options']['size'] = '';
-   $data['options']['merchant_organization_id'] = $product->merchant_organization_id;
-   Cart::add($data);
-   return \Response::json(['success' => 'Successfully Added To Cart']);
-   }else{
-
-   $data['id'] = $product->id;
-   $data['name'] = $product->product_name;
-   $data['qty'] = 1;
-   $data['price'] = $product->discount_price / 100;
-   $data['weight'] = 1;
-   $data['options']['image'] = $product->image_one_secure_url;
-   $data['options']['color'] = '';
-   $data['options']['size'] = '';
-   $data['options']['merchant_organization_id'] = $product->merchant_organization_id;
-   Cart::add($data);
-   return \Response::json(['success' => 'Successfully Added To Cart']);
-
+        $data = array();
+     
+        $data['id'] = $product->id;
+        $data['name'] = $product->product_name;
+        $data['qty'] = 1;
+        $data['price'] = (!$product->discount_price) ? $product->selling_price / 100 :
+        ($product->selling_price - $product->discount_price) /100;
+        $data['weight'] = 1;
+        $data['options']['image'] = $product->image_one_secure_url;
+        $data['options']['color'] = '';
+        $data['options']['size'] = '';
+        $data['options']['merchant_organization_id'] = $product->merchant_organization_id;
+        Cart::add($data);
+        return \Response::json(['success' => 'Successfully Added To Cart']);
+     
+      } catch (\Throwable $th) {
+        if (app()->environment('production')){
+          \Sentry\captureException($th);
+        }
+       
+        // TODO Send response to user there was an error
+      
+         return \Response::json(['error' => 'Item was not added. Try again or contact support if issue still persist'],500);
+      }
    }
-
-   }
-
-    public function search(Request $request){
-      $item = $request->search;
-      $products = DB::table('products')
-        ->where('product_name','LIKE',"%$item%")
-        ->paginate(20);
-
-    return view('pages.search',compact('products'));  
-    }
   
 
   public function showCart()
   {
-    $cart = Cart::content();
-    return view('pages.cart', compact('cart'));
+    try { 
+      $cart = Cart::content();
+      return view('pages.cart', compact('cart'));
+    } catch (\Throwable $th) {
+       if (app()->environment('production')){
+          \Sentry\captureException($th);
+        }
+      
+       $notification=array(
+        'messege'=>'An error occured. Try again or contact support if issue still persist',
+        'alert-type'=>'error'
+        );
+        return Redirect()->back()->with($notification);
+    }
+    
   }
 
 
@@ -96,24 +96,51 @@ class CartController extends Controller
 
   public function removeCart($rowId)
   {
-    Cart::remove($rowId);
-    $notification = array(
-      'messege' => 'Product Remove from Cart',
+    try {      
+      Cart::remove($rowId);
+      $notification = array(
+      'messege' => 'Product removed from cart',
       'alert-type' => 'success'
     );
     return Redirect()->back()->with($notification);
+    } catch (\Throwable $th) {
+      if (app()->environment('production')){
+          \Sentry\captureException($th);
+        }
+
+    $notification = array(
+      'messege' => 'An error occured while removing item from your cart.',
+      'alert-type' => 'error'
+    );
+    return Redirect()->back()->with($notification);
+    }
+    
   }
 
 
   public function updateCart(Request $request)
   {
+    try {
     $rowId = $request->productid;
     $qty = $request->qty;
     Cart::update($rowId, $qty);
     $notification = array(
-      'messege' => 'Product Quantity Updated',
+      'messege' => 'Product quantity updated',
       'alert-type' => 'success'
     );
-    return Redirect()->back()->with($notification);
+    Session::forget('coupon');
+    return Redirect()->back()->with($notification); 
+    } catch (\Throwable $th) {
+      if (app()->environment('production')){
+          \Sentry\captureException($th);
+        }
+        
+      $notification = array(
+      'messege' => 'An error occured while updating your Product quantity',
+      'alert-type' => 'error'
+    );
+    return Redirect()->back()->with($notification); 
+    }
+    
   }
 }

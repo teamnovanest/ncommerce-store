@@ -5,19 +5,14 @@
     <!-- Body main wrapper start -->
     <div class="">
         <!-- Start Bradcaump area -->
-        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/2.jpg) no-repeat scroll center center / cover ;">
+        <div class="ht__bradcaump__area">
             <div class="ht__bradcaump__wrap">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12"> 
-                            <!-- <div class="bradcaump__inner text-center">
-                                <h2 class="bradcaump-title">Product</h2>
-                                <nav class="bradcaump-inner">
-                                  <a class="breadcrumb-item" href="/">Home</a>
-                                  <span class="brd-separetor">/</span>
-                                  <span class="breadcrumb-item active">Product</span>
-                                </nav>
-                            </div> -->
+                        <div class="col-12">
+                            <div class="bradcaump__inner text-center">
+                                <h2 class="bradcaump-title">Products</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -29,44 +24,43 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-xl-3 col-md-12 col-12">
-                          <!-- Start Product Cat -->
-                        <div class="htc__shop__cat">
-                            <h4 class="section-title-4">PRODUCT CATEGORIES</h4>
-                                {{-- <ul class="sidebar__list">
-                                         @php
-                                         $category = DB::table('categories')->get();
-                                            @endphp
-                                    @foreach($category as $cat)
-				                    <li><a href="{{ url('allcategory/'.$cat->id) }}">{{ $cat->category_name }}</a></li>
-								    @endforeach
-                                </ul> --}}
-                        </div>
-                            <!-- End Product Cat -->
-                        <div class="htc__shop__left__sidebar">
-                            <!-- Start Range -->
-                            <div class="htc-grid-range">
-                                <h4 class="section-title-4">FILTER BY PRICE</h4>
-                                <div class="content-shopby">
-                                    <div class="price_filter s-filter clear">
-                                        <form action="#" method="GET">
-                                            <div id="slider-range"></div>
-                                            <div class="slider__range--output">
-                                                <div class="price__output--wrap">
-                                                    <div class="price--output">
-                                                        <span>Price :</span><input type="text" id="amount" readonly>
-                                                    </div>
-                                                    <div class="price--filter">
-                                                        <a href="#">Filter</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+						  <!-- Start Product Cat -->
+                        <div class="categories-menu">
+                                <div class="category-heading">
+                               <h3>Product Categories</h3>
                                 </div>
-                            </div>
-                            <!-- End Range -->
-                            
+                            <div class="category-menu-list"> 
+                                <ul class="sidebar__list">
+                                        @php
+                                        $category = DB::table('category_options')->where('deleted_at', NULL)->get();
+                                        @endphp
+                                    @foreach($category as $cat)
+				                    <li><a href="{{ route('category.name',['id'=>$cat->id,'category_name'=> $cat->category_name]) }}">{{ $cat->category_name }}</a></li>
+								    @endforeach
+                                </ul>
+                            </div>   
                         </div>
+                        <br>
+                            <!-- End Product Cat -->
+							<!-- brands -->
+						 <div class="categories-menu">
+                                <div class="category-heading">
+                               <h3>Brands</h3>
+                                </div>
+                            <div class="category-menu-list"> 
+                                <ul class="sidebar__list">
+								
+                            @php
+                           $brands =  DB::table('brand_options')->where('deleted_at', NULL)->get();
+                            @endphp
+								@foreach($brands as $row)
+			 <li class="brand"><a href="{{url('product/brand/'.$row->id.'/'.$row->brand_name)}}">{{ $row->brand_name }}</a></li>
+								@endforeach
+								 
+							</ul>
+                        </div>    
+						</div>
+							<!--brands  -->
                     </div>
                     <div class="col-lg-9 col-xl-9 col-md-12 col-12 smt-30">
                         <div class="row">
@@ -87,50 +81,33 @@
                                 <div class="row">
                                     <!-- Start Single Product -->
                                          @foreach($products as $pro)
-                                    <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 col-12">
+                                    <div class="col-lg-3 single__pro col-xl-3 col-md-4 col-6 col-sm-6">
                                         <div class="product">
                                             <div class="product__inner">
                                                 <div class="pro__thumb">
-                                                    <a href="#">
+                                                    <a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}">
                                                         <img src="{{ asset($pro->image_one_secure_url) }}" alt="product images">
                                                     </a>
                                                 </div>
                                                 
                                                 <div class="product__hover__info">
                                                     <ul class="product__action">
-                                                        <li><a title="Quick View" href="{{ url('product/details/'.$pro->id) }}"><span class="ti-plus"></span></a></li>
-                                                        <li><a title="Add To Cart" href="{{ route('show.cart')}}"><span class="ti-shopping-cart"></span></a></li>
-                                                        <li><a title="Wishlist" href="#"><span class="ti-heart"></span></a></li>
+                                                        <li><a title="Quick View" href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}"><span class="ti-plus"></span></a></li>
+                                                        <li><a class="addcart" title="Add to cart"  data-id="{{ $pro->id }}"><span class="ti-shopping-cart"></span></a></</li>
+                                                        <li><a title="Add to wishlist" class="addwishlist" data-id="{{ $pro->id }}" ><span class="ti-heart"></span></a></li>
                                                     </ul>
                                                 </div>
                                                
                                             </div>
                                             <div class="product__details">
-                                                <h2><a href="{{ url('product/details/'.$pro->id.'/'.$pro->product_name) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
+                                                <h2 class="product-name"><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
                                                 <ul class="product__price">
 					                                @if($pro->discount_price == NULL)
-                                                    <li class="new__price">GH₵ {{ $pro->selling_price }}</li>
+                                                    <li class="new__price">GH₵ {{ $pro->selling_price / 100 }}</li>
                                                     @else
-                                                    <li class="new__price">GH₵ {{ $pro->discount_price }}</li>
-                                                    <li class="old__price">GH₵ {{ $pro->selling_price }}</li>
+                                                    <li class="new__price">GH₵ {{ $pro->discount_price / 100}}</li>
+                                                    <li class="old__price">GH₵ {{ $pro->selling_price / 100}}</li>
                                                     @endif
-                                                </ul>
-                                                <br>
-                                                <ul class="product_marks">
-                                                                   @if($pro->discount_price == NULL)
-                                                    <li class="product_mark product_new" style="background: blue;">New</li>
-                                                                   @else
-                                                        <li class="product_mark product_new" style="background: red;">
-                                                                   @php
-                                                                        $amount = $pro->selling_price - $pro->discount_price;
-                                                                        $discount = $amount/$pro->selling_price*100;
-            
-                                                                   @endphp
-                                   
-                                                                   {{ intval($discount) }}%
-            
-                                                        </li>  
-                                                                   @endif     
                                                 </ul>
                                             </div>
                                         </div>
@@ -148,43 +125,25 @@
                                     <div class="row">
                                         <div class="col-md-4 col-lg-4 col-xl-3 col-sm-5 col-12">
                                             <div class="list__thumb">
-                                                <a href="{{ url('product/details/'.$pro->id) }}">
+                                                <a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}">
                                                     <img src="{{ asset($pro->image_one_secure_url) }}" alt="Product Image">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="col-md-8 col-lg-8 col-xl-9 col-sm-7 col-12">
                                             <div class="list__details__inner">
-                                                <h2><a href="{{ url('product/details/'.$pro->id.'/'.$pro->product_name) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
-                                                
+                                                <h2 class="product-name"><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
                                                 <ul class="product__price">
                                                 @if($pro-> discount_price == NULL)
-                                                <li class="new__price">GH₵ {{ $pro->selling_price }}</li>
+                                                <li class="new__price">GH₵ {{ $pro->selling_price / 100 }}</li>
                                                     @else
-                                                    <li class="new__price">GH₵ {{ $pro->discount_price }}</li>
-                                                    <li class="old__price">GH₵ {{ $pro->selling_price }}</li>
+                                                    <li class="new__price">GH₵ {{ $pro->discount_price / 100}}</li>
+                                                    <li class="old__price">GH₵ {{ $pro->selling_price / 100}}</li>
                                                     @endif
                                                 </ul>
                                                     <br>
-                                                <ul class="product_marks">
-                                                                   @if($pro->discount_price == NULL)
-                                                    <li class="product_mark product_new" style="background: blue;">New</li>
-                                                                   @else
-                                                        <li class="product_mark product_new" style="background: red;">
-                                                                   @php
-                                                                        $amount = $pro->selling_price - $pro->discount_price;
-                                                                        $discount = $amount/$pro->selling_price*100;
-            
-                                                                   @endphp
-                                   
-                                                                   {{ intval($discount) }}%
-            
-                                                        </li>  
-                                                                   @endif     
-                                                </ul>
-                                                <br>
                                                 <div class="shop__btn">
-                                                    <a class="htc__btn" href="{{ url('/product/details/'.$pro->id)}}"><span class="ti-plus"></span>View Product</a>
+                                                    <a class="htc__btn" href="{{ url('product/details/'.$pro->id.'/'.$pro->slug)}}"><span class="ti-plus"></span>View Product</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -194,13 +153,21 @@
                                 <!-- End List Content-->
                             </div>
                             <!-- End Single View -->
+							<!-- Shop Page Navigation -->
+                        <br>
+						<div class="shop_page_nav d-flex flex-row">
+							 
+							 
+                               {{ $products->links() }}
+							  
+							 
+						</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         <!-- End Our ShopSide Area -->
-        <!-- Start Footer Area -->
 <script type="text/javascript">
     function productview(id){
         $.ajax({

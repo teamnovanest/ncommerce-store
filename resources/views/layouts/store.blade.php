@@ -34,8 +34,7 @@ $setting = DB::table('sitesettings')->first();
     <!-- User style -->
     <link rel="stylesheet" href="{{ asset('/frontend_new/css/custom.css') }}">
 
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
-
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('/lib/toastr/toastr.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
@@ -48,9 +47,9 @@ $setting = DB::table('sitesettings')->first();
     <!-- azia CSS -->
     <link rel="stylesheet" href="{{ asset('/lib/css/azia.css')}}">
 
-     <script src="https://js.stripe.com/v3/"></script>
+     {{-- <script src="https://js.stripe.com/v3/"></script> --}}
 
-     <link rel='stylesheet' href="https://unpkg.com/nprogress@0.2.0/nprogress.css" />
+     <link rel='stylesheet' href="{{ asset('/lib/nprogress/nprogress.css') }}" />
 
     <!-- Modernizr JS -->
     <script src="{{ asset('/frontend_new/js/vendor/modernizr-2.8.3.min.js')}}"></script>
@@ -81,10 +80,6 @@ $setting = DB::table('sitesettings')->first();
                                     <li class="drop"><a href="/">Home</a>
                                     </li>
                                     <li class="drop"><a href="/shop">Shop</a>
-                                    
-                                       
-                                    <!-- </li>
-                                    <li class="drop"><a href="#">Blog</a> -->
                                        
                                     </li>
                                     <li><a href="/contact/page">Contact</a></li>
@@ -99,8 +94,6 @@ $setting = DB::table('sitesettings')->first();
 
                                         <li><a href="/shop">Shop</a>
                                         </li>
-
-                                        <!-- <li><a href="#">Blog</a></li> -->
 
 
                                         <li><a href="/contact/page">Contact</a></li>
@@ -168,17 +161,17 @@ $setting = DB::table('sitesettings')->first();
                                 <h1>NCOMMERCE</h1>
                             </a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet consectetu adipisicing elit sed do eiusmod tempor incididunt ut labore.</p>
+                        {{-- <p>Lorem ipsum dolor sit amet consectetu adipisicing elit sed do eiusmod tempor incididunt ut labore.</p> --}}
                     </div>
                     <ul class="sidebar__thumd">
-                        <li><a href="#"><img src="/frontend_new/images/sidebar-img/1.jpg" alt="sidebar images"></a></li>
+                        {{-- <li><a href="#"><img src="/frontend_new/images/sidebar-img/1.jpg" alt="sidebar images"></a></li>
                         <li><a href="#"><img src="/frontend_new/images/sidebar-img/2.jpg" alt="sidebar images"></a></li>
                         <li><a href="#"><img src="/frontend_new/images/sidebar-img/3.jpg" alt="sidebar images"></a></li>
                         <li><a href="#"><img src="/frontend_new/images/sidebar-img/4.jpg" alt="sidebar images"></a></li>
                         <li><a href="#"><img src="/frontend_new/images/sidebar-img/5.jpg" alt="sidebar images"></a></li>
                         <li><a href="#"><img src="/frontend_new/images/sidebar-img/6.jpg" alt="sidebar images"></a></li>
                         <li><a href="#"><img src="/frontend_new/images/sidebar-img/7.jpg" alt="sidebar images"></a></li>
-                        <li><a href="#"><img src="/frontend_new/images/sidebar-img/8.jpg" alt="sidebar images"></a></li>
+                        <li><a href="#"><img src="/frontend_new/images/sidebar-img/8.jpg" alt="sidebar images"></a></li> --}}
                     </ul>
 
                     {{-- @php
@@ -238,7 +231,7 @@ $setting = DB::table('sitesettings')->first();
                             <div class="shp__pro__details">
                                 <h2><a href="#">{{ $row->name  }}</a></h2>
                                 <span class="quantity">QTY: {{ $row->qty }}</span>
-                                <span class="shp__price">GH₵ {{ $row->price*$row->qty}}</span>
+                                <span class="shp__price">GH₵ {{number_format( $row->price*$row->qty,2)}}</span>
                             </div>
                             <div class="remove__btn">
                                 <a href="{{ url('remove/cart/'.$row->rowId ) }}"" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
@@ -277,10 +270,11 @@ $setting = DB::table('sitesettings')->first();
                     <div class="row">
                          <!-- Start Single Footer Widget -->
                         <div class="col-lg-3 col-xl-3 col-md-6 col-sm-6">
+                            @if ($setting)
                             <div class="ft__widget">
                                 <div class="ft__logo">
                                     <a href="#">
-                                      {{ $setting->company_name }}
+                                      {{ $setting->company_name ?? ''}}
                                        NCOMMERCE
                                     </a>
                                    
@@ -292,7 +286,7 @@ $setting = DB::table('sitesettings')->first();
                                                 <i class="zmdi zmdi-pin"></i>
                                             </div>
                                             <div class="address-text">
-                                                <p>{{ $setting->company_address }}</p>
+                                                <p>{{ $setting->company_address ?? ''}}</p>
                                             </div>
                                         </li>
                                         <li>
@@ -300,7 +294,7 @@ $setting = DB::table('sitesettings')->first();
                                                 <i class="zmdi zmdi-email"></i>
                                             </div>
                                             <div class="address-text">
-                                                <a href="#"> {{ $setting->email }}</a>
+                                                <a href="#"> {{ $setting->email ?? ''}}</a>
                                             </div>
                                         </li>
                                         <li>
@@ -308,18 +302,19 @@ $setting = DB::table('sitesettings')->first();
                                                 <i class="zmdi zmdi-phone-in-talk"></i>
                                             </div>
                                             <div class="address-text">
-                                                <p>{{ $setting->phone_one }}</p>
+                                                <p>{{ $setting->phone_one ?? ''}}</p>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
                                 <ul class="social__icon">
-                                    <li><a href="{{ $setting->twitter }}"><i class="zmdi zmdi-twitter"></i></a></li>
-                                    <li><a href="{{ $setting->instagram }}"><i class="zmdi zmdi-instagram"></i></a></li>
-                                    <li><a href="{{ $setting->facebook }}"><i class="zmdi zmdi-facebook"></i></a></li>
-                                    <li><a href="{{ $setting->facebook }}"><i class="zmdi zmdi-google-plus"></i></a></li>
+                                    <li><a href="{{ $setting->twitter ?? ''}}"><i class="zmdi zmdi-twitter"></i></a></li>
+                                    <li><a href="{{ $setting->instagram ?? ''}}"><i class="zmdi zmdi-instagram"></i></a></li>
+                                    <li><a href="{{ $setting->facebook ?? ''}}"><i class="zmdi zmdi-facebook"></i></a></li>
+                                    <li><a href="{{ $setting->facebook ?? ''}}"><i class="zmdi zmdi-google-plus"></i></a></li>
                                 </ul>
                             </div>
+                            @endif
                         </div>
                         <!-- End Single Footer Widget -->
                         <!-- Start Single Footer Widget -->
@@ -441,30 +436,33 @@ $setting = DB::table('sitesettings')->first();
 
 
     <!-- jquery latest version -->
-    <script src="{{ asset('/frontend_new/js/vendor/jquery-1.12.0.min.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    {{-- <script type="text/javascript" src="{{ asset('/lib/toastr/toastr.min.js') }}"></script> --}}
+    <script src="{{ asset('/lib/sweetalert/sweetalert.js') }}"></script> 
+    <!-- <script src="{{ asset('/lib/sweetalert/sweetalert.min.js')}}"></script> -->
+    <script src="{{ asset('/lib/nprogress/nprogress.js')}}"></script>
+
+  <!-- <script src="{{ asset('/frontend_new/js/vendor/jquery-1.12.0.min.js')}}"></script>  -->
     <!-- Bootstrap framework js -->
     <script src="{{ asset('/frontend_new/js/bootstrap.min.js')}}"></script>
     <!-- All js plugins included in this file. -->
     <script src="{{ asset('/frontend_new/js/plugins.js')}}"></script>
-    <script src="{{ asset('/frontend_new/js/slick.min.js')}}"></script>
-    <script src="{{ asset('/frontend_new/js/owl.carousel.min.js')}}"></script>
+   <!--  <script src="{{ asset('/frontend_new/js/slick.min.js')}}"></script> -->
+    <script src="{{ asset('/frontend_new/js/owl.carousel.min.js')}}"></script>  
+   
     <!-- Waypoints.min.js. -->
-    <script src="{{ asset('/frontend_new/js/waypoints.min.js')}}"></script>
+    <!-- <script src="{{ asset('/frontend_new/js/waypoints.min.js')}}"></script> -->
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="{{ asset('/frontend_new/js/main.js')}}"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-<script src="{{ asset('/frontend/js/product_custom.js')}}"></script>
+<!-- <script src="{{ asset('/frontend/js/product_custom.js')}}"></script> -->
 <script src="{{ asset('js/custom.js')}}"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-  <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
-  <script src="{{ asset('https://unpkg.com/nprogress@0.2.0/nprogress.js')}}"></script>
-
+  
+@stack('scripts')
 <!-- cus dashboard script -->
-   <script src="{{asset('lib/jquery/jquery.min.js')}}"></script>
+   {{-- <script src="{{asset('lib/jquery/jquery.min.js')}}"></script> --}}
     <!-- <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script> -->
     <!-- <script src="../lib/ionicons/ionicons.js"></script> -->
     <!-- <script src="../lib/jquery.flot/jquery.flot.js"></script> -->
@@ -482,18 +480,47 @@ $setting = DB::table('sitesettings')->first();
  <script>
         @if(Session::has('messege'))
           var type="{{Session::get('alert-type','info')}}"
+          var Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 5000,
+                        timerProgressBar: true,
+                        onOpen: (toast) => {
+                            toast.addEventListener(
+                                "mouseenter",
+                                Swal.stopTimer
+                            );
+                            toast.addEventListener(
+                                "mouseleave",
+                                Swal.resumeTimer
+                            );
+                        },
+                    });
           switch(type){
               case 'info':
-                   toastr.info("{{ Session::get('messege') }}");
+                   Toast.fire({
+                            icon: "info",
+                            title: "{{ Session::get('messege') }}",
+                        });
                    break;
               case 'success':
-                  toastr.success("{{ Session::get('messege') }}");
+                    Toast.fire({
+                            icon: "success",
+                            title: "{{ Session::get('messege') }}",
+                        });
                   break;
               case 'warning':
-                 toastr.warning("{{ Session::get('messege') }}");
+                   Toast.fire({
+                            icon: "warning",
+                            title: "{{ Session::get('messege') }}",
+                        });
                   break;
               case 'error':
-                  toastr.error("{{ Session::get('messege') }}");
+                    Toast.fire({
+                            icon: "error",
+                            title: "{{ Session::get('messege') }}",
+                        });
                   break;
           }
         @endif
@@ -501,34 +528,27 @@ $setting = DB::table('sitesettings')->first();
 
 
  <script>  
-         $(document).on("click", "#return", function(e){
-             e.preventDefault();
-             var link = $(this).attr("href");
-                swal({
-                  title: "Are you sure want to Return?",
-                  text: "Once you procede, a refund will have to be processed!",
-                  icon: "warning",
-                  buttons: true,
-                  dangerMode: true,
-                })
-                .then((willDelete) => {
-                  if (willDelete) {
-                       window.location.href = link;
-                  } else {
-                    swal("Cancel!");
-                  }
-                });
-            });
-    </script>
-
-
-
-
-
-
-
-
+//  <script>
+//         @if(Session::has('messege'))
+//           var type="{{Session::get('alert-type','info')}}"
+//           switch(type){
+//               case 'info':
+//                    toastr.info("{{ Session::get('messege') }}");
+//                    break;
+//               case 'success':
+//                   toastr.success("{{ Session::get('messege') }}");
+//                   break;
+//               case 'warning':
+//                  toastr.warning("{{ Session::get('messege') }}");
+//                   break;
+//               case 'error':
+//                   toastr.error("{{ Session::get('messege') }}");
+//                   break;
+//           }
+//         @endif
+//    </script>  
 
 </body>
 
 </html>
+

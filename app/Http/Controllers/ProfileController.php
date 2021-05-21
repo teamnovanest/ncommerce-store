@@ -15,15 +15,28 @@ class ProfileController extends Controller
     }
 
     public function showProfile() {
+      try {
         $user = DB::table('users')
         ->leftJoin('profile_images','users.id','=','profile_images.user_id')
         ->select('users.name','users.phone','users.email','profile_images.profile_secure_url')
         ->where('users.id',Auth::id())->first();
 
         return view('pages.user_profile',compact('user'));
+      } catch (\Throwable $th) {
+         if (app()->environment('production')){
+            \Sentry\captureException($th);
+        }
+        $notification=array(
+            'messege'=>'An error occured while accessing your profile. Try again or contact support if issue still persist',
+            'alert-type'=>'error'
+        );
+        return Redirect()->back()->with($notification);
+      }
+        
     }
 
     public function updateProfile(Request $request) {
+      try {  
       $full_name = $request->input('full_name');
       $email = $request->input('email');
       $phone = $request->input('phone_number');
@@ -101,6 +114,15 @@ class ProfileController extends Controller
       $notification=array('messege'=>'Profile Updated successfully','alert-type'=>'success');
 
       return Redirect()->back()->with($notification);
-
+      } catch (\Throwable $th) {
+         if (app()->environment('production')){
+            \Sentry\captureException($th);
+        }
+        $notification=array(
+            'messege'=>'An error occured while updating profile. Try again or contact support if issue still persist',
+            'alert-type'=>'error'
+        );
+        return Redirect()->back()->with($notification);
+      }
       }
 }

@@ -220,7 +220,7 @@
     padding: 50px;
     background-color: #fdfdfd;
     position: relative;
-    min-height: 600px;
+    min-height: 800px;
 }
 
 .form__body {
@@ -295,6 +295,9 @@
 .multiSel span {
     cursor: pointer;
     display: inline-block;
+    padding-top: 5px;
+    font-size: 1.01rem;
+    font-weight: 400;
 }
 
 .dropdown dd ul {
@@ -303,7 +306,7 @@
     color: #fff;
     display: none;
     padding: 2px 15px 2px 5px;
-    width: 290px;
+    width: 400px;
     position: absolute;
     list-style: none;
     height: 100px;
@@ -354,6 +357,11 @@
 .form__submit:hover {
     background: rgb(250, 250, 250);
     color: #000;
+}
+
+.form__header--main {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
 }
 
 /* User Profile style */
@@ -571,4 +579,96 @@
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
+}
+
+/* Adding ellipsis to product name */
+
+.product-name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@media (max-width: 640px) {
+    .category-menu-list {
+        display: none;
+    }
+}
+
+/* Error Page */
+.section-error {
+    position: relative;
+}
+
+.error-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 80%;
+}
+
+.error-box__image {
+    width: 100%;
+    height: 55vh;
+}
+
+.error-text {
+    text-align: center;
+    margin-top: -70px;
+}
+
+@media screen and (min-width: 800px) {
+    .error-text {
+        margin-top: 0;
+    }
+}
+
+.error-text__heading--1 {
+    color: #ed6161;
+    font-size: 2.5rem;
+}
+
+.error-text__heading--2 {
+    color: #bcbcbc;
+    font-size: 1.6rem;
+}
+
+.error-text__links a {
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: #000;
+    padding-bottom: 5px;
+    border-bottom: 3px solid #f95858;
+}
+
+.btn__secondary {
+    margin-top: 15px;
+}
+
+@media screen and (min-width: 500px) {
+    .btn__secondary {
+        margin-top: 0;
+    }
+}
+
+.error-text__paragraph {
+    font-size: 1.15rem;
+    color: #3b2a7d;
+    font-weight: lighter;
+    margin-top: -15px;
+}
+
+@media screen and (min-width: 710px) {
+    .error-text__paragraph {
+        font-size: 1.3rem;
+    }
+}
+
+.error-500 {
+    color: #1d3557ce;
 }

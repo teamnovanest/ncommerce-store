@@ -3,7 +3,7 @@
 @section('content')
 
 		 <!-- Start Bradcaump area -->
-        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/2.jpg) no-repeat scroll center center / cover ;">
+        <div class="ht__bradcaump__area">
             <div class="ht__bradcaump__wrap">
                 <div class="container">
                     <div class="row">
@@ -61,16 +61,10 @@
                                             <td class="product-quantity">{{ $row->options->size }}</td>
                                             @endif
                                             <td>
-                                                <form method="post" action="/update/cart/item">
-           	                                        <input type="hidden" name="productid" value="{{ $row->rowId }}">
-           	                                        <input type="number" name="qty" pattern="[0-9]" value="{{ $row->qty }}" style="width: 50px;" min="1">
-                                                    <i class="fas fa-check-square"></i>
-                                                      <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-           	                                        <button type="submit" class="btn btn-success btn-sm">✔</button>
-                                                </form>  
+                                                @include('partials.quantity_update')
                                             </td>
-                                            <td class="product-price">GH₵ {{ $row->price }}</td>
-                                            <td class="product-subtotal">GH₵ {{ $row->price*$row->qty }}</td>
+                                            <td class="product-price">GH₵ {{ number_format($row->price,2) }}</td>
+                                            <td class="product-subtotal">GH₵ {{ number_format($row->price*$row->qty,2) }}</td>
                                             <td class="product-remove"><a href="{{ url('remove/cart/'.$row->rowId ) }}">X</a></td>
                                         </tr>
 								@endforeach
@@ -78,18 +72,19 @@
                             </tbody>
                         </table>
                     </div>
+                            @if ($cart->count() > 0)
                                 <div class="row">
                                 <div class="col-md-8 col-sm-7 col-xs-12">
                                 </div>
                                 <div class="col-md-4 col-sm-5 col-xs-12">
                                     <div class="cart_totals">
-                                        <h2>Cart Totals</h2>
+                                        <h2>Cart Total</h2>
                                         <table>
                                             <tbody>
                                                 <tr class="order-total">
                                                     <th>Total</th>
                                                     <td>
-                                                        <strong><span class="amount">GH₵ {{ Cart::Subtotal() }}</span></strong>
+                                                        <strong><span class="amount">GH₵ {{ (Cart::Subtotal()) }}</span></strong>
                                                     </td>
                                                 </tr>                                           
                                             </tbody>
@@ -100,6 +95,11 @@
                                     </div>
                                 </div>
                             </div>
+
+                            @else
+                            <div></div>
+                            
+                            @endif
                         <!-- </form> -->
                     </div>
                 </div>
@@ -108,6 +108,7 @@
     
 	 <!-- Body main wrapper end -->
     <!-- Placed js at the end of the document so the pages load faster -->
+
 
 
 

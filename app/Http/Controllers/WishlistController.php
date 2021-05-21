@@ -36,30 +36,37 @@ class WishlistController extends Controller
     
    public function addWishlist($id){
 
-    $userid = Auth::id();
-    $check = DB::table('wishlists')->where('user_id',$userid)->where('product_id',$id)->first();
-
-    $data = array(
-    'user_id' => $userid,
-    'product_id' => $id,
-
-    );
-
-        if (Auth::Check()) {
-        
-        if ($check) {
-        return \Response::json(['error' => 'Product Already Added To Wishlist']);	 
-        }else{
-        DB::table('wishlists')->insert($data);
-        return \Response::json(['success' => 'Product Added To wishlist']);
-
-        }
-        
+    try {
+        $userid = Auth::id();
+        $check = DB::table('wishlists')->where('user_id',$userid)->where('product_id',$id)->first();
+    
+        $data = array(
+        'user_id' => $userid,
+        'product_id' => $id,
+    
+        );
+    
+            if (Auth::Check()) {
             
-        }else{
-        return \Response::json(['error' => 'At first login your account']);      
-
-        } 
+            if ($check) {
+            return \Response::json(['error' => 'Product Already Added To Wishlist']);	 
+            }else{
+            DB::table('wishlists')->insert($data);
+            return \Response::json(['success' => 'Product Added To wishlist']);
+    
+            }
+            
+                
+            }else{
+            return \Response::json(['error' => 'First login your account to wishlist a product']);      
+    
+            } 
+    } catch (\Throwable $th) {
+        if (app()->environment('production')){
+            \Sentry\captureException($th);
+        }
+        return \Response::json(['error' => 'An error occured while trying to wishlist a product, Try again or contact support if issue persist'],500);     
+    }
 
    }
 

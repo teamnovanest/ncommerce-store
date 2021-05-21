@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\LogoutController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\OrderUpdateController;
 use App\Http\Controllers\OrderDetailsController;
 use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\FeatureRequestController;
@@ -47,7 +49,7 @@ Route::get("/", "App\Http\Controllers\HomeController@index");
 Route::get('/user/logout', [LogoutController::class, 'logout'])->name('user.logout');
 
 // Search Route
-Route::get('/product/search', [CartController::class,'search'])->name('product.search');
+Route::get('/product/search', [ProductController::class,'search'])->name('product.search');
 
 
 // Cart
@@ -59,25 +61,26 @@ Route::get('/add/to/cart/{id}', [CartController::class,'AddCart']);
 
 //coupone application routes
 Route::post('/user/apply/coupon/', [CouponController::class, 'coupon'])->name('apply.coupon'); 
-Route::post('remove/coupon/', [CouponController::class, 'couponRemove'])->name('remove.coupon'); 
+Route::get('remove/coupon/', [CouponController::class, 'couponRemove'])->name('remove.coupon'); 
 
 // Product 
 Route::get('/product/details/{id}/{slug}', [ProductController::class, 'productView']);
 Route::post('/cart/product/add/{id}', [ProductController::class, 'addCart']);
 
 // Checkout Routes
-Route::get('/user/checkout/process/', [CheckoutController::class, 'checkout'])->name('checkout.process');
+Route::get('/user/checkout/process', [CheckoutController::class, 'checkout'])->name('checkout.process');
 
 // Customer Order Details route
-Route::get('/order/{id}/status', [OrderDetailsController::class,'viewOrderStatus'])->name('order.status');
+Route::get('/order/{id}/status/{orderDetailId}', [OrderDetailsController::class,'viewOrderStatus'])->name('order.status');
 
 // Feature Request Route
 Route::get('/feature-request/index', [FeatureRequestController::class,'index'])->name('feature.index');
 Route::get('/feature-request/create', [FeatureRequestController::class,'create'])->name('feature.create');
 Route::post('/feature-request/save', [FeatureRequestController::class,'save'])->name('feature.save');
-Route::post('/feature-request/{requestId}/save', [FeatureRequestController::class,'requestLike']);
+Route::post('/feature-request/{id}/like', [FeatureRequestController::class,'requestLike']);
 Route::get('/feature-request/{id}/edit', [FeatureRequestController::class,'editFeature'])->name('feature.edit');
 Route::post('/feature-request/{id}/update', [FeatureRequestController::class,'updateRequest'])->name('feature.update');
+Route::get('/feature-request/{id}/delete', [FeatureRequestController::class,'delete'])->name('feature.delete');
 
 
 // Contact page routes
@@ -93,7 +96,7 @@ Route::get('/delete/wishlist/{id}', [WishlistController::class, 'deleteWishlist'
 // All Product details Page 
 Route::get('/{category}/{id}/{subcategory_name}', [ProductController::class, 'productsView']);
 Route::get('/product/category/{id}/{category_name}', [ProductController::class, 'categoryView'])->name('category.name');
-Route::get('product/brand/{id}/{brand_name}', [ProductController::class, 'searchProductByBrand']);
+Route::get('/product/brand/{id}/{brand_name}', [ProductController::class, 'searchProductByBrand']);
 
 
 // shop
@@ -122,3 +125,8 @@ Route::post('/newsletter/create', [NewsletterController::class, 'storeNewsLetter
 
 //Product Review
 Route::post('/product/review/create', [ProductReviewController::class, 'productReviewCreate'])->name('review.create');
+// City Route
+Route::get('/city/{region_id}', [CityController::class, 'cities']);
+
+//order update route
+Route::post('/order/{orderId}/{orderDetailId}/update', [OrderUpdateController::class, 'updateOrder']);
