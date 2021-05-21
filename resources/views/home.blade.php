@@ -54,14 +54,15 @@
                 <div class="slider__container slider--one mrg-xs">
                     <div class="slider__activation__wrap owl-carousel owl-theme">
                         <!-- Start Single Slide -->
+                        @foreach ($publicity as $pub) 
                         <div>
-                            <img src="{{'assets\img\c.jpg'}}"
+                            <img src={{$pub->product_secure_url}}
                                 class="slide slider__full--screen slider-height-inherit  slider-text-left" alt="">
                             <div class="text-left">
                                 <div class="row">
                                     <div class="col-lg-8 col-xl-8 col-md-12 col-12">
                                         <div class="slider__inner">
-                                            <h1>New Product <span class="text--theme">Collection</span></h1>
+                                            <h1>{{$pub->product_name}}<span class="text--theme"></span></h1>
                                             <div class="slider__btn">
                                                 <a class="htc__btn" href="#">shop now</a>
                                             </div>
@@ -70,9 +71,10 @@
                                 </div>
                             </div>
                         </div>
+                        @endforeach
                         <!-- End Single Slide -->
                         <!-- Start Single Slide -->
-                        <div>
+                        <!-- <div>
                             <img src="{{'assets\img\a.jpg'}}"
                                 class="slide slider__full--screen slider-height-inherit  slider-text-left" alt="">
                             <div class="text-left">
@@ -87,7 +89,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- End Single Slide -->
 
                     </div>

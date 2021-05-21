@@ -32,8 +32,11 @@ class HomeController extends Controller
             //     ->where('main_slider',1)->orderBy('id','DESC')->first();
             $category = DB::table('category_options')->where('deleted_at', NULL)->get();
             // $subcategory = DB::table('subcategory')->where('category_id',$cat->id)->get();
+
+            $publicity = DB::table('publicity')->get();
+            // dd($publicity);
     
-            return view('home', compact('featured', 'trend' , 'best', 'hot', 'category'));
+            return view('home', compact('featured', 'trend' , 'best', 'hot', 'category', 'publicity'));
         } catch (\Throwable $th) {
              if (app()->environment('production')){
             \Sentry\captureException($th);

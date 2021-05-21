@@ -650,3 +650,12 @@
 .error-500 {
     color: #1d3557ce;
 }
+
+
+/* Publicity */
+.owl-carousel .owl-item img
+{
+    display: block;
+    width: 1600px;
+    height: 500px;
+}
