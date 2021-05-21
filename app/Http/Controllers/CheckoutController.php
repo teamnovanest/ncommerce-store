@@ -24,8 +24,8 @@ class CheckoutController extends Controller
     $selectedOfferId = $request->selectedOfferId;
     #select the payment period and percentag from the lender offering table
     $lenderOffering = DB::table('lender_offerings')->select('payment_period', 'percentage', 'max_financed', 'lender_organization_id')->where('id', $selectedOfferId)->first();
-    // $rate = $lenderOffering->percentage;
-    // $time = $lenderOffering->payment_period;
+    $rate = $lenderOffering->percentage;
+    $time = $lenderOffering->payment_period;
    
     DB::begintransaction();
     try {
@@ -50,14 +50,13 @@ class CheckoutController extends Controller
       if (Session::has('coupon')) {
         $data['subtotal'] = Session::get('coupon')['balance'] * 100;
         $data['total'] = Session::get('coupon')['balance'] * 100;
+        $data['total_financed'] = (((Session::get('coupon')['balance'] * $rate * $time/12 ) /100) + (Session::get('coupon')['balance'])) * 100 ;
       } else {
           $data['subtotal'] = intval($this->floatvalue(Cart::Subtotal()) * 100);
           $data['total'] = intval($this->floatvalue(Cart::Subtotal()) * 100);
+          $data['total_financed'] = ((intval($this->floatvalue(Cart::Subtotal()) * $rate * $time/12 ) /100) + (intval($this->floatvalue(Cart::Subtotal())))) * 100 ;
       } 
       $data['created_at'] = now();
-      $data['total'] = intval($this->floatvalue(Cart::Subtotal()) * 100);
-      // $data['total_financed'] = (intval($this->floatvalue(Cart::Subtotal()) * $rate /12 * $time /100) + intval($this->floatvalue(Cart::Subtotal())) * 100) ;
-      // dd($data);
       $order_id = DB::table('orders')->insertGetId($data);
 
       // Insert Order Details Table
@@ -114,8 +113,8 @@ class CheckoutController extends Controller
          if (app()->environment('production')){
             \Sentry\captureException($th);
         }
-      // $resData['message'] = $th->getMessage();
-      $resData['message'] = "Something didn't go right. Our engineers have been notified \nabout the issue and will look into it. If the issue persists contact support";
+      $resData['message'] = $th->getMessage();
+      // $resData['message'] = "Something didn't go right. Our engineers have been notified \nabout the issue and will look into it. If the issue persists contact support";
       return response()->json($resData, 500);
     }
   }
