@@ -144,7 +144,7 @@ $(document).ready(function () {
                         toast: true,
                         position: "top-end",
                         showConfirmButton: false,
-                        timer: 3000,
+                        timer: 5000,
                         timerProgressBar: true,
                         onOpen: (toast) => {
                             toast.addEventListener(
@@ -193,7 +193,7 @@ $(document).ready(function () {
                         toast: true,
                         position: "top-end",
                         showConfirmButton: false,
-                        timer: 3000,
+                        timer: 5000,
                         timerProgressBar: true,
                         onOpen: (toast) => {
                             toast.addEventListener(
