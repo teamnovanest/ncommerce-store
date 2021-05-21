@@ -226,8 +226,8 @@
                                                     <li><i class="zmdi zmdi-star"></i></li>
                                                     <li><i class="zmdi zmdi-star"></i></li>
                                                     <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                                    <li><i class="zmdi zmdi-star-half rate"></i></li>
+                                                    <li><i class="zmdi zmdi-star-half rate"></i></li>
                                                 </ul>
                                                 <div class="rating__send">
                                                     <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
@@ -249,38 +249,38 @@
                                     <h4 class="rating-title-2">Your Rating</h4>
                                     <div class="rating__list">
                                         <!-- Start Single List -->
-                                        <ul class="rating">
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
+                                        <ul class="rating" id="star-one">
+                                            <li><i class="zmdi zmdi-star-full rate"></i></li>
                                         </ul>
                                         <!-- End Single List -->
                                         <!-- Start Single List -->
-                                        <ul class="rating">
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
+                                        <ul class="rating" id="star-two">
+                                            <li><i class="zmdi zmdi-star-half rate"></i></li>
+                                            <li><i class="zmdi zmdi-star-half rate"></i></li>
                                         </ul>
                                         <!-- End Single List -->
                                         <!-- Start Single List -->
-                                        <ul class="rating">
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
+                                        <ul class="rating" id="star-three">
+                                            <li><i class="zmdi zmdi-star-half rate"></i></li>
+                                            <li><i class="zmdi zmdi-star-half rate"></i></li>
+                                            <li><i class="zmdi zmdi-star-half rate"></i></li>
                                         </ul>
                                         <!-- End Single List -->
                                         <!-- Start Single List -->
-                                        <ul class="rating">
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
+                                        <ul class="rating" id="star-four">
+                                            <li><i class="zmdi zmdi-star-half rate"></i></li>
+                                            <li><i class="zmdi zmdi-star-half rate"></i></li>
+                                            <li><i class="zmdi zmdi-star-half rate"></i></li>
+                                            <li><i class="zmdi zmdi-star-half rate"></i></li>
                                         </ul>
                                         <!-- End Single List -->
                                         <!-- Start Single List -->
-                                        <ul class="rating">
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
+                                        <ul class="rating" id="star-five">
+                                            <li><i class="zmdi zmdi-star-half rate"></i></li>
+                                            <li><i class="zmdi zmdi-star-half rate"></i></li>
+                                            <li><i class="zmdi zmdi-star-half rate"></i></li>
+                                            <li><i class="zmdi zmdi-star-half rate"></i></li>
+                                            <li><i class="zmdi zmdi-star-half rate"></i></li>
                                         </ul>
                                         <!-- End Single List -->
                                     </div>
@@ -313,7 +313,6 @@
             </div>
         </section>
         <!-- End Product tab -->
-
 
 
 {{-- @include('partials.finance-offerings') --}}

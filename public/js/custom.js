@@ -311,5 +311,17 @@ $(document).ready(function () {
             });
         }
     });
+
+    //Product review rating js
+
+    $(".rate").hover(function () {
+        $(this).css({ "background-color": "yellow" });
+        $(this).click(function (evt) {
+            console.log(evt.target);
+            var selected_rating = $(this).closest("ul").attr("id");
+            console.log("selected_rating", selected_rating);
+        });
+    });
+
     //end of ready function
 });
