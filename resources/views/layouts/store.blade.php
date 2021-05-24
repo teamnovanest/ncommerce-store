@@ -445,17 +445,17 @@ $setting = DB::table('sitesettings')->first();
         </button>
     </div>
     <div class="modal-body">
-        <div class="privacy_policy__section privacy_policy">
-        <h3 class="privacy-policy__heading-1">Privacy Policy</h3>
-        <h6 class="privacy-policy__updated-date">Updated on 24th May, 2021</h6>
+        <div class="policy__section privacy_policy">
+        <h3 class="policy__heading-1">Privacy Policy</h3>
+        <h6 class="policy__updated-date">Updated on 24th May, 2021</h6>
         <div class="main-content">
         {{-- Overview section --}}
         <h3 class="privacy-policy__heading-2">Overview</h3>
         <p class="privacy-policy__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum quidem culpa facilis beatae, blanditiis officia adipisci unde tempore recusandae laboriosam accusamus temporibus at doloribus cumque quasi nostrum distinctio qui maiores magnam ut? Nisi similique temporibus veritatis doloremque consequuntur! Cumque minima tempora ducimus earum dolores omnis provident dignissimos veritatis architecto reiciendis placeat optio assumenda voluptatum nam qui quibusdam amet debitis est, maxime in distinctio. Exercitationem provident quas reprehenderit quia ipsum et dolore neque asperiores qui possimus ad tempora maxime debitis vero, temporibus, nihil totam saepe voluptate! Laborum inventore ad id dolorem! Nobis odio numquam animi nihil soluta aut a officiis.</p>
 
         {{-- Consent section --}}
-        <h3 class="privacy-policy__heading-2">Collection of Information & Use</h3>
-        <p class="privacy-policy__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum quidem culpa facilis beatae, blanditiis officia adipisci unde tempore recusandae laboriosam accusamus temporibus at doloribus cumque quasi nostrum distinctio qui maiores magnam ut? Nisi similique temporibus veritatis doloremque consequuntur! Cumque minima tempora ducimus earum dolores omnis provident dignissimos veritatis architecto reiciendis placeat optio assumenda voluptatum nam qui quibusdam amet debitis est, maxime in distinctio. Exercitationem provident quas reprehenderit quia ipsum et dolore neque asperiores qui possimus ad tempora maxime debitis vero, temporibus, nihil totam saepe voluptate! Laborum inventore ad id dolorem! Nobis odio numquam animi nihil soluta aut a officiis.</p>
+        <h3 class="policy__heading-2">Collection of Information & Use</h3>
+        <p class="policy__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum quidem culpa facilis beatae, blanditiis officia adipisci unde tempore recusandae laboriosam accusamus temporibus at doloribus cumque quasi nostrum distinctio qui maiores magnam ut? Nisi similique temporibus veritatis doloremque consequuntur! Cumque minima tempora ducimus earum dolores omnis provident dignissimos veritatis architecto reiciendis placeat optio assumenda voluptatum nam qui quibusdam amet debitis est, maxime in distinctio. Exercitationem provident quas reprehenderit quia ipsum et dolore neque asperiores qui possimus ad tempora maxime debitis vero, temporibus, nihil totam saepe voluptate! Laborum inventore ad id dolorem! Nobis odio numquam animi nihil soluta aut a officiis.</p>
         </div>
     </div>
     </div>
@@ -480,17 +480,17 @@ $setting = DB::table('sitesettings')->first();
         </button>
     </div>
     <div class="modal-body">
-        <div class="privacy_policy__section privacy_policy">
-        <h3 class="privacy-policy__heading-1">Terms of Service</h3>
-        <h6 class="privacy-policy__updated-date">Updated on 24th May, 2021</h6>
+        <div class="policy__section terms-of-service">
+        <h3 class="policy__heading-1">Terms of Service</h3>
+        <h6 class="policy__updated-date">Updated on 24th May, 2021</h6>
         <div class="main-content">
         {{-- Overview section --}}
-        <h3 class="privacy-policy__heading-2">Overview</h3>
-        <p class="privacy-policy__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum quidem culpa facilis beatae, blanditiis officia adipisci unde tempore recusandae laboriosam accusamus temporibus at doloribus cumque quasi nostrum distinctio qui maiores magnam ut? Nisi similique temporibus veritatis doloremque consequuntur! Cumque minima tempora ducimus earum dolores omnis provident dignissimos veritatis architecto reiciendis placeat optio assumenda voluptatum nam qui quibusdam amet debitis est, maxime in distinctio. Exercitationem provident quas reprehenderit quia ipsum et dolore neque asperiores qui possimus ad tempora maxime debitis vero, temporibus, nihil totam saepe voluptate! Laborum inventore ad id dolorem! Nobis odio numquam animi nihil soluta aut a officiis.</p>
+        <h3 class="policy__heading-2">Overview</h3>
+        <p class="policy__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum quidem culpa facilis beatae, blanditiis officia adipisci unde tempore recusandae laboriosam accusamus temporibus at doloribus cumque quasi nostrum distinctio qui maiores magnam ut? Nisi similique temporibus veritatis doloremque consequuntur! Cumque minima tempora ducimus earum dolores omnis provident dignissimos veritatis architecto reiciendis placeat optio assumenda voluptatum nam qui quibusdam amet debitis est, maxime in distinctio. Exercitationem provident quas reprehenderit quia ipsum et dolore neque asperiores qui possimus ad tempora maxime debitis vero, temporibus, nihil totam saepe voluptate! Laborum inventore ad id dolorem! Nobis odio numquam animi nihil soluta aut a officiis.</p>
 
         {{-- Consent section --}}
-        <h3 class="privacy-policy__heading-2">Your Agreement</h3>
-        <p class="privacy-policy__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum quidem culpa facilis beatae, blanditiis officia adipisci unde tempore recusandae laboriosam accusamus temporibus at doloribus cumque quasi nostrum distinctio qui maiores magnam ut? Nisi similique temporibus veritatis doloremque consequuntur! Cumque minima tempora ducimus earum dolores omnis provident dignissimos veritatis architecto reiciendis placeat optio assumenda voluptatum nam qui quibusdam amet debitis est, maxime in distinctio. Exercitationem provident quas reprehenderit quia ipsum et dolore neque asperiores qui possimus ad tempora maxime debitis vero, temporibus, nihil totam saepe voluptate! Laborum inventore ad id dolorem! Nobis odio numquam animi nihil soluta aut a officiis.</p>
+        <h3 class="policy__heading-2">Your Agreement</h3>
+        <p class="policy__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum quidem culpa facilis beatae, blanditiis officia adipisci unde tempore recusandae laboriosam accusamus temporibus at doloribus cumque quasi nostrum distinctio qui maiores magnam ut? Nisi similique temporibus veritatis doloremque consequuntur! Cumque minima tempora ducimus earum dolores omnis provident dignissimos veritatis architecto reiciendis placeat optio assumenda voluptatum nam qui quibusdam amet debitis est, maxime in distinctio. Exercitationem provident quas reprehenderit quia ipsum et dolore neque asperiores qui possimus ad tempora maxime debitis vero, temporibus, nihil totam saepe voluptate! Laborum inventore ad id dolorem! Nobis odio numquam animi nihil soluta aut a officiis.</p>
         </div>
     </div>
     </div>
