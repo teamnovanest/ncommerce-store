@@ -659,37 +659,42 @@
     color: #1d3557ce;
 }
 
-/* Privacy Policy Page */
-.privacy_policy__section {
+/* Privacy Policy & Terms of Service Page */
+.policy__section {
     height: 500px;
     overflow: auto;
     box-sizing: border-box;
 }
-.privacy_policy {
+.privacy_policy,
+.terms-of-service {
     text-align: center;
     /* margin: 0 auto; */
     padding: 0 30px;
 }
 
 @media screen and (min-width: 718px) {
-    .privacy_policy::-webkit-scrollbar {
+    .privacy_policy::-webkit-scrollbar,
+    .terms-of-service::-webkit-scrollbar {
         width: 10px;
     }
 
-    .privacy_policy::-webkit-scrollbar-track {
+    .privacy_policy::-webkit-scrollbar-track,
+    .terms-of-service::-webkit-scrollbar-track {
         background: #f1f1f1;
     }
 
-    .privacy_policy::-webkit-scrollbar-thumb {
+    .privacy_policy::-webkit-scrollbar-thumb,
+    .terms-of-service::-webkit-scrollbar-thumb {
         background: #888;
     }
 
-    .privacy_policy::-webkit-scrollbar-thumb:hover {
+    .privacy_policy::-webkit-scrollbar-thumb:hover,
+    .terms-of-service::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
 }
 
-.privacy-policy__updated-date {
+.policy__updated-date {
     font-size: 0.95rem;
     color: rgba(0, 0, 0, 0.2);
 }
@@ -698,16 +703,16 @@
     text-align: left;
 }
 
-.privacy-policy__heading-1 {
+.policy__heading-1 {
     margin-top: 1.5rem;
 }
 
-.privacy-policy__heading-2 {
+.policy__heading-2 {
     color: rgba(0, 0, 0, 0.5);
     margin-top: 2rem;
 }
 
-.privacy-policy__paragraph {
+.policy__paragraph {
     color: rgba(175, 172, 172, 0.9);
     line-height: 2.5;
 }
