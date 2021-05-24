@@ -338,7 +338,7 @@ $setting = DB::table('sitesettings')->first();
                                 <ul class="footer-categories">
                                     <li><a href="#">About Us</a></li>
                                     <li><a href="/contact/page">Contact Us</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href data-toggle="modal" data-target="#terms-of-service">Terms & Conditions</a></li>
                                     <li><a href="#">Returns & Exchanges</a></li>
                                     <li><a href="#">Shipping & Delivery</a></li>
                                     <li><a href data-toggle="modal" data-target="#privacy-policy">Privacy Policy</a></li>
@@ -467,6 +467,41 @@ $setting = DB::table('sitesettings')->first();
   </div>
 </div>
 {{-- End of privacy policy modal --}}
+
+
+{{-- Start of terms of service modal --}}
+<div class="modal fade" id="terms-of-service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="privacy_policy__section privacy_policy">
+        <h3 class="privacy-policy__heading-1">Terms of Service</h3>
+        <h6 class="privacy-policy__updated-date">Updated on 24th May, 2021</h6>
+        <div class="main-content">
+        {{-- Overview section --}}
+        <h3 class="privacy-policy__heading-2">Overview</h3>
+        <p class="privacy-policy__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum quidem culpa facilis beatae, blanditiis officia adipisci unde tempore recusandae laboriosam accusamus temporibus at doloribus cumque quasi nostrum distinctio qui maiores magnam ut? Nisi similique temporibus veritatis doloremque consequuntur! Cumque minima tempora ducimus earum dolores omnis provident dignissimos veritatis architecto reiciendis placeat optio assumenda voluptatum nam qui quibusdam amet debitis est, maxime in distinctio. Exercitationem provident quas reprehenderit quia ipsum et dolore neque asperiores qui possimus ad tempora maxime debitis vero, temporibus, nihil totam saepe voluptate! Laborum inventore ad id dolorem! Nobis odio numquam animi nihil soluta aut a officiis.</p>
+
+        {{-- Consent section --}}
+        <h3 class="privacy-policy__heading-2">Your Agreement</h3>
+        <p class="privacy-policy__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum quidem culpa facilis beatae, blanditiis officia adipisci unde tempore recusandae laboriosam accusamus temporibus at doloribus cumque quasi nostrum distinctio qui maiores magnam ut? Nisi similique temporibus veritatis doloremque consequuntur! Cumque minima tempora ducimus earum dolores omnis provident dignissimos veritatis architecto reiciendis placeat optio assumenda voluptatum nam qui quibusdam amet debitis est, maxime in distinctio. Exercitationem provident quas reprehenderit quia ipsum et dolore neque asperiores qui possimus ad tempora maxime debitis vero, temporibus, nihil totam saepe voluptate! Laborum inventore ad id dolorem! Nobis odio numquam animi nihil soluta aut a officiis.</p>
+        </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn" data-dismiss="modal">Decline</button>
+        <button type="button" class="btn"  data-dismiss="modal" id="btn-understood">Agree</button>
+    </div>
+    </div>
+  </div>
+</div>
+{{-- End of terms of service modal --}}
 
 
 
