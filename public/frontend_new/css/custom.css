@@ -659,6 +659,20 @@
     color: #1d3557ce;
 }
 
+/* Publicity */
+.owl-carousel .owl-item img {
+    display: block;
+    width: 1600px;
+    height: 500px;
+}
+
+@media screen and (max-width: 500px) {
+    .owl-carousel .owl-item img {
+        display: block;
+        width: 1600px;
+        height: 300px;
+    }
+}
 /* Privacy Policy & Terms of Service Page */
 .policy__section {
     height: 500px;

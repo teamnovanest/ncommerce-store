@@ -51,56 +51,41 @@
             </div>
             <div class="col-lg-9 col-xl-9 col-md-8 col-12">
                 <!-- Start Slider Area -->
-                <div class="slider__container slider--one mrg-xs">
-                    <div class="slider__activation__wrap owl-carousel owl-theme">
-                        <!-- Start Single Slide -->
-                        <div>
-                            <img src="{{'assets\img\c.jpg'}}"
-                                class="slide slider__full--screen slider-height-inherit  slider-text-left" alt="">
-                            <div class="text-left">
-                                <div class="row">
-                                    <div class="col-lg-8 col-xl-8 col-md-12 col-12">
-                                        <div class="slider__inner">
-                                            <h1>New Product <span class="text--theme">Collection</span></h1>
-                                            <div class="slider__btn">
-                                                <a class="htc__btn" href="#">shop now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Slide -->
-                        <!-- Start Single Slide -->
-                        <div>
-                            <img src="{{'assets\img\a.jpg'}}"
-                                class="slide slider__full--screen slider-height-inherit  slider-text-left" alt="">
-                            <div class="text-left">
-                                <div class="row">
-                                    <div class="col-lg-8 col-xl-8 col-md-12 col-12">
-                                        <div class="slider__inner">
-                                            <h1>New Product <span class="text--theme">Collection</span></h1>
-                                            <div class="slider__btn">
-                                                <a class="htc__btn" href="#">shop now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Slide -->
+                <div class="slider__container slider--one mrg-xs" id="advertIndicators">
+                    <ol class="carousel-indicators">
+                    @foreach( $publicity as $image )
+                        <li data-target="#advertIndicators" data-slide-to="{{ $loop->index }}" class="{{ $loop->first ? 'active' : '' }}"></li>
+                    @endforeach
+                    </ol>
 
+                    <div class="slider__activation__wrap owl-carousel owl-theme">
+                            <!-- Start Single Slide -->
+                            @if (sizeof($publicity) > 0) 
+                            @foreach( $publicity as $image )
+                            @if ($image->start_date <= date(now()) && $image->end_date > date(now()))
+                            <div class="item {{ $loop->first ? ' active' : '' }}" >
+                                <img src="{{ $image->image_secure_url }}" alt="">
+                            </div>
+                            @endif
+                            @endforeach
+                            @else
+                                <div>
+                                    <img src="{{'assets\img\c.jpg'}}">
+                                </div>
+                            @endif
+
+                        <!-- End Single Slide -->
                     </div>
                 </div>
-                <!-- Start Slider Area -->
+            <!-- Start Slider Area -->
             </div>
-        </div>
+    </div>
     </div>
 </section>
 <!-- End Feature Product -->
 
 <!-- Start Our Product Area -->
-<section class="htc__product__area ptb--130 bg__white">
+<section class="htc__product__area ptb--10 bg__white">
     <div class="container">
         <div class="htc__product__container">
             <!-- Start Product MEnu -->
