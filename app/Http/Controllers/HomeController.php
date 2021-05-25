@@ -26,15 +26,15 @@ class HomeController extends Controller
                 ->select('products.*','brand_options.brand_name')
                 ->where('products.status',1)->where('hot_new',1)->orderBy('id','desc')->limit(3)
                 ->get();
-            // $slider = DB::table('products')
-            //     ->join('brand','products.brand_id','brand.id')
-            //     ->select('products.*','brand.brand_name')
-            //     ->where('main_slider',1)->orderBy('id','DESC')->first();
+
             $category = DB::table('category_options')->where('deleted_at', NULL)->get();
             // $subcategory = DB::table('subcategory')->where('category_id',$cat->id)->get();
 
-            $publicity = DB::table('publicity')->get();
-            // dd($publicity);
+            $publicity = DB::table('publicity')
+            ->where('start_date','<=',date(now()))
+            ->where('end_date','>',date(now()))
+            ->select('start_date','end_date','image_secure_url')
+            ->inRandomOrder()->limit(10)->get();
     
             return view('home', compact('featured', 'trend' , 'best', 'hot', 'category', 'publicity'));
         } catch (\Throwable $th) {
