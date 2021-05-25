@@ -23,13 +23,28 @@ class OrderDetailsController extends Controller
             ->where('id', $orderDetailId)
             ->where('order_id',$order_id)->first();
              
-            $order_status = DB::table('order_details')
-            ->join('order_status_histories', 'order_status_histories.product_id','=', 'order_details.product_id')
-            ->leftJoin('status_options', 'order_status_histories.status_id', '=', 'status_options.id')
-            ->select('status_options.status_name', 'status_options.description', 'order_status_histories.status_id','order_status_histories.updated_at','order_details.created_at')
+            // $order_status = DB::table('order_details')
+            // ->join('order_status_histories', 'order_status_histories.product_id','=', 'order_details.product_id')
+            // ->leftJoin('status_options', 'order_status_histories.status_id', '=', 'status_options.id')
+            // ->select('status_options.status_name', 'status_options.description', 'order_status_histories.status_id','order_status_histories.updated_at','order_details.created_at')
+            // ->where('order_details.id', $orderDetailId)
+            // ->where('order_details.order_id',$order_id)
+            // ->where('order_status_histories.user_id', Auth::id())->get();
+
+            $product_id = DB::table('order_details')
+            ->select('product_id AS pid')
             ->where('order_details.id', $orderDetailId)
-            ->where('order_details.order_id',$order_id)
-            ->where('order_status_histories.user_id', Auth::id())->get();
+            ->first();
+           
+            $order_status = DB::table('order_details')
+            ->join('order_status_histories', 'order_status_histories.order_id','=', 'order_details.order_id')
+            ->leftJoin('status_options', 'order_status_histories.status_id', '=', 'status_options.id')
+            ->select('status_options.status_name', 'status_options.description',
+            'order_status_histories.status_id','order_status_histories.updated_at','order_details.created_at')
+            ->where('order_details.id', $orderDetailId)
+            ->where('order_status_histories.product_id',$product_id->pid)
+            ->where('order_status_histories.user_id', Auth::id())
+            ->get();
             
             return view('pages.order_status',compact('order_status','order_code','current_status','reason'));       
         } catch (\Throwable $th) {

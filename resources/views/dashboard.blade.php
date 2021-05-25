@@ -54,7 +54,7 @@
                                             class="btn btn-sm btn-info"> View</a>
                                     </td>
                                     <td>
-                                        @if ($row->status_id === 2)
+                                        @if (($row->status_id === 7 || $row->status_id === 9) && $row->status_id !== 8)
                                         <div class="form-check form-check-inline mt-2">
                                             <label for="" class="p-2">Yes </label>
                                             <input class="form-check-input" type="checkbox" name="updateRadio" id="updateRadio" value="{{8}}" data-order-id="{{$row->id}}" data-order-datail-id="{{$row->order_detail_id}}" data-product-id="{{$row->product_id}}">
