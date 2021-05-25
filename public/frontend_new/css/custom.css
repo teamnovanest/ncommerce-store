@@ -690,7 +690,7 @@
 
     .privacy_policy::-webkit-scrollbar-thumb:hover,
     .terms-of-service::-webkit-scrollbar-thumb:hover {
-        background: #555;
+        background: #fd534a;
     }
 }
 
