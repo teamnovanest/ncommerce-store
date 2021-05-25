@@ -13,7 +13,7 @@
 
     <dt>
     <a class="dropdown__header" href="#">
-      <span class="hida">Select finance institutions</span>    
+      <span class="hida">Click to select your financial institution</span>    
       <p class="multiSel"></p>  
     </a>
     </dt>
