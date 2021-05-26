@@ -264,9 +264,10 @@
                     $user_review = DB::table('product_reviews')->where('user_id',Auth::id())->where('product_id',$product->id)->first();
                     $user_bought_product = DB::table('order_details')
                     ->join('orders','order_details.order_id','=','orders.id')
+                    ->join('order_status_histories','order_details.product_id','=','order_status_histories.product_id')
                     ->where('order_details.product_id',$product->id)
                     ->where('orders.user_id',Auth::id())
-                    // ->where('order_details.status_id',9)
+                    ->where('order_status_histories.status_id',9)
                     ->first();
                     @endphp
                     <div role="tabpanel" id="reviews" class="product__tab__content fade">

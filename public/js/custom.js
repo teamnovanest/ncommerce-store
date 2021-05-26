@@ -313,9 +313,6 @@ $(document).ready(function () {
     });
 
     //Product review rating js
-    $(".rating").hover(function () {
-        $(".rate").removeClass("mystar");
-    });
     $("#star1").hover(function () {
         $(".rate").removeClass("mystar");
         $("#star1").addClass("mystar");
