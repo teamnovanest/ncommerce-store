@@ -549,7 +549,6 @@
     width: 500px;
 }
 
-
 /*  Product Review */
 .review_submit {
     background-color: #050505;
@@ -755,4 +754,11 @@
     .modal .modal-dialog {
         max-width: 600px;
     }
+}
+
+.zmdi {
+    font-size: 40px;
+}
+.mystar {
+    color: #f3c258;
 }

@@ -124,7 +124,7 @@ Route::post('/newsletter/create', [NewsletterController::class, 'storeNewsLetter
 
 
 //Product Review
-Route::post('/product/review/create', [ProductReviewController::class, 'productReviewCreate'])->name('review.create');
+Route::get('/product/review', [ProductReviewController::class, 'productReview']);
 // City Route
 Route::get('/city/{region_id}', [CityController::class, 'cities']);
 
