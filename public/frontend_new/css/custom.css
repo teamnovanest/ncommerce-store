@@ -549,6 +549,19 @@
     width: 500px;
 }
 
+/*  Product Review */
+.review_submit {
+    background-color: #050505;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 15px 100px;
+    text-decoration: none;
+    border: 0px;
+}
 .finance-offer__error {
     padding: 0 10px;
 }
@@ -741,4 +754,11 @@
     .modal .modal-dialog {
         max-width: 600px;
     }
+}
+
+.zmdi {
+    font-size: 40px;
+}
+.mystar {
+    color: #f3c258;
 }

@@ -16,6 +16,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderUpdateController;
 use App\Http\Controllers\OrderDetailsController;
+use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\FeatureRequestController;
 use App\Http\Controllers\LenderOfferingController;
 
@@ -120,6 +121,10 @@ Route::post('user/profile/update', [ProfileController::class,'updateProfile'])->
 //newsletters
 Route::post('/newsletter/create', [NewsletterController::class, 'storeNewsLetter']) ->name('store.newsletter');
 
+
+
+//Product Review
+Route::get('/product/review', [ProductReviewController::class, 'productReview']);
 // City Route
 Route::get('/city/{region_id}', [CityController::class, 'cities']);
 

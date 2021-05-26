@@ -311,5 +311,86 @@ $(document).ready(function () {
             });
         }
     });
+
+    //Product review rating js
+    $("#star1").hover(function () {
+        $(".rate").removeClass("mystar");
+        $("#star1").addClass("mystar");
+    });
+    $("#star2").hover(function () {
+        $(".rate").removeClass("mystar");
+        $("#star1, #star2").addClass("mystar");
+    });
+    $("#star3").hover(function () {
+        $(".rate").removeClass("mystar");
+        $("#star1, #star2, #star3").addClass("mystar");
+    });
+    $("#star4").hover(function () {
+        $(".rate").removeClass("mystar");
+        $("#star1, #star2, #star3, #star4").addClass("mystar");
+    });
+    $("#star5").hover(function () {
+        $(".rate").removeClass("mystar");
+        $("#star1, #star2, #star3, #star4, #star5").addClass("mystar");
+    });
+
+    var selected_rating;
+    $(".rate").on("click", function (evt) {
+        selected_rating = $(this).attr("data-rate-id");
+    });
+
+    $("#submit-review-btn").on("click", function (evt) {
+        evt.preventDefault();
+        var product_id = $(this).attr("data-product-id");
+        var review = $('textarea[name="review"]').val();
+
+        if (selected_rating && product_id) {
+            $.ajax({
+                url: "/product/review",
+                type: "GET",
+                dataType: "json",
+                cache: false,
+                data: {
+                    selected_rating,
+                    product_id,
+                    review,
+                },
+                success: function (data) {
+                    if (data.message) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success",
+                            text: data.message,
+                            showCloseButton: true,
+                        });
+                        window.location.reload();
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: data.error,
+                            showCloseButton: true,
+                        });
+                    }
+                },
+                error: function (error) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: error.responseJSON.error,
+                        showCloseButton: true,
+                    });
+                },
+            });
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Please add a rating",
+                showCloseButton: true,
+            });
+        }
+    });
+
     //end of ready function
 });

@@ -326,7 +326,7 @@ $setting = DB::table('sitesettings')->first();
                                 @endphp
                                 <ul class="footer-categories">
                             @foreach($category as $cat)
-                                    <li><a href="{{ url('allcategory/'.$cat->id) }}">{{ $cat->category_name }}</a></li>
+                                    <li><a href="{{route('category.name',['id'=>$cat->id,'category_name'=> $cat->category_name]) }}">{{ $cat->category_name }}</a></li>
                             @endforeach
                                 </ul>
                             </div>

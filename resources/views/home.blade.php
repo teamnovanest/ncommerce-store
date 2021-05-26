@@ -69,9 +69,23 @@
                             @endif
                             @endforeach
                             @else
-                                <div>
-                                    <img src="{{'assets\img\c.jpg'}}">
+                            <div>
+                            <img src="{{'assets\img\c.jpg'}}"
+                                class="slide slider__full--screen slider-height-inherit  slider-text-left" alt="">
+                            <div class="text-left">
+                                <div class="row">
+                                    <div class="col-lg-8 col-xl-8 col-md-12 col-12">
+                                        <div class="slider__inner">
+                                            <h1 class="p-5">Advertise <span class="text--theme">Here</span></h1>
+                                            <div class="slider__btn">
+                                                {{-- <a class="htc__btn" href="#">shop now</a> --}}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                            </div>
+                    </div>
                             @endif
 
                         <!-- End Single Slide -->
