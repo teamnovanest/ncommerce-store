@@ -256,7 +256,7 @@ $('.fixed__footer').css({'margin-bottom': $newsletter_height.height() + 'px'});
       nav:true,
       autoplay: true,
       navText: [ '<i class="zmdi zmdi-chevron-left"></i>', '<i class="zmdi zmdi-chevron-right"></i>' ],
-      autoplayTimeout: 10000,
+      animateOut: 'fadeOut',
       items:1,
       dots: false,
       lazyLoad: true,
