@@ -318,6 +318,7 @@
                                         <li><i class="zmdi zmdi-star mystar"></i></li>
                                         @endif
                                     </ul>
+                                    
                                     {{-- <div class="rating__send">
                                                     <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
                                                     <a href="#"><i class="zmdi zmdi-close"></i></a>
@@ -339,12 +340,12 @@
                             <h4 class="rating-title-2">Your Rating</h4>
                             <div class="rating__list">
                                 <!-- Start Single List -->
-                                <ul class="rating" >
+                                <ul class="rating">
                                     <li><i class="zmdi zmdi-star rate" id="star1" data-rate-id="1"></i></li>
                                     <li><i class="zmdi zmdi-star rate" id="star2" data-rate-id="2"></i></li>
                                     <li><i class="zmdi zmdi-star rate" id="star3" data-rate-id="3"></i></li>
                                     <li><i class="zmdi zmdi-star rate" id="star4" data-rate-id="4"></i></li>
-                                    <li><i class="zmdi zmdi-star rate" id="star5" data-rate-id="5" "></i></li>
+                                    <li><i class="zmdi zmdi-star rate" id="star5" data-rate-id="5"></i></li>
                                 </ul>
                                 <!-- End Single List -->
                             </div>

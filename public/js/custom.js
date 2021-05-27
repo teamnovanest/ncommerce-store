@@ -334,9 +334,66 @@ $(document).ready(function () {
         $("#star1, #star2, #star3, #star4, #star5").addClass("mystar");
     });
 
+    // removing the color when the user leaves without clicking on any star
+    $(".rating").hover(function () {
+        $("#star1, #star2, #star3, #star4, #star5").removeClass("mystar");
+    });
+
     var selected_rating;
     $(".rate").on("click", function (evt) {
-        selected_rating = $(this).attr("data-rate-id");
+        selected_rating = parseInt($(this).attr("data-rate-id"));
+
+        if (selected_rating === 1) {
+            $(".rating__list").empty();
+            $(".rating__list").append(`
+            <ul class="rating">
+            <li><i class="zmdi zmdi-star mystar"></i></li>
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star"></i></li>
+            </ul>`);
+        } else if (selected_rating === 2) {
+            $(".rating__list").empty();
+            $(".rating__list").append(`
+            <ul class="rating">
+            <li><i class="zmdi zmdi-star mystar"></i></li>
+            <li><i class="zmdi zmdi-star mystar"></i></li>
+            <li><i class="zmdi zmdi-star"></i></li>
+            <li><i class="zmdi zmdi-star"></i></li>
+            <li><i class="zmdi zmdi-star"></i></li>
+            </ul>`);
+        } else if (selected_rating === 3) {
+            $(".rating__list").empty();
+            $(".rating__list").append(`
+            <ul class="rating">
+            <li><i class="zmdi zmdi-star mystar"></i></li>
+            <li><i class="zmdi zmdi-star mystar"></i></li>
+            <li><i class="zmdi zmdi-star mystar"></i></li>
+            <li><i class="zmdi zmdi-star"></i></li>
+            <li><i class="zmdi zmdi-star"></i></li>
+            </ul>`);
+        } else if (selected_rating === 4) {
+            $(".rating__list").empty();
+            $(".rating__list").append(`
+            <ul class="rating">
+            <li><i class="zmdi zmdi-star mystar"></i></li>
+            <li><i class="zmdi zmdi-star mystar"></i></li>
+            <li><i class="zmdi zmdi-star mystar"></i></li>
+            <li><i class="zmdi zmdi-star mystar"></i></li>
+            <li><i class="zmdi zmdi-star"></i></li>
+            </ul>`);
+        } else if (selected_rating === 5) {
+            $(".rating__list").empty();
+            $(".rating__list").append(`
+            <ul class="rating">
+            <li><i class="zmdi zmdi-star mystar"></i></li>
+            <li><i class="zmdi zmdi-star mystar"></i></li>
+            <li><i class="zmdi zmdi-star mystar"></i></li>
+            <li><i class="zmdi zmdi-star mystar"></i></li>
+            <li><i class="zmdi zmdi-star mystar"></i></li>
+            </ul>`);
+        }
     });
 
     $("#submit-review-btn").on("click", function (evt) {
