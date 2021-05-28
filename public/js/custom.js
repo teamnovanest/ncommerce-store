@@ -97,6 +97,16 @@ $(document).ready(function () {
                     $("#thumbsup" + id).removeClass("thumbsup");
                     $("#thumbsup" + id).attr("data-value-id", 0);
                     $("#likes" + id).html(response.results.likes);
+                    $("#disliked_request" + id).hide(); //from the userlikes page
+                } else if (response.status === "liked_already") {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Warning",
+                        text: "You liked this request. To dislike it,Click on the icon or  go to the likes section and click on the thumbs icon to dislike it.",
+                        showCloseButton: true,
+                    });
+                    $("#thumbsup" + id).addClass("thumbsup");
+                    $("#thumbsup" + id).attr("data-value-id", 1);
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -116,6 +126,7 @@ $(document).ready(function () {
             },
         });
     });
+
     // Disable quantity update button on page load
     $(".btn-update-qty").prop("disabled", true);
 
