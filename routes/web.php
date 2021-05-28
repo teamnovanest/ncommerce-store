@@ -81,6 +81,7 @@ Route::post('/feature-request/{id}/like', [FeatureRequestController::class,'requ
 Route::get('/feature-request/{id}/edit', [FeatureRequestController::class,'editFeature'])->name('feature.edit');
 Route::post('/feature-request/{id}/update', [FeatureRequestController::class,'updateRequest'])->name('feature.update');
 Route::get('/feature-request/{id}/delete', [FeatureRequestController::class,'delete'])->name('feature.delete');
+Route::get('/user/likes', [FeatureRequestController::class,'userLikes'])->name('user.likes');
 
 
 // Contact page routes
