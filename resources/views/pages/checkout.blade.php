@@ -92,11 +92,11 @@
                                 <div class="row">
                                     
                                    
-                                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+                                    <div class="col-2 col-lg-1 col-md-2 col-xs-2">
                                         <input class="form-check-input" type="radio" name="lenderOfferingRadio"
                                         id="{{$offer->id}}" value="{{$offer->id}}" data-id="{{$offer->id}}">
                                     </div>
-                                        <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10">
+                                        <div class="col-10 col-lg-11 col-md-10 col-xs-10">
                                             <label class="form-check-label" for="{{$offer->id}}">
                                             @if (Session::has('coupon'))
                                                 <p>
