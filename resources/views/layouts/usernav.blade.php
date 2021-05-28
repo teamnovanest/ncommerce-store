@@ -99,7 +99,8 @@
                 <div>
                   <nav class="nav">
                     <a href="{{route('feature.create')}}" class="nav-link">Add Request</a>
-                    <a href="{{ route('feature.index')}}" class="nav-link">View Request</a>
+                    <a href="{{ route('feature.index')}}" class="nav-link">View Requests</a>
+                    <a href="{{ route('user.likes')}}" class="nav-link">Likes</a>
                   </nav>
                 </div>
               </div><!-- container -->
