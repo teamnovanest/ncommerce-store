@@ -22,8 +22,8 @@
 
                                 @foreach($likes as $like)
                                 <tr id="disliked_request{{$like->id}}" >
-                                    <td>{{ $like->title }}</td>
-                                    <td>{{ $like->description }}</td>
+                                    <td class="pro-name">{{ $like->title }}</td>
+                                    <td class="pro-name">{{ $like->description }}</td>
                                     <td>
                                         <button class="like-btn" data-request-id="{{$like->id}}"><i
                                                 class="material-icons thumbsup" id="thumbsup{{$like->id}}"

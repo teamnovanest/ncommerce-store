@@ -23,8 +23,8 @@
 
                                 @foreach($requests as $request)
                                 <tr>
-                                    <td>{{ $request->title }}</td>
-                                    <td>{{ $request->description }}</td>
+                                    <td class="pro-name">{{ $request->title }}</td>
+                                    <td class="pro-name">{{ $request->description }}</td>
                                     <td id="likes{{$request->id}}">{{$request->likes}}</td>
                                     <td>
                                         @if ($request->user_id === Auth::id())
