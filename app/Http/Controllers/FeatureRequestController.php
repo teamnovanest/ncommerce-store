@@ -57,7 +57,7 @@ class FeatureRequestController extends Controller
                  'created_at' => now(),
              ]);
                    $notification=array(
-                 'messege'=>'Request Sent',
+                 'messege'=>'Feature request sent successfully',
                  'alert-type'=>'success'
                   );
      
