@@ -165,7 +165,55 @@
 
     <script src="{{ asset('https://unpkg.com/nprogress@0.2.0/nprogress.js')}}"></script>
 
-    <script>
+     <script>
+        @if(Session::has('messege'))
+          var type="{{Session::get('alert-type','info')}}"
+          var Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 5000,
+                        timerProgressBar: true,
+                        onOpen: (toast) => {
+                            toast.addEventListener(
+                                "mouseenter",
+                                Swal.stopTimer
+                            );
+                            toast.addEventListener(
+                                "mouseleave",
+                                Swal.resumeTimer
+                            );
+                        },
+                    });
+          switch(type){
+              case 'info':
+                   Toast.fire({
+                            icon: "info",
+                            title: "{{ Session::get('messege') }}",
+                        });
+                   break;
+              case 'success':
+                    Toast.fire({
+                            icon: "success",
+                            title: "{{ Session::get('messege') }}",
+                        });
+                  break;
+              case 'warning':
+                   Toast.fire({
+                            icon: "warning",
+                            title: "{{ Session::get('messege') }}",
+                        });
+                  break;
+              case 'error':
+                    Toast.fire({
+                            icon: "error",
+                            title: "{{ Session::get('messege') }}",
+                        });
+                  break;
+          }
+        @endif
+     </script>  
+    {{-- <script>
       @if(Session::has('messege'))
       var type = "{{Session::get('alert-type','info')}}"
       switch (type) {
@@ -183,7 +231,7 @@
           break;
       }
       @endif
-    </script>
+    </script> --}}
 
 </body>
 
