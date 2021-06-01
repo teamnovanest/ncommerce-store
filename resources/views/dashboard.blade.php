@@ -28,11 +28,11 @@
                             <tbody>
                                 @foreach($order as $row)
                                 <tr>
+                                    <td class="pro-name"><a href="{{ url('product/details/'.$row->product_id.'/'.$row->slug) }}" 
+                                    target="_blank">{{$row->product_name}}</a></td>
                                     <td><a href="{{ url('product/details/'.$row->product_id.'/'.$row->slug) }}"
-                                            target="_blank">{{$row->product_name}}</a></td>
-                                    <td><a href="{{ url('product/details/'.$row->product_id.'/'.$row->slug) }}"
-                                            target="_blank"><img style="height: 100px"
-                                                src="{{ asset( $row->image_one_secure_url )}}" alt="product images"></a>
+                                    target="_blank"><img style="height: 70px"
+                                    src="{{ asset( $row->image_one_secure_url )}}" alt="product images"></a>
                                     </td>
                                     <th>{{date('j F, Y', strtotime($row->created_at)) }}</th>
                                     <td>GHC {{ number_format($row->total / 100,2)}}</td>
