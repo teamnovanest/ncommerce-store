@@ -62,11 +62,11 @@
                             <!-- Start Single Slide -->
                             @if (sizeof($publicity) > 0) 
                             @foreach( $publicity as $image )
-                            @if ($image->start_date <= date(now()) && $image->end_date > date(now()))
+                            <!-- @if ($image->start_date <= date('Y-m-d') && $image->end_date >= date('Y-m-d')) -->
                             <div class="item {{ $loop->first ? ' active' : '' }}" >
                                 <img src="{{ $image->image_secure_url }}" alt="">
                             </div>
-                            @endif
+                            <!-- @endif -->
                             @endforeach
                             @else
                             <div>

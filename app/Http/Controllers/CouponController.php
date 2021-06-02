@@ -23,8 +23,7 @@ class CouponController extends Controller
 
     $content = Cart::content();
   
-    if ($check) {
-      
+    if ($check && $check->start_date <= date('Y-m-d') && $check->end_date >= date('Y-m-d')) {
       foreach($content as $row){
          if ($row->options->merchant_organization_id === $check->merchant_organization_id) {
             $percentage_price = intval($check->discount / 100 * $this->floatvalue(Cart::Subtotal()));
