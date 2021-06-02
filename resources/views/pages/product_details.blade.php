@@ -124,7 +124,7 @@
                         <br><br>
 
                         <div class="pro__details">
-                            {{ substr( $product->product_details,0,900)}}
+                            {!! (substr($product->product_details,0,500)) !!}
                             <span><a href="#description">View more</a></span>
                         </div>
                         <br>
@@ -217,7 +217,7 @@
                         <div class="product__description__wrap">
                             <div class="product__desc">
                                 <h2 class="title__6">Details</h2>
-                                <p>{{$product->product_details}}</p>
+                                <p>{!! $product->product_details !!}</p>
                             </div>
                             <div class="pro__feature">
                                 <h2 class="title__6">Features</h2>

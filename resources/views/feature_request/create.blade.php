@@ -12,8 +12,7 @@
         <div class="container">
             <div class="form-group has-success mg-b-0  col-md-9 col-sm-12 mx-auto">
                 <input class="form-control" placeholder="Feature Tittle"  required type="text" name="title">
-                <textarea rows="5" class="form-control mg-t-20"  required name="description" >Feature Description
-                </textarea>
+                <textarea rows="5" class="form-control mg-t-20"  required name="description" placeholder="Feature Description"></textarea>
                 <input type="submit" class="form-control-btn mg-t-20"></input>
             </div><!-- form-group -->
         </div><!-- col -->
