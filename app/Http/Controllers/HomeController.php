@@ -31,8 +31,8 @@ class HomeController extends Controller
             // $subcategory = DB::table('subcategory')->where('category_id',$cat->id)->get();
 
             $publicity = DB::table('publicity')
-            ->where('start_date','<=',date(now()))
-            ->where('end_date','>',date(now()))
+            ->where('start_date','<=',date('Y-m-d'))
+            ->where('end_date','>=',date('Y-m-d'))
             ->select('start_date','end_date','image_secure_url')
             ->inRandomOrder()->limit(10)->get();
     
