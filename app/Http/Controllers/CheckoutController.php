@@ -83,6 +83,7 @@ class CheckoutController extends Controller
         $status['user_id'] = Auth::id();
         $status['order_id'] = $order_id;
         $status['status_id'] = 1;
+        $status['status'] = 'ORDER_PENDING';
         $status['product_id'] = $row->id;
         $status['merchant_organization_id'] = $row->options->merchant_organization_id;
         $status['lender_organization_id'] = $lenderOffering->lender_organization_id;
