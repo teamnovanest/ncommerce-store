@@ -17,9 +17,10 @@
                                     <th>Product name</th>
                                     <th>Product image</th>
                                     <th>Date </th>
+                                    <th>Product price</th>
                                     <th>Amount </th>
-                                    <th>Total Financed</th>
-                                    <th>Order Code </th>
+                                    <th>Total financed</th>
+                                    <th>Order code </th>
                                     <th>Status </th>
                                     <th>Action </th>
                                     <th>Received? </th>
@@ -34,11 +35,12 @@
                                     target="_blank"><img style="height: 70px"
                                     src="{{ asset( $row->image_one_secure_url )}}" alt="product images"></a>
                                     </td>
-                                    <th>{{date('j F, Y', strtotime($row->created_at)) }}</th>
+                                    <td>{{date('j F, Y', strtotime($row->created_at)) }}</td>
+                                    <td> GHC {{number_format($row->totalprice /100,2) }}</td>
                                     <td>GHC {{ number_format($row->total / 100,2)}}</td>
                                     <td>GHC
                                         {{ number_format(((($row->total / 100) * $row->percentage * ($row->payment_period/12)) / 100) + ($row->total/100),2)}}
-                                        </>
+                                    </td>
                                     <td>{{ $row->order_code }}</td>
                                     <td id="statustd{{$row->order_detail_id}}">
                                         @if($row->status_id === 0)
