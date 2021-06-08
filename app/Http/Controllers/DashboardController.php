@@ -18,7 +18,8 @@ class DashboardController extends Controller
     public function __construct() {
         $this->middleware('auth');
     }
-    public function index() {
+    public function index(Request $request) 
+    {
         try {
            $lender_organizations = CustomerFinanceOrganizationAffiliation::where('user_id', Auth::id())->get();
         $selected_organizations = UserLenderSelection::where('user_id', Auth::id())->get();
@@ -39,6 +40,18 @@ class DashboardController extends Controller
         }else{ 
             $finance_institutions = DB::table('lenders')->get();
             $regions = Region::all();
+
+            // $employer_name = $request->input('employer_name');
+            // $employer_address = $request->input('employer_address');
+            // $phone_one = $request->input('phone_one');
+            // $phone_two = $request->input('phone_two');
+
+            // DB::table('employer_info')
+            // ->insert([
+            //     'employer_name' =>$employer_name,
+            //     'employer_address'=>$employer_address,
+            // ]);
+
             return view('pages.select_finance_institution', compact('finance_institutions','regions'));
         }    
         } catch (\Throwable $th) {

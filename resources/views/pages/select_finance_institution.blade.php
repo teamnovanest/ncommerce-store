@@ -1,68 +1,93 @@
 @extends('layouts.usernav')
 
 @section('content')
-   <div class="form__section">
- <div class="form__body">
-  <div class="form__header">
-  <h3 class="form__header--main">Please select the institutions you have an account with</h3>
-  {{-- <p class="form__header--sec">Skip this step if you don't have</p> --}}
- </div>
- <form id="form">
-   @csrf
-  <dl class="dropdown"> 
 
-    <dt>
-    <a class="dropdown__header" href="#">
-      <span class="hida">Click to select your financial institution</span>    
-      <p class="multiSel"></p>  
-    </a>
-    </dt>
+<div class="center-section">
+    <div>
+        <div>
+            <div class="card px-0 pt-4 pb-0 mt-3 mb-3 form__section">
+                <p class="text-center"><i>Fill all form field to go to next step</i></p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="msform">
+                            <!-- progressbar -->
+                            <ul id="progressbar">
+                                <li class="active" id="account"><strong>Finance Institution</strong></li>
+                                <li id="personal"><strong>Employer Information</strong></li>
+                            </ul> <!-- fieldsets -->
+                            <fieldset>
+                                <div class="form-card">
+                                    <h3 class="fs-title">Please select the institutions you have an account with</h3>
+                                <dl class="dropdown"> 
 
-    <dd>
-        <div class="mutliSelect">
-            <ul class="institution__list">
-              <li>
-                <input type="checkbox" value="NONE" name="none">
-                NONE
-              </li>
-             @foreach ($finance_institutions as $finance_institution)  
-                <li>
-                    <input type="checkbox" id="{{$finance_institution->id}}" value="{{$finance_institution->registered_name}}"
-                    name="institution[]" />
-                    {{$finance_institution->registered_name}}</li>
-             @endforeach
-            </ul>
+                                <dt>
+                                 <a class="dropdown__header" href="#">
+                                   <span class="hida">Click to select your financial institution</span>    
+                                   <p class="multiSel"></p>  
+                                 </a>
+                                 </dt>
+                            
+                                 <dd>
+                                     <div class="mutliSelect">
+                                         <ul class="institution__list">
+                                           <li>
+                                             <input type="checkbox" value="NONE" name="none">
+                                             NONE
+                                           </li>
+                                          @foreach ($finance_institutions as $finance_institution)  
+                                            <li>
+                                                <input type="checkbox" id="{{$finance_institution->id}}" value="{                             {$finance_institution->registered_name}}"
+                                                name="institution[]" />
+                                                {{$finance_institution->registered_name}}
+                                            </li>
+                                          @endforeach
+                                         </ul>
+                                     </div>
+                                 </dd>
+                                </dl>
+                                    <label class='form__label' for="region">Choose Region</label>
+                                        <select class="form-control" data-style="btn btn-link" id="region"
+                                        name="region_id">
+                                        <option label="Choose Region"></option>
+                                            @foreach($regions as $row)
+                                        <option value="{{ $row->id }}">{{ $row->region_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    <label class="form__label" for="city">City</label>
+                                        <select id='city' class="form-control" data-style="btn btn-link"
+                                        name="city_id">
+                                        </select>
+                                    <label class="form__label" for="identification">Select your form of identification</label>
+                                        <select class="form-control " data-style="btn btn-link" id="identification" name="identification">
+                                            <option value="NHIS">NHIS</option>
+                                            <option value="PASSPORT">Passport</option>
+                                            <option value="VOTER ID">Voter's Id</option>
+                                        </select>
+                                    <label class="form__label" for="identification_number">Identification number</label>
+                                        <input class="form-control " type="text" id="identification_number" name="identification_number" placeholder="Enter number" outlined>
+                                </div> <input type="button" name="next" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title">Employer Information</h2>
+                                    <input type="text" name="employer_name" placeholder="Employer Name" class="input-width"/> 
+                                    <input type="text" name="employer_address" placeholder="Address"class="input-width" /> <input type="text" name="phone_one" placeholder="Contact No." class="input-width"/> 
+                                    <input type="text" name="phone_two" placeholder="Alternate Contact No." class="input-width"/>
+                                    
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                <button class="action-button-previous" id="btn_submit">Submit</button>
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-    </dd>
-   </dl>
-   <label class='form__label' for="region">Choose Region</label>
-      <select class="form-control" data-style="btn btn-link" id="region"
-          name="region_id">
-          <option label="Choose Region"></option>
-          @foreach($regions as $row)
-          <option value="{{ $row->id }}">{{ $row->region_name }}</option>
-          @endforeach
-      </select>
-        <label class="form__label" for="city">City</label>
-          <select id='city' class="form-control" data-style="btn btn-link"
-              name="city_id">
-
-          </select>
-   <label class="form__label" for="identification">Select your form of identification</label>
-       <select class="form-control " data-style="btn btn-link" id="identification" name="identification">
-
-          <option value="NHIS">NHIS</option>
-          <option value="PASSPORT">Passport</option>
-          <option value="VOTER ID">Voter's Id</option>
-
-          </select>
-     <label class="form__label" for="identification_number">Identification number</label>
-    <input class="form-control " type="text" id="identification_number" name="identification_number" placeholder="Enter number">
-    <button class="form__submit" id="btn_submit">Submit</button>
-   </form>
- </div>
-
+    </div>
 </div>
+
+
 
 <script
   src="https://code.jquery.com/jquery-3.6.0.js"
@@ -195,5 +220,4 @@ $('#btn_submit').on('click',function(event) {
     });
 
 </script>
-
 @endsection
