@@ -20,7 +20,7 @@ class DashboardController extends Controller
     }
     public function index() {
         try {
-           $lender_organizations = CustomerFinanceOrganizationAffiliation::where('user_id', Auth::id())->get();
+        $lender_organizations = CustomerFinanceOrganizationAffiliation::where('user_id', Auth::id())->get();
         $selected_organizations = UserLenderSelection::where('user_id', Auth::id())->get();
         
         if($lender_organizations->isNotEmpty() || $selected_organizations->isNotEmpty()) {
