@@ -23,7 +23,7 @@ class CheckoutController extends Controller
     
     $selectedOfferId = $request->selectedOfferId;
     #select the payment period and percentag from the lender offering table
-    $lenderOffering = DB::table('lender_offerings')->select('payment_period', 'percentage', 'max_financed', 'lender_organization_id')->where('id', $selectedOfferId)->first();
+    $lenderOffering = DB::table('lender_offerings')->select('payment_period', 'percentage', 'max_financed', 'lender_organization_id','finance_union_id')->where('id', $selectedOfferId)->first();
     $rate = $lenderOffering->percentage;
     $time = $lenderOffering->payment_period;
    
@@ -99,6 +99,7 @@ class CheckoutController extends Controller
       $offerdetail['percentage'] = $lenderOffering->percentage;
       $offerdetail['payment_period'] = $lenderOffering->payment_period;
       $offerdetail['lender_organization_id'] = $lenderOffering->lender_organization_id;
+      $offerdetail['finance_union_id'] = $lenderOffering->finance_union_id;
       $offerdetail['created_at'] = now();
       DB::table('order_financings')->insert($offerdetail);
 
