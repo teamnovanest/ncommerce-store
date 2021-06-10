@@ -39,18 +39,7 @@ class DashboardController extends Controller
               return view('dashboard',compact('order','status'));
         }else{ 
             $finance_institutions = DB::table('lenders')->get();
-            $regions = Region::all();
-
-            // $employer_name = $request->input('employer_name');
-            // $employer_address = $request->input('employer_address');
-            // $phone_one = $request->input('phone_one');
-            // $phone_two = $request->input('phone_two');
-
-            // DB::table('employer_info')
-            // ->insert([
-            //     'employer_name' =>$employer_name,
-            //     'employer_address'=>$employer_address,
-            // ]);
+            $regions = Region::all(); 
 
             return view('pages.select_finance_institution', compact('finance_institutions','regions'));
         }    
@@ -68,7 +57,7 @@ class DashboardController extends Controller
     }
 
      public function saveFinanceInstitution(Request $request) {
-        $finance_institution = $request->selectedInstitutions;
+     $finance_institution = $request->selectedInstitutions;
      $affiliation = $request->affiliation;
      $region_id = $request->region_id;
      $city_id = $request->city_id;
@@ -76,34 +65,78 @@ class DashboardController extends Controller
      $identification_number = $request->input('identification_number');
     //  dd($request);
 
-     $data = array();
-     if($finance_institution) {
-        
-         for ($x = 0; $x < sizeof($finance_institution); $x++) { $arr=array(); $arr['user_id']=Auth::user()->id;
-             $arr['lender_organization_id'] = $finance_institution[$x];
-             $arr['region_id'] = $region_id;
-             $arr['city_id'] = $city_id;
-             $arr['identification_type'] = $identification_card;
-             $arr['identification_number'] = $identification_number;
-             $arr['created_at'] = now();
-             array_push($data, $arr);
-             }
-     } else {
-             $arr['user_id']=Auth::user()->id;
-             $arr['affiliation'] = $affiliation;
-             $arr['region_id'] = $region_id;
-             $arr['city_id'] = $city_id;
-             $arr['identification_type'] = $identification_card;
-             $arr['identification_number'] = $identification_number;
-             $arr['created_at'] = now();
-             array_push($data, $arr);
+     $company_name = $request->company_name;
+     $employer_name = $request->employer_name;
+     $address = $request->address;
+     $phone_one = $request->phone_one;
+     $phone_two = $request->phone_two;
+     $is_HR = $request->is_HR;
+     
+     try {
+         DB::beginTransaction();
+         $data = array();
+         if($finance_institution) {
+             
+             for ($x = 0; $x < sizeof($finance_institution); $x++) { 
+                 $arr=array(); $arr['user_id']=Auth::user()->id;
+                 $arr['lender_organization_id'] = $finance_institution[$x];
+                 $arr['region_id'] = $region_id;
+                 $arr['city_id'] = $city_id;
+                 $arr['identification_type'] = $identification_card;
+                 $arr['identification_number'] = $identification_number;
+                 $arr['created_at'] = now();
+                 array_push($data, $arr);
+                 }
+
+                 #insert into the customer_employer_information table
+                 DB::table('customer_employer_information')
+                 ->insert([
+                     'company_name' =>$company_name,
+                     'employer_name' =>$employer_name,
+                     'address'=>$address,
+                     'phone_one'=>$phone_one,
+                     'phone_two'=>$phone_two,
+                     'is_HR'=>$is_HR,
+                     'created_at' => now()
+                 ]); 
+         } else {
+                 $arr['user_id']=Auth::user()->id;
+                 $arr['affiliation'] = $affiliation;
+                 $arr['region_id'] = $region_id;
+                 $arr['city_id'] = $city_id;
+                 $arr['identification_type'] = $identification_card;
+                 $arr['identification_number'] = $identification_number;
+                 $arr['created_at'] = now();
+                 array_push($data, $arr);
+
+                 #insert into the customer_employer_information table 
+                 DB::table('customer_employer_information')
+                 ->insert([
+                     'company_name' =>$company_name,
+                     'employer_name' =>$employer_name,
+                     'address'=>$address,
+                     'phone_one'=>$phone_one,
+                     'phone_two'=>$phone_two,
+                     'is_HR'=>$is_HR,
+                     'created_at' => now()
+                 ]); 
+         }
+
+         UserLenderSelection::insert($data);
+         DB::commit();
+         $insertedId = DB::getPdo()->lastInsertId();
+
+         return response()->json($insertedId);
+    
+     } catch (\Throwable $th) {
+         dd($th);
+         //throw $th;
+         DB::rollback();
+         if (app()->environment('production')){
+          \Sentry\captureException($th);
+        }
+        return response()->json(['error'=>'An error occured. Try again or contact support if issue still persist'],500);
      }
-
-    UserLenderSelection::insert($data);
-
-    $insertedId = DB::getPdo()->lastInsertId();
-
-    return response()->json($insertedId);
     }
 
     public function changePassword(){
