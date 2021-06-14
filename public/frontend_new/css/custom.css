@@ -974,3 +974,7 @@ select.list-dt:focus {
 .input-width {
     width: 100%;
 }
+
+.thumb_image {
+    width: 50px;
+}

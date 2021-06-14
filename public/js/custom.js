@@ -459,77 +459,201 @@ $(document).ready(function () {
             });
         }
     });
+    //select finance institution js
 
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var opacity;
+
+    $(".next").click(function () {
+        current_fs = $(this).parent();
+        next_fs = $(this).parent().next();
+
+        //Add Class Active
+        $("#progressbar li")
+            .eq($("fieldset").index(next_fs))
+            .addClass("active");
+
+        //show the next fieldset
+        next_fs.show();
+        //hide the current fieldset with style
+        current_fs.animate(
+            { opacity: 0 },
+            {
+                step: function (now) {
+                    // for making fielset appear animation
+                    opacity = 1 - now;
+
+                    current_fs.css({
+                        display: "none",
+                        position: "relative",
+                    });
+                    next_fs.css({ opacity: opacity });
+                },
+                duration: 600,
+            }
+        );
+    });
+
+    $(".previous").click(function () {
+        current_fs = $(this).parent();
+        previous_fs = $(this).parent().prev();
+
+        //Remove class active
+        $("#progressbar li")
+            .eq($("fieldset").index(current_fs))
+            .removeClass("active");
+
+        //show the previous fieldset
+        previous_fs.show();
+
+        //hide the current fieldset with style
+        current_fs.animate(
+            { opacity: 0 },
+            {
+                step: function (now) {
+                    // for making fielset appear animation
+                    opacity = 1 - now;
+
+                    current_fs.css({
+                        display: "none",
+                        position: "relative",
+                    });
+                    previous_fs.css({ opacity: opacity });
+                },
+                duration: 600,
+            }
+        );
+    });
+
+    $(".radio-group .radio").click(function () {
+        $(this).parent().find(".radio").removeClass("selected");
+        $(this).addClass("selected");
+    });
+
+    $(".submit").click(function () {
+        return false;
+    });
+
+    //product questiong and answer js
+    //submithing questions
+    $("#submit-questions-btn").on("click", function (evt) {
+        evt.preventDefault();
+        var product_id = $(this).attr("data-product-id");
+        var merchant_organization_id = $(this).attr(
+            "data-merchant-organization-id"
+        );
+        var question = $('textarea[name="question"]').val();
+
+        if (product_id && question && merchant_organization_id) {
+            $.ajax({
+                url: "/product/question",
+                type: "POST",
+                dataType: "json",
+                cache: false,
+                data: {
+                    product_id,
+                    question,
+                    merchant_organization_id,
+                },
+                success: function (data) {
+                    if (data) {
+                        $("#productQuestionContainer").append(`
+                        <div class="pro__review ans">
+                            <div class="review__thumb thumb_image">
+                                <img src=${data.profile_secure_url} alt="user_image"> 
+                            </div>
+                            <div class="review__details">
+                                <div class="review__info">
+                                    <h5><a href="#">${data.name}</a></h5> 
+                                </div>
+                                <div class="review__date">
+                                    <span>${data.created_at}</span>
+                                </div>
+                                <p> ${data.question}</p>
+                                <p> ${data.answer}</p>
+                                </div>
+                            </div>`);
+                        $('textarea[name="question"]').empty();
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "An error occured",
+                            showCloseButton: true,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log("error", error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: error.responseJSON.error,
+                        showCloseButton: true,
+                    });
+                },
+            });
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Oops... An error occured try again or contact support if issue persist.",
+                showCloseButton: true,
+            });
+        }
+    });
+
+    //fetching questions and answers
+    $("#QandATab").on("click", function (evt) {
+        evt.preventDefault();
+
+        var product_id = $('input[name="product_id"]').val();
+        $.ajax({
+            url: "/product/" + product_id + "/questions/answers",
+            type: "GET",
+            dataType: "json",
+            cache: false,
+            data: {
+                product_id,
+            },
+            success: function (data) {
+                $.each(data, function (index, value) {
+                    $("#productQuestionContainer").append(`
+                    <div class="pro__review ans">
+                            <div class="review__thumb">
+                                <img src=${value.profile_secure_url} alt="user_image"> 
+                            </div>
+                            <div class="review__details">
+                                <div class="review__info">
+                                    <h5><a href="#">${value.name}</a></h5> 
+                                </div>
+                                <div class="review__date">
+                                    <span>${value.created_at}</span>
+                                </div>
+                                <p> ${value.question}</p>
+                                <p> ${value.answer}</p>
+                                </div>
+                            </div>`);
+                });
+            },
+            error: function (error) {
+                if (error.status === 401) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "You are not logged, in Please login to view product questions and answers.",
+                        showCloseButton: true,
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Oops an error occured, please try again or contact support if issue persist.",
+                        showCloseButton: true,
+                    });
+                }
+            },
+        });
+    });
     //end of ready function
-});
-
-
-//select finance institution js
-$(document).ready(function(){
-
-var current_fs, next_fs, previous_fs; //fieldsets
-var opacity;
-
-$(".next").click(function(){
-
-current_fs = $(this).parent();
-next_fs = $(this).parent().next();
-
-//Add Class Active
-$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-
-//show the next fieldset
-next_fs.show();
-//hide the current fieldset with style
-current_fs.animate({opacity: 0}, {
-step: function(now) {
-// for making fielset appear animation
-opacity = 1 - now;
-
-current_fs.css({
-'display': 'none',
-'position': 'relative'
-});
-next_fs.css({'opacity': opacity});
-},
-duration: 600
-});
-});
-
-$(".previous").click(function(){
-
-current_fs = $(this).parent();
-previous_fs = $(this).parent().prev();
-
-//Remove class active
-$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-
-//show the previous fieldset
-previous_fs.show();
-
-//hide the current fieldset with style
-current_fs.animate({opacity: 0}, {
-step: function(now) {
-// for making fielset appear animation
-opacity = 1 - now;
-
-current_fs.css({
-'display': 'none',
-'position': 'relative'
-});
-previous_fs.css({'opacity': opacity});
-},
-duration: 600
-});
-});
-
-$('.radio-group .radio').click(function(){
-$(this).parent().find('.radio').removeClass('selected');
-$(this).addClass('selected');
-});
-
-$(".submit").click(function(){
-return false;
-})
-
 });
