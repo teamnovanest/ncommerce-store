@@ -556,8 +556,7 @@ $(document).ready(function () {
                     merchant_organization_id,
                 },
                 success: function (data) {
-                    if (data) {
-                        $("#productQuestionContainer").append(`
+                    $("#productQuestionContainer").append(`
                         <div class="pro__review ans">
                             <div class="review__thumb thumb_image">
                                 <img src=${data.profile_secure_url} alt="user_image"> 
@@ -573,24 +572,31 @@ $(document).ready(function () {
                                 <p> ${data.answer}</p>
                                 </div>
                             </div>`);
-                        $('textarea[name="question"]').empty();
+                    $('textarea[name="question"]').empty();
+
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "An error occured",
+                        showCloseButton: true,
+                    });
+                },
+                error: function (error) {
+                    if (error.status === 401) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "You are not logged, in Please login to ask your question.",
+                            showCloseButton: true,
+                        });
                     } else {
                         Swal.fire({
                             icon: "error",
                             title: "Error",
-                            text: "An error occured",
+                            text: error.responseJSON.error,
                             showCloseButton: true,
                         });
                     }
-                },
-                error: function (error) {
-                    console.log("error", error);
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: error.responseJSON.error,
-                        showCloseButton: true,
-                    });
                 },
             });
         } else {
