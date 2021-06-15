@@ -17,6 +17,7 @@ class ProductController extends Controller
 {
     public function productView($id)
     {
+      try {
         /* $product = DB::table('products')
     			->join('categories','products.category_id','categories.id')
     			->join('subcategories','products.subcategory_id','subcategories.id')
@@ -42,58 +43,139 @@ class ProductController extends Controller
 		// 	->orderBy('percentage', 'ASC')->get();
 		// //dd($credit_offers);
 
-    	return view('pages.product_details',compact('product','product_color','product_size'));
+    	return view('pages.product_details',compact('product','product_color','product_size'));      
+      } catch (\Throwable $th) {
+         if (app()->environment('production')){
+            \Sentry\captureException($th);
+        }
+        $notification=array(
+            'messege'=>'An error occured while accessing product detail page. Try again or contact support if issue still persist',
+            'alert-type'=>'error'
+        );
+        return Redirect()->back()->with($notification);
+      }
     }
 
 public function addCart(Request $request, $id){
-  $product = DB::table('products')->where('id',$id)->first();
-
-   $data = array();
-
-   $data['id'] = $product->id;
-   $data['name'] = $product->product_name;
-   $data['qty'] = 1;
-   $data['price'] = (!$product->discount_price) ? $product->selling_price / 100 :
-   ($product->selling_price - $product->discount_price) /100;
-   $data['weight'] = 1;
-   $data['options']['image'] = $product->image_one_secure_url;
-   $data['options']['color'] = '';
-   $data['options']['size'] = '';
-   $data['options']['merchant_organization_id'] = $product->merchant_organization_id;
-   Cart::add($data);
-  	$notification=array(
-  	'messege'=>'Product Added Successfully ',
-  	'alert-type'=>'success'
-  	);
-  	return Redirect()->back()->with($notification);
+  try {
+    $product = DB::table('products')->where('id',$id)->first();
+  
+     $data = array();
+  
+     $data['id'] = $product->id;
+     $data['name'] = $product->product_name;
+     $data['qty'] = $request->input('qty');
+     $data['price'] = (!$product->discount_price) ? $product->selling_price / 100 :
+     ($product->selling_price - $product->discount_price) /100;
+     $data['weight'] = 1;
+     $data['options']['image'] = $product->image_one_secure_url;
+     $data['options']['color'] = $request->input('color');
+     $data['options']['size'] = $request->input('size');
+     $data['options']['merchant_organization_id'] = $product->merchant_organization_id;
+     
+     Cart::add($data);
+      $notification=array(
+      'messege'=>'Product Added Successfully ',
+      'alert-type'=>'success'
+      );
+      return Redirect()->back()->with($notification);
+  } catch (\Throwable $th) {
+     if (app()->environment('production')){
+            \Sentry\captureException($th);
+        }
+        $notification=array(
+            'messege'=>'An error occured while adding product to cart. Try again or contact support if issue still persist',
+            'alert-type'=>'error'
+        );
+        return Redirect()->back()->with($notification);
+  }
 
 }
 
 
 public function productsView(Request $request){
-	   $subcategoryId = $request->id;
+
+  try {
+    $subcategoryId = $request->id;
        $products = DB::table('products')->where('subcategory_id',$subcategoryId)->paginate(5);
-       $categorys = DB::table('categories')->get();
+       $categorys = DB::table('category_options')->get();
 	   
        $brands = DB::table('products')->where('subcategory_id',$subcategoryId)->select('brand_id')->groupBy('brand_id')->get();
 
-       return view('pages.all_products',compact('products','categorys','brands'));
+       return view('pages.all_products',compact('products','categorys','brands')); 
+  } catch (\Throwable $th) {
+     if (app()->environment('production')){
+            \Sentry\captureException($th);
+        }
+        $notification=array(
+            'messege'=>'An error occured while accessing product page. Try again or contact support if issue still persist',
+            'alert-type'=>'error'
+        );
+        return Redirect()->back()->with($notification);
+  }
+	  
 	   
 	   
 	}
 
 	public function categoryView(Request $request){
-    $categoryId = $request->id;
-	
-    $category_all =  DB::table('products')->where('category_id',$categoryId)->paginate(10);
+    try {
+      $categoryId = $request->id;   
+      $category_all =  DB::table('products')->where('category_id',$categoryId)->paginate(10);
     return view('pages.all_category',compact('category_all'));
+    } catch (\Throwable $th) {
+       if (app()->environment('production')){
+            \Sentry\captureException($th);
+        }
+        $notification=array(
+            'messege'=>'An error occured while accessing product page. Try again or contact support if issue still persist',
+            'alert-type'=>'error'
+        );
+        return Redirect()->back()->with($notification);
+    }
+    
 
   }
   
 	public function searchProductByBrand(Request $request){
+    try {
     $brandId = $request->id;
     $products =  DB::table('products')->where('brand_id',$brandId)->paginate(10);
     return view('pages.search_product_by_brand',compact('products'));
+    } catch (\Throwable $th) {
+       if (app()->environment('production')){
+            \Sentry\captureException($th);
+        }
+        $notification=array(
+            'messege'=>'An error occured while accessing brand products. Try again or contact support if issue still persist',
+            'alert-type'=>'error'
+        );
+        return Redirect()->back()->with($notification);
+    }
+    
 
   }
+
+  
+
+    public function search(Request $request){
+      try {
+        $item = $request->search;
+        $products = DB::table('products')
+        ->where('product_name','LIKE',"%$item%")
+        ->paginate(20);
+
+    return view('pages.search',compact('products'));  
+      } catch (\Throwable $th) {
+         if (app()->environment('production')){
+            \Sentry\captureException($th);
+        }
+        $notification=array(
+            'messege'=>'An error occured while accessing searched products. Try again or contact support if issue still persist',
+            'alert-type'=>'error'
+        );
+        return Redirect()->back()->with($notification);
+      }
+     
+    }
 }

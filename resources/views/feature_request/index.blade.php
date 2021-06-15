@@ -23,37 +23,20 @@
 
                                 @foreach($requests as $request)
                                 <tr>
-                                    <td>{{ $request->title }}</td>
-                                    <td>{{ $request->description }}</td>
+                                    <td class="pro-name">{{ $request->title }}</td>
+                                    <td class="pro-name">{{ $request->description }}</td>
                                     <td id="likes{{$request->id}}">{{$request->likes}}</td>
                                     <td>
                                         @if ($request->user_id === Auth::id())
-                                        <a href="{{route('feature.edit',['id'=>$request->id])}}"
+                                            <a href="{{route('feature.edit',['id'=>$request->id])}}"
                                             class="btn btn-sm btn-info">Edit</a>
-                                        <a href="{{route('feature.delete',['id'=>$request->id])}}"
+                                            <a href="{{route('feature.delete',['id'=>$request->id])}}"
                                             class="btn btn-sm btn-danger">Delete</a>
                                         @else
-
-                                        @if(sizeof($user_likes) !== 0)
-                                        @foreach ($user_likes as $likes)
-                                        @if($request->id === $likes->request_id)
-                                        <button class="like-btn" data-request-id="{{$request->id}}"><i
-                                                class="material-icons thumbsup" id="thumbsup{{$request->id}}"
-                                                data-value-id="{{1}}">thumb_up_off_alt</i>
-                                        </button>
-                                        @else
-                                        <button class="like-btn" data-request-id="{{$request->id}}"><i
+                                            <button class="like-btn" data-request-id="{{$request->id}}"><i
                                                 class="material-icons" id="thumbsup{{$request->id}}"
                                                 data-value-id="{{0}}">thumb_up_off_alt</i>
-                                        </button>
-                                        @endif
-                                        @endforeach
-                                        @else
-                                        <button class="like-btn" data-request-id="{{$request->id}}"><i
-                                                class="material-icons" id="thumbsup{{$request->id}}"
-                                                data-value-id="{{0}}">thumb_up_off_alt</i>
-                                        </button>
-                                        @endif
+                                            </button>
                                         @endif
                                     </td>
                                 </tr>

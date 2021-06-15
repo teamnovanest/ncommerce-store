@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\LogoutController;
@@ -13,9 +14,12 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\OrderUpdateController;
 use App\Http\Controllers\OrderDetailsController;
+use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\FeatureRequestController;
 use App\Http\Controllers\LenderOfferingController;
+use App\Http\Controllers\ProductQuestionsAndAnswersController;
 
 
 /*
@@ -46,7 +50,7 @@ Route::get("/", "App\Http\Controllers\HomeController@index");
 Route::get('/user/logout', [LogoutController::class, 'logout'])->name('user.logout');
 
 // Search Route
-Route::get('/product/search', [CartController::class,'search'])->name('product.search');
+Route::get('/product/search', [ProductController::class,'search'])->name('product.search');
 
 
 // Cart
@@ -58,17 +62,17 @@ Route::get('/add/to/cart/{id}', [CartController::class,'AddCart']);
 
 //coupone application routes
 Route::post('/user/apply/coupon/', [CouponController::class, 'coupon'])->name('apply.coupon'); 
-Route::post('remove/coupon/', [CouponController::class, 'couponRemove'])->name('remove.coupon'); 
+Route::get('remove/coupon/', [CouponController::class, 'couponRemove'])->name('remove.coupon'); 
 
 // Product 
 Route::get('/product/details/{id}/{slug}', [ProductController::class, 'productView']);
 Route::post('/cart/product/add/{id}', [ProductController::class, 'addCart']);
 
 // Checkout Routes
-Route::get('/user/checkout/process/', [CheckoutController::class, 'checkout'])->name('checkout.process');
+Route::get('/user/checkout/process', [CheckoutController::class, 'checkout'])->name('checkout.process');
 
 // Customer Order Details route
-Route::get('/order/{id}/status', [OrderDetailsController::class,'viewOrderStatus'])->name('order.status');
+Route::get('/order/{id}/status/{orderDetailId}', [OrderDetailsController::class,'viewOrderStatus'])->name('order.status');
 
 // Feature Request Route
 Route::get('/feature-request/index', [FeatureRequestController::class,'index'])->name('feature.index');
@@ -78,6 +82,7 @@ Route::post('/feature-request/{id}/like', [FeatureRequestController::class,'requ
 Route::get('/feature-request/{id}/edit', [FeatureRequestController::class,'editFeature'])->name('feature.edit');
 Route::post('/feature-request/{id}/update', [FeatureRequestController::class,'updateRequest'])->name('feature.update');
 Route::get('/feature-request/{id}/delete', [FeatureRequestController::class,'delete'])->name('feature.delete');
+Route::get('/user/likes', [FeatureRequestController::class,'userLikes'])->name('user.likes');
 
 
 // Contact page routes
@@ -93,7 +98,7 @@ Route::get('/delete/wishlist/{id}', [WishlistController::class, 'deleteWishlist'
 // All Product details Page 
 Route::get('/{category}/{id}/{subcategory_name}', [ProductController::class, 'productsView']);
 Route::get('/product/category/{id}/{category_name}', [ProductController::class, 'categoryView'])->name('category.name');
-Route::get('product/brand/{id}/{brand_name}', [ProductController::class, 'searchProductByBrand']);
+Route::get('/product/brand/{id}/{brand_name}', [ProductController::class, 'searchProductByBrand']);
 
 
 // shop
@@ -117,3 +122,19 @@ Route::post('user/profile/update', [ProfileController::class,'updateProfile'])->
 
 //newsletters
 Route::post('/newsletter/create', [NewsletterController::class, 'storeNewsLetter']) ->name('store.newsletter');
+
+
+
+//Product Review
+Route::get('/product/review', [ProductReviewController::class, 'productReview']);
+// City Route
+Route::get('/city/{region_id}', [CityController::class, 'cities']);
+
+//order update route
+Route::post('/order/{orderId}/{orderDetailId}/update', [OrderUpdateController::class, 'updateOrder']);
+
+//product questions and answers
+Route::post("/product/question", [ProductQuestionsAndAnswersController::class, 'productQuestions']);
+Route::get("/product/{product_id}/questions/answers", [ProductQuestionsAndAnswersController::class, 'getProductsQA']);
+
+

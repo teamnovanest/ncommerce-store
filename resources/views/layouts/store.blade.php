@@ -11,16 +11,7 @@ $setting = DB::table('sitesettings')->first();
     <title>Ncommerce</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   
-
-
-    <!-- for the default version -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch.umd.js"></script>
-    -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/instantsearch.css@7/themes/satellite-min.css"
-    />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/frontend_new/css/images/favicon.ico') }}">
@@ -44,7 +35,7 @@ $setting = DB::table('sitesettings')->first();
     <!-- User style -->
     <link rel="stylesheet" href="{{ asset('/frontend_new/css/custom.css') }}">
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('/lib/toastr/toastr.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('/lib/toastr/toastr.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
@@ -118,10 +109,6 @@ $setting = DB::table('sitesettings')->first();
                                     <li class="drop"><a href="/">Home</a>
                                     </li>
                                     <li class="drop"><a href="/shop">Shop</a>
-                                    
-                                       
-                                    <!-- </li>
-                                    <li class="drop"><a href="#">Blog</a> -->
                                        
                                     </li>
                                     <li><a href="/contact/page">Contact</a></li>
@@ -136,8 +123,6 @@ $setting = DB::table('sitesettings')->first();
 
                                         <li><a href="/shop">Shop</a>
                                         </li>
-
-                                        <!-- <li><a href="#">Blog</a></li> -->
 
 
                                         <li><a href="/contact/page">Contact</a></li>
@@ -208,17 +193,17 @@ $setting = DB::table('sitesettings')->first();
                                 <h1>NCOMMERCE</h1>
                             </a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet consectetu adipisicing elit sed do eiusmod tempor incididunt ut labore.</p>
+                        {{-- <p>Lorem ipsum dolor sit amet consectetu adipisicing elit sed do eiusmod tempor incididunt ut labore.</p> --}}
                     </div>
                     <ul class="sidebar__thumd">
-                        <li><a href="#"><img src="/frontend_new/images/sidebar-img/1.jpg" alt="sidebar images"></a></li>
+                        {{-- <li><a href="#"><img src="/frontend_new/images/sidebar-img/1.jpg" alt="sidebar images"></a></li>
                         <li><a href="#"><img src="/frontend_new/images/sidebar-img/2.jpg" alt="sidebar images"></a></li>
                         <li><a href="#"><img src="/frontend_new/images/sidebar-img/3.jpg" alt="sidebar images"></a></li>
                         <li><a href="#"><img src="/frontend_new/images/sidebar-img/4.jpg" alt="sidebar images"></a></li>
                         <li><a href="#"><img src="/frontend_new/images/sidebar-img/5.jpg" alt="sidebar images"></a></li>
                         <li><a href="#"><img src="/frontend_new/images/sidebar-img/6.jpg" alt="sidebar images"></a></li>
                         <li><a href="#"><img src="/frontend_new/images/sidebar-img/7.jpg" alt="sidebar images"></a></li>
-                        <li><a href="#"><img src="/frontend_new/images/sidebar-img/8.jpg" alt="sidebar images"></a></li>
+                        <li><a href="#"><img src="/frontend_new/images/sidebar-img/8.jpg" alt="sidebar images"></a></li> --}}
                     </ul>
 
                     {{-- @php
@@ -317,10 +302,11 @@ $setting = DB::table('sitesettings')->first();
                     <div class="row">
                          <!-- Start Single Footer Widget -->
                         <div class="col-lg-3 col-xl-3 col-md-6 col-sm-6">
+                            @if ($setting)
                             <div class="ft__widget">
                                 <div class="ft__logo">
                                     <a href="#">
-                                      {{ $setting->company_name }}
+                                      {{ $setting->company_name ?? ''}}
                                        NCOMMERCE
                                     </a>
                                    
@@ -332,7 +318,7 @@ $setting = DB::table('sitesettings')->first();
                                                 <i class="zmdi zmdi-pin"></i>
                                             </div>
                                             <div class="address-text">
-                                                <p>{{ $setting->company_address }}</p>
+                                                <p>{{ $setting->company_address ?? ''}}</p>
                                             </div>
                                         </li>
                                         <li>
@@ -340,7 +326,7 @@ $setting = DB::table('sitesettings')->first();
                                                 <i class="zmdi zmdi-email"></i>
                                             </div>
                                             <div class="address-text">
-                                                <a href="#"> {{ $setting->email }}</a>
+                                                <a href="#"> {{ $setting->email ?? ''}}</a>
                                             </div>
                                         </li>
                                         <li>
@@ -348,18 +334,19 @@ $setting = DB::table('sitesettings')->first();
                                                 <i class="zmdi zmdi-phone-in-talk"></i>
                                             </div>
                                             <div class="address-text">
-                                                <p>{{ $setting->phone_one }}</p>
+                                                <p>{{ $setting->phone_one ?? ''}}</p>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
                                 <ul class="social__icon">
-                                    <li><a href="{{ $setting->twitter }}"><i class="zmdi zmdi-twitter"></i></a></li>
-                                    <li><a href="{{ $setting->instagram }}"><i class="zmdi zmdi-instagram"></i></a></li>
-                                    <li><a href="{{ $setting->facebook }}"><i class="zmdi zmdi-facebook"></i></a></li>
-                                    <li><a href="{{ $setting->facebook }}"><i class="zmdi zmdi-google-plus"></i></a></li>
+                                    <li><a href="{{ $setting->twitter ?? ''}}"><i class="zmdi zmdi-twitter"></i></a></li>
+                                    <li><a href="{{ $setting->instagram ?? ''}}"><i class="zmdi zmdi-instagram"></i></a></li>
+                                    <li><a href="{{ $setting->facebook ?? ''}}"><i class="zmdi zmdi-facebook"></i></a></li>
+                                    <li><a href="{{ $setting->facebook ?? ''}}"><i class="zmdi zmdi-google-plus"></i></a></li>
                                 </ul>
                             </div>
+                            @endif
                         </div>
                         <!-- End Single Footer Widget -->
                         <!-- Start Single Footer Widget -->
@@ -371,7 +358,7 @@ $setting = DB::table('sitesettings')->first();
                                 @endphp
                                 <ul class="footer-categories">
                             @foreach($category as $cat)
-                                    <li><a href="{{ url('allcategory/'.$cat->id) }}">{{ $cat->category_name }}</a></li>
+                                    <li><a href="{{route('category.name',['id'=>$cat->id,'category_name'=> $cat->category_name]) }}">{{ $cat->category_name }}</a></li>
                             @endforeach
                                 </ul>
                             </div>
@@ -383,10 +370,10 @@ $setting = DB::table('sitesettings')->first();
                                 <ul class="footer-categories">
                                     <li><a href="#">About Us</a></li>
                                     <li><a href="/contact/page">Contact Us</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href data-toggle="modal" data-target="#terms-of-service">Terms & Conditions</a></li>
                                     <li><a href="#">Returns & Exchanges</a></li>
                                     <li><a href="#">Shipping & Delivery</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href data-toggle="modal" data-target="#privacy-policy">Privacy Policy</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -479,6 +466,76 @@ $setting = DB::table('sitesettings')->first();
 </div> --}}
 
 
+{{-- Start of privacy policy modal --}}
+<div class="modal fade" id="privacy-policy" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="policy__section privacy_policy">
+        <h3 class="policy__heading-1">Privacy Policy</h3>
+        <h6 class="policy__updated-date">Updated on 24th May, 2021</h6>
+        <div class="main-content">
+        {{-- Overview section --}}
+        <h3 class="policy__heading-2">Overview</h3>
+        <p class="policy__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum quidem culpa facilis beatae, blanditiis officia adipisci unde tempore recusandae laboriosam accusamus temporibus at doloribus cumque quasi nostrum distinctio qui maiores magnam ut? Nisi similique temporibus veritatis doloremque consequuntur! Cumque minima tempora ducimus earum dolores omnis provident dignissimos veritatis architecto reiciendis placeat optio assumenda voluptatum nam qui quibusdam amet debitis est, maxime in distinctio. Exercitationem provident quas reprehenderit quia ipsum et dolore neque asperiores qui possimus ad tempora maxime debitis vero, temporibus, nihil totam saepe voluptate! Laborum inventore ad id dolorem! Nobis odio numquam animi nihil soluta aut a officiis.</p>
+
+        {{-- Consent section --}}
+        <h3 class="policy__heading-2">Collection of Information & Use</h3>
+        <p class="policy__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum quidem culpa facilis beatae, blanditiis officia adipisci unde tempore recusandae laboriosam accusamus temporibus at doloribus cumque quasi nostrum distinctio qui maiores magnam ut? Nisi similique temporibus veritatis doloremque consequuntur! Cumque minima tempora ducimus earum dolores omnis provident dignissimos veritatis architecto reiciendis placeat optio assumenda voluptatum nam qui quibusdam amet debitis est, maxime in distinctio. Exercitationem provident quas reprehenderit quia ipsum et dolore neque asperiores qui possimus ad tempora maxime debitis vero, temporibus, nihil totam saepe voluptate! Laborum inventore ad id dolorem! Nobis odio numquam animi nihil soluta aut a officiis.</p>
+        </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn" data-dismiss="modal">Close</button>
+        <button type="button" class="btn"  data-dismiss="modal" id="btn-understood">Understood</button>
+    </div>
+    </div>
+  </div>
+</div>
+{{-- End of privacy policy modal --}}
+
+
+{{-- Start of terms of service modal --}}
+<div class="modal fade" id="terms-of-service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="policy__section terms-of-service">
+        <h3 class="policy__heading-1">Terms of Service</h3>
+        <h6 class="policy__updated-date">Updated on 24th May, 2021</h6>
+        <div class="main-content">
+        {{-- Overview section --}}
+        <h3 class="policy__heading-2">Overview</h3>
+        <p class="policy__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum quidem culpa facilis beatae, blanditiis officia adipisci unde tempore recusandae laboriosam accusamus temporibus at doloribus cumque quasi nostrum distinctio qui maiores magnam ut? Nisi similique temporibus veritatis doloremque consequuntur! Cumque minima tempora ducimus earum dolores omnis provident dignissimos veritatis architecto reiciendis placeat optio assumenda voluptatum nam qui quibusdam amet debitis est, maxime in distinctio. Exercitationem provident quas reprehenderit quia ipsum et dolore neque asperiores qui possimus ad tempora maxime debitis vero, temporibus, nihil totam saepe voluptate! Laborum inventore ad id dolorem! Nobis odio numquam animi nihil soluta aut a officiis.</p>
+
+        {{-- Consent section --}}
+        <h3 class="policy__heading-2">Your Agreement</h3>
+        <p class="policy__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum quidem culpa facilis beatae, blanditiis officia adipisci unde tempore recusandae laboriosam accusamus temporibus at doloribus cumque quasi nostrum distinctio qui maiores magnam ut? Nisi similique temporibus veritatis doloremque consequuntur! Cumque minima tempora ducimus earum dolores omnis provident dignissimos veritatis architecto reiciendis placeat optio assumenda voluptatum nam qui quibusdam amet debitis est, maxime in distinctio. Exercitationem provident quas reprehenderit quia ipsum et dolore neque asperiores qui possimus ad tempora maxime debitis vero, temporibus, nihil totam saepe voluptate! Laborum inventore ad id dolorem! Nobis odio numquam animi nihil soluta aut a officiis.</p>
+        </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn" data-dismiss="modal">Decline</button>
+        <button type="button" class="btn"  data-dismiss="modal" id="btn-understood">Agree</button>
+    </div>
+    </div>
+  </div>
+</div>
+{{-- End of terms of service modal --}}
+
+
 
     <!--  Search -->
     <!--Plyfill for IE 11 support  -->
@@ -492,7 +549,7 @@ $setting = DB::table('sitesettings')->first();
     <!-- jquery latest version -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="{{ asset('/lib/toastr/toastr.min.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('/lib/toastr/toastr.min.js') }}"></script> --}}
     <script src="{{ asset('/lib/sweetalert/sweetalert.js') }}"></script> 
     <!-- <script src="{{ asset('/lib/sweetalert/sweetalert.min.js')}}"></script> -->
     <script src="{{ asset('/lib/nprogress/nprogress.js')}}"></script>
@@ -537,18 +594,47 @@ $setting = DB::table('sitesettings')->first();
  <script>
         @if(Session::has('messege'))
           var type="{{Session::get('alert-type','info')}}"
+          var Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 5000,
+                        timerProgressBar: true,
+                        onOpen: (toast) => {
+                            toast.addEventListener(
+                                "mouseenter",
+                                Swal.stopTimer
+                            );
+                            toast.addEventListener(
+                                "mouseleave",
+                                Swal.resumeTimer
+                            );
+                        },
+                    });
           switch(type){
               case 'info':
-                   toastr.info("{{ Session::get('messege') }}");
+                   Toast.fire({
+                            icon: "info",
+                            title: "{{ Session::get('messege') }}",
+                        });
                    break;
               case 'success':
-                  toastr.success("{{ Session::get('messege') }}");
+                    Toast.fire({
+                            icon: "success",
+                            title: "{{ Session::get('messege') }}",
+                        });
                   break;
               case 'warning':
-                 toastr.warning("{{ Session::get('messege') }}");
+                   Toast.fire({
+                            icon: "warning",
+                            title: "{{ Session::get('messege') }}",
+                        });
                   break;
               case 'error':
-                  toastr.error("{{ Session::get('messege') }}");
+                    Toast.fire({
+                            icon: "error",
+                            title: "{{ Session::get('messege') }}",
+                        });
                   break;
           }
         @endif
@@ -556,33 +642,25 @@ $setting = DB::table('sitesettings')->first();
 
 
  <script>  
-         $(document).on("click", "#return", function(e){
-             e.preventDefault();
-             var link = $(this).attr("href");
-                swal({
-                  title: "Are you sure want to Return?",
-                  text: "Once you procede, a refund will have to be processed!",
-                  icon: "warning",
-                  buttons: true,
-                  dangerMode: true,
-                })
-                .then((willDelete) => {
-                  if (willDelete) {
-                       window.location.href = link;
-                  } else {
-                    swal("Cancel!");
-                  }
-                });
-            });
-    </script>
-
-
-
-
-
-
-
-
+//  <script>
+//         @if(Session::has('messege'))
+//           var type="{{Session::get('alert-type','info')}}"
+//           switch(type){
+//               case 'info':
+//                    toastr.info("{{ Session::get('messege') }}");
+//                    break;
+//               case 'success':
+//                   toastr.success("{{ Session::get('messege') }}");
+//                   break;
+//               case 'warning':
+//                  toastr.warning("{{ Session::get('messege') }}");
+//                   break;
+//               case 'error':
+//                   toastr.error("{{ Session::get('messege') }}");
+//                   break;
+//           }
+//         @endif
+//    </script>  
 
 </body>
 

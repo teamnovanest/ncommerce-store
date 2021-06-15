@@ -11,19 +11,30 @@ class ContactController extends Controller
         return view('pages.contact');
     }
 
-
-      public function contactForm(Request $request){
-
-  	$data = array();
-  	$data['name'] = $request->name;
-  	$data['email'] = $request->email;
-  	$data['phone'] = $request->phone;
-  	$data['message'] = $request->message;
-  	DB::table('contacts')->insert($data);
-  	$notification=array(
-            'messege'=>'Message  Sent',
-            'alert-type'=>'success'
-             );
-           return Redirect()->back()->with($notification); 
+    public function contactForm(Request $request){
+      
+      try {
+        $data = array();
+  	    $data['name'] = $request->name;
+  	    $data['email'] = $request->email;
+  	    $data['phone'] = $request->phone;
+  	    $data['message'] = $request->message;
+  	    DB::table('contacts')->insert($data);
+  	    $notification=array(
+          'messege'=>'Message  Sent',
+          'alert-type'=>'success'
+        );
+        return Redirect()->back()->with($notification); 
+      } catch (\Throwable $th) {
+        if (app()->environment('production')){
+             \Sentry\captureException($th);
+             }
+        $notification=array(
+          'messege'=>'Something did not go right.Try again',
+          'alert-type'=>'error'
+        );     
+        return Redirect()->back()->with($notification);
+      }
+  	
   }
 }

@@ -218,9 +218,9 @@
     margin: 0 auto;
     margin-top: 50px;
     padding: 50px;
-    background-color: #fdfdfd;
+    background-color: #f7f7f3;
     position: relative;
-    min-height: 600px;
+    min-height: 800px;
 }
 
 .form__body {
@@ -245,9 +245,9 @@
 
 .form__label {
     color: #000;
-    margin: 15px;
+    margin: 10px;
     margin-left: 0;
-    font-size: 15px;
+    font-size: 10px;
 }
 
 .dropdown__header {
@@ -295,6 +295,9 @@
 .multiSel span {
     cursor: pointer;
     display: inline-block;
+    padding-top: 5px;
+    font-size: 1.01rem;
+    font-weight: 400;
 }
 
 .dropdown dd ul {
@@ -303,7 +306,7 @@
     color: #fff;
     display: none;
     padding: 2px 15px 2px 5px;
-    width: 290px;
+    width: 400px;
     position: absolute;
     list-style: none;
     height: 100px;
@@ -354,6 +357,11 @@
 .form__submit:hover {
     background: rgb(250, 250, 250);
     color: #000;
+}
+
+.form__header--main {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
 }
 
 /* User Profile style */
@@ -418,8 +426,8 @@
 }
 
 .form__label {
-    font-size: 18px;
-    margin-bottom: 25px;
+    font-size: 15px;
+    margin-bottom: 15px;
     letter-spacing: 1.3px;
     text-transform: uppercase;
 }
@@ -518,6 +526,12 @@
     float: right;
 }
 
+.links-pagination::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 .text-left {
     position: absolute;
     top: 70px;
@@ -541,6 +555,19 @@
     width: 500px;
 }
 
+/*  Product Review */
+.review_submit {
+    background-color: #050505;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 15px 100px;
+    text-decoration: none;
+    border: 0px;
+}
 .finance-offer__error {
     padding: 0 10px;
 }
@@ -557,4 +584,397 @@
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
+}
+
+/* Adding ellipsis to product name */
+
+.product-name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@media (max-width: 640px) {
+    .category-menu-list {
+        display: none;
+    }
+}
+
+/* Error Page */
+.section-error {
+    position: relative;
+}
+
+.error-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 80%;
+}
+
+.error-box__image {
+    width: 100%;
+    height: 55vh;
+}
+
+.error-text {
+    text-align: center;
+    margin-top: -70px;
+}
+
+@media screen and (min-width: 800px) {
+    .error-text {
+        margin-top: 0;
+    }
+}
+
+.error-text__heading--1 {
+    color: #ed6161;
+    font-size: 2.5rem;
+}
+
+.error-text__heading--2 {
+    color: #bcbcbc;
+    font-size: 1.6rem;
+}
+
+.error-text__links a {
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: #000;
+    padding-bottom: 5px;
+    border-bottom: 3px solid #f95858;
+}
+
+.btn__secondary {
+    margin-top: 15px;
+}
+
+@media screen and (min-width: 500px) {
+    .btn__secondary {
+        margin-top: 0;
+    }
+}
+
+.error-text__paragraph {
+    font-size: 1.15rem;
+    color: #3b2a7d;
+    font-weight: lighter;
+    margin-top: -15px;
+}
+
+@media screen and (min-width: 710px) {
+    .error-text__paragraph {
+        font-size: 1.3rem;
+    }
+}
+
+.error-500 {
+    color: #1d3557ce;
+}
+
+/* Publicity */
+.owl-carousel .owl-item img {
+    display: block;
+    width: 1600px;
+    height: 500px;
+}
+
+@media screen and (max-width: 500px) {
+    .owl-carousel .owl-item img {
+        display: block;
+        width: 1600px;
+        height: 300px;
+    }
+}
+/* Privacy Policy & Terms of Service Page */
+.policy__section {
+    height: 500px;
+    overflow: auto;
+    box-sizing: border-box;
+}
+.privacy_policy,
+.terms-of-service {
+    text-align: center;
+    /* margin: 0 auto; */
+    padding: 0 30px;
+}
+
+@media screen and (min-width: 718px) {
+    .privacy_policy::-webkit-scrollbar,
+    .terms-of-service::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .privacy_policy::-webkit-scrollbar-track,
+    .terms-of-service::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .privacy_policy::-webkit-scrollbar-thumb,
+    .terms-of-service::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    .privacy_policy::-webkit-scrollbar-thumb:hover,
+    .terms-of-service::-webkit-scrollbar-thumb:hover {
+        background: #fd534a;
+    }
+}
+
+.policy__updated-date {
+    font-size: 0.95rem;
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.main-content {
+    text-align: left;
+}
+
+.policy__heading-1 {
+    margin-top: 1.5rem;
+}
+
+.policy__heading-2 {
+    color: rgba(0, 0, 0, 0.5);
+    margin-top: 2rem;
+}
+
+.policy__paragraph {
+    color: rgba(175, 172, 172, 0.9);
+    line-height: 2.5;
+}
+
+.modal-footer #btn-understood {
+    color: #fff;
+    background: #ff4136;
+    border-color: #ff4136;
+}
+
+@media screen and (min-width: 567px) {
+    .modal .modal-dialog {
+        max-width: 600px;
+    }
+    #msform {
+        max-width: 100%;
+    }
+}
+
+.zmdi {
+    font-size: 40px;
+}
+.mystar {
+    color: #f3c258;
+}
+
+/* Product name on the dashboard */
+.pro-name {
+    word-wrap: break-word;
+    min-width: 200px;
+    text-align: left;
+}
+
+#msform {
+    text-align: center;
+    position: relative;
+    /* margin-top: 20px */
+}
+
+#msform fieldset .form-card {
+    background: white;
+    border: 0 none;
+    border-radius: 0px;
+    box-shadow: 0 2px 2px 2px rgba(20, 33, 209, 0.302);
+    padding: 20px 40px 20px 40px;
+    box-sizing: border-box;
+    width: 70%;
+    margin: auto;
+    position: relative;
+}
+
+#msform fieldset {
+    border: 0 none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+#msform fieldset:not(:first-of-type) {
+    display: none;
+}
+
+#msform fieldset .form-card {
+    text-align: left;
+    color: #9e9e9e;
+}
+
+#msform input,
+#msform textarea {
+    padding: 0px 8px 4px 8px;
+    /* border: none; */
+    border-bottom: 1px solid #ccc;
+    border-radius: 0px;
+    margin-top: 2px;
+    /* width: 100%; */
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2c3e50;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+#msform input:focus,
+#msform textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: none;
+    font-weight: bold;
+    border-bottom: 2px solid skyblue;
+    outline-width: 0;
+}
+
+#msform .action-button {
+    width: 100px;
+    background: skyblue;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+}
+
+#msform .action-button:hover,
+#msform .action-button:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px skyblue;
+}
+
+#msform .action-button-previous {
+    width: 100px;
+    background: #616161;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+}
+
+#msform .action-button-previous:hover,
+#msform .action-button-previous:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #616161;
+}
+
+select.list-dt {
+    border: none;
+    outline: 0;
+    border-bottom: 1px solid #ccc;
+    padding: 2px 5px 3px 5px;
+    margin: 2px;
+}
+
+select.list-dt:focus {
+    border-bottom: 2px solid skyblue;
+}
+
+.card {
+    z-index: 0;
+    border: none;
+    border-radius: 0.5rem;
+    position: relative;
+}
+
+.fs-title {
+    font-size: 25px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: left;
+}
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey;
+    margin-left: 170px;
+}
+
+#progressbar .active {
+    color: #000000;
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 12px;
+    width: 25%;
+    float: left;
+    position: relative;
+}
+
+#progressbar #account:before {
+    font-family: FontAwesome;
+    content: "\f023";
+}
+
+#progressbar #personal:before {
+    font-family: FontAwesome;
+    content: "\f007";
+}
+
+#progressbar #payment:before {
+    font-family: FontAwesome;
+    content: "\f09d";
+}
+
+#progressbar #confirm:before {
+    font-family: FontAwesome;
+    content: "\f00c";
+}
+
+#progressbar li:before {
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    display: block;
+    font-size: 18px;
+    color: #ffffff;
+    background: lightgray;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    padding: 2px;
+}
+
+#progressbar li:after {
+    content: "";
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+    position: absolute;
+    left: 0;
+    top: 25px;
+    z-index: -1;
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: skyblue;
+}
+
+.input-width {
+    width: 100%;
+}
+
+.thumb_image {
+    width: 50px;
 }

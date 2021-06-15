@@ -1,0 +1,6 @@
+mysql/*
+.env.prod
+.env
+.git
+package-lock.json
+notes.txt

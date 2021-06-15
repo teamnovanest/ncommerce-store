@@ -5,7 +5,7 @@
  <!-- Body main wrapper start -->
     <div class="">
         <!-- Start Bradcaump area -->
-        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/2.jpg) no-repeat scroll center center / cover ;">
+        <div class="ht__bradcaump__area">
             <div class="ht__bradcaump__wrap">
                 <div class="container">
                     <div class="row">
@@ -81,7 +81,7 @@
                                 <div class="row">
                                     <!-- Start Single Product -->
                                          @foreach($category_all as $pro)
-                                    <div class="col-lg-3 single__pro col-xl-3 col-md-4 col-12 col-sm-6">
+                                    <div class="col-lg-3 single__pro col-xl-3 col-md-4 col-6 col-sm-6">
                                         <div class="product">
                                             <div class="product__inner">
                                                 <div class="pro__thumb">
@@ -100,7 +100,7 @@
                                                
                                             </div>
                                             <div class="product__details">
-                                                <h2><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
+                                                <h2 class="product-name"><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
                                                 <ul class="product__price">
 					                                @if($pro->discount_price == NULL)
                                                     <li class="new__price">GH₵ {{ $pro->selling_price / 100}}</li>
@@ -131,7 +131,7 @@
                                         </div>
                                         <div class="col-md-8 col-lg-8 col-xl-9 col-sm-7 col-12">
                                             <div class="list__details__inner">
-                                                <h2><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
+                                                <h2 class="product-name"><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0" >{{ $pro->product_name  }} </a></h2>
                                                 <!-- <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu sit amet…</p> -->
                                                 <ul class="product__price">
                                                 @if($pro-> discount_price == NULL)
@@ -199,110 +199,6 @@
          }  
         })
     }
-
-
-</script>
-
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-
-<script type="text/javascript">
-    
-   $(document).ready(function(){
-     $('.addwishlist').on('click', function(){
-        var id = $(this).data('id');
-
-        if (id) {
-            $.ajax({
-                url: " {{ url('add/wishlist/') }}/"+id,
-                type:"GET",
-                datType:"json",
-                success:function(data){
-             const Toast = Swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 3000,
-                  timerProgressBar: true,
-                  onOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                  }
-                })
-                window.location.reload();
-
-             if ($.isEmptyObject(data.error)) {
-
-                Toast.fire({
-                  icon: 'success',
-                  title: data.success
-                })
-             }else{
-                 Toast.fire({
-                  icon: 'error',
-                  title: data.error
-                })
-             }
- 
-
-                },
-            });
-
-        }else{
-            alert('danger');
-        }
-     });
-
-   });
-</script>
-
-<script type="text/javascript">
-    
-   $(document).ready(function(){
-     $('.addcart').on('click', function(){
-        var id = $(this).data('id');
-        if (id) {
-            $.ajax({
-                url: " {{ url('/add/to/cart/') }}/"+id,
-                type:"GET",
-                datType:"json",
-                success:function(data){
-             const Toast = Swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 3000,
-                  timerProgressBar: true,
-                  onOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                  }
-                })
-                  window.location.reload();
-
-             if ($.isEmptyObject(data.error)) {
-
-                Toast.fire({
-                  icon: 'success',
-                  title: data.success
-                })
-             }else{
-                 Toast.fire({
-                  icon: 'error',
-                  title: data.error
-                })
-             }
-
-                },
-            });
-        }else{
-            alert('danger');
-        }
-     });
-
-   });
 
 
 </script>
