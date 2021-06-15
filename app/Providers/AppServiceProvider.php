@@ -7,6 +7,7 @@ use Auth;
 use Cart;
 use View;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,7 +19,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+         //check that app is local
+         if (!$this->app->isLocal()) {
+           
+            URL::forceScheme('https'); // use https in production
+            
+        }
     }
 
     /**
@@ -44,6 +50,7 @@ class AppServiceProvider extends ServiceProvider
         } catch (\Throwable $th) {
             $cart = null;
             $profileImage = null;
+            return $th->getMessage();
         };
 
         Paginator::useBootstrap();
