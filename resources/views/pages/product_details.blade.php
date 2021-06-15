@@ -206,6 +206,9 @@
                     <li role="presentation">
                         <a href="#reviews" role="tab" data-toggle="tab">Reviews</a>
                     </li>
+                    <li role="presentation">
+                        <a href="#QA" role="tab" data-toggle="tab" id="QandATab">Q & A</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -284,7 +287,7 @@
                             </div>
                             <div class="review__details">
                                 <div class="review__info">
-                                    <h4><a href="#">{{ $review->name}}</a></h4>
+                                    <h4><a href="#">{{ $review->name}}</a></h4> 
                                     <ul class="rating">
                                         @if ($review->rating === 1)
                                             <li><i class="zmdi zmdi-star mystar"></i></li>
@@ -368,6 +371,31 @@
                         </div>
                         @endif
                         @endauth
+                    </div>
+
+
+                    <div role="tabpanel" id="QA" class="product__tab__content fade">
+                        <div class="review__address__inner"></div>
+                        <!-- Start Single Review -->
+                    <div class="review__box">
+                            <form id="review-form" class="QandAform">
+                                @csrf
+                                <input type="hidden"  name="product_id" value="{{$product->id}}">    
+                                <div class="single-review-form">
+                                    <div class="review-box message">
+                                        <textarea placeholder="Write your question" name="question"></textarea>
+                                    </div>
+                                </div>
+                                <div class="review-btn">
+                                    <span class="wc-proceed-to-checkout">
+                                        <button id="submit-questions-btn" class="checkout-btn btn" type="submit" data-product-id="{{$product->id}}" data-merchant-organization-id="{{$product->merchant_organization_id}}">SUBMIT QUESTION</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="productQuestionContainer">
+
+                        </div>
                     </div>
                 </div>
                 <!-- End Single Content -->
