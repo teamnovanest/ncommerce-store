@@ -1,0 +1,60 @@
+runtime: custom
+env: flex
+
+service: vestashi-store-prod
+#service: default
+
+network:
+  forwarded_ports: 
+        - 8000/tcp
+# Put in values for env vars before deploy, else it will not work        
+env_variables:
+        APP_NAME: Vestashi Store
+        APP_ENV: production
+        APP_KEY: base64:qHKiTWZnQMiyEPKgIkV+zuhnu1Tlo8bZfUJKLXXY33A=
+        APP_DEBUG: true
+        APP_URL: https://vestashi.com
+        LOG_CHANNEL: stack
+        LOG_LEVEL: debug
+        DB_CONNECTION: mysql
+        DB_HOST: 
+        DB_PORT: '3306'
+        DB_DATABASE: 
+        DB_USERNAME: 
+        DB_PASSWORD:
+        BROADCAST_DRIVER: log
+        CACHE_DRIVER: file
+        QUEUE_CONNECTION: sync
+        SESSION_DRIVER: database
+        SESSION_LIFETIME: '120'
+        REDIS_HOST: 
+        REDIS_PASSWORD: 
+        CLOUDINARY_CLOUD_NAME: 
+        CLOUDINARY_API_KEY: 
+        CLOUDINARY_API_SECRET: 
+        CLOUDINARY_URL: 
+        CLOUDINARY_UPLOAD_PRESET: 
+        MAIL_DRIVER: mailgun
+        MAIL_HOST: smtp.eu.mailgun.org
+        MAIL_PORT: '587'
+        MAIL_ENCRYPTION: tls
+        MAIL_USERNAME: 
+        MAIL_PASSWORD: 
+        MAIL_FROM_ADDRESS: 
+        MAIL_FROM_NAME: 'Vestashi'
+        # Error & Performance monitoring
+        SENTRY_LARAVEL_DSN: 
+        SENTRY_TRACES_SAMPLE_RATE: 1
+
+resources:
+    cpu: 1
+    memory_gb: 1
+    disk_size_gb: 20
+
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 7
+
+skip_files:
+  - .env
+  - .env.prod

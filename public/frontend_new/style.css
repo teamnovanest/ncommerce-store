@@ -2489,7 +2489,7 @@ select.select-color {
 .review__details p {
     color: #505050;
     line-height: 26px;
-    width: 82%;
+    width: 100%;
 }
 .pro__review.ans {
     margin-bottom: 50px;
@@ -2711,7 +2711,7 @@ select.select-color {
 .review-box.message textarea {
     background: transparent none repeat scroll 0 0;
     border: 1px solid #999;
-    min-height: 100px;
+    min-height: 50px;
     padding-left: 20px;
 }
 .review-btn {

@@ -19,6 +19,7 @@ use App\Http\Controllers\OrderDetailsController;
 use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\FeatureRequestController;
 use App\Http\Controllers\LenderOfferingController;
+use App\Http\Controllers\ProductQuestionsAndAnswersController;
 
 
 /*
@@ -135,3 +136,8 @@ Route::post('/order/{orderId}/{orderDetailId}/update', [OrderUpdateController::c
 
 //search product by city
 Route::get('/{city}/{id}/all/products', [CityController::class, 'searchProductByCity']);
+//product questions and answers
+Route::post("/product/question", [ProductQuestionsAndAnswersController::class, 'productQuestions']);
+Route::get("/product/{product_id}/questions/answers", [ProductQuestionsAndAnswersController::class, 'getProductsQA']);
+
+
