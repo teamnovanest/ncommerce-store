@@ -131,3 +131,7 @@ Route::get('/city/{region_id}', [CityController::class, 'cities']);
 
 //order update route
 Route::post('/order/{orderId}/{orderDetailId}/update', [OrderUpdateController::class, 'updateOrder']);
+
+
+//search product by city
+Route::get('/{city}/{id}/all/products', [CityController::class, 'searchProductByCity']);

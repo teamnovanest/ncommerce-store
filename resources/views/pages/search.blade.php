@@ -155,12 +155,8 @@
                             <!-- End Single View -->
 							<!-- Shop Page Navigation -->
                         <br>
-						<div class="shop_page_nav d-flex flex-row">
-							 
-							 
-                               {{ $products->links() }}
-							  
-							 
+						<div class="center-pagination">
+                        {{ $products->links() }} 
 						</div>
                         </div>
                     </div>
