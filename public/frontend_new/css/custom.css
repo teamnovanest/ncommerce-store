@@ -523,7 +523,7 @@
 }
 
 .center-pagination {
-    float: right;
+    margin-left: 30%;
 }
 
 .links-pagination::after {

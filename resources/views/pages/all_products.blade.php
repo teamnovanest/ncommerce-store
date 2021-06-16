@@ -66,6 +66,23 @@
                         <div class="row">
                             <div class="col-lg-12 col-xl-12 col-md-12 col-12">
                                 <div class="producy__view__container">
+                                     <!-- Start Short Form -->
+                                    <div class="product__list__option">
+                                        <!-- <div class="order-single-btn">
+                                            <select class="select-color selectpicker">
+                                              <option>Sort by newness</option>
+                                              <option>Match</option>
+                                              <option>Updated</option>
+                                              <option>Title</option>
+                                              <option>Category</option>
+                                              <option>Rating</option>
+                                            </select>
+                                        </div>
+                                        <div class="shp__pro__show">
+                                            <span>Showing 1 - 4 of 25 results</span>
+                                        </div> -->
+                                    </div>
+                                    <!-- End Short Form -->
                                     <!-- Start List And Grid View -->
                                     <ul class="view__mode nav" role="tablist">
                                         <li role="presentation" class="grid-view"><a class="active" href="#grid-view" role="tab" data-toggle="tab"><i class="zmdi zmdi-grid"></i></a></li>
@@ -156,12 +173,8 @@
                             <!-- End Single View -->
 							<!-- Shop Page Navigation -->
                         <br>
-						<div class="shop_page_nav d-flex flex-row">
-							 
-							 
-                               {{ $products->links() }}
-							  
-							 
+						<div class="center-pagination">
+                            {{ $products->links() }}
 						</div>
                         </div>
                     </div>
