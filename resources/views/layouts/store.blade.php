@@ -168,9 +168,7 @@ $setting = DB::table('sitesettings')->first();
                                 @csrf
                                     <input type="text" id="searchbox" required="required" placeholder="Search for products..." name="search">
                                     <button type="submit"></button>
-                                    <div id="hits"></div>
-                                    <div id="hit-template"></div>
-                                    <div id="pagination"></div>
+                                 
                                 </form>
                                 <div class="search__close__btn">
                                     <span class="search__close__btn_icon"><i class="zmdi zmdi-close"></i></span>
@@ -572,7 +570,7 @@ $setting = DB::table('sitesettings')->first();
 <script src="{{ asset('js/custom.js')}}"></script>
 
 <!-- Init Search -->
-<script src="{{ asset('/js/search.js')}}"></script>
+<!-- <script src="{{ asset('/js/search.js')}}"></script> -->
   
 @stack('scripts')
 <!-- cus dashboard script -->

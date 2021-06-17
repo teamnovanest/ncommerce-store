@@ -1,9 +1,25 @@
 (function () {
  
-    var searchClient = algoliasearch('EK3Z6X1VYZ', '10e42df43f0323333e3357ae9ce5d26b');
+
+/*   const search = instantsearch({
+    indexName: 'instant_search',
+    searchClient: algoliasearch(
+      'NPLVI1F6D8',
+      '00702f144eb02973f80ff12f5f8cac7a'
+    ),
+  });
+  
+  // Add widgets
+  // ...
+  
+  search.start();
+  
+ */
+
+    var searchClient = algoliasearch('NPLVI1F6D8', '00702f144eb02973f80ff12f5f8cac7a');
     //var index = searchClient.initIndex('product_idx');
     const search = instantsearch({
-        indexName: 'product_idx',
+        indexName: 'dev_VESTASHI',
         searchClient,
     });
 

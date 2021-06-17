@@ -53,7 +53,7 @@ class HomeController extends Controller
      public function shop(){
          try {
            $cat = DB::table('products');
-        $allProducts = DB::table('products')->where('status',1)->orderBy('id','desc')->paginate(54);
+        $allProducts = DB::table('products')->where('status',1)->orderBy('id','desc')->paginate(50);
 	
        $category = DB::table('category_options')->get();
 
@@ -73,7 +73,7 @@ class HomeController extends Controller
 
     public function shopView($id){
         try {
-           $allProducts = DB::table('products')->where('status',1)->where('category_id',$id)->orderBy('id','desc')->paginate(12);
+           $allProducts = DB::table('products')->where('status',1)->where('category_id',$id)->orderBy('id','desc')->paginate(50);
 	
        $category = DB::table('category_options')->get();
 
