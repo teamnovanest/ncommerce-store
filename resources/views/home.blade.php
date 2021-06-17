@@ -162,8 +162,8 @@
                 </div>
             </div>
         </div>
-        <div class="links-pagination">
-            <div class="center-pagination">
+        <div class="row d-flex justify-content-center">
+            <div class="cols-lg-3">
                 {{ $featured->links() }}
             </div>
         </div>

@@ -534,15 +534,6 @@
     color: black;
 }
 
-.center-pagination {
-    margin-left: 30%;
-}
-
-.links-pagination::after {
-    content: "";
-    display: table;
-    clear: both;
-}
 
 .text-left {
     position: absolute;
