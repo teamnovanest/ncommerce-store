@@ -121,8 +121,8 @@
                                 @endif
                             </div>
                         </div>
-                        <br><br>
-
+                        <br>
+                        <div><span>Quantity Remaining: </span> <span> {{$product_quantity}}</span></div>
                         <div class="pro__details">
                             {!! (substr($product->product_details,0,500)) !!}
                             <span><a href="#description">View more</a></span>

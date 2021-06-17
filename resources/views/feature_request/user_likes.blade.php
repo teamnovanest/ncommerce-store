@@ -38,8 +38,10 @@
                 </div>
             </div>
         </div>
-        <div class="center-pagination">
-            {{ $likes->links() }}
+        <div class="row d-flex justify-content-center">
+            <div class="cols-lg-3">
+                {{ $likes->links() }}
+            </div>
         </div>
     </div>
 </div>

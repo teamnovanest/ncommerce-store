@@ -184,9 +184,11 @@
                             </div>
                             <!-- End Single View -->
 
-                            <div class="center-pagination">
-                            {{ $products->links() }}
-						    </div>
+                            <div class="row d-flex justify-content-center">
+                                <div class="cols-lg-3">
+                                    {{ $products->links() }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
