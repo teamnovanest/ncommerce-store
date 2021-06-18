@@ -2,16 +2,14 @@
 
 @section('content')
 
- <!-- Body main wrapper start -->
-    <div class="">
-        <!-- Start Bradcaump area -->
+    <div>
         <div class="ht__bradcaump__area">
             <div class="ht__bradcaump__wrap">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
                             <div class="bradcaump__inner text-center">
-                                <h2 class="bradcaump-title">Products</h2>
+                                <h2 class="bradcaump-title">Products In {{$city->city_name}}</h2>
                             </div>
                         </div>
                     </div>
@@ -24,21 +22,22 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-xl-3 col-md-12 col-12">
-						  <!-- Start Product Cat -->
-                        <div class="categories-menu">
+                        <div class="htc__shop__left__sidebar">
+                              <!-- Start Product Cat -->
+                            <div class="categories-menu">
                                 <div class="category-heading">
                                <h3>Product Categories</h3>
-                                </div>
+                                   </div>
                             <div class="category-menu-list"> 
                                 <ul class="sidebar__list">
-                                        @php
-                                        $category = DB::table('category_options')->where('deleted_at', NULL)->get();
-                                        @endphp
+                                         @php
+                                         $category = DB::table('category_options')->where('deleted_at', NULL)->get();
+                                            @endphp
                                     @foreach($category as $cat)
 				                    <li><a href="{{ route('category.name',['id'=>$cat->id,'category_name'=> $cat->category_name]) }}">{{ $cat->category_name }}</a></li>
 								    @endforeach
                                 </ul>
-                            </div>   
+                            </div>    
                         </div>
                         <br>
                             <!-- End Product Cat -->
@@ -48,19 +47,20 @@
                                <h3>Brands</h3>
                                 </div>
                             <div class="category-menu-list"> 
-                                <ul class="sidebar__list">
+                            <ul class="sidebar__list">
 								
                             @php
-                           $brands =  DB::table('brand_options')->where('deleted_at', NULL)->get();
+                            $brands =  DB::table('brand_options')->where('deleted_at', NULL)->get();
                             @endphp
-								@foreach($brands as $row)
-			 <li class="brand"><a href="{{url('product/brand/'.$row->id.'/'.$row->brand_name)}}">{{ $row->brand_name }}</a></li>
+							@foreach($brands as $row)
+			                <li class="brand"><a href="{{ url('product/brand/'.$row->id.'/'.$row->brand_name) }}">{{ $row->brand_name }}</a></li>
 								@endforeach
 								 
 							</ul>
                         </div>    
 						</div>
 							<!--brands  -->
+                        </div>
                     </div>
                     <div class="col-lg-9 col-xl-9 col-md-12 col-12 smt-30">
                         <div class="row">
@@ -97,33 +97,38 @@
                             <div role="tabpanel" id="grid-view" class="single-grid-view tab-pane fade show active clearfix">
                                 <div class="row">
                                     <!-- Start Single Product -->
-                                         @foreach($products as $pro)
+                                    @foreach ($products as $product)
                                     <div class="col-lg-3 single__pro col-xl-3 col-md-4 col-6 col-sm-6">
                                         <div class="product">
                                             <div class="product__inner">
                                                 <div class="pro__thumb">
-                                                    <a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}">
-                                                        <img src="{{ asset($pro->image_one_secure_url) }}" alt="product images">
+                                                    <a href="{{url('product/details/'.$product->id.'/'.$product->slug)}}">
+                                                        <img src="{{ asset($product->image_one_secure_url) }}" alt="product images">
                                                     </a>
                                                 </div>
-                                                
                                                 <div class="product__hover__info">
                                                     <ul class="product__action">
-                                                        <li><a title="Quick View" href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}"><span class="ti-plus"></span></a></li>
-                                                        <li><a class="addcart" title="Add to cart"  data-id="{{ $pro->id }}"><span class="ti-shopping-cart"></span></a></</li>
-                                                        <li><a title="Add to wishlist" class="addwishlist" data-id="{{ $pro->id }}" ><span class="ti-heart"></span></a></li>
+                                                        <li><a title="Quick View" href="{{ url('product/details/'.$product->id.'/'.$product->slug) }}"><span class="ti-plus"></span></a></li>
+                                                        <li><a class="addcart" title="Add to cart"  data-id="{{ $product->id }}"><span class="ti-shopping-cart"></span></a></</li>
+                                                        <li><a title="Add to wishlist" class="addwishlist" data-id="{{ $product->id }}" ><span class="ti-heart"></span></a></li>
                                                     </ul>
                                                 </div>
-                                               
                                             </div>
                                             <div class="product__details">
-                                                <h2 class="product-name"><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
+                                                <h2 class="product-name"><a href="{{ url('product/details/'.$product->id.'/'.$product->slug) }}" tabindex="0">{{ $product->product_name  }} </a></h2>
+                                                @foreach ($all_cities as $city)
+                                                <div style="background-color:black; color: white;" class="product-name">
+                                                <span>{{$city->region_name}}</span>
+                                                -
+                                                <span>{{$city->city_name}}</span>
+                                                </div>
+                                                @endforeach
                                                 <ul class="product__price">
-					                                @if($pro->discount_price == NULL)
-                                                    <li class="new__price">GH₵ {{ $pro->selling_price / 100 }}</li>
+					                                @if($product->discount_price == NULL)
+                                                    <li class="new__price">GH₵ {{ $product->selling_price / 100}}</li>
                                                     @else
-                                                    <li class="new__price">GH₵ {{ $pro->discount_price / 100}}</li>
-                                                    <li class="old__price">GH₵ {{ $pro->selling_price / 100}}</li>
+                                                    <li class="new__price">GH₵ {{ $product->discount_price / 100}}</li>
+                                                    <li class="old__price">GH₵ {{ $product->selling_price / 100}}</li>
                                                     @endif
                                                 </ul>
                                             </div>
@@ -134,10 +139,10 @@
                                 </div>
                             </div>
                             <!-- End Single View -->
-                            <!-- Start Single View -->
+                             <!-- Start Single View -->
                             <div role="tabpanel" id="list-view" class="single-grid-view tab-pane fade clearfix">
                                 <!-- Start List Content-->
-                                        @foreach($products as $pro)
+                                    @foreach($products as $pro)
                                 <div class="single__list__content clearfix">
                                     <div class="row">
                                         <div class="col-md-4 col-lg-4 col-xl-3 col-sm-5 col-12">
@@ -150,10 +155,17 @@
                                         <div class="col-md-8 col-lg-8 col-xl-9 col-sm-7 col-12">
                                             <div class="list__details__inner">
                                                 <h2 class="product-name"><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
+                                                @foreach ($all_cities as $city)
+                                                <div style="background-color:black; color: white; width: 30%;" class="product-name">
+                                                <span>{{$city->region_name}}</span>
+                                                -
+                                                <span>{{$city->city_name}}</span>
+                                                </div>
+                                                @endforeach
                                                 <!-- <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu sit amet…</p> -->
                                                 <ul class="product__price">
                                                 @if($pro-> discount_price == NULL)
-                                                <li class="new__price">GH₵ {{ $pro->selling_price / 100 }}</li>
+                                                <li class="new__price">GH₵ {{ $pro->selling_price / 100}}</li>
                                                     @else
                                                     <li class="new__price">GH₵ {{ $pro->discount_price / 100}}</li>
                                                     <li class="old__price">GH₵ {{ $pro->selling_price / 100}}</li>
@@ -161,7 +173,7 @@
                                                 </ul>
                                                     <br>
                                                 <div class="shop__btn">
-                                                    <a class="htc__btn" href="{{ url('product/details/'.$pro->id.'/'.$pro->slug)}}"><span class="ti-plus"></span>View Product</a>
+                                                    <a class="htc__btn" href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}"><span class="ti-plus"></span>View Product</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -171,9 +183,8 @@
                                 <!-- End List Content-->
                             </div>
                             <!-- End Single View -->
-							<!-- Shop Page Navigation -->
-                        <br>
-						<div class="row d-flex justify-content-center">
+
+                            <div class="row d-flex justify-content-center">
                                 <div class="cols-lg-3">
                                     {{ $products->links() }}
                                 </div>
@@ -182,38 +193,7 @@
                     </div>
                 </div>
             </div>
+        </div>    
         </section>
         <!-- End Our ShopSide Area -->
-        <!-- Start Footer Area -->
-
-<script type="text/javascript">
-    function productview(id){
-        $.ajax({
-         url: "{{ url('/cart/product/view/') }}/"+id, 
-         type: "GET",
-         dataType:"json",
-         success:function(data){
-       $('#pcode').text(data.product.product_code);
-       $('#pcat').text(data.product.category_name);
-       $('#psub').text(data.product.subcategory_name);
-       $('#pbrand').text(data.product.brand_name);
-       $('#pname').text(data.product.product_name);
-       $('#pimage').attr('src',data.product.image_one_secure_url);
-       $('#product_id').val(data.product.id);
-
-       var d = $('select[name="color"]').empty();
-       $.each(data.color,function(key,value){
-       $('select[name="color"]').append('<option value="'+value+'">'+value+'</option>'); 
-        });
-
-          var d = $('select[name="size"]').empty();
-       $.each(data.size,function(key,value){
-       $('select[name="size"]').append('<option value="'+value+'">'+value+'</option>'); 
-        });
-
-
-         }  
-        })
-    }
-</script>
 @endsection

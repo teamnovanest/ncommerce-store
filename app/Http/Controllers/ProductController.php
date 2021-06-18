@@ -26,15 +26,16 @@ class ProductController extends Controller
     			->where('products.id',$id)
     			->first(); */
 				$product = Product::whereId($id)->first();
-				//dd($p);
-
-    	$color = $product->product_color;
-
-    	$product_color = explode(',', $color);
+        
+        $color = $product->product_color;
+        
+        $product_color = explode(',', $color);
     	
-    	$size = $product->product_size;
-		
+        $size = $product->product_size;
+        
     	$product_size = explode(',', $size);		
+      
+      $product_quantity = $product->product_quantity;
 
 	
 		// // Credit offers 
@@ -43,7 +44,7 @@ class ProductController extends Controller
 		// 	->orderBy('percentage', 'ASC')->get();
 		// //dd($credit_offers);
 
-    	return view('pages.product_details',compact('product','product_color','product_size'));      
+    	return view('pages.product_details',compact('product','product_color','product_size','product_quantity'));      
       } catch (\Throwable $th) {
          if (app()->environment('production')){
             \Sentry\captureException($th);
