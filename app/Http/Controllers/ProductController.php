@@ -161,10 +161,11 @@ public function productsView(Request $request){
     public function search(Request $request){
       try {
         $item = $request->search;
-      /*   $products = DB::table('products')
-        ->where('product_name','LIKE',"%$item%")
-        ->paginate(20); */
-        $products =  Product::search($item)->paginate(50);
+        
+        //Apply  filter and  display only products with status code 1. 
+        // Do not include products the merchant does  not want to dispay in the store in the results
+        $products =  Product::search($item)->where('status', 1)->paginate(50); 
+      
     return view('pages.search',compact('products'));  
 
       } catch (\Throwable $th) {
