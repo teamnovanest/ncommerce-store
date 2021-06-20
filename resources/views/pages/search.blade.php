@@ -160,6 +160,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- End Single View -->
+							<!-- Shop Page Navigation -->
+                        <br>
+						<div class="row d-flex justify-content-center">
+                            <div class="cols-lg-3">
+                                {{ $products->links() }}
+                            </div>
+                        </div>
                         </div>
                         @endforeach
                         <!-- End List Content-->

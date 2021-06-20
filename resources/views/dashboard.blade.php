@@ -71,8 +71,10 @@
                 </div><!-- container -->
             </div><!-- az-footer -->
         </div><!-- az-content-body -->
-        <div class="center-pagination">
-            {{ $order->links() }}
+        <div class="row d-flex justify-content-center">
+            <div class="cols-lg-3">
+                {{ $order->links() }}
+            </div>
         </div>
     </div>
 </div>

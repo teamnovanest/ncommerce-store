@@ -48,7 +48,6 @@ $setting = DB::table('sitesettings')->first();
     <!-- azia CSS -->
     <link rel="stylesheet" href="{{ asset('/lib/css/azia.css')}}">
 
-     {{-- <script src="https://js.stripe.com/v3/"></script> --}}
 
      <link rel='stylesheet' href="{{ asset('/lib/nprogress/nprogress.css') }}" />
 
@@ -106,26 +105,57 @@ $setting = DB::table('sitesettings')->first();
                         <div class="col-md-6 col-lg-8 col-sm-2 col-6 ">
                             <nav class="mainmenu__nav d-none d-lg-block">
                                 <ul class="main__menu">
-                                    <li class="drop"><a href="/">Home</a>
-                                    </li>
-                                    <li class="drop"><a href="/shop">Shop</a>
-                                       
-                                    </li>
+                                    <li class="drop"><a href="/">Home</a></li>
+                                    <li class="drop"><a href="/shop">Shop</a></li>
                                     <li><a href="/contact/page">Contact</a></li>
+                                    <li class="drop"><a href="#">Shop By Cities</a>
+                                        <ul class="dropdown mega_dropdown">
+                                            <!-- Start Single Mega MEnu -->
+                                            <li><a class="mega__title" href="shop.html">Cities</a>
+                                                <ul class="mega__item">
+                                                @php
+                                                $all_cities = DB::table('cities')
+                                                ->join('merchant_locations', 'merchant_locations.city_id', '=', 'cities.id')
+                                                ->select('merchant_locations.city_id','cities.id','cities.city_name')
+                                                ->get();
+                                                @endphp
+                                                @foreach ($all_cities as $cities)
+                                               <div class="col-3">
+                                                <li>
+                                                <a href="{{ url($cities->city_name.'/'.$cities->city_id.'/all/products') }}">{{$cities->city_name}}</a>
+                                                </li>
+                                                </div>
+                                                @endforeach
+                                                </ul>
+                                            </li>
+                                            <!-- End Single Mega MEnu -->
+                                        </ul>
+                                    </li>
                                 </ul>
                             </nav>
                             <div class="mobile-menu clearfix d-none">
                                 <nav id="mobile_dropdown">
                                     <ul>
-                                        <li><a href="/">Home</a>
-                                        </li>
-
-
-                                        <li><a href="/shop">Shop</a>
-                                        </li>
-
-
+                                        <li><a href="/">Home</a></li>
+                                        <li><a href="/shop">Shop</a></li>
                                         <li><a href="/contact/page">Contact</a></li>
+                                        <li><a class="mega__title" href="#">Cities</a>
+                                                <ul class="mega__item">
+                                                @php
+                                                $all_cities = DB::table('cities')
+                                                ->join('merchant_locations', 'merchant_locations.city_id', '=', 'cities.id')
+                                                ->select('merchant_locations.city_id','cities.id','cities.city_name')
+                                                ->get();
+                                                @endphp
+                                                @foreach ($all_cities as $cities)
+                                               <div class="col-3">
+                                                <li>
+                                                <a href="{{ url($cities->city_name.'/'.$cities->city_id.'/all/products') }}">{{$cities->city_name}}</a>
+                                                </li>
+                                                </div>
+                                                @endforeach
+                                                </ul>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>                          

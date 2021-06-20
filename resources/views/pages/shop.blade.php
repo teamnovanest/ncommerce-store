@@ -86,8 +86,10 @@
                         </div>
                     </div>
                     <!-- Start Load More BTn -->
-                            <div class="center-pagination">
+                            <div class="row d-flex justify-content-center">
+                                <div class="cols-lg-3">
                                     {{ $allProducts->links() }}
+                                </div>
                             </div>
                     <!-- End Load More BTn -->
                 </div>
