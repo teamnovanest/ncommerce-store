@@ -31,7 +31,7 @@ class DashboardController extends Controller
               ->leftJoin('status_options', 'order_details.status_id', '=', 'status_options.id')
               ->join('products','order_details.product_id', '=', 'products.id')
               ->join('order_financings', 'orders.id', '=', 'order_financings.order_id')
-              ->select('orders.*','order_details.id AS order_detail_id','order_details.status','order_details.status_id','order_details.totalprice','status_options.status_name','products.image_one_secure_url','products.product_name','order_details.product_id','products.slug','order_financings.payment_period','order_financings.percentage')
+              ->select('orders.*','order_details.id AS order_detail_id','order_details.status','order_details.status_id','order_details.singleprice','order_details.quantity','order_details.totalprice','status_options.status_name','products.image_one_secure_url','products.product_name','order_details.product_id','products.slug','order_financings.payment_period','order_financings.percentage')
               ->where('orders.user_id',Auth::id())->orderBy('orders.id','DESC')->limit(10)->paginate(10);
 
               $status = DB::table('status_options')->where('tag','customer')->get();
