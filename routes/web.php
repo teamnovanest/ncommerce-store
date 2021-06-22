@@ -46,7 +46,7 @@ Route::group(['middleware' => ['role:customer']], function () {
     
 });
 
-Route::get("/", "App\Http\Controllers\HomeController@index");
+Route::get("/", [HomeController::class,"index"]);
 Route::get('/user/logout', [LogoutController::class, 'logout'])->name('user.logout');
 
 // Search Route
