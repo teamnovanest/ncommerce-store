@@ -17,8 +17,9 @@
                                     <th>Product name</th>
                                     <th>Product image</th>
                                     <th>Date </th>
-                                    <th>Product price</th>
-                                    <th>Amount </th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th>Total </th>
                                     <th>Total financed</th>
                                     <th>Order code </th>
                                     <th>Status </th>
@@ -36,10 +37,11 @@
                                     src="{{ asset( $row->image_one_secure_url )}}" alt="product images"></a>
                                     </td>
                                     <td>{{date('j F, Y', strtotime($row->created_at)) }}</td>
-                                    <td> GHC {{number_format($row->totalprice /100,2) }}</td>
-                                    <td>GHC {{ number_format($row->total / 100,2)}}</td>
+                                    <td> GHC {{number_format($row->singleprice /100,2) }}</td>
+                                    <td>{{$row->quantity}}</td>
+                                    <td>GHC {{ number_format($row->totalprice / 100,2)}}</td>
                                     <td>GHC
-                                        {{ number_format(((($row->total / 100) * $row->percentage * ($row->payment_period/12)) / 100) + ($row->total/100),2)}}
+                                        {{ number_format(((($row->totalprice / 100) * $row->percentage * ($row->payment_period/12)) / 100) + ($row->total/100),2)}}
                                     </td>
                                     <td>{{ $row->order_code }}</td>
                                     <td id="statustd{{$row->order_detail_id}}">
@@ -56,12 +58,16 @@
                                             class="btn btn-sm btn-info"> View</a>
                                     </td>
                                     <td>
-                                        @if (($row->status_id === 7) && $row->status_id !== 8)
-                                        <div class="form-check form-check-inline mt-2">
+                                        @if ($row->status_id === 7)
+                                        <div class="form-check form-check-inline mt-2 updateCheckBox{{ $row->order_detail_id}}">
                                             <label for="" class="p-2">Yes </label>
-                                            <input class="form-check-input" type="checkbox" name="updateRadio" id="updateRadio" value="{{8}}" data-order-id="{{$row->id}}" data-order-datail-id="{{$row->order_detail_id}}" data-product-id="{{$row->product_id}}">
+                                            <input class="form-check-input updateRadio" type="checkbox" name="updateRadio" id="updateRadio" value="{{8}}" data-order-id="{{$row->id}}" data-order-datail-id="{{$row->order_detail_id}}" data-product-id="{{$row->product_id}}">
                                         </div>
                                         @endif
+                                        @if ($row->status_id === 8 || $row->status_id === 9)
+                                            <label for="" class="p-2">Yes </label>
+                                        @endif
+                                        <label for="" class="p-2 lable{{$row->order_detail_id}}"></label>
                                     </td>
                                 </tr>
                                 @endforeach

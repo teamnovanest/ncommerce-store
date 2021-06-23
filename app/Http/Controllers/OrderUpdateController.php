@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Mail;
 
 class OrderUpdateController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function updateOrder(Request $request,$orderId,$orderDetailId){
         $status_id = $request->statusId;
         $product_id = $request->productId;

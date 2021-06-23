@@ -141,7 +141,7 @@ public function productsView(Request $request){
 	public function searchProductByBrand(Request $request){
     try {
     $brandId = $request->id;
-    $products =  DB::table('products')->where('brand_id',$brandId)->paginate(10);
+    $products =  DB::table('products')->where('brand_id',$brandId)->paginate(50);
     return view('pages.search_product_by_brand',compact('products'));
     } catch (\Throwable $th) {
        if (app()->environment('production')){
@@ -162,11 +162,13 @@ public function productsView(Request $request){
     public function search(Request $request){
       try {
         $item = $request->search;
-        $products = DB::table('products')
-        ->where('product_name','LIKE',"%$item%")
-        ->paginate(20);
-
+        
+        //Apply  filter and  display only products with status code 1. 
+        // Do not include products the merchant does  not want to dispay in the store in the results
+        $products =  Product::search($item)->where('status', 1)->paginate(50); 
+      
     return view('pages.search',compact('products'));  
+
       } catch (\Throwable $th) {
          if (app()->environment('production')){
             \Sentry\captureException($th);

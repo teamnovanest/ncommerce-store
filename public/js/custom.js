@@ -271,11 +271,11 @@ $(document).ready(function () {
     });
 
     //customer order update js
-    $("#updateRadio").on("click", function () {
-        var statusId = $("#updateRadio").val();
-        var orderId = $("#updateRadio").attr("data-order-id");
-        var productId = $("#updateRadio").attr("data-product-id");
-        var orderDetailId = $("#updateRadio").attr("data-order-datail-id");
+    $(".updateRadio").on("click", function () {
+        var statusId = $(this).val();
+        var orderId = $(this).attr("data-order-id");
+        var productId = $(this).attr("data-product-id");
+        var orderDetailId = $(this).attr("data-order-datail-id");
 
         if (statusId && orderId && productId && orderDetailId) {
             $.ajax({
@@ -293,6 +293,8 @@ $(document).ready(function () {
                     $("#statustd" + orderDetailId).append(
                         `<span class="badge badge-success">${data.status_name}</span>`
                     );
+                    $(".updateCheckBox" + orderDetailId).hide();
+                    $(".lable" + orderDetailId).html("Yes");
                     NProgress.done();
                     Swal.fire({
                         icon: "success",
@@ -300,7 +302,6 @@ $(document).ready(function () {
                         text: "Order updated successfully",
                         showCloseButton: true,
                     });
-                    window.location.reload();
                 },
                 error: function (error) {
                     NProgress.done();
