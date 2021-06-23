@@ -16,11 +16,12 @@
                         <fieldset>
                             <div class="form-card">
                                 <h4 class="fs-title">Please select the institutions you have an account with</h4>
+                                <div class="form__label">Choose Financial institution *</div>
                                 <dl class="dropdown">
 
                                     <dt>
-                                        <a class="dropdown__header" href="#">
-                                            <span class="hida">Click to select your financial institution *</span>
+                                        <a class="dropdown__header">
+                                            <span class="hida">Choose financial institution</span>
                                             <p class="multiSel"></p>
                                         </a>
                                     </dt>

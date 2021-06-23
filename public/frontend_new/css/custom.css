@@ -289,10 +289,11 @@
 }
 
 .dropdown dt a {
-    background-color: rgb(214, 213, 213, 0.1);
+    background-color: transparent;
+    height: 39px;
     display: block;
-    padding: 8px 20px 5px 10px;
-    min-height: 25px;
+    padding: 2px 20px 1px 10px;
+    /* min-height: 25px; */
     line-height: 24px;
     overflow: hidden;
     border: 0;
@@ -307,8 +308,9 @@
 .multiSel span {
     cursor: pointer;
     display: inline-block;
-    padding-top: 5px;
-    font-size: 1.01rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    color: #596882;
     font-weight: 400;
 }
 
@@ -533,7 +535,6 @@
 .shop-category a {
     color: black;
 }
-
 
 .text-left {
     position: absolute;
@@ -916,7 +917,7 @@ select.list-dt:focus {
 .fs-title {
     font-size: 25px;
     color: #2c3e50;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-weight: bold;
     text-align: left;
 }
@@ -1014,4 +1015,17 @@ select.list-dt:focus {
 
 .thumb_image {
     width: 50px;
+}
+
+.dropup,
+.dropright,
+.dropdown,
+.dropleft {
+    /* position: relative; */
+    border: #cdd4e0 solid 1px;
+}
+
+.dropdown dt a {
+    background-color: transparent;
+    height: 39px;
 }
