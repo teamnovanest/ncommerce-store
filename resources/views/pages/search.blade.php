@@ -102,11 +102,12 @@
                                         <div class="product__details">
                                             <h2 class="product-name"><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
                                             <ul class="product__price">
-                                                @if($pro->discount_price == null)
-                                                <li class="new__price">GH₵ {{ $pro->selling_price / 100 }}</li>
+                                                @if($pro->discount_price == NULL)
+                                                <li>GH₵ {{number_format($pro->selling_price,2) }}</li>
                                                 @else
-                                                <li class="new__price">GH₵ {{ $pro->discount_price / 100}}</li>
-                                                <li class="old__price">GH₵ {{ $pro->selling_price / 100}}</li>
+                                                <li class="new__price">GH₵
+                                                    {{number_format($pro->selling_price - $pro->discount_price,2) }}</li>
+                                                <li class="old__price">GH₵ {{number_format($pro->selling_price,2) }}</li>
                                                 @endif
                                             </ul>
                                         </div>
@@ -146,11 +147,12 @@
                                     <div class="list__details__inner">
                                         <h2 class="product-name"><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
                                         <ul class="product__price">
-                                            @if($pro-> discount_price == NULL)
-                                            <li class="new__price">GH₵ {{ $pro->selling_price / 100 }}</li>
+                                            @if($pro->discount_price == NULL)
+                                            <li>GH₵ {{number_format($pro->selling_price,2) }}</li>
                                             @else
-                                            <li class="new__price">GH₵ {{ $pro->discount_price / 100}}</li>
-                                            <li class="old__price">GH₵ {{ $pro->selling_price / 100}}</li>
+                                            <li class="new__price">GH₵
+                                                {{number_format($pro->selling_price - $pro->discount_price,2) }}</li>
+                                            <li class="old__price">GH₵ {{number_format($pro->selling_price,2) }}</li>
                                             @endif
                                         </ul>
                                         <br>

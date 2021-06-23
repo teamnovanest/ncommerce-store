@@ -116,19 +116,20 @@
                                             </div>
                                             <div class="product__details">
                                                 <h2 class="product-name"><a href="{{ url('product/details/'.$product->id.'/'.$product->slug) }}" tabindex="0">{{ $product->product_name  }} </a></h2>
-                                                @foreach ($all_cities as $city)
+                                                
                                                 <div style="background-color:black; color: white;" class="product-name">
-                                                <span>{{$city->region_name}}</span>
+                                                <span>{{$product->region_name}}</span>
                                                 -
-                                                <span>{{$city->city_name}}</span>
+                                                <span>{{$product->city_name}}</span>
                                                 </div>
-                                                @endforeach
+                                                
                                                 <ul class="product__price">
-					                                @if($product->discount_price == NULL)
-                                                    <li class="new__price">GH₵ {{ $product->selling_price / 100}}</li>
+                                                    @if($product->discount_price == NULL)
+                                                    <li>GH₵ {{number_format($product->selling_price/ 100 ,2) }}</li>
                                                     @else
-                                                    <li class="new__price">GH₵ {{ $product->discount_price / 100}}</li>
-                                                    <li class="old__price">GH₵ {{ $product->selling_price / 100}}</li>
+                                                    <li class="new__price">GH₵
+                                                        {{number_format($product->selling_price /100 - $product->discount_price / 100 ,2) }}</li>
+                                                    <li class="old__price">GH₵ {{number_format($product->selling_price / 100 ,2) }}</li>
                                                     @endif
                                                 </ul>
                                             </div>
@@ -155,20 +156,21 @@
                                         <div class="col-md-8 col-lg-8 col-xl-9 col-sm-7 col-12">
                                             <div class="list__details__inner">
                                                 <h2 class="product-name"><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
-                                                @foreach ($all_cities as $city)
+                                                
                                                 <div style="background-color:black; color: white; width: 30%;" class="product-name">
-                                                <span>{{$city->region_name}}</span>
+                                                <span>{{$pro->region_name}}</span>
                                                 -
-                                                <span>{{$city->city_name}}</span>
+                                                <span>{{$pro->city_name}}</span>
                                                 </div>
-                                                @endforeach
-                                                <!-- <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu sit amet…</p> -->
+                                                
+                                                
                                                 <ul class="product__price">
-                                                @if($pro-> discount_price == NULL)
-                                                <li class="new__price">GH₵ {{ $pro->selling_price / 100}}</li>
+                                                   @if($pro->discount_price == NULL)
+                                                    <li>GH₵ {{number_format($pro->selling_price/ 100 ,2) }}</li>
                                                     @else
-                                                    <li class="new__price">GH₵ {{ $pro->discount_price / 100}}</li>
-                                                    <li class="old__price">GH₵ {{ $pro->selling_price / 100}}</li>
+                                                    <li class="new__price">GH₵
+                                                        {{number_format($pro->selling_price /100 - $pro->discount_price / 100 ,2) }}</li>
+                                                    <li class="old__price">GH₵ {{number_format($pro->selling_price / 100 ,2) }}</li>
                                                     @endif
                                                 </ul>
                                                     <br>

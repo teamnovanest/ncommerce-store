@@ -15,7 +15,11 @@ class HomeController extends Controller
     public function index(){
         try {
             //$featured = DB::table('products')->where('status',1)->orderBy('id','desc')->limit(100)->paginate(12);
-            $featured = Product::where('status','=',1)->inRandomOrder()->paginate(12);
+            $featured = Product::leftjoin('merchant_locations', 'merchant_locations.merchant_organization_id', '=', 'products.merchant_organization_id')
+            ->leftJoin('regions','merchant_locations.region_id','=','regions.id')
+            ->leftJoin('cities','merchant_locations.city_id','=','cities.id')
+            ->select('products.id','products.slug','products.image_one_secure_url','products.category_id','products.product_name','products.selling_price','products.discount_price','regions.region_name','cities.city_name')
+            ->where('products.status','=',1)->inRandomOrder()->paginate(12);
             //  $featured = Product::with(['brand'])->where('status','=',1)->inRandomOrder()->paginate(12);
             $trend = Product::where('status','=',1)->where('trend',1)->inRandomOrder()->limit(8);
             $best = Product::where('status','=',1)->where('best_rated',1)->inRandomOrder()->limit(8);
@@ -52,11 +56,13 @@ class HomeController extends Controller
 
      public function shop(){
          try {
-           $cat = DB::table('products');
-        $allProducts = DB::table('products')->where('status',1)->orderBy('id','desc')->paginate(50);
-	
-       $category = DB::table('category_options')->get();
-
+           $allProducts = DB::table('products')
+           ->leftJoin('merchant_locations', 'merchant_locations.merchant_organization_id', '=', 'products.merchant_organization_id')
+           ->leftJoin('regions','merchant_locations.region_id','=','regions.id')
+           ->leftJoin('cities','merchant_locations.city_id','=','cities.id')
+           ->select('products.id','products.slug','products.image_one_secure_url','products.category_id','products.product_name','products.selling_price','products.discount_price','regions.region_name','cities.city_name')
+           ->where('products.status',1)->inRandomOrder()->paginate(50);
+           $category = DB::table('category_options')->get();
        return view('pages.shop',compact('category', 'allProducts'));  
          } catch (\Throwable $th) {
              if (app()->environment('production')){
@@ -73,7 +79,12 @@ class HomeController extends Controller
 
     public function shopView($id){
         try {
-           $allProducts = DB::table('products')->where('status',1)->where('category_id',$id)->orderBy('id','desc')->paginate(50);
+           $allProducts = DB::table('products')
+           ->leftJoin('merchant_locations', 'merchant_locations.merchant_organization_id', '=', 'products.merchant_organization_id')
+           ->leftJoin('regions','merchant_locations.region_id','=','regions.id')
+           ->leftJoin('cities','merchant_locations.city_id','=','cities.id')
+           ->select('products.id','products.slug','products.image_one_secure_url','products.category_id','products.product_name','products.selling_price','products.discount_price','regions.region_name','cities.city_name')
+           ->where('status',1)->where('category_id',$id)->orderBy('id','desc')->paginate(50);
 	
        $category = DB::table('category_options')->get();
 

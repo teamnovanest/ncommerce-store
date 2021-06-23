@@ -118,13 +118,18 @@
                                             </div>
                                             <div class="product__details">
                                                 <h2 class="product-name"><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
+                                                <div style="background-color:black; color: white;" class="product-name">
+                                                    <span>{{$pro->region_name}}</span>
+                                                    -
+                                                    <span>{{$pro->city_name}}</span>
+                                                </div>
                                                 <ul class="product__price">
-					                                @if($pro->discount_price == NULL)
-                                                    <li class="new__price">GH₵ {{ $pro->selling_price / 100 }}</li>
+					                                @if($pro-> discount_price == NULL)
+                                                   <li class="new__price">GH₵ {{ number_format($pro->selling_price / 100,2)}}</li>
                                                     @else
-                                                    <li class="new__price">GH₵ {{ $pro->discount_price / 100}}</li>
-                                                    <li class="old__price">GH₵ {{ $pro->selling_price / 100}}</li>
-                                                    @endif
+                                                    <li class="new__price">GH₵ {{ number_format($pro->selling_price / 100 - $pro->discount_price / 100,2)}}</li>
+                                                    <li class="old__price">GH₵ {{ number_format($pro->selling_price / 100,2)}}</li>
+                                                @endif
                                                 </ul>
                                             </div>
                                         </div>
@@ -150,14 +155,18 @@
                                         <div class="col-md-8 col-lg-8 col-xl-9 col-sm-7 col-12">
                                             <div class="list__details__inner">
                                                 <h2 class="product-name"><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
-                                                <!-- <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu sit amet…</p> -->
+                                                <div style="background-color:black; color: white; width: 30%;" class="product-name">
+                                                <span>{{$pro->region_name}}</span>
+                                                -
+                                                <span>{{$pro->city_name}}</span>
+                                                </div>
                                                 <ul class="product__price">
                                                 @if($pro-> discount_price == NULL)
-                                                <li class="new__price">GH₵ {{ $pro->selling_price / 100 }}</li>
+                                                    <li class="new__price">GH₵ {{ number_format($pro->selling_price / 100,2)}}</li>
                                                     @else
-                                                    <li class="new__price">GH₵ {{ $pro->discount_price / 100}}</li>
-                                                    <li class="old__price">GH₵ {{ $pro->selling_price / 100}}</li>
-                                                    @endif
+                                                    <li class="new__price">GH₵ {{ number_format($pro->selling_price / 100 - $pro->discount_price / 100,2)}}</li>
+                                                    <li class="old__price">GH₵ {{ number_format($pro->selling_price / 100,2)}}</li>
+                                                @endif
                                                 </ul>
                                                     <br>
                                                 <div class="shop__btn">

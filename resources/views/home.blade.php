@@ -141,9 +141,16 @@
                                 </div>
                             </div>
                             <div class="product__details">
-                                <h2 class="product-name"><a
+                                <h2 class="product-name">
+                                    <a
                                         href="{{ url('/product/details/'.$row->id.'/'.$row->slug) }}">{{$row->product_name}}
-                                    </a></h2>
+                                    </a>
+                                </h2>
+                                <div style="background-color:black; color: white;" class="product-name">
+                                    <span>{{$row->region_name}}</span>
+                                    -
+                                    <span>{{$row->city_name}}</span>
+                                </div>
                                 <ul class="product__price">
                                     @if($row->discount_price == NULL)
                                     <li>GH₵ {{number_format($row->selling_price,2) }}</li>
