@@ -18,13 +18,7 @@ class ProductController extends Controller
     public function productView($id)
     {
       try {
-        /* $product = DB::table('products')
-    			->join('categories','products.category_id','categories.id')
-    			->join('subcategories','products.subcategory_id','subcategories.id')
-    			->join('brand_options','products.brand_id','brand_options.id')
-    			->select('products.*','categories.category_name','subcategories.subcategory_name','brand_options.brand_name')
-    			->where('products.id',$id)
-    			->first(); */
+    
 				$product = Product::whereId($id)->first();
         
         $color = $product->product_color;
@@ -37,12 +31,7 @@ class ProductController extends Controller
       
       $product_quantity = $product->product_quantity;
 
-	
-		// // Credit offers 
-		// $credit_offers = LenderOffering::with(['lender'])
-		// ->where('lender_organization_id','=', Auth::user()->lender_organization_id)
-		// 	->orderBy('percentage', 'ASC')->get();
-		// //dd($credit_offers);
+
 
     	return view('pages.product_details',compact('product','product_color','product_size','product_quantity'));      
       } catch (\Throwable $th) {

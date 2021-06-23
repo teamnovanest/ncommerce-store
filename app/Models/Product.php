@@ -85,7 +85,7 @@ class Product extends Model
     public function searchableAs()
     {
         if (!app()->environment('production')){
-        return 'dev_VESTASHI';
+            return 'dev_VESTASHI';
         }else{
             return 'prod_VESTASHI';
         }
