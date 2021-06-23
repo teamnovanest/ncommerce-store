@@ -804,6 +804,9 @@
     <!-- Instant search  -->
     <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.8.3/dist/instantsearch.production.min.js" integrity="sha256-LAGhRRdtVoD6RLo2qDQsU2mp+XVSciKRC8XPOBWmofM=" crossorigin="anonymous"></script>
 
+    <!-- Paystack -->
+    <script src="https://js.paystack.co/v2/inline.js"></script>
+
 
     <!-- jquery latest version -->
     <script src="{{asset('/frontend_new/js/vendor/jquery-1.12.0.min.js')}}"></script>

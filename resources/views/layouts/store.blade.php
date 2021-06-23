@@ -576,7 +576,12 @@ $setting = DB::table('sitesettings')->first();
 
     <!-- jquery latest version -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
+    <!-- Paystack -->
+    <script src="https://js.paystack.co/v2/inline.js"></script>
 
+   
+    
     {{-- <script type="text/javascript" src="{{ asset('/lib/toastr/toastr.min.js') }}"></script> --}}
     <script src="{{ asset('/lib/sweetalert/sweetalert.js') }}"></script> 
     <!-- <script src="{{ asset('/lib/sweetalert/sweetalert.min.js')}}"></script> -->

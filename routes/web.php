@@ -19,6 +19,7 @@ use App\Http\Controllers\OrderDetailsController;
 use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\FeatureRequestController;
 use App\Http\Controllers\LenderOfferingController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductQuestionsAndAnswersController;
 
 
@@ -45,6 +46,10 @@ Route::group(['middleware' => ['role:customer']], function () {
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
 });
+
+// Papyment routes
+
+Route::get("/payment/verify/{transactionref}", [PaymentController::class,"verify"]);
 
 Route::get("/", [HomeController::class,"index"]);
 Route::get('/user/logout', [LogoutController::class, 'logout'])->name('user.logout');
