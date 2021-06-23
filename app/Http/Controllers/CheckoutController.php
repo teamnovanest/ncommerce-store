@@ -8,7 +8,9 @@ use Mail;
 use Session;
 use App\Mail\InvoiceMail;
 use Illuminate\Http\Request;
+use App\Mail\OrderConfirmation;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
 class CheckoutController extends Controller
 {
@@ -20,7 +22,6 @@ class CheckoutController extends Controller
 
   public function checkout(Request $request)
   {
-    
     $selectedOfferId = $request->selectedOfferId;
     #select the payment period and percentag from the lender offering table
     $lenderOffering = DB::table('lender_offerings')->select('payment_period', 'percentage', 'max_financed', 'lender_organization_id','finance_union_id')->where('id', $selectedOfferId)->first();
@@ -103,6 +104,30 @@ class CheckoutController extends Controller
       $offerdetail['created_at'] = now();
       DB::table('order_financings')->insert($offerdetail);
 
+      // info: Generating information to send order confirmation
+      $order_summary = DB::table('orders')
+      ->join('users', 'orders.user_id', '=', 'users.id')
+      ->select('orders.id AS oid','order_code','subtotal','total','name','email','total_financed','orders.created_at as created_at')
+      ->where('orders.id', $order_id)
+      ->where('orders.user_id', Auth::user()->id)
+      ->first();
+
+      $order_details = DB::table('order_details')
+      ->join('products', 'order_details.product_id', '=', 'products.id')
+      ->select('image_one_secure_url','products.product_name as product','quantity','totalprice')
+      ->where('order_id', $order_id)
+      ->get();
+
+      $order_financing = DB::table('order_financings')
+      ->select('payment_period','percentage')
+      ->where('order_id',$order_id)
+      ->where('user_id',Auth::user()->id)
+      ->first();
+
+      $url = URL::to('/dashboard');
+
+      Mail::to($order_summary->email)->send(new OrderConfirmation($order_summary,$order_details,$order_financing,$url));
+      
       Cart::destroy();
       if (Session::has('coupon')) {
         Session::forget('coupon');
