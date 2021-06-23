@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderDetailsController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
+    
     public function viewOrderStatus($order_id,$orderDetailId) {
         try {
             $order_codes = DB::table('orders')->where('id',$order_id)->get('order_code');
