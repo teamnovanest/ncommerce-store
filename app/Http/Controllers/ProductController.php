@@ -98,8 +98,13 @@ public function productsView(Request $request){
 
   try {
     $subcategoryId = $request->id;
-       $products = DB::table('products')->where('subcategory_id',$subcategoryId)->paginate(5);
-       $categorys = DB::table('category_options')->get();
+        $products = DB::table('products')
+        ->leftJoin('merchant_locations', 'merchant_locations.merchant_organization_id', '=', 'products.merchant_organization_id')
+        ->leftJoin('regions','merchant_locations.region_id','=','regions.id')
+        ->leftJoin('cities','merchant_locations.city_id','=','cities.id')
+        ->select('products.id','products.slug','products.image_one_secure_url','products.category_id','products.product_name','products.selling_price','products.discount_price','regions.region_name','cities.city_name')
+        ->where('subcategory_id',$subcategoryId)->paginate(5);
+        $categorys = DB::table('category_options')->inRandomOrder()->get();
 	   
        $brands = DB::table('products')->where('subcategory_id',$subcategoryId)->select('brand_id')->groupBy('brand_id')->get();
 
@@ -122,7 +127,12 @@ public function productsView(Request $request){
 	public function categoryView(Request $request){
     try {
       $categoryId = $request->id;   
-      $category_all =  DB::table('products')->where('category_id',$categoryId)->paginate(10);
+      $category_all =  DB::table('products')
+      ->leftJoin('merchant_locations', 'merchant_locations.merchant_organization_id', '=', 'products.merchant_organization_id')
+      ->leftJoin('regions','merchant_locations.region_id','=','regions.id')
+      ->leftJoin('cities','merchant_locations.city_id','=','cities.id')
+      ->select('products.id','products.slug','products.image_one_secure_url','products.category_id','products.product_name','products.selling_price','products.discount_price','regions.region_name','cities.city_name')
+      ->where('category_id',$categoryId)->paginate(10);
     return view('pages.all_category',compact('category_all'));
     } catch (\Throwable $th) {
        if (app()->environment('production')){
@@ -141,7 +151,12 @@ public function productsView(Request $request){
 	public function searchProductByBrand(Request $request){
     try {
     $brandId = $request->id;
-    $products =  DB::table('products')->where('brand_id',$brandId)->paginate(50);
+    $products =  DB::table('products')
+    ->leftJoin('merchant_locations', 'merchant_locations.merchant_organization_id', '=', 'products.merchant_organization_id')
+    ->leftJoin('regions','merchant_locations.region_id','=','regions.id')
+    ->leftJoin('cities','merchant_locations.city_id','=','cities.id')
+    ->select('products.id','products.slug','products.image_one_secure_url','products.category_id','products.product_name','products.selling_price','products.discount_price','regions.region_name','cities.city_name')
+    ->where('brand_id',$brandId)->paginate(50);
     return view('pages.search_product_by_brand',compact('products'));
     } catch (\Throwable $th) {
        if (app()->environment('production')){
