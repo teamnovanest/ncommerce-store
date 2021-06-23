@@ -68,14 +68,20 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    
                                     <div class="product__details">
                                         <h2 class="product-name"><a href="{{ url('/product/details/'.$row->id.'/'.$row->slug) }}" >{{$row->product_name}}</a></h2>
+                                        <div style="background-color:black; color: white;" class="product-name">
+                                            <span>{{$row->region_name}}</span>
+                                            -
+                                            <span>{{$row->city_name}}</span>
+                                        </div>
                                         <ul class="product__price">
                                              @if($row->discount_price == NULL)
-                                            <li >GH₵ {{$row->selling_price / 100}}</li>
+                                            <li >GH₵ {{number_format($row->selling_price / 100,2)}}</li>
                                               @else
-                                              <li class="new__price">GH₵ {{$row->discount_price / 100}}</li>
-                                            <li class="old__price">GH₵ {{$row->selling_price / 100}}</li>
+                                              <li class="new__price">GH₵ {{number_format($row->selling_price / 100 - $row->discount_price / 100,2)}}</li>
+                                            <li class="old__price">GH₵ {{number_format($row->selling_price / 100,2)}}</li>
                                               @endif
                                         </ul>
                                     </div>
