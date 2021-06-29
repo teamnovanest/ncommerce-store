@@ -45,6 +45,7 @@
                             @php
                             $order = [];
                             @endphp
+
                                 @foreach($cart as $row)
                                 <tr>
                                     <td class="product-name">{{ $row->name  }}</td>
@@ -70,11 +71,11 @@
                                 </tr>
                                 @php
                                 
-                                  array_push($order, ['product_id' => $row->id, 'quantity' => $row->qty]); 
+                                  array_push($order, ['product_id' => $row->id, 'quantity' => $row->qty,'color' => $row->options->color, 'size' => $row->options->size, 
+                                  'merchant_id' => $row->options->merchant_organization_id, 'product_name' => $row->name, 'price' => $row->price, 'totalprice' => $row->price * $row->qty ]); 
                                 @endphp
                                 @endforeach
-
-                                
+      
                             </tbody>
                         </table>
                     </div>
@@ -85,6 +86,9 @@
 
     <!-- Start: Pay online without finance -->
     <section>
+         <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5">
         @if($cart->count() > 0)
 
         <div class="container">
@@ -111,7 +115,7 @@
                             <input type="text" id="last-name" @if (Auth::check()) value="{{explode(' ',auth()->user()->name)[1] }}" @endif />
                         </div>
                         <div class="form-submit">
-                            <button type="button" id="pay-btn" onclick="payWithPaystack()"> Pay </button>
+                            <button type="button" class="checkout-btn btn" id="pay-btn" onclick="payWithPaystack()"> PAY </button>
                         </div>
                     </form>
 
@@ -119,11 +123,11 @@
             </div>
         </div>
         @endif
-    </section>
+  
+    </div>
     <!-- End: Pay online without finance -->
 
-
-    <section>
+  <div class="col-lg-6 mb-5">
         @if($cart->count() > 0)
 
         <div class="container">
@@ -278,7 +282,12 @@
 @else
 <div></div>
 @endif
+</div>
+</div>
+</div>
 </section>
+
+
 <section>
     <div class="container ptb--50">
         @if($cart->count() > 0)
@@ -392,10 +401,9 @@
                 alert('Window closed.');
             },
             callback: async function (response) {
-                console.log(response);
                 var message = 'Payment complete! Reference: ' + response.reference;
                
-                // Start a loading here
+                //start loader
                 fetch(`/payment/verify/${response.reference}`, {
                     method: 'get',
                     headers:{
@@ -405,12 +413,22 @@
                 }).then(response => response.json())
                 .then(data => {
                       // Stop a loading here
-                      // redirect to completed page/ dashboard/ order detail page
-                  console.log('Success:', data);
+                      Swal.fire({
+                        icon: "success",
+                        title: "Success",
+                        text: 'You have successfully placed your order.',
+                        showCloseButton: true,
+                    });
+                    window.location.href="/dashboard";
                 })
                 .catch((error) => {
                      // Stop a loading here
-                  console.error('Error:', error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: 'Something didnt go right. Our engineers have been notified \nabout the issue and will look into it. If the issue persists contact support',
+                        showCloseButton: true,
+                    });
                 });
                 
             }

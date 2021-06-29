@@ -628,7 +628,9 @@ $(document).ready(function () {
                     $("#productQuestionContainer").append(`
                     <div class="pro__review ans">
                             <div class="review__thumb">
-                                <img src=${value.profile_secure_url} alt="user_image"> 
+                                <img src=${
+                                    value.profile_secure_url
+                                } alt="user_image" class="thumb_image"> 
                             </div>
                             <div class="review__details">
                                 <div class="review__info">
@@ -638,7 +640,11 @@ $(document).ready(function () {
                                     <span>${value.created_at}</span>
                                 </div>
                                 <p> ${value.question}</p>
-                                <p> ${value.answer}</p>
+                                <p> ${
+                                    value.answer !== null
+                                        ? value.answer
+                                        : "Not answered"
+                                }</p>
                                 </div>
                             </div>`);
                 });
