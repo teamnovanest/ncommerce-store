@@ -197,8 +197,13 @@
                 },
                 success: function (data) {
                     if (data) {
+                        Swal.fire({
+                        icon: "success",
+                        title: "Success",
+                        text: 'Registration process completed successfully',
+                        showCloseButton: true,
+                    });
                         window.location.href = '/dashboard';
-                        toastr.success('Success');
                         NProgress.done();
                     }
                 },
