@@ -308,7 +308,7 @@ $(document).ready(function () {
                     Swal.fire({
                         icon: "error",
                         title: "Error",
-                        text: error.attrresponseJSON.error,
+                        text: error.responseJSON.message,
                         showCloseButton: true,
                     });
                 },

@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Mail\OrderConfirmation;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class PaymentController extends Controller
 {
@@ -13,11 +19,37 @@ class PaymentController extends Controller
         $this->middleware('auth');
     }
 
+    public function sendOrderConfirmationEmail($orderId){
+        // info: Generating information to send order confirmation
+      $order_summary = DB::table('orders')
+      ->join('users', 'orders.user_id', '=', 'users.id')
+      ->select('orders.id AS oid','order_code','subtotal','total','name','email','total_financed','orders.created_at as created_at')
+      ->where('orders.id', $orderId)
+      ->where('orders.user_id', Auth::user()->id)
+      ->first();
+
+      $order_details = DB::table('order_details')
+      ->join('products', 'order_details.product_id', '=', 'products.id')
+      ->select('image_one_secure_url','products.product_name as product','quantity','totalprice')
+      ->where('order_id', $orderId)
+      ->get();
+
+      $order_financing = DB::table('order_financings')
+      ->select('payment_period','percentage')
+      ->where('order_id',$orderId)
+      ->where('user_id',Auth::user()->id)
+      ->first();
+
+      $url = URL::to('/dashboard');
+
+      $results = Mail::to($order_summary->email)->send(new OrderConfirmation($order_summary,$order_details,$order_financing,$url));
+      return $results;
+    }
+
     /**
      *  verify paystack payment done on the client side as recomended in the docs
      */
     public function verify($transactionref){
-       
     // TODO:
     // Insert order & customer details in to tables
     // product and quantity orderd is nin the metadata
@@ -98,19 +130,24 @@ class PaymentController extends Controller
                             'customer_code' => $res_data['data']['customer']['customer_code'],
                             'created_at' => now()
                         ]);
-                        
+                        //send order confirmation email to the user
+                        $result = $this->sendOrderConfirmationEmail($orderId);
+
+                            Cart::destroy();
+                            if (Session::has('coupon')) {
+                                Session::forget('coupon');
+                            }
                         DB::commit();
-                        return response()->json(['status' => 200]);
+                        return response()->json(['status' => 'success']);
                         } catch (\Throwable $th) {
-                            dd($th);
                             DB::rollback();
                             if (app()->environment('production')){
                                 \Sentry\captureException($th);
                             }
-                            return response()->json(['status'=> 500]);
+                            return response()->json(['status'=> 'error'],500);
                         }
                 }else{
-                  return response()->json(['status'=> 500]);
+                  return response()->json(['status'=> error],500);
                 }
         }
 

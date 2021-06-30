@@ -99,7 +99,7 @@ class OrderUpdateController extends Controller
             } catch (\Throwable $th) {
                 $error = $th->getMessage();
                 DB::rollback();
-                return response()->json(['error'=>'An error occured. Try again or contact support if issue persist'],500);
+                return \response()->json(['message'=>'An error occured. Try again or contact support if issue persist'],500);
             }
         
     }
