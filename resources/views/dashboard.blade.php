@@ -9,7 +9,7 @@
     <div class="section-center">
         <div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
             <div class="container">
-                <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+                <div class="az-content-body pd-lg-l-40 d-flex flex-column" style="overflow: auto">
                     <div class="table-responsive">
                         <table class="table mg-b-0">
                             <thead>
