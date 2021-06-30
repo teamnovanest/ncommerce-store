@@ -20,6 +20,10 @@ class ProductController extends Controller
       try {
     
 				$product = Product::whereId($id)->first();
+
+        $product_seo = DB::table('product_seos')
+        ->where('product_id',$id)
+        ->first();
         
         $color = $product->product_color;
         
@@ -33,7 +37,7 @@ class ProductController extends Controller
 
 
 
-    	return view('pages.product_details',compact('product','product_color','product_size','product_quantity'));      
+    	return view('pages.product_details',compact('product','product_color','product_size','product_quantity','product_seo'));      
       } catch (\Throwable $th) {
          if (app()->environment('production')){
             \Sentry\captureException($th);
