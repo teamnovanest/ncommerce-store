@@ -114,7 +114,6 @@
 <script type="text/javascript">
     $(".dropdown dt a").on('click', function () {
         $(".dropdown dd ul").slideToggle('fast');
-        console.log('Hello');
     });
     $(".dropdown dd ul li a").on('click', function () {
         $(".dropdown dd ul").hide();
