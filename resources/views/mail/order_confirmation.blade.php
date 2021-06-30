@@ -450,25 +450,43 @@
                class="order__summary--details-outlook" style="vertical-align:top;width:264px;"
             >
           <![endif]-->
-              <div class="mj-column-per-44 mj-outlook-group-fix order__summary--details" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
-                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
-                  <tr>
-                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">Subtotal: GHC {{ number_format($order_summary->total / 100,2) }}</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">Interest: GHC {{ number_format(((($order_summary->total / 100) * $order_financing->percentage * ($order_financing->payment_period/12)) / 100),2)}}</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">Total: GHC {{ number_format($order_summary->total_financed / 100,2) }}</div>
-                    </td>
-                  </tr>
-                </table>
-              </div>
+            @if (isset($order_financing)) 
+            <div class="mj-column-per-44 mj-outlook-group-fix order__summary--details" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+              <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                <tr>
+                  <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                    <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">Subtotal: GHC {{ number_format($order_summary->total / 100,2) }}</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                    <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">Interest: GHC {{ number_format(((($order_summary->total / 100) * $order_financing->percentage * ($order_financing->payment_period/12)) / 100),2)}}</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                    <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">Total: GHC {{ number_format($order_summary->total_financed / 100,2) }}</div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            @else            
+            <div class="mj-column-per-44 mj-outlook-group-fix order__summary--details" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+              <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                <tr>
+                  <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                    <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">Subtotal: GHC {{ number_format($order_summary->total / 100,2) }}</div>
+                  </td>
+                </tr>
+            
+                <tr>
+                  <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                    <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">Total: GHC {{ number_format($order_summary->total / 100,2) }}</div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            @endif
               <!--[if mso | IE]>
             </td>
           

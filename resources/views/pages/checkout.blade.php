@@ -115,7 +115,7 @@
                             <input type="text" id="last-name" @if (Auth::check()) value="{{explode(' ',auth()->user()->name)[1] }}" @endif />
                         </div>
                         <div class="form-submit">
-                            <button type="button" class="checkout-btn btn" id="pay-btn" onclick="payWithPaystack()"> PAY </button>
+                            <button type="button" class="checkout-btn btn" id="pay-btn" onclick="payWithPaystack()">CHECKOUT WITH PAYMENT </button>
                         </div>
                     </form>
 
@@ -339,7 +339,7 @@
 
                     <div>
                         <span class="wc-proceed-to-checkout">
-                            <button id="checkout" class="checkout-btn btn" type="button">CHECKOUT</button>
+                            <button id="checkout" class="checkout-btn btn" type="button">CHECKOUT WITH FINANCE</button>
                         </span>
                         <span class="cart_buttons">
                             <button style="height: 50px; background: black;" type="button" class="btn btn-danger">CANCEL</button>
@@ -402,7 +402,7 @@
             },
             callback: async function (response) {
                 var message = 'Payment complete! Reference: ' + response.reference;
-               
+
                 //start loader
                 fetch(`/payment/verify/${response.reference}`, {
                     method: 'get',

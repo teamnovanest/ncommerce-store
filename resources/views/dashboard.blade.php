@@ -41,7 +41,7 @@
                                     <td>{{$row->quantity}}</td>
                                     <td>GHC {{ number_format($row->totalprice / 100,2)}}</td>
                                     <td>GHC
-                                        {{ number_format(((($row->totalprice / 100) * $row->percentage * ($row->payment_period/12)) / 100) + ($row->total/100),2)}}
+                                        {{ number_format(((($row->totalprice / 100) * $row->percentage * ($row->payment_period/12)) / 100) + ($row->totalprice/100),2)}}
                                     </td>
                                     <td>{{ $row->order_code }}</td>
                                     <td id="statustd{{$row->order_detail_id}}">
