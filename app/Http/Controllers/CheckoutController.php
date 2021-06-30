@@ -30,7 +30,6 @@ class CheckoutController extends Controller
    
     DB::begintransaction();
     try {
-        // throw new \Exception();
       $content = Cart::content();
 
        //info: Removing product in wishlist when a customer finally purchase a product

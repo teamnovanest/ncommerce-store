@@ -1,3 +1,8 @@
+@php
+$seo = DB::table('seos')->where('deleted_at', NULL)->first();
+
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,31 +23,27 @@
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Twitter -->
-  <!-- <meta name="twitter:site" content="@bootstrapdash">
-    <meta name="twitter:creator" content="@bootstrapdash">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Azia">
-    <meta name="twitter:description" content="Responsive Bootstrap 4 Dashboard Template">
-    <meta name="twitter:image" content="https://www.bootstrapdash.com/azia/img/azia-social.png"> -->
-
-  <!-- Facebook -->
-  <!-- <meta property="og:url" content="https://www.bootstrapdash.com/azia">
-    <meta property="og:title" content="Azia">
-    <meta property="og:description" content="Responsive Bootstrap 4 Dashboard Template">
-
-    <meta property="og:image" content="https://www.bootstrapdash.com/azia/img/azia-social.png">
-    <meta property="og:image:secure_url" content="https://www.bootstrapdash.com/azia/img/azia-social.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="600"> -->
-
+  
+  <title>{{ $seo->meta_title }}</title>
   <!-- Meta -->
-  <meta name="description" content="">
-  <meta name="author" content=" ">
+    <meta name="description" content="{{ $seo->meta_description }}">
+    <meta name="keywords" content="{{ $seo->meta_keywords }}">
 
-  <title>Ncommerce</title>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vestashi.com/">
+    <meta property="og:title" content="{{ $seo->meta_title }}">
+    <meta property="og:description" content="{{ $seo->meta_description }}">
+    <meta property="og:image" content="https://facebook.com">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vestashi.com/">
+    <meta property="twitter:title" content="{{ $seo->meta_title }}">
+    <meta property="twitter:description" content="{{ $seo->meta_description }}">
+    <meta property="twitter:image" content="https://twitter.com">
+
+    <link rel="canonical" href="https://vestashi.com/">
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
  <link rel="stylesheet" type="text/css" href="{{ asset('/lib/toastr/toastr.css') }}">
