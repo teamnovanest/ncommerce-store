@@ -1,18 +1,16 @@
- @php
-
+@php
 $seo = DB::table('seos')->where('deleted_at', NULL)->first();
 
 @endphp
 
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{{ $seo->meta_title }}</title>
-    <meta name="description" content="{{ $seo->meta_description }}">
-    <meta name="keywords" content="{{ $seo->meta_keywords }}">
+    <title>{{ $product_seo->meta_title ?? $seo->meta_title }}</title>
+    <meta name="description" content="{{ $product_seo->meta_description ?? $seo->meta_description }}">
+    <meta name="keywords" content="{{ $product_seo->meta_keywords ?? $seo->meta_keywords }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="canonical" href="https://vestashi.com/">
@@ -20,15 +18,15 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://vestashi.com/">
-    <meta property="og:title" content="{{ $seo->meta_title }}">
-    <meta property="og:description" content="{{ $seo->meta_description }}">
+    <meta property="og:title" content="{{ $product_seo->meta_title ?? $seo->meta_title }}">
+    <meta property="og:description" content="{{ $product_seo->meta_description ?? $seo->meta_description }}">
     <meta property="og:image" content="https://facebook.com">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://vestashi.com/">
-    <meta property="twitter:title" content="{{ $seo->meta_title }}">
-    <meta property="twitter:description" content="{{ $seo->meta_description }}">
+    <meta property="twitter:title" content="{{ $product_seo->meta_title ?? $seo->meta_title }}">
+    <meta property="twitter:description" content="{{ $product_seo->meta_description ?? $seo->meta_description }}">
     <meta property="twitter:image" content="https://twitter.com">
     
     <!-- Place favicon.ico in the root directory -->
