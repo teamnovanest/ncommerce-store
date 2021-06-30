@@ -102,18 +102,18 @@ class CheckoutController extends Controller
       $offerdetail['finance_union_id'] = $lenderOffering->finance_union_id;
       $offerdetail['created_at'] = now();
       DB::table('order_financings')->insert($offerdetail);
-
+      
       // info: Generating information to send order confirmation
       $order_summary = DB::table('orders')
       ->join('users', 'orders.user_id', '=', 'users.id')
-      ->select('orders.id AS oid','order_code','subtotal','total','name','email','total_financed','orders.created_at as created_at')
+      ->select('orders.id AS oid','orders.order_code','orders.subtotal','orders.total','users.name','users.email','orders.total_financed','orders.created_at as created_at')
       ->where('orders.id', $order_id)
       ->where('orders.user_id', Auth::user()->id)
       ->first();
 
       $order_details = DB::table('order_details')
       ->join('products', 'order_details.product_id', '=', 'products.id')
-      ->select('image_one_secure_url','products.product_name as product','quantity','totalprice')
+      ->select('products.image_one_secure_url','products.product_name as product','order_details.quantity','order_details.totalprice')
       ->where('order_id', $order_id)
       ->get();
 

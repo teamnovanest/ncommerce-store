@@ -129,21 +129,22 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
                                     <li class="drop"><a href="#">Shop By Cities</a>
                                         <ul class="dropdown mega_dropdown">
                                             <!-- Start Single Mega MEnu -->
-                                            <li><a class="mega__title" href="shop.html">Cities</a>
+                                            <li><a class="mega__title" href="">Cities</a>
                                                 <ul class="mega__item">
-                                                @php
-                                                $all_cities = DB::table('cities')
-                                                ->join('merchant_locations', 'merchant_locations.city_id', '=', 'cities.id')
-                                                ->select('merchant_locations.city_id','cities.id','cities.city_name')
-                                                ->get();
-                                                @endphp
-                                                @foreach ($all_cities as $cities)
-                                               <div class="col-3">
-                                                <li>
-                                                <a href="{{ url($cities->city_name.'/'.$cities->city_id.'/all/products') }}">{{$cities->city_name}}</a>
-                                                </li>
-                                                </div>
-                                                @endforeach
+                                                    @php
+                                                    $all_cities = DB::table('cities')
+                                                    ->join('merchant_locations', 'merchant_locations.city_id', '=', 'cities.id')
+                                                    ->select('merchant_locations.city_id','cities.id','cities.city_name')
+                                                    ->distinct()
+                                                    ->get();
+                                                    @endphp
+                                                    @foreach ($all_cities as $cities)
+                                                    <div class="col-4">
+                                                        <li>
+                                                            <a href="{{ url($cities->city_name.'/'.$cities->city_id.'/all/products') }}">{{$cities->city_name}}</a>
+                                                        </li>
+                                                    </div>
+                                                    @endforeach
                                                 </ul>
                                             </li>
                                             <!-- End Single Mega MEnu -->

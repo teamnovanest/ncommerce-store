@@ -92,6 +92,7 @@ class DashboardController extends Controller
                  DB::table('customer_employer_information')
                  ->insert([
                      'company_name' =>$company_name,
+                     'user_id' => Auth::user()->id,
                      'employer_name' =>$employer_name,
                      'address'=>$address,
                      'phone_one'=>$phone_one,
@@ -113,6 +114,7 @@ class DashboardController extends Controller
                  DB::table('customer_employer_information')
                  ->insert([
                      'company_name' =>$company_name,
+                     'user_id' =>Auth::user()->id,
                      'employer_name' =>$employer_name,
                      'address'=>$address,
                      'phone_one'=>$phone_one,
@@ -129,7 +131,6 @@ class DashboardController extends Controller
          return response()->json($insertedId);
     
      } catch (\Throwable $th) {
-         dd($th);
          //throw $th;
          DB::rollback();
          if (app()->environment('production')){
