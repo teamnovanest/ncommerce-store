@@ -127,6 +127,12 @@
     </div>
     <!-- End: Pay online without finance -->
 
+    <div class="overlay" id="loader">
+        <div class="overlay__inner">
+            <div class="overlay__content"><span class="spinner"></span></div>
+        </div>
+    </div>
+
   <div class="col-lg-6 mb-5">
         @if($cart->count() > 0)
 
@@ -341,9 +347,9 @@
                         <span class="wc-proceed-to-checkout">
                             <button id="checkout" class="checkout-btn btn" type="button">CHECKOUT WITH FINANCE</button>
                         </span>
-                        <span class="cart_buttons">
+                        {{-- <span class="cart_buttons">
                             <button style="height: 50px; background: black;" type="button" class="btn btn-danger">CANCEL</button>
-                        </span>
+                        </span> --}}
                     </div>
                 </div>
             </div>
@@ -379,9 +385,9 @@
     var order =  {!! json_encode($order) !!};
     var customerId =  {!! json_encode(auth()->user()->id) !!};
   
-  
-   
-   var payWithPaystack = function (e) {
+    var loader = document.getElementById("loader");
+
+    var payWithPaystack = function (e) {
       
         e.preventDefault();
         var handler = PaystackPop.setup({
@@ -398,12 +404,16 @@
 
             },
             onClose: function () {
-                alert('Window closed.');
+              Swal.fire({
+                icon: 'error',
+                text: 'Window closed!',
+                });
             },
             callback: async function (response) {
                 var message = 'Payment complete! Reference: ' + response.reference;
 
                 //start loader
+                loader.classList.add("show_loader");
                 fetch(`/payment/verify/${response.reference}`, {
                     method: 'get',
                     headers:{
@@ -413,20 +423,31 @@
                 }).then(response => response.json())
                 .then(data => {
                       // Stop a loading here
-                      Swal.fire({
-                        icon: "success",
-                        title: "Success",
-                        text: 'You have successfully placed your order.',
+                    loader.classList.remove('show_loader');
+                    if (data.success) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success",
+                            text: data.success,
+                            showCloseButton: true,
+                        });
+                        window.location.href="/dashboard";     
+                    } else {
+                         Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text:data.error ,
                         showCloseButton: true,
-                    });
-                    window.location.href="/dashboard";
+                    }); 
+                    }
                 })
                 .catch((error) => {
                      // Stop a loading here
+                    loader.classList.remove('show_loader');
                     Swal.fire({
                         icon: "error",
                         title: "Error",
-                        text: 'Something didnt go right. Our engineers have been notified \nabout the issue and will look into it. If the issue persists contact support',
+                        text:error.error,
                         showCloseButton: true,
                     });
                 });
