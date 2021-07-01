@@ -49,6 +49,7 @@
                 </div>
                 <div class="form-layout-footer">
                     <button class="btn btn-info mg-r-5">Update Profile</button>
+                    <span class="float-right mt-2 del-account"><a href="" id="account-delete-btn" user_id={{$user->id}}>Delete my account ?</a></span>
                 </div><!-- form-layout-footer -->
             </div>
             <!-- End of second column -->

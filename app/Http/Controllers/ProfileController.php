@@ -6,7 +6,10 @@ use App\Models\ProfileImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\CustomerFinanceOrganizationAffiliation;
 use Cloudinary;
+
 
 class ProfileController extends Controller
 {
@@ -18,7 +21,7 @@ class ProfileController extends Controller
       try {
         $user = DB::table('users')
         ->leftJoin('profile_images','users.id','=','profile_images.user_id')
-        ->select('users.name','users.phone','users.email','profile_images.profile_secure_url')
+        ->select('users.id','users.name','users.phone','users.email','profile_images.profile_secure_url')
         ->where('users.id',Auth::id())->first();
 
         return view('pages.user_profile',compact('user'));
@@ -124,5 +127,25 @@ class ProfileController extends Controller
         );
         return Redirect()->back()->with($notification);
       }
+      }
+
+      public function accountDelete($id)
+      {
+        try {
+          if(intval($id) === Auth::id()){
+            User::where('id',$id)->delete();
+            CustomerFinanceOrganizationAffiliation::where('user_id',$id)->delete();
+    
+            return response()->json(['success'=>'Account deleted Successfully']);
+
+          }else{
+            return response()->json(['message'=>'Cannot delete account']);
+          }
+        } catch (\Throwable $th) {
+           if (app()->environment('production')){
+            \Sentry\captureException($th);
+          }
+          return \response()->json(['error'=>'Oops! an error occured, Please try again or contact support if issue persist.'],500);
+        }
       }
 }
