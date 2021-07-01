@@ -1076,3 +1076,12 @@ select.list-dt:focus {
 .show_loader {
     display: block;
 }
+
+/* delete user account */
+.del-account a{
+    color: black;
+}
+
+.del-account a:hover{
+    color: red;
+}

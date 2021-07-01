@@ -668,5 +668,75 @@ $(document).ready(function () {
             },
         });
     });
+
+    function accountDelete(id) {
+        return $.ajax({
+            url: "/user/" + id + "/account/delete",
+            type: "get",
+            dataType: "json",
+            cache: false,
+            data: {
+                id,
+            },
+            success: function (data) {
+                NProgress.done();
+                if (data.success) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Success",
+                        text: data.success,
+                        showCloseButton: true,
+                    });
+                    window.location.href = "/register";
+                } else {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "warning",
+                        text: data.message,
+                        showCloseButton: true,
+                    });
+                }
+            },
+            error: function (error) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: error.responseJSON.error,
+                    showCloseButton: true,
+                });
+            },
+        });
+    }
+    //deleting user account
+    $("#account-delete-btn").on("click", function (e) {
+        e.preventDefault();
+        NProgress.start();
+
+        var id = $(this).attr("user_id");
+
+        if (id)
+            Swal.fire({
+                title: "Do you want to delete your account?",
+                icon: "warning",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: `Yes`,
+                denyButtonText: `Cancel`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    accountDelete(id);
+                } else if (result.isDenied) {
+                    Swal.fire("Cancelled", "", "info");
+                }
+            });
+        else {
+            Swal.fire({
+                icon: "warning",
+                title: "Unauthorize",
+                text: "You do not have permission!",
+            });
+        }
+    });
+
     //end of ready function
 });

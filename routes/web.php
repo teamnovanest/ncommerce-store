@@ -123,7 +123,8 @@ Route::post('/reset/password', [DashboardController::class,'resetPassword'])->na
 
 // User profile route
 Route::get('/user/profile', [ProfileController::class,'showProfile'])->name('user.profile.show');
-Route::post('user/profile/update', [ProfileController::class,'updateProfile'])->name('user.profile.update');
+Route::post('/user/profile/update', [ProfileController::class,'updateProfile'])->name('user.profile.update');
+Route::get('/user/{id}/account/delete', [ProfileController::class,'accountDelete'])->name('account.delete');
 
 //newsletters
 Route::post('/newsletter/create', [NewsletterController::class, 'storeNewsLetter']) ->name('store.newsletter');
