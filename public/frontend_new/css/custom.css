@@ -1055,7 +1055,7 @@ select.list-dt:focus {
     transform: translate(-50%, -50%);
 }
 
-.spinner {
+.loader_spinner {
     width: 75px;
     height: 75px;
     display: inline-block;
@@ -1078,10 +1078,10 @@ select.list-dt:focus {
 }
 
 /* delete user account */
-.del-account a{
+.del-account a {
     color: black;
 }
 
-.del-account a:hover{
+.del-account a:hover {
     color: red;
 }
