@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
@@ -19,7 +20,6 @@ use App\Http\Controllers\OrderDetailsController;
 use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\FeatureRequestController;
 use App\Http\Controllers\LenderOfferingController;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductQuestionsAndAnswersController;
 
 
@@ -146,4 +146,15 @@ Route::get('/{city}/{id}/all/products', [CityController::class, 'searchProductBy
 Route::post("/product/question", [ProductQuestionsAndAnswersController::class, 'productQuestions']);
 Route::get("/product/{product_id}/questions/answers", [ProductQuestionsAndAnswersController::class, 'getProductsQA']);
 
+
+// privacy
+Route::get('/privacy/index', function () {
+    return view('pages.privacy');
+}
+);
+// term & condition
+Route::get('/terms-conditions/index', function () {
+    return view('pages.terms_condition');
+}
+);
 
