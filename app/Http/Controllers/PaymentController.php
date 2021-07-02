@@ -73,7 +73,12 @@ class PaymentController extends Controller
                             array_push($totalamount,$value['totalprice']);
                             }
                             $sum_of_totalprices_in_order = array_sum($totalamount) * 100;
-                    if ($res_data['data']['domain'] === env('PAYMENT_ENVIRONMENT')  && $res_data['data']['amount'] === $sum_of_totalprices_in_order) {
+                            $balance = (Session::has('coupon')) ? (intval(Session::get('coupon')['balance']) * 100) : 0; //fetching the balance that is cart::subtotal minus coupon percentage price
+                            $percentage_price = (Session::has('coupon')) ? (intval(Session::get('coupon')['percentage_price']) * 100) : 0; //fetching the coupon percentage price.
+                            $total = (Session::has('coupon')) ? ($sum_of_totalprices_in_order - $percentage_price) : $sum_of_totalprices_in_order;
+                        #NOTE::when coupon is applied to the order, the total price reduces and the amount paid by the user and the sum of the prices in the 
+                        #in the order will not match. So check if the session has coupon else use the original price.
+                    if ($res_data['data']['domain'] === env('PAYMENT_ENVIRONMENT') && $res_data['data']['amount'] === $total && $balance === $total) {
                             // insert into orders table
                             $orderId = DB::table('orders')->insertGetId([
                                 'user_id' => $res_data['data']['metadata']['customerId'],
@@ -83,6 +88,13 @@ class PaymentController extends Controller
                                 'status_code' => crc32(uniqid()),
                                 'created_at' => now(),
                             ]);
+
+                            if(Session::has('coupon')){
+                                $coupon_name = Session::get('coupon')['name'];
+                                $coupon = DB::table('coupons')->where('coupon_name', $coupon_name)->first();
+                                $coupon_discount = $coupon->discount;
+                                $coupon_merchant = $coupon->merchant_organization_id;
+                            }
             
                             //insert into order details table
                             foreach ($res_data['data']['metadata']['order'] as  $value) {
@@ -96,8 +108,9 @@ class PaymentController extends Controller
                                     'color' => $value['color'],
                                     'size' => $value['size'],
                                     'quantity' => $value['quantity'],
-                                    'singleprice' => floatval($value['price']) * 100,
-                                    'totalprice' => floatval($value['totalprice']) * 100,
+                                    'singleprice' => (Session::has('coupon') && $value['merchant_id'] === $coupon_merchant) ? (intval(floatval($value['price'] - ($coupon_discount / 100 * $value['price'])) * 100)) : (floatval($value['price']) * 100),
+                                    #NOTE : no need to multipy the price and quantity to get the totalprice, I have done that in the checkout blade before passing the variable to the controller
+                                    'totalprice' => (Session::has('coupon') && $value['merchant_id'] === $coupon_merchant) ? (intval(floatval(($value['totalprice']) - ($coupon_discount / 100 * $value['totalprice'])) * 100)) : (floatval(($value['totalprice'])) * 100),
                                     'created_at' => now(),
                                 ]);
                             }

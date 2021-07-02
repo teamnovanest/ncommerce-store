@@ -22,30 +22,58 @@ class CouponController extends Controller
     $check = DB::table('coupons')->where('coupon_name', $coupon)->first(); //first
 
     $content = Cart::content();
-  
+
     if ($check && $check->start_date <= date('Y-m-d') && $check->end_date >= date('Y-m-d')) {
-      foreach($content as $row){
+      
+      $total = [];
+      foreach ($content as $row) {
          if ($row->options->merchant_organization_id === $check->merchant_organization_id) {
-            $percentage_price = intval($check->discount / 100 * $this->floatvalue(Cart::Subtotal()));
-            Session::put('coupon', [
-                'name' => $check->coupon_name,
-                'discount' => $check->discount,
-                'balance' =>   intval($this->floatvalue(Cart::Subtotal()) - $percentage_price)
-              ]);
+           $percentage_price = intval($check->discount / 100 * $row->price * $row->qty);
+           array_push($total,$percentage_price);
+         }
+      }
+      
+        if (!empty($total)) {
+             Session::put('coupon', [
+              'name' => $check->coupon_name,
+              'discount' => $check->discount,
+              'balance' =>   intval($this->floatvalue(Cart::Subtotal()) - array_sum($total)),
+              'percentage_price' => array_sum($total)
+            ]);
               $notification = array(
-                'messege' => 'Successfully Coupon Applied',
+                'messege' => 'Coupon applied successfully',
                 'alert-type' => 'success'
               );
               return Redirect()->back()->with($notification);
-           } 
-           else {
-                $notification = array(
-                'messege' => 'Coupon code do not match this Product(s) . Try a different \nproduct or contact support if issue still persist',
+        } else {
+              $notification = array(
+                'messege' => 'Coupon application failed,\n Try products from the vendor the coupon belongs to.',
                 'alert-type' => 'error'
               );
               return Redirect()->back()->with($notification);
-             }
-          }
+        }
+    
+      // foreach($content as $row){
+      //    if ($row->options->merchant_organization_id === $check->merchant_organization_id) {
+      //       // array_push($cart_total,$row->price);
+      //       $percentage_price = intval($check->discount / 100 * $row->price * $row->qty);
+      //         Session::put('coupon', [
+      //           'name' => $check->coupon_name,
+      //           'discount' => $check->discount,
+      //           'balance' =>   intval($this->floatvalue(Cart::Subtotal()) - $percentage_price),
+      //           'percentage_price' => $percentage_price
+      //         ]);
+               
+      //      } 
+      //      else {
+      //           $notification = array(
+      //           'messege' => 'Coupon application failed,\n Try products from the vendor the coupon belongs to.',
+      //           'alert-type' => 'error'
+      //         );
+      //         return Redirect()->back()->with($notification);
+      //        }
+      //      }
+ 
     } else {
       $notification = array(
         'messege' => 'Invalid Coupon',
@@ -64,11 +92,11 @@ class CouponController extends Controller
         'alert-type'=>'error'
         );
         return Redirect()->back()->with($notification);
-    }
+      }
     
   }
 
-   public function couponRemove(){
+  public function couponRemove(){
  	Session::forget('coupon');
  	$notification=array(
         'messege'=>'Coupon remove Successfully',
