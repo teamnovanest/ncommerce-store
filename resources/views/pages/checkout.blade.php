@@ -129,7 +129,7 @@
 
     <div class="overlay" id="loader">
         <div class="overlay__inner">
-            <div class="overlay__content"><span class="spinner"></span></div>
+            <div class="overlay__content"><span class="loader_spinner"></span></div>
         </div>
     </div>
 
