@@ -59,10 +59,17 @@ class CheckoutController extends Controller
       $data['created_at'] = now();
       $order_id = DB::table('orders')->insertGetId($data);
 
+      if(Session::has('coupon')){
+        $coupon_name = Session::get('coupon')['name'];
+        $coupon = DB::table('coupons')->where('coupon_name', $coupon_name)->first();
+        $coupon_discount = $coupon->discount;
+        $coupon_merchant = $coupon->merchant_organization_id;
+      }
+    
       // Insert Order Details Table
       $details = array();
       foreach ($content as $row) {
-        $details['order_id'] = $order_id;
+        $details['order_id'] = 1; # $order_id;
         $details['product_id'] = $row->id;
         $details['product_name'] = $row->name;
         $details['status_id'] = 1;
@@ -70,8 +77,14 @@ class CheckoutController extends Controller
         $details['color'] = $row->options->color;
         $details['size'] = $row->options->size;
         $details['quantity'] = $row->qty;
-        $details['singleprice'] = floatval($row->price) * 100;
-        $details['totalprice'] = floatval($row->price) * $row->qty * 100;
+        // if (Session::has('coupon')) {  //            intval($coupon_discount / 100 * $row->price);
+          $details['singleprice'] = (Session::has('coupon') && $row->options->merchant_organization_id === $coupon_merchant) ? intval(floatval($row->price - ($coupon_discount / 100 * $row->price)) * 100) : (intval(floatval($row->price) * 100));
+          $details['totalprice'] = (Session::has('coupon') && $row->options->merchant_organization_id === $coupon_merchant) ? intval(floatval(($row->price * $row->qty) - ($coupon_discount / 100 * ($row->price * $row->qty))) * 100) : (intval(floatval($row->price)) * $row->qty * 100);
+        // } else {
+        //   $details['singleprice'] = floatval($row->price) * 100;
+        //   $details['totalprice'] = floatval($row->price) * $row->qty * 100;
+        // }
+        
         $details['merchant_organization_id'] = $row->options->merchant_organization_id;
         $details['lender_organization_id'] = $lenderOffering->lender_organization_id;
         $details['created_at'] = now();
