@@ -69,12 +69,12 @@ class OrderUpdateController extends Controller
                     ->join('order_status_histories','order_details.order_id','=','order_status_histories.order_id')
                     ->join('users','order_status_histories.updated_by','=','users.id')
                     ->join('lenders','users.lender_organization_id','=','lenders.id')
-                    ->select('lenders.registered_name as lender','email','name')
+                    ->select('lenders.registered_name as lender','users.email','users.name')
                     ->where('order_details.id', $orderDetailId)
                     ->where('order_status_histories.status_id', 5)
                     ->where('order_status_histories.product_id', $product_id)
                     ->first();
-
+                    
                     $order_details = DB::table('order_details')
                     ->join('status_options','order_details.status_id','=','status_options.id')
                     ->join('products', 'order_details.product_id', '=', 'products.id')
@@ -87,9 +87,11 @@ class OrderUpdateController extends Controller
                     ->select('payment_period','percentage')
                     ->where('order_id',$orderId)
                     ->first();
-                
+                    
                     Mail::to($merchant->email)->send(new MerchantOrderUpdate($order_summary,$order_details,$merchant));
-                    Mail::to($finance_institution->email)->send(new LenderOrderUpdate($order_summary,$order_details,$finance_institution,$order_financing));
+                    if ($finance_institution) {
+                        Mail::to($finance_institution->email)->send(new LenderOrderUpdate($order_summary,$order_details,$finance_institution,$order_financing));
+                    }
 
                     DB::commit();      
                     return \response()->json($status_name);
