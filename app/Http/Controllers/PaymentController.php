@@ -73,9 +73,9 @@ class PaymentController extends Controller
                             array_push($totalamount,$value['totalprice']);
                             }
                             $sum_of_totalprices_in_order = array_sum($totalamount) * 100;
-                            $balance = (Session::has('coupon')) ? (intval(Session::get('coupon')['balance']) * 100) : 0; //fetching the balance that is cart::subtotal minus coupon percentage price
-                            $percentage_price = (Session::has('coupon')) ? (intval(Session::get('coupon')['percentage_price']) * 100) : 0; //fetching the coupon percentage price.
-                            $total = (Session::has('coupon')) ? ($sum_of_totalprices_in_order - $percentage_price) : $sum_of_totalprices_in_order;
+                            $balance = (Session::has('coupon')) ? (intval(Session::get('coupon')['balance']) * 100) : $sum_of_totalprices_in_order; //fetching the balance that is cart::subtotal minus coupon percentage price
+                            $percentage_price = (Session::has('coupon')) ? (intval(Session::get('coupon')['percentage_price']) * 100) : 0; //fetching the coupon percentage price if coupon has been applied                          
+                            $total = $sum_of_totalprices_in_order - $percentage_price; //subtrating the percentage discount price from the sum of the total prices in the order
                         #NOTE::when coupon is applied to the order, the total price reduces and the amount paid by the user and the sum of the prices in the 
                         #in the order will not match. So check if the session has coupon else use the original price.
                     if ($res_data['data']['domain'] === env('PAYMENT_ENVIRONMENT') && $res_data['data']['amount'] === $total && $balance === $total) {
@@ -154,7 +154,7 @@ class PaymentController extends Controller
                         }else{
                             return response()->json(['error'=> 'Something didnt go right. Please try again, If the issue persists contact support']);
                         }
-                } catch (\Throwable $th) {
+                } catch (\Throwable $th){
                     DB::rollback();
                     if (app()->environment('production')){
                         \Sentry\captureException($th);
