@@ -414,10 +414,10 @@ $setting = DB::table('sitesettings')->first();
                                 <ul class="footer-categories">
                                     <li><a href="#">About Us</a></li>
                                     <li><a href="/contact/page">Contact Us</a></li>
-                                    <li><a href="/terms-conditions/index">Terms & Conditions</a></li>
+                                    <li><a href="/terms-conditions">Terms & Conditions</a></li>
                                     <li><a href="#">Returns & Exchanges</a></li>
                                     <li><a href="#">Shipping & Delivery</a></li>
-                                    <li><a href="/privacy/index">Privacy Policy</a></li>
+                                    <li><a href="/privacy-policy">Privacy Policy</a></li>
                                 </ul>
                             </div>
                         </div>
