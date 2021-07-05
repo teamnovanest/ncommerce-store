@@ -85,14 +85,14 @@
                                     <div class="product">
                                         <div class="product__inner">
                                             <div class="pro__thumb">
-                                                <a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}">
+                                                <a href="{{ url('product/'.$pro->id.'/details/'.$pro->slug) }}">
                                                     <img src="{{ asset($pro->image_one_secure_url) }}" alt="product images">
                                                 </a>
                                             </div>
 
                                             <div class="product__hover__info">
                                                 <ul class="product__action">
-                                                    <li><a title="Quick View" href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}"><span class="ti-plus"></span></a></li>
+                                                    <li><a title="Quick View" href="{{ url('product/'.$pro->id.'/details/'.$pro->slug) }}"><span class="ti-plus"></span></a></li>
                                                     <li><a class="addcart" title="Add to cart" data-id="{{ $pro->id }}"><span class="ti-shopping-cart"></span></a></< /li>
                                                     <li><a title="Add to wishlist" class="addwishlist" data-id="{{ $pro->id }}"><span class="ti-heart"></span></a></li>
                                                 </ul>
@@ -100,7 +100,7 @@
 
                                         </div>
                                         <div class="product__details">
-                                            <h2 class="product-name"><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
+                                            <h2 class="product-name"><a href="{{ url('product/'.$pro->id.'/details/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
                                             <ul class="product__price">
                                                 @if($pro->discount_price == NULL)
                                                 <li>GH₵ {{number_format($pro->selling_price,2) }}</li>
@@ -138,14 +138,14 @@
                             <div class="row">
                                 <div class="col-md-4 col-lg-4 col-xl-3 col-sm-5 col-12">
                                     <div class="list__thumb">
-                                        <a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}">
+                                        <a href="{{ url('product/'.$pro->id.'/details/'.$pro->slug) }}">
                                             <img src="{{ asset($pro->image_one_secure_url) }}" alt="Product Image">
                                         </a>
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-lg-8 col-xl-9 col-sm-7 col-12">
                                     <div class="list__details__inner">
-                                        <h2 class="product-name"><a href="{{ url('product/details/'.$pro->id.'/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
+                                        <h2 class="product-name"><a href="{{ url('product/'.$pro->id.'/details/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
                                         <ul class="product__price">
                                             @if($pro->discount_price == NULL)
                                             <li>GH₵ {{number_format($pro->selling_price,2) }}</li>
@@ -157,7 +157,7 @@
                                         </ul>
                                         <br>
                                         <div class="shop__btn">
-                                            <a class="htc__btn" href="{{ url('product/details/'.$pro->id.'/'.$pro->slug)}}"><span class="ti-plus"></span>View Product</a>
+                                            <a class="htc__btn" href="{{ url('product/'.$pro->id.'/details/'.$pro->slug)}}"><span class="ti-plus"></span>View Product</a>
                                         </div>
                                     </div>
                                 </div>

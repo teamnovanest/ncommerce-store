@@ -52,26 +52,26 @@ Route::group(['middleware' => ['role:customer']], function () {
 Route::get("/payment/verify/{transactionref}", [PaymentController::class,"verify"]);
 
 Route::get("/", [HomeController::class,"index"]);
-Route::get('/user/logout', [LogoutController::class, 'logout'])->name('user.logout');
+Route::get('/logout', [LogoutController::class, 'logout'])->name('user.logout');
 
 // Search Route
-Route::get('/product/search', [ProductController::class,'search'])->name('product.search');
+Route::get('/search', [ProductController::class,'search'])->name('product.search');
 
 
-// Cart
-Route::get('/product/cart', [CartController::class,'showCart'])->name('show.cart');
-Route::get('/user/checkout/', [PurchaseController::class,'checkout'])->name('user.checkout');
+// Cart 
+Route::get('/cart', [CartController::class,'showCart'])->name('show.cart');
+Route::get('/checkout', [PurchaseController::class,'checkout'])->name('user.checkout');
 Route::get('/remove/cart/{rowId}', [CartController::class, 'removeCart']);
 Route::post('/update/cart/{rowId}', [CartController::class, 'updateCart']);
 Route::get('/add/to/cart/{id}', [CartController::class,'AddCart']);
 
 //coupone application routes
-Route::post('/user/apply/coupon/', [CouponController::class, 'coupon'])->name('apply.coupon'); 
-Route::get('remove/coupon/', [CouponController::class, 'couponRemove'])->name('remove.coupon'); 
+Route::post('/apply/coupon', [CouponController::class, 'coupon'])->name('apply.coupon'); 
+Route::get('/remove/coupon', [CouponController::class, 'couponRemove'])->name('remove.coupon'); 
 
 // Product 
-Route::get('/product/details/{id}/{slug}', [ProductController::class, 'productView']);
-Route::post('/cart/product/add/{id}', [ProductController::class, 'addCart']);
+Route::get('/product/{id}/details/{slug}', [ProductController::class, 'productView']);
+Route::post('/add/to/cart/{id}', [ProductController::class, 'addCart']);
 
 // Checkout Routes
 Route::get('/user/checkout/process', [CheckoutController::class, 'checkout'])->name('checkout.process');

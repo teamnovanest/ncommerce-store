@@ -56,13 +56,13 @@
                                 <div class="product foo">
                                     <div class="product__inner">
                                         <div class="pro__thumb">
-                                            <a href="{{ url('product/details/'.$row->id.'/'.$row->slug)}}">
+                                            <a href="{{ url('product/'.$row->id.'/details/'.$row->slug)}}">
                                                 <img src="{{ asset( $row->image_one_secure_url )}}" alt="product images">
                                             </a>
                                         </div>
                                         <div class="product__hover__info">
                                             <ul class="product__action">
-                                                <li><a title="Quick view" href="{{ url('/product/details/'.$row->id.'/'.$row->slug) }}"><span class="ti-plus"></span></a></li>
+                                                <li><a title="Quick view" href="{{ url('product/'.$row->id.'/details/'.$row->slug) }}"><span class="ti-plus"></span></a></li>
                                                  <li><a class="addcart" title="Add to cart"  data-id="{{ $row->id }}"><span class="ti-shopping-cart"></span></a></</li>
                                                 <li><a title="Add to wishlist" class="addwishlist" data-id="{{ $row->id }}" ><span class="ti-heart"></span></a></li>
                                             </ul>
@@ -70,7 +70,7 @@
                                     </div>
                                     
                                     <div class="product__details">
-                                        <h2 class="product-name"><a href="{{ url('/product/details/'.$row->id.'/'.$row->slug) }}" >{{$row->product_name}}</a></h2>
+                                        <h2 class="product-name"><a href="{{ url('product/'.$row->id.'/details/'.$row->slug) }}" >{{$row->product_name}}</a></h2>
                                         <div style="background-color:black; color: white;" class="product-name">
                                             <span>{{$row->region_name}}</span>
                                             -
