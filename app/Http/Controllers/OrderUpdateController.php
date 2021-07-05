@@ -44,6 +44,7 @@ class OrderUpdateController extends Controller
                     'user_id' => Auth::user()->id,
                     'order_id'=>$orderId,
                     'status_id' => $status_id,
+                    'status' => $status_name->status_name,
                     'product_id' => $product_id,
                     'updated_by' => Auth::user()->id,
                     'created_at' => now(),
@@ -61,7 +62,7 @@ class OrderUpdateController extends Controller
                     $merchant = DB::table('order_details')
                     ->join('merchants','order_details.merchant_organization_id','=','merchants.id')
                     ->join('settings','merchants.id','=','settings.merchant_organization_id')
-                    ->select('registered_name','email')
+                    ->select('merchants.registered_name','settings.email')
                     ->where('order_details.id',$orderDetailId)
                     ->first();
 
@@ -78,7 +79,7 @@ class OrderUpdateController extends Controller
                     $order_details = DB::table('order_details')
                     ->join('status_options','order_details.status_id','=','status_options.id')
                     ->join('products', 'order_details.product_id', '=', 'products.id')
-                    ->select('image_one_secure_url','products.product_name as product','quantity','totalprice','description','status_id')
+                    ->select('products.image_one_secure_url','products.product_name as product','order_details.quantity','order_details.totalprice','status_options.description','order_details.status_id')
                     ->where('order_details.order_id', $orderId)
                     ->where('order_details.product_id', $product_id)
                     ->first();
