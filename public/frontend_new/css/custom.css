@@ -696,20 +696,20 @@
         height: 300px;
     }
 }
-/* Privacy Policy & Terms of Service Page */
+/* Privacy Policy & Terms of Service Page
 .policy__section {
     height: 500px;
     overflow: auto;
     box-sizing: border-box;
-}
-.privacy_policy,
-.terms-of-service {
+} */
+/* .privacy_policy, */
+/* .terms-of-service {
     text-align: center;
-    /* margin: 0 auto; */
+    margin: 0 auto;
     padding: 0 30px;
-}
+} */
 
-@media screen and (min-width: 718px) {
+/* @media screen and (min-width: 718px) {
     .privacy_policy::-webkit-scrollbar,
     .terms-of-service::-webkit-scrollbar {
         width: 10px;
@@ -729,8 +729,8 @@
     .terms-of-service::-webkit-scrollbar-thumb:hover {
         background: #fd534a;
     }
-}
-
+} */
+/* 
 .policy__updated-date {
     font-size: 0.95rem;
     color: rgba(0, 0, 0, 0.2);
@@ -752,7 +752,7 @@
 .policy__paragraph {
     color: rgba(175, 172, 172, 0.9);
     line-height: 2.5;
-}
+} */
 
 .modal-footer #btn-understood {
     color: #fff;
