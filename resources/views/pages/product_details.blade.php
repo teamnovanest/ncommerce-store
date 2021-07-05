@@ -127,14 +127,9 @@
                             {!! (substr($product->product_details,0,500)) !!}
                             <span><a href="#description">View more</a></span>
                             
-                            <h6 class="mt-2">@php
-                            $location = DB::table('merchant_locations')
-                            ->leftJoin('cities', 'merchant_locations.city_id', '=', 'cities.id')
-                            ->leftJoin('regions', 'merchant_locations.region_id', '=', 'regions.id')
-                            ->select('cities.city_name','regions.region_name')
-                            ->first();
-                            @endphp
-                            {{$location->region_name}}- {{$location->city_name}}</h6>
+                            <h6 class="mt-2">
+                            {{$location->region_name}}- {{$location->city_name}}
+                            </h6>
                         </div>
                         <br>
                         <form action="{{ url('cart/product/add/'.$product->id) }}" method="post">

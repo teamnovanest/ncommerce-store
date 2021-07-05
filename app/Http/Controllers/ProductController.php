@@ -35,9 +35,14 @@ class ProductController extends Controller
       
       $product_quantity = $product->product_quantity;
 
+      $location = DB::table('merchant_locations')
+      ->leftJoin('cities', 'merchant_locations.city_id', '=', 'cities.id')
+      ->leftJoin('regions', 'merchant_locations.region_id', '=', 'regions.id')
+      ->select('cities.city_name','regions.region_name')
+      ->where('merchant_locations.merchant_organization_id',$product->merchant_organization_id)
+      ->first();
 
-
-    	return view('pages.product_details',compact('product','product_color','product_size','product_quantity','product_seo'));      
+    	return view('pages.product_details',compact('product','product_color','product_size','product_quantity','product_seo','location'));      
       } catch (\Throwable $th) {
          if (app()->environment('production')){
             \Sentry\captureException($th);
