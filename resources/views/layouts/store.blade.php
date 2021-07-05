@@ -126,7 +126,7 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
                                     <li class="drop"><a href="/">Home</a></li>
                                     <li class="drop"><a href="/shop">Shop</a></li>
                                     <li><a href="/contact/page">Contact</a></li>
-                                    <li class="drop"><a href="#">Shop By Cities</a>
+                                    <li class="drop"><a href="#">Shop By City</a>
                                         <ul class="dropdown mega_dropdown">
                                             <!-- Start Single Mega MEnu -->
                                             <li><a class="mega__title" href="">Cities</a>
@@ -139,7 +139,7 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
                                                     ->get();
                                                     @endphp
                                                     @foreach ($all_cities as $cities)
-                                                    <div class="col-4">
+                                                    <div class="col-3">
                                                         <li>
                                                             <a href="{{ url($cities->city_name.'/'.$cities->city_id.'/all/products') }}">{{$cities->city_name}}</a>
                                                         </li>

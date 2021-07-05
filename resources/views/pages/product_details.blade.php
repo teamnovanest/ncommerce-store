@@ -126,6 +126,10 @@
                         <div class="pro__details">
                             {!! (substr($product->product_details,0,500)) !!}
                             <span><a href="#description">View more</a></span>
+                            
+                            <h6 class="mt-2">
+                            {{$location->region_name}}- {{$location->city_name}}
+                            </h6>
                         </div>
                         <br>
                         <form action="{{ url('cart/product/add/'.$product->id) }}" method="post">
