@@ -27,13 +27,13 @@ class DashboardController extends Controller
         if($lender_organizations->isNotEmpty() || $selected_organizations->isNotEmpty()) {
             
               $order = DB::table('orders')
-              ->join('order_details', 'order_details.order_id', '=', 'orders.id')
+              ->join('order_details','order_details.order_id', '=', 'orders.id')
               ->leftJoin('status_options', 'order_details.status_id', '=', 'status_options.id')
               ->join('products','order_details.product_id', '=', 'products.id')
               ->leftJoin('order_financings', 'orders.id', '=', 'order_financings.order_id')
-              ->select('orders.*','order_details.id AS order_detail_id','order_details.status','order_details.status_id','order_details.singleprice','order_details.quantity','order_details.totalprice','status_options.status_name','products.image_one_secure_url','products.product_name','order_details.product_id','products.slug','order_financings.payment_period','order_financings.percentage')
+              ->select('orders.id','orders.order_code','orders.created_at','order_details.id AS order_detail_id','order_details.status','order_details.status_id','order_details.singleprice','order_details.quantity','order_details.totalprice','status_options.status_name','products.image_one_secure_url','products.product_name','order_details.product_id','products.slug','order_financings.payment_period','order_financings.percentage')
               ->where('orders.user_id',Auth::id())->orderBy('orders.id','DESC')->limit(10)->paginate(10);
-
+              
               $status = DB::table('status_options')->where('tag','customer')->get();
             
               return view('dashboard',compact('order','status'));

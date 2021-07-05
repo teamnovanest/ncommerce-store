@@ -69,7 +69,7 @@ class CheckoutController extends Controller
       // Insert Order Details Table
       $details = array();
       foreach ($content as $row) {
-        $details['order_id'] = 1; # $order_id;
+        $details['order_id'] = $order_id;
         $details['product_id'] = $row->id;
         $details['product_name'] = $row->name;
         $details['status_id'] = 1;
