@@ -148,12 +148,12 @@ Route::get("/product/{product_id}/questions/answers", [ProductQuestionsAndAnswer
 
 
 // privacy
-Route::get('/privacy/index', function () {
-    return view('pages.privacy');
+Route::get('/privacy-policy', function () {
+    return view('pages.privacy_policy');
 }
 );
 // term & condition
-Route::get('/terms-conditions/index', function () {
+Route::get('/terms-conditions', function () {
     return view('pages.terms_condition');
 }
 );
