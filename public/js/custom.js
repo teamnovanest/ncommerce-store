@@ -559,8 +559,10 @@ $(document).ready(function () {
                 success: function (data) {
                     $("#productQuestionContainer").append(`
                         <div class="pro__review ans">
-                            <div class="review__thumb thumb_image">
-                                <img src=${data.profile_secure_url} alt="user_image"> 
+                            <div class="review__thumb">
+                                <img src=${
+                                    data.profile_secure_url
+                                } alt="user_image" class="thumb_image"> 
                             </div>
                             <div class="review__details">
                                 <div class="review__info">
@@ -570,15 +572,18 @@ $(document).ready(function () {
                                     <span>${data.created_at}</span>
                                 </div>
                                 <p> ${data.question}</p>
-                                <p> ${data.answer}</p>
+                                <p> ${
+                                    data.answer !== null
+                                        ? value.answer
+                                        : "Not answered"
+                                }</p>
                                 </div>
                             </div>`);
-                    $('textarea[name="question"]').empty();
-
+                    $('textarea[name="question"]').val("");
                     Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: "An error occured",
+                        icon: "success",
+                        title: "Success",
+                        text: "Question sent successfully.",
                         showCloseButton: true,
                     });
                 },
