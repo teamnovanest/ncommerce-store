@@ -24,7 +24,6 @@ class CityController extends Controller
     }
 
     public function searchProductByCity(Request $request){
-        // dd($request);
     $cityId = $request->id;
     $city = DB::table('cities')->where('id',$cityId)->first('city_name');
     $products =  DB::table('products')
