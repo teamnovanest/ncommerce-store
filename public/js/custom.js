@@ -426,7 +426,6 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     if (data) {
-                        console.log("data =>", data);
                         $("#review__form__div").hide();
                         $("#rating__wrap__div").hide();
 
@@ -479,7 +478,9 @@ $(document).ready(function () {
                             `);
                         }
                         $("#review__date").append(
-                            `<span>${data.created_at}</span>`
+                            `<span>${moment(data.created_at).format(
+                                "MMMM Do YYYY"
+                            )}</span>`
                         );
                         $("#review_message").append(`${data.reviews}`);
 
@@ -625,7 +626,9 @@ $(document).ready(function () {
                                     <h5><a href="#">${data.name}</a></h5> 
                                 </div>
                                 <div class="review__date">
-                                    <span>${data.created_at.toDateString()}</span>
+                                    <span>${moment(data.created_at).format(
+                                        "MMMM Do YYYY"
+                                    )}</span>
                                 </div>
                                 <p> ${data.question}</p>
                                 <p> ${
@@ -644,7 +647,6 @@ $(document).ready(function () {
                     });
                 },
                 error: function (error) {
-                    console.log("error", error);
                     if (error.status === 500) {
                         Swal.fire({
                             icon: "error",
@@ -699,7 +701,9 @@ $(document).ready(function () {
                                     <h5><a href="#">${value.name}</a></h5> 
                                 </div>
                                 <div class="review__date">
-                                    <span>${value.created_at}</span>
+                                    <span>${moment(value.created_at).format(
+                                        "MMMM Do YYYY"
+                                    )}</span>
                                 </div>
                                 <p> ${value.question}</p>
                                 <p> ${

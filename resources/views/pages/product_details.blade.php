@@ -128,7 +128,7 @@
                             <span><a href="#description">View more</a></span>
                             
                             <h6 class="mt-2">
-                            {{$location->region_name}}- {{$location->city_name}}
+                            {{$location->region_name ?? ''}}- {{$location->city_name ?? ''}}
                             </h6>
                         </div>
                         <br>
@@ -315,7 +315,6 @@
                             </form>
                         </div>
                         @endif
-                        @endauth
 
                         @if (!$user_review)
                             <div class="pro__review ans">
@@ -336,6 +335,8 @@
                                 </div>
                             </div>
                         @endif
+                        @endauth
+
                         <!-- Start Single Review -->
                         @foreach($reviews as $review)
                             <div class="pro__review ans">
