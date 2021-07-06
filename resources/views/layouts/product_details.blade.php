@@ -123,7 +123,7 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
                                 <ul class="main__menu">
                                     <li class="drop"><a href="/">Home</a></li>
                                     <li class="drop"><a href="/shop">Shop</a></li>
-                                    <li><a href="/contact/page">Contact</a></li>
+                                    <li><a href="/contact">Contact</a></li>
                                     <li class="drop"><a href="#">Shop By Cities</a>
                                         <ul class="dropdown mega_dropdown">
                                             <!-- Start Single Mega MEnu -->
@@ -138,7 +138,7 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
                                                 @foreach ($all_cities as $cities)
                                                <div class="col-3">
                                                 <li>
-                                                <a href="{{ url($cities->city_name.'/'.$cities->city_id.'/all/products') }}">{{$cities->city_name}}</a>
+                                                <a href="{{ url('/city/'.$cities->city_id.'/'.$cities->city_name.'/products') }}">{{$cities->city_name}}</a>
                                                 </li>
                                                 </div>
                                                 @endforeach
@@ -154,7 +154,7 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
                                     <ul>
                                         <li><a href="/">Home</a></li>
                                         <li><a href="/shop">Shop</a></li>
-                                        <li><a href="/contact/page">Contact</a></li>
+                                        <li><a href="/contact">Contact</a></li>
                                         <li><a class="mega__title" href="#">Cities</a>
                                                 <ul class="mega__item">
                                                 @php
@@ -166,7 +166,7 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
                                                 @foreach ($all_cities as $cities)
                                                <div class="col-3">
                                                 <li>
-                                                <a href="{{ url($cities->city_name.'/'.$cities->city_id.'/all/products') }}">{{$cities->city_name}}</a>
+                                                <a href="{{ url('/city/'.$cities->city_id.'/'.$cities->city_name.'/products') }}">{{$cities->city_name}}</a>
                                                 </li>
                                                 </div>
                                                 @endforeach
@@ -187,7 +187,7 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
                                 @php
                                 $wishlist = DB::table('wishlists')->where('user_id',Auth::id())->count();
                                 @endphp
-                                <li><a href="/user/wishlist"><span class="ti-heart">{{ $wishlist > 0 ? $wishlist  : "" }}</span></a></li>
+                                <li><a href="/wishlist"><span class="ti-heart">{{ $wishlist > 0 ? $wishlist  : "" }}</span></a></li>
                                 @endguest
                                 <li class="cart__menu"><span class="ti-shopping-cart">{{ Cart::count() > 0 ? Cart::count(): "" }}</span></li>
                                 <li class="toggle__menu d-none d-lg-block"><span class="ti-menu"></span></li>
@@ -413,7 +413,7 @@ $setting = DB::table('sitesettings')->first();
                                 <h2 class="ft__title">Infomation</h2>
                                 <ul class="footer-categories">
                                     <li><a href="#">About Us</a></li>
-                                    <li><a href="/contact/page">Contact Us</a></li>
+                                    <li><a href="/contact">Contact Us</a></li>
                                     <li><a href="/terms-conditions">Terms & Conditions</a></li>
                                     <li><a href="#">Returns & Exchanges</a></li>
                                     <li><a href="#">Shipping & Delivery</a></li>
@@ -464,7 +464,7 @@ $setting = DB::table('sitesettings')->first();
                                 <ul class="footer__menu">
                                     <li><a href="/">Home</a></li>
                                     <li><a href="/shop">Product</a></li>
-                                    <li><a href="/contact/page">Contact Us</a></li>
+                                    <li><a href="/contact">Contact Us</a></li>
                                 </ul>
                             </div>
                         </div>

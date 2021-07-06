@@ -52,29 +52,29 @@ Route::group(['middleware' => ['role:customer']], function () {
 Route::get("/payment/verify/{transactionref}", [PaymentController::class,"verify"]);
 
 Route::get("/", [HomeController::class,"index"]);
-Route::get('/user/logout', [LogoutController::class, 'logout'])->name('user.logout');
+Route::get('/logout', [LogoutController::class, 'logout'])->name('user.logout');
 
 // Search Route
-Route::get('/product/search', [ProductController::class,'search'])->name('product.search');
+Route::get('/search', [ProductController::class,'search'])->name('product.search');
 
 
-// Cart
-Route::get('/product/cart', [CartController::class,'showCart'])->name('show.cart');
-Route::get('/user/checkout/', [PurchaseController::class,'checkout'])->name('user.checkout');
+// Cart 
+Route::get('/cart', [CartController::class,'showCart'])->name('show.cart');
+Route::get('/checkout', [PurchaseController::class,'checkout'])->name('user.checkout');
 Route::get('/remove/cart/{rowId}', [CartController::class, 'removeCart']);
 Route::post('/update/cart/{rowId}', [CartController::class, 'updateCart']);
 Route::get('/add/to/cart/{id}', [CartController::class,'AddCart']);
 
 //coupone application routes
-Route::post('/user/apply/coupon/', [CouponController::class, 'coupon'])->name('apply.coupon'); 
-Route::get('remove/coupon/', [CouponController::class, 'couponRemove'])->name('remove.coupon'); 
+Route::post('/apply/coupon', [CouponController::class, 'coupon'])->name('apply.coupon'); 
+Route::get('/remove/coupon', [CouponController::class, 'couponRemove'])->name('remove.coupon'); 
 
 // Product 
-Route::get('/product/details/{id}/{slug}', [ProductController::class, 'productView']);
-Route::post('/cart/product/add/{id}', [ProductController::class, 'addCart']);
+Route::get('/product/{id}/details/{slug}', [ProductController::class, 'productView']);
+Route::post('/add/to/cart/{id}', [ProductController::class, 'addCart']);
 
 // Checkout Routes
-Route::get('/user/checkout/process', [CheckoutController::class, 'checkout'])->name('checkout.process');
+Route::get('/checkout/process', [CheckoutController::class, 'checkout'])->name('checkout.process');
 
 // Customer Order Details route
 Route::get('/order/{id}/status/{orderDetailId}', [OrderDetailsController::class,'viewOrderStatus'])->name('order.status');
@@ -87,16 +87,16 @@ Route::post('/feature-request/{id}/like', [FeatureRequestController::class,'requ
 Route::get('/feature-request/{id}/edit', [FeatureRequestController::class,'editFeature'])->name('feature.edit');
 Route::post('/feature-request/{id}/update', [FeatureRequestController::class,'updateRequest'])->name('feature.update');
 Route::get('/feature-request/{id}/delete', [FeatureRequestController::class,'delete'])->name('feature.delete');
-Route::get('/user/likes', [FeatureRequestController::class,'userLikes'])->name('user.likes');
+Route::get('/feature-request/likes', [FeatureRequestController::class,'userLikes'])->name('user.likes');
 
 
 // Contact page routes
-Route::get('/contact/page', [ContactController::class, 'contact'])->name('contact.page');
-Route::post('/contact/form', [ContactController::class, 'contactForm' ])->name('contact.form');
+Route::get('/contact', [ContactController::class, 'contact'])->name('contact.page');
+Route::post('/contact', [ContactController::class, 'contactForm' ])->name('contact.form');
 
 //  Wishlist
 Route::get('/add/wishlist/{id}', [WishlistController::class, 'addWishlist']);
-Route::get('/user/wishlist/', [WishlistController::class, 'index'])->name('user.wishlist');
+Route::get('/wishlist', [WishlistController::class, 'index'])->name('user.wishlist');
 Route::get('/delete/wishlist/{id}', [WishlistController::class, 'deleteWishlist']);
 
 
@@ -118,12 +118,12 @@ Route::post('/institutions/save', [DashboardController::class,'saveFinanceInstit
 Route::get('/lender-offerings/{orgId}', [LenderOfferingController::class, 'lenderOfferings']);
 
 // Password Reset route
-Route::get('/password/change', [DashboardController::class, 'changePassword'])->name('password.change');
-Route::post('/reset/password', [DashboardController::class,'resetPassword'])->name('password.new');
+Route::get('/password/reset', [DashboardController::class, 'changePassword'])->name('password.change');
+Route::post('/password/reset', [DashboardController::class,'resetPassword'])->name('password.new');
 
 // User profile route
-Route::get('/user/profile', [ProfileController::class,'showProfile'])->name('user.profile.show');
-Route::post('/user/profile/update', [ProfileController::class,'updateProfile'])->name('user.profile.update');
+Route::get('/profile', [ProfileController::class,'showProfile'])->name('user.profile.show');
+Route::post('/profile/update', [ProfileController::class,'updateProfile'])->name('user.profile.update');
 Route::get('/user/{id}/account/delete', [ProfileController::class,'accountDelete'])->name('account.delete');
 
 //newsletters
@@ -141,7 +141,7 @@ Route::post('/order/{orderId}/{orderDetailId}/update', [OrderUpdateController::c
 
 
 //search product by city
-Route::get('/{city}/{id}/all/products', [CityController::class, 'searchProductByCity']);
+Route::get('/city/{id}/{city_name}/products', [CityController::class, 'searchProductByCity']);
 //product questions and answers
 Route::post("/product/question", [ProductQuestionsAndAnswersController::class, 'productQuestions']);
 Route::get("/product/{product_id}/questions/answers", [ProductQuestionsAndAnswersController::class, 'getProductsQA']);

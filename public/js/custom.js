@@ -31,7 +31,7 @@ $(document).ready(function () {
 
         if (selectedOfferId) {
             $.ajax({
-                url: "/user/checkout/process",
+                url: "/checkout/process",
                 type: "GET",
                 dataType: "json",
                 cache: false,
