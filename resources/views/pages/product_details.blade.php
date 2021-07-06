@@ -284,7 +284,7 @@
                         <div class="pro__review ans">
                             <div class="review__thumb">
                                 @if ($review->profile_secure_url !== null)
-                                <img src="{{$review->profile_secure_url}}" alt="user_image"> 
+                                <img src="{{$review->profile_secure_url}}" alt="user_image" class="thumb_image"> 
                                 @else   
                                 <img src={{"asset/images/review/2.jpg"}} alt="user_image">
                                 @endif
