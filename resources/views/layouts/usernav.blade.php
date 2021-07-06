@@ -84,7 +84,7 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
             <a href="/dashboard" class="nav-link"><i class="typcn typcn-chart-area-outline"></i> Dashboard</a>
           </li>
           <li class="nav-item">
-            <a href="/user/wishlist" class="nav-link"><i class="typcn typcn-heart-outline"></i> Wishlist
+            <a href="/wishlist" class="nav-link"><i class="typcn typcn-heart-outline"></i> Wishlist
            
             @php
             $wishlist = DB::table('wishlists')->where('user_id',Auth::id())->count();
