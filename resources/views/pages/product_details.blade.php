@@ -132,7 +132,7 @@
                             </h6>
                         </div>
                         <br>
-                        <form action="{{ url('cart/product/add/'.$product->id) }}" method="post">
+                        <form action="{{ url('add/to/cart/'.$product->id) }}" method="post">
                             @csrf
 
                             <div class="row">
