@@ -54,7 +54,7 @@ class ProductQuestionsAndAnswersController extends Controller
                         ->join('users','users.id','=','product_questions.user_id')
                         ->leftJoin('profile_images','product_questions.user_id','=','profile_images.user_id')
                         ->select('product_questions.question','product_questions.answer','product_questions.created_at','users.name','profile_images.profile_secure_url')
-                        ->where('product_questions.product_id',$product_id)
+                        ->where('product_questions.product_id',$product_id)->orderBy('product_questions.id','DESC')
                         ->get();
     
                 return response()->json($question);

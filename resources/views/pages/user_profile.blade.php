@@ -19,7 +19,7 @@
                         @if ($user->profile_secure_url)
                         <img src="{{$user->profile_secure_url}}" width=130px>
                         @else
-                        <img src="https://image.flaticon.com/icons/svg/236/236831.svg" width=130px>
+                        <img src="{{asset('frontend_new/images/user/user_image.svg')}}" width=130px>
                         @endif
                     </div>
                     <label class="custom-file">

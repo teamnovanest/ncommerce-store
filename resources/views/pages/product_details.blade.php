@@ -265,6 +265,7 @@
                     ->join('users','users.id','=','product_reviews.user_id')
                     ->leftJoin('profile_images','product_reviews.user_id','=','profile_images.user_id')
                     ->select('product_reviews.user_id','product_reviews.rating','product_reviews.reviews','product_reviews.created_at','users.name','profile_images.profile_secure_url')
+                    ->orderBy('product_reviews.id','DESC')
                     ->where('product_reviews.product_id',$product->id)
                     ->get();
 
@@ -279,70 +280,10 @@
                     @endphp
                     <div role="tabpanel" id="reviews" class="product__tab__content fade">
                         <div class="review__address__inner"></div>
-                        <!-- Start Single Review -->
-                        @foreach($reviews as $review)
-                        <div class="pro__review ans">
-                            <div class="review__thumb">
-                                @if ($review->profile_secure_url !== null)
-                                <img src="{{$review->profile_secure_url}}" alt="user_image" class="thumb_image"> 
-                                @else   
-                                <img src={{"asset/images/review/2.jpg"}} alt="user_image">
-                                @endif
-                            </div>
-                            <div class="review__details">
-                                <div class="review__info">
-                                    <h4><a href="#">{{ $review->name}}</a></h4> 
-                                    <ul class="rating">
-                                        @if ($review->rating === 1)
-                                            <li><i class="zmdi zmdi-star mystar"></i></li>
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                        @elseif($review->rating === 2)
-                                        <li><i class="zmdi zmdi-star mystar"></i></li>
-                                        <li><i class="zmdi zmdi-star mystar"></i></li>
-                                        <li><i class="zmdi zmdi-star"></i></li>
-                                        <li><i class="zmdi zmdi-star"></i></li>
-                                        <li><i class="zmdi zmdi-star"></i></li>
-                                        @elseif($review->rating === 3)
-                                        <li><i class="zmdi zmdi-star mystar"></i></li>
-                                        <li><i class="zmdi zmdi-star mystar"></i></li>
-                                        <li><i class="zmdi zmdi-star mystar"></i></li>
-                                        <li><i class="zmdi zmdi-star"></i></li>
-                                        <li><i class="zmdi zmdi-star"></i></li>
-                                        @elseif($review->rating === 4)
-                                        <li><i class="zmdi zmdi-star mystar"></i></li>
-                                        <li><i class="zmdi zmdi-star mystar"></i></li>
-                                        <li><i class="zmdi zmdi-star mystar"></i></li>
-                                        <li><i class="zmdi zmdi-star mystar"></i></li>
-                                        <li><i class="zmdi zmdi-star"></i></li>
-                                        @elseif($review->rating === 5)    
-                                        <li><i class="zmdi zmdi-star mystar"></i></li>
-                                        <li><i class="zmdi zmdi-star mystar"></i></li>
-                                        <li><i class="zmdi zmdi-star mystar"></i></li>
-                                        <li><i class="zmdi zmdi-star mystar"></i></li>
-                                        <li><i class="zmdi zmdi-star mystar"></i></li>
-                                        @endif
-                                    </ul>
-                                    
-                                    {{-- <div class="rating__send">
-                                                    <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-                                                    <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                                </div> --}}
-                                </div>
-                                <div class="review__date">
-                                    <span>{{ date('Y-m-d',strtotime($review->created_at))}}</span>
-                                </div>
-                                <p> {{ $review->reviews}}</p>
-                            </div>
-                        </div>
-                        @endforeach
-                        <!-- End Single Review -->
                         <!-- Start RAting Area -->
                         @auth
                         @if(!$user_review && $user_bought_product)
-                        <div class="rating__wrap">
+                        <div class="rating__wrap" id="rating__wrap__div">
                             <h2 class="rating-title">Write A review</h2>
                             <h4 class="rating-title-2">Your Rating</h4>
                             <div class="rating__list">
@@ -358,7 +299,7 @@
                             </div>
                         </div>
                         <!-- End RAting Area -->
-                        <div class="review__box">
+                        <div class="review__box" id="review__form__div">
                             <form id="review-form">
                                 <input type="hidden"  name="product_id" value="{{$product->id}}">    
                                 <div class="single-review-form">
@@ -375,6 +316,81 @@
                         </div>
                         @endif
                         @endauth
+
+                        @if (!$user_review)
+                            <div class="pro__review ans">
+                                <div class="review__thumb" id="review_image">
+                                    
+                                </div>
+                                <div class="review__details">
+                                    <div class="review__info">
+                                        <h4 id="review_name"></h4> 
+                                        <ul class="rating" id="review_rating">
+                                    
+                                        </ul>
+                                    </div>
+                                    <div class="review__date">
+                                        
+                                    </div>
+                                    <p id="review_message"></p>
+                                </div>
+                            </div>
+                        @endif
+                        <!-- Start Single Review -->
+                        @foreach($reviews as $review)
+                            <div class="pro__review ans">
+                                <div class="review__thumb">
+                                    @if ($review->profile_secure_url !== null)
+                                    <img src="{{$review->profile_secure_url}}" alt="user_image" class="thumb_image"> 
+                                    @else   
+                                    <img src={{asset('frontend_new/images/user/user_image.svg')}} class="thumb_image" alt="user_image">
+                                    @endif
+                                </div>
+                                <div class="review__details">
+                                    <div class="review__info">
+                                        <h4><a href="#">{{ $review->name}}</a></h4> 
+                                        <ul class="rating">
+                                            @if ($review->rating === 1)
+                                                <li><i class="zmdi zmdi-star mystar"></i></li>
+                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                <li><i class="zmdi zmdi-star"></i></li>
+                                            @elseif($review->rating === 2)
+                                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                                            <li><i class="zmdi zmdi-star"></i></li>
+                                            <li><i class="zmdi zmdi-star"></i></li>
+                                            <li><i class="zmdi zmdi-star"></i></li>
+                                            @elseif($review->rating === 3)
+                                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                                            <li><i class="zmdi zmdi-star"></i></li>
+                                            <li><i class="zmdi zmdi-star"></i></li>
+                                            @elseif($review->rating === 4)
+                                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                                            <li><i class="zmdi zmdi-star"></i></li>
+                                            @elseif($review->rating === 5)    
+                                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                                            @endif
+                                        </ul>
+                                    </div>
+                                    <div class="review__date">
+                                        <span>{{ date('Y-m-d',strtotime($review->created_at))}}</span>
+                                    </div>
+                                    <p> {{ $review->reviews}}</p>
+                                </div>
+                            </div>           
+                        @endforeach
+                        <!-- End Single Review -->
                     </div>
 
 
