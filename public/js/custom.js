@@ -764,6 +764,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
+                NProgress.done();
                 Swal.fire({
                     icon: "error",
                     title: "Error",
@@ -776,8 +777,6 @@ $(document).ready(function () {
     //deleting user account
     $("#account-delete-btn").on("click", function (e) {
         e.preventDefault();
-        NProgress.start();
-
         var id = $(this).attr("user_id");
 
         if (id)
