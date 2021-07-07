@@ -764,7 +764,6 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                NProgress.done();
                 Swal.fire({
                     icon: "error",
                     title: "Error",
