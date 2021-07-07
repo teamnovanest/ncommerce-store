@@ -108,7 +108,7 @@ Route::get('/product/brand/{id}/{brand_name}', [ProductController::class, 'searc
 
 // shop
 Route::get('/shop', [HomeController::class, 'shop']);
-Route::get('/shop/{id}', [HomeController::class, 'shopView']);
+Route::get('/shop/{id}/{category_name}/products', [HomeController::class, 'shopView']);
 
 
 // Selecting finance organizations route

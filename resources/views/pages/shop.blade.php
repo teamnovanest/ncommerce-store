@@ -10,7 +10,12 @@
                     <div class="row">
                         <div class="col-12"> 
                             <div class="bradcaump__inner text-center">
-                                <h2 class="bradcaump-title">Products</h2>
+                            @if(isset($cat_name))
+                                <h2 class="bradcaump-title">Products <span>/</span>{{$cat_name->category_name }}</h2>                                    
+                            @else
+                                <h2 class="bradcaump-title">Products</h2>                                    
+                            @endif
+                            
                                 <!-- <nav class="bradcaump-inner">
                                   <a class="breadcrumb-item" href="/">Home</a>
                                   <span class="brd-separetor">/</span>
@@ -32,13 +37,8 @@
                         <div class="col-md-12">
                             <div class="filter__menu__container">
                                 <div class="product__menu">
-                                    @php
-                                    $category = DB::table('category_options')->get();
-                                    @endphp
-
-                                    
                                     @foreach($category as $cat)
-                                    <p class="shop-category"><a href="{{ url('/shop/'.$cat->id) }}">{{ $cat->category_name }}</a></p>
+                                    <p class="shop-category"><a href="{{ url('/shop/'.$cat->id.'/'.$cat->category_name.'/products') }}">{{ $cat->category_name }}</a></p>
                                
                                     @endforeach
                                     
@@ -63,7 +63,7 @@
                                         <div class="product__hover__info">
                                             <ul class="product__action">
                                                 <li><a title="Quick view" href="{{ url('product/'.$row->id.'/details/'.$row->slug) }}"><span class="ti-plus"></span></a></li>
-                                                 <li><a class="addcart" title="Add to cart"  data-id="{{ $row->id }}"><span class="ti-shopping-cart"></span></a></</li>
+                                                 <li><a class="addcart" title="Add to cart"  data-id="{{ $row->id }}"><span class="ti-shopping-cart"></span></a></li>
                                                 <li><a title="Add to wishlist" class="addwishlist" data-id="{{ $row->id }}" ><span class="ti-heart"></span></a></li>
                                             </ul>
                                         </div>
