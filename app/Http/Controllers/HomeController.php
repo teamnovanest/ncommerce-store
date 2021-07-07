@@ -63,6 +63,7 @@ class HomeController extends Controller
            ->select('products.id','products.slug','products.image_one_secure_url','products.category_id','products.product_name','products.selling_price','products.discount_price','regions.region_name','cities.city_name')
            ->where('products.status',1)->inRandomOrder()->paginate(50);
            $category = DB::table('category_options')->get();
+           
        return view('pages.shop',compact('category', 'allProducts'));  
          } catch (\Throwable $th) {
              if (app()->environment('production')){
@@ -84,11 +85,16 @@ class HomeController extends Controller
            ->leftJoin('regions','merchant_locations.region_id','=','regions.id')
            ->leftJoin('cities','merchant_locations.city_id','=','cities.id')
            ->select('products.id','products.slug','products.image_one_secure_url','products.category_id','products.product_name','products.selling_price','products.discount_price','regions.region_name','cities.city_name')
-           ->where('status',1)->where('category_id',$id)->orderBy('id','desc')->paginate(50);
-	
-       $category = DB::table('category_options')->get();
+           ->where('status',1)->where('category_id',$id)->inRandomOrder()->paginate(50);
+           
+           $category = DB::table('category_options')
+           ->get();
 
-       return view('pages.shop',compact('category', 'allProducts')); 
+           $cat_name = DB::table('category_options')
+           ->where('id', $id)
+           ->first();
+
+       return view('pages.shop',compact('category', 'allProducts','cat_name')); 
         } catch (\Throwable $th) {
              if (app()->environment('production')){
             \Sentry\captureException($th);
