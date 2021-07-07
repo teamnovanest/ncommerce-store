@@ -425,14 +425,71 @@ $(document).ready(function () {
                     review,
                 },
                 success: function (data) {
-                    if (data.message) {
+                    if (data) {
+                        $("#review__form__div").hide();
+                        $("#rating__wrap__div").hide();
+
+                        $("#review_image").append(
+                            `<img src="${data.profile_secure_url}" alt="user_image" class="thumb_image">`
+                        );
+                        $("#review_name").append(
+                            `<a href="#">${data.name}</a>`
+                        );
+
+                        if (data.rating === 1) {
+                            $("#review_rating").append(`
+                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                            <li><i class="zmdi zmdi-star"></i></li>
+                            <li><i class="zmdi zmdi-star"></i></li>
+                            <li><i class="zmdi zmdi-star"></i></li>
+                            <li><i class="zmdi zmdi-star"></i></li>
+                            `);
+                        } else if (data.rating === 2) {
+                            $("#review_rating").append(`
+                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                            <li><i class="zmdi zmdi-star"></i></li>
+                            <li><i class="zmdi zmdi-star"></i></li>
+                            <li><i class="zmdi zmdi-star"></i></li>
+                            `);
+                        } else if (data.rating === 3) {
+                            $("#review_rating").append(`
+                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                            <li><i class="zmdi zmdi-star"></i></li>
+                            <li><i class="zmdi zmdi-star"></i></li>
+                            `);
+                        } else if (data.rating === 4) {
+                            $("#review_rating").append(`
+                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                            <li><i class="zmdi zmdi-star"></i></li>
+                            `);
+                        } else {
+                            $("#review_rating").append(`
+                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                            <li><i class="zmdi zmdi-star mystar"></i></li>
+                            `);
+                        }
+                        $("#review__date").append(
+                            `<span>${moment(data.created_at).format(
+                                "MMMM Do YYYY"
+                            )}</span>`
+                        );
+                        $("#review_message").append(`${data.reviews}`);
+
                         Swal.fire({
                             icon: "success",
                             title: "Success",
-                            text: data.message,
+                            text: "Product review added successfully",
                             showCloseButton: true,
                         });
-                        window.location.reload();
                     } else {
                         Swal.fire({
                             icon: "error",
@@ -557,7 +614,7 @@ $(document).ready(function () {
                     merchant_organization_id,
                 },
                 success: function (data) {
-                    $("#productQuestionContainer").append(`
+                    $("#productQuestionContainer").prepend(`
                         <div class="pro__review ans">
                             <div class="review__thumb">
                                 <img src=${
@@ -569,7 +626,9 @@ $(document).ready(function () {
                                     <h5><a href="#">${data.name}</a></h5> 
                                 </div>
                                 <div class="review__date">
-                                    <span>${data.created_at}</span>
+                                    <span>${moment(data.created_at).format(
+                                        "MMMM Do YYYY"
+                                    )}</span>
                                 </div>
                                 <p> ${data.question}</p>
                                 <p> ${
@@ -588,18 +647,18 @@ $(document).ready(function () {
                     });
                 },
                 error: function (error) {
-                    if (error.status === 401) {
+                    if (error.status === 500) {
                         Swal.fire({
                             icon: "error",
                             title: "Error",
-                            text: "You are not logged, in Please login to ask your question.",
+                            text: error.responseJSON.error,
                             showCloseButton: true,
                         });
                     } else {
                         Swal.fire({
                             icon: "error",
                             title: "Error",
-                            text: error.responseJSON.error,
+                            text: "You are not logged, in Please login to ask your question.",
                             showCloseButton: true,
                         });
                     }
@@ -642,7 +701,9 @@ $(document).ready(function () {
                                     <h5><a href="#">${value.name}</a></h5> 
                                 </div>
                                 <div class="review__date">
-                                    <span>${value.created_at}</span>
+                                    <span>${moment(value.created_at).format(
+                                        "MMMM Do YYYY"
+                                    )}</span>
                                 </div>
                                 <p> ${value.question}</p>
                                 <p> ${

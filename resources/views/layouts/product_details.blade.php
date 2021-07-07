@@ -525,7 +525,7 @@ $setting = DB::table('sitesettings')->first();
     <!-- Paystack -->
     <script src="https://js.paystack.co/v2/inline.js"></script>
 
-   
+   <script src="{{asset('/lib/moment/moment.min.js')}}"></script>
     
     {{-- <script type="text/javascript" src="{{ asset('/lib/toastr/toastr.min.js') }}"></script> --}}
     <script src="{{ asset('/lib/sweetalert/sweetalert.js') }}"></script> 

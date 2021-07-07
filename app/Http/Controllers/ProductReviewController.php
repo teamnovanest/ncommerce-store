@@ -20,7 +20,13 @@ class ProductReviewController extends Controller
         $data['created_at'] = now();
         $id = DB::table('product_reviews')->insertGetId($data);
         if ($id) {
-          return response()->json(['message'=>"Product review added successfully"]);
+            $review = DB::table('product_reviews')
+            ->join('users','product_reviews.user_id','=','users.id')
+            ->leftJoin('profile_images','users.id','=','profile_images.user_id')
+            ->select('product_reviews.reviews','product_reviews.rating','product_reviews.created_at','users.name','profile_images.profile_secure_url')
+            ->where('product_reviews.id',$id)
+            ->where('users.id',Auth::id())->first();
+          return response()->json($review);
         }else{
              return response()->json(['error'=>'An error occured while sending your review, please try again or contact support if issue persist.']);
         }
