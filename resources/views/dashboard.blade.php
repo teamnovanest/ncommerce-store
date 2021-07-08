@@ -30,9 +30,9 @@
                             <tbody>
                                 @foreach($order as $row)
                                 <tr>
-                                    <td class="pro-name"><a href="{{ url('product/details/'.$row->product_id.'/'.$row->slug) }}" 
+                                    <td class="pro-name"><a href="{{ url('product/'.$row->product_id.'/details/'.$row->slug) }}" 
                                     target="_blank">{{$row->product_name}}</a></td>
-                                    <td><a href="{{ url('product/details/'.$row->product_id.'/'.$row->slug) }}"
+                                    <td><a href="{{ url('product/'.$row->product_id.'/details/'.$row->slug) }}"
                                     target="_blank"><img style="height: 70px"
                                     src="{{ asset( $row->image_one_secure_url )}}" alt="product images"></a>
                                     </td>
