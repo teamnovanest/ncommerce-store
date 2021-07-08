@@ -18,18 +18,21 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
     <link rel="canonical" href="https://vestashi.com/">
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
+    <meta property="og:image:type" content="image/jpg">
     <meta property="og:url" content="https://vestashi.com/">
     <meta property="og:title" content="{{ $seo->meta_title }}">
     <meta property="og:description" content="{{ $seo->meta_description }}">
-    <meta property="og:image" content="https://facebook.com">
+    <meta property="og:image" content="{{ $seo->image_secure_url }}">
+    <meta property="og:image:secure_url" content="{{ $seo->image_secure_url }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://vestashi.com/">
     <meta property="twitter:title" content="{{ $seo->meta_title }}">
     <meta property="twitter:description" content="{{ $seo->meta_description }}">
-    <meta property="twitter:image" content="https://twitter.com">
+    <meta property="twitter:image" content="{{ $seo->image_secure_url }}">
     
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/frontend_new/css/images/favicon.ico') }}">
