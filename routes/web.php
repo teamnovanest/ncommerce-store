@@ -17,6 +17,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderUpdateController;
 use App\Http\Controllers\OrderDetailsController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\FeatureRequestController;
 use App\Http\Controllers\LenderOfferingController;
@@ -118,8 +119,8 @@ Route::post('/institutions/save', [DashboardController::class,'saveFinanceInstit
 Route::get('/lender-offerings/{orgId}', [LenderOfferingController::class, 'lenderOfferings']);
 
 // Password Reset route
-Route::get('/password/reset', [DashboardController::class, 'changePassword'])->name('password.change');
-Route::post('/password/reset', [DashboardController::class,'resetPassword'])->name('password.new');
+Route::get('/password/reset', [PasswordResetController::class, 'changePassword'])->name('password.change');
+Route::post('/password/reset', [PasswordResetController::class,'resetPassword'])->name('password.new');
 
 // User profile route
 Route::get('/profile', [ProfileController::class,'showProfile'])->name('user.profile.show');
