@@ -62,7 +62,6 @@ class PasswordResetController extends Controller
     }
   
     } catch (\Throwable $th) {
-        dd($th);
         if (app()->environment('production')){
           \Sentry\captureException($th);
         }
