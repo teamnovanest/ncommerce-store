@@ -1,17 +1,7 @@
 dispatch:
-  - url: "vestashi.com/*"
-    service: vestashi-store-prod
-
-  - url: "merchant.vestashi.com/*"
-    service: vestashi-merchant-prod
-
-
   - url: "finance.vestashi.com/*"
     service: vestashi-finance-prod
 
-
-  - url: "admin.vestashi.com/*"
+  - url: "vestashi.com/*"
     service: default
-
-
- 
+    

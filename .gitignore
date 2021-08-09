@@ -4,6 +4,7 @@
 /storage/*.key
 /vendor
 .env
+.env.prod
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml
@@ -12,3 +13,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 notes.txt
+app-prod.yaml
+app-test.yaml
+app-dev.yaml
+npm-shrinkwrap.json

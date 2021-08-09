@@ -4,3 +4,4 @@ mysql/*
 .git
 package-lock.json
 notes.txt
+npm-shrinkwrap.json
