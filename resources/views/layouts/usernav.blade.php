@@ -1,5 +1,11 @@
 @php
 $seo = DB::table('seos')->where('deleted_at', NULL)->first();
+$user_profile_photo = DB::table('users')
+->join('profile_images', 'users.id', '=', 'profile_images.user_id')
+->select('profile_secure_url')
+->where('users.id',Auth::user()->id)
+->first();
+// dd($user_profile_photo);
 
 @endphp
 
@@ -111,7 +117,12 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
             </div>
           </li>
           <li class="nav-item">
+            @if ($user_profile_photo !== null)
+              <a href="" class="nav-link with-sub"><span><img src="{{ $user_profile_photo->profile_secure_url }}" class="user__profile-photo" alt="profile picture" /></span>{{Auth::user()->name}}<span class="arrow"><i class="typcn typcn-arrow-sorted-down"></i></span></a> 
+            @else
+                
             <a href="" class="nav-link with-sub"><i class="typcn typcn-user"></i> {{Auth::user()->name}} <span class="arrow"><i class="typcn typcn-arrow-sorted-down"></i></span></a>
+            @endif
             <div class="az-menu-sub">
               <div class="container">
                 <div>

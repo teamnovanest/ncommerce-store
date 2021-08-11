@@ -1085,3 +1085,10 @@ select.list-dt:focus {
 .del-account a:hover {
     color: red;
 }
+
+/* profile photo */
+.user__profile-photo {
+    height: 35px;
+    width: 35px;
+    margin-right: 5px;
+}
