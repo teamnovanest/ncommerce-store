@@ -396,9 +396,14 @@
 
 
                     <div role="tabpanel" id="QA" class="product__tab__content fade">
+                        <form action="">
+                             <input type="hidden"  name="product_id" value="{{$product->id}}"> 
+                        </form>
+                        @auth
+                            
                         <div class="review__address__inner"></div>
                         <!-- Start Single Review -->
-                    <div class="review__box">
+                        <div class="review__box">
                             <form id="review-form" class="QandAform">
                                 @csrf
                                 <input type="hidden"  name="product_id" value="{{$product->id}}">    
@@ -414,6 +419,7 @@
                                 </div>
                             </form>
                         </div>
+                        @endauth
                         <div id="productQuestionContainer">
 
                         </div>

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class ProductQuestionsAndAnswersController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     public function productQuestions(Request $request){
@@ -48,7 +48,7 @@ class ProductQuestionsAndAnswersController extends Controller
     }
 
     public function getProductsQA($product_id){
-        if(Auth::id()){
+        
             try {
                 $question = DB::table('product_questions')
                         ->join('users','users.id','=','product_questions.user_id')
@@ -56,8 +56,15 @@ class ProductQuestionsAndAnswersController extends Controller
                         ->select('product_questions.question','product_questions.answer','product_questions.created_at','users.name','profile_images.profile_secure_url')
                         ->where('product_questions.product_id',$product_id)->orderBy('product_questions.id','DESC')
                         ->get();
-    
-                return response()->json($question);
+                if (Auth::check()) {
+                    return response()->json([$question]);
+                }else {
+                      $notification=array(
+                            'message'=>'You need to log in to post a question.',
+                            'alert-type'=>'success'
+                        );
+                    return response()->json([$question,$notification]);
+                }
             } catch (\Throwable $th) {
                  if (app()->environment('production')){
                 \Sentry\captureException($th);
@@ -65,8 +72,5 @@ class ProductQuestionsAndAnswersController extends Controller
                  return \response()->setStatusCode(500);
             }
 
-        }else{
-        return \response()->setStatusCode(401);
-        }
     }
 }

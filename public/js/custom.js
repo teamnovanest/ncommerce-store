@@ -678,7 +678,40 @@ $(document).ready(function () {
     $("#QandATab").on("click", function (evt) {
         evt.preventDefault();
 
+        const displayQA = function (value) {
+            $("#productQuestionContainer").empty();
+            $.each(value, function (index, data) {
+                $("#productQuestionContainer").append(`
+                    <div class="pro__review ans">
+                            <div class="review__thumb">
+                                <img src=${
+                                    data.profile_secure_url !== "null"
+                                        ? data.profile_secure_url
+                                        : ""
+                                } alt="user_image" class="thumb_image">
+                            </div>
+                            <div class="review__details">
+                                <div class="review__info">
+                                    <h5><a href="#">${data.name}</a></h5>
+                                </div>
+                                <div class="review__date">
+                                    <span>${moment(data.created_at).format(
+                                        "MMMM Do YYYY"
+                                    )}</span>
+                                </div>
+                                <p> ${data.question}</p>
+                                <p> ${
+                                    data.answer !== null
+                                        ? data.answer
+                                        : "Not answered"
+                                }</p>
+                                </div>
+                            </div>`);
+            });
+        };
+
         var product_id = $('input[name="product_id"]').val();
+
         $.ajax({
             url: "/product/" + product_id + "/questions/answers",
             type: "GET",
@@ -688,49 +721,29 @@ $(document).ready(function () {
                 product_id,
             },
             success: function (data) {
-                $.each(data, function (index, value) {
-                    $("#productQuestionContainer").append(`
-                    <div class="pro__review ans">
-                            <div class="review__thumb">
-                                <img src=${
-                                    value.profile_secure_url
-                                } alt="user_image" class="thumb_image"> 
-                            </div>
-                            <div class="review__details">
-                                <div class="review__info">
-                                    <h5><a href="#">${value.name}</a></h5> 
-                                </div>
-                                <div class="review__date">
-                                    <span>${moment(value.created_at).format(
-                                        "MMMM Do YYYY"
-                                    )}</span>
-                                </div>
-                                <p> ${value.question}</p>
-                                <p> ${
-                                    value.answer !== null
-                                        ? value.answer
-                                        : "Not answered"
-                                }</p>
-                                </div>
-                            </div>`);
-                });
+                if (data.length === 2) {
+                    const [value, notification] = data;
+                    if (notification.message) {
+                        Swal.fire({
+                            icon: "info",
+                            title: "Info",
+                            text: notification.message,
+                            showCloseButton: true,
+                        });
+                    }
+                    displayQA(value);
+                } else {
+                    const [questions] = data;
+                    displayQA(questions);
+                }
             },
             error: function (error) {
-                if (error.status === 401) {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: "You are not logged, in Please login to view product questions and answers.",
-                        showCloseButton: true,
-                    });
-                } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: "Oops an error occured, please try again or contact support if issue persist.",
-                        showCloseButton: true,
-                    });
-                }
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Oops an error occured, please try again or contact support if issue persist.",
+                    showCloseButton: true,
+                });
             },
         });
     });
