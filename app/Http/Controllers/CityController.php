@@ -31,6 +31,7 @@ class CityController extends Controller
     ->join('cities', 'cities.id', '=', 'merchant_locations.city_id')
     ->join('regions', 'regions.id', '=', 'merchant_locations.region_id')
     ->select('products.id','products.product_name','products.product_details','products.slug','products.product_color','products.product_size','products.selling_price','products.discount_price','products.video_link','products.image_one_secure_url','regions.region_name','cities.city_name')
+    ->where('products.status',1)
     ->where('merchant_locations.city_id',$cityId)->inRandomOrder()->paginate(48);
 
     return view('pages.search_product_by_city',compact('products','city'));
