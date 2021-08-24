@@ -12,8 +12,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-notes.txt
-app-prod.yaml
+notes-store.txt
 app-test.yaml
 app-dev.yaml
 npm-shrinkwrap.json

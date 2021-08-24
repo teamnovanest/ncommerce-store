@@ -1,7 +1,4 @@
 dispatch:
-  - url: "finance.vestashi.com/*"
-    service: vestashi-finance-prod
-
   - url: "vestashi.com/*"
     service: default
     
