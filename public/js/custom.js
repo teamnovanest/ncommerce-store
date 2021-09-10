@@ -815,5 +815,17 @@ $(document).ready(function () {
         }
     });
 
+    $("#registration__btn").on("click", function (event) {
+        event.preventDefault();
+        var password = $("#password").val();
+        var confirmPassword = $("#confirm_password").val();
+        if (password === confirmPassword) {
+            $(".register-form").submit();
+        } else {
+            $(".password-input").addClass("password-invalid__border");
+            $(".password-invalid__text").removeClass("hidden");
+        }
+    });
+
     //end of ready function
 });

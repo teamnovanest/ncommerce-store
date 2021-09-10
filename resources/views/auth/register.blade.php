@@ -10,7 +10,7 @@
              <div class="p-8">
                 <x-jet-validation-errors class="mb-4" />
 
-                    <form method="POST" class="" action="{{ route('register') }}">
+                    <form class="register-form" method="POST" class="" action="{{ route('register') }}">
                       @csrf
                         <div class="mb-5">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-600">Full Name</label>
@@ -32,16 +32,18 @@
                         <div class="mb-5">
                             <label for="password" class="block mb-2 text-sm font-medium text-gray-600" required>Password</label>
 
-                            <input type="password" placeholder="Enter password" name="password" class="block w-full p-3 rounded bg-gray-200 border border-transparent focus:outline-none" required>
+                            <input id="password" type="password" placeholder="Enter password" name="password" class="password-input block w-full p-3 rounded bg-gray-200 border border-transparent focus:outline-none" required>
                         </div>
 
                         <div class="mb-5">
                             <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-600">Confirm Password</label>
 
-                            <input type="password" placeholder="Confirm password" name="password_confirmation" class="block w-full p-3 rounded bg-gray-200 border border-transparent focus:outline-none" required>
+                            <input id="confirm_password" type="password" placeholder="Confirm password" name="password_confirmation" class="password-input block w-full p-3 rounded bg-gray-200 border border-transparent focus:outline-none" required>
+
+                            <p class="password-invalid__text hidden">Passwords do not match. Please try again</p>
                         </div>
 
-                        <button class="w-full p-3 mt-1 bg-indigo-600 text-white rounded shadow">Register</button>
+                        <button class="w-full p-3 mt-1 bg-indigo-600 text-white rounded shadow" id="registration__btn">Register</button>
                     </form>
                 </div>
                 
