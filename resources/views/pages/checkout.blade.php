@@ -134,8 +134,10 @@
     </div>
 
   <div class="col-lg-6 mb-5">
+      @if (isset($special_association_offers) || isset($credit_offers))
+          
         @if($cart->count() > 0)
-
+        
         <div class="container">
             <h4 class="pb--30 text-center">FINANCE PAYMENT PLANS</h4>
             <div class="row">
@@ -284,6 +286,7 @@
                 @endif
             </div>
         </div>
+        @endif
 </div>
 @else
 <div></div>
@@ -315,6 +318,7 @@
                 @endif
 
             </div>
+           @if (isset($special_institution_offers) || isset($credit_offers))
             <div class="col-md-6 col-sm-5 col-xs-12">
                 <div class="cart_totals">
                     <h3>Cart Total</h3>
@@ -324,8 +328,8 @@
                                 GH₵ {{ number_format(Session::get('coupon')['balance'],2) }} </span>
                         </li>
                         <li>Coupon : ({{ Session::get('coupon')['name'] }} )
-                            <a href="{{ route('remove.coupon') }}" class="btn btn-danger btn-sm">X</a>
                             <span class="amount">{{ Session::get('coupon')['discount'] }} % </span>
+                            <a href="{{ route('remove.coupon') }}" class="btn btn-danger btn-sm ml-1">X</a>
                         </li>
                         @else
                         <li>Subtotal : <span class="amount">
@@ -353,6 +357,7 @@
                     </div>
                 </div>
             </div>
+              @endif
         </div>
         @else
         <div></div>

@@ -128,7 +128,7 @@
                             <span><a href="#description">View more</a></span>
                             
                             <h6 class="mt-2">
-                            {{$location->region_name ?? ''}}- {{$location->city_name ?? ''}}
+                            {{$location->city_name ?? ''}}- {{$location->region_name ?? ''}}
                             </h6>
                         </div>
                         <br>

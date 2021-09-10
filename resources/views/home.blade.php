@@ -147,9 +147,9 @@
                                     </a>
                                 </h2>
                                 <div style="background-color:black; color: white;" class="product-name">
-                                    <span>{{$row->region_name}}</span>
-                                    -
                                     <span>{{$row->city_name}}</span>
+                                    -
+                                    <span>{{$row->region_name}}</span>
                                 </div>
                                 <ul class="product__price">
                                     @if($row->discount_price == NULL)

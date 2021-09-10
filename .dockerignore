@@ -1,7 +1,8 @@
-mysql/*
 .env.prod
 .env
 .git
 package-lock.json
-notes.txt
+notes-store.txt
 npm-shrinkwrap.json
+node_modules
+vendor

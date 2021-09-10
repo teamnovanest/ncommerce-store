@@ -30,12 +30,12 @@
                                         <div class="mutliSelect">
                                             <ul class="institution__list">
                                                 <li>
-                                                    <input type="checkbox" value="None" name="none">
+                                                    <input class="finance_institution" type="checkbox" value="None" name="none">
                                                     None
                                                 </li>
                                                 @foreach ($finance_institutions as $finance_institution)
                                                 <li>
-                                                    <input type="checkbox" id="{{$finance_institution->id}}"
+                                                    <input class="finance_institution" type="checkbox" id="{{$finance_institution->id}}"
                                                         value="{{$finance_institution->registered_name}}"
                                                         name="institution[]"/>
                                                     {{$finance_institution->registered_name}}
@@ -61,6 +61,7 @@
                                 <label class="form__label" for="identification">Select your form of identification *</label>
                                 <select class="form-control " data-style="btn btn-link" id="identification"
                                     name="identification" required>
+                                    <option label="Select an identification card"></option>
                                     <option value="NHIS">NHIS</option>
                                     <option value="PASSPORT">Passport</option>
                                     <option value="VOTER ID">Voter's Id</option>
@@ -271,6 +272,19 @@
 
         });
     });
+
+</script>
+
+<script>
+$(document).ready(function() {
+      $('.mutliSelect input[type="checkbox"]:checked').each(function() 
+    {
+        $(this).prop('checked', false);
+    });
+    $('#region').val('');
+    $('#identification').val('');
+    $('#identification_number').val('');
+})
 
 </script>
 @endsection

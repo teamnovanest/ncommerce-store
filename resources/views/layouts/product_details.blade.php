@@ -117,7 +117,7 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
                     <div class="row">
                         <div class="col-md-3 col-lg-2  col-sm-8 col-3">
                             <div class="logo">
-                               <h5><a href="/">NCOMMERCE</a></h5>
+                               <h5><a href="/">Vestashi</a></h5>
                             </div>
                         </div>
                         <!-- Start MAinmenu Ares -->
@@ -237,7 +237,7 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
                     <div class="off__contact">
                         <div class="logo">
                             <a href="/">
-                                <h1>NCOMMERCE</h1>
+                                <h1>Vestashi</h1>
                             </a>
                         </div>
                         {{-- <p>Lorem ipsum dolor sit amet consectetu adipisicing elit sed do eiusmod tempor incididunt ut labore.</p> --}}
@@ -354,7 +354,7 @@ $setting = DB::table('sitesettings')->first();
                                 <div class="ft__logo">
                                     <a href="#">
                                       {{ $setting->company_name ?? ''}}
-                                       NCOMMERCE
+                                       Vestashi
                                     </a>
                                    
                                 </div>
@@ -461,7 +461,7 @@ $setting = DB::table('sitesettings')->first();
                         <div class="col-lg-12 col-xl-12 col-md-12 col-12">
                             <div class="copyright__inner">
                                 <div class="copyright">
-                                    <p>© <script>document.write(new Date().getFullYear());</script> <a href="#">NCommerce</a>
+                                    <p>© <script>document.write(new Date().getFullYear());</script> <a href="#">Vestashi</a>
                                     All Right Reserved.</p>
                                 </div>
                                 <ul class="footer__menu">
