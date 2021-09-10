@@ -72,9 +72,9 @@
                                     <div class="product__details">
                                         <h2 class="product-name"><a href="{{ url('product/'.$row->id.'/details/'.$row->slug) }}" >{{$row->product_name}}</a></h2>
                                         <div style="background-color:black; color: white;" class="product-name">
-                                            <span>{{$row->region_name}}</span>
-                                            -
                                             <span>{{$row->city_name}}</span>
+                                            -
+                                            <span>{{$row->region_name}}</span>
                                         </div>
                                         <ul class="product__price">
                                              @if($row->discount_price == NULL)

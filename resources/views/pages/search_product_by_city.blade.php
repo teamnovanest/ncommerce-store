@@ -118,9 +118,9 @@
                                                 <h2 class="product-name"><a href="{{ url('product/'.$product->id.'/details/'.$product->slug) }}" tabindex="0">{{ $product->product_name  }} </a></h2>
                                                 
                                                 <div style="background-color:black; color: white;" class="product-name">
-                                                <span>{{$product->region_name}}</span>
-                                                -
                                                 <span>{{$product->city_name}}</span>
+                                                -
+                                                <span>{{$product->region_name}}</span>
                                                 </div>
                                                 
                                                 <ul class="product__price">
@@ -158,9 +158,9 @@
                                                 <h2 class="product-name"><a href="{{ url('product/'.$pro->id.'/details/'.$pro->slug) }}" tabindex="0">{{ $pro->product_name  }} </a></h2>
                                                 
                                                 <div style="background-color:black; color: white; width: 30%;" class="product-name">
-                                                <span>{{$pro->region_name}}</span>
-                                                -
                                                 <span>{{$pro->city_name}}</span>
+                                                -
+                                                <span>{{$pro->region_name}}</span>
                                                 </div>
                                                 
                                                 
