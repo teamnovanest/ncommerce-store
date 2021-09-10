@@ -56,13 +56,8 @@ class PurchaseController extends Controller
                     $cart = Cart::content();
                     return view('pages.checkout', compact('cart','credit_offers', 'amount'));
                 } else {
-                    $finance_institutions = DB::table('lenders')->get();
-                    $regions = Region::all();
-                    $notification=array(
-                    'messege'=>'You need to be affiliated with a lender before you can make a purchase',
-                    'alert-type'=>'info'
-                    );
-                    return redirect()->action([DashboardController::class, 'index'])->with($notification);
+                    $cart = Cart::content();
+                    return view('pages.checkout', compact('cart'));
                }
        } catch (\Throwable $th) {
 			if (app()->environment('production')){
