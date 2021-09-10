@@ -378,6 +378,16 @@
     margin-bottom: 1.5rem;
 }
 
+.password-invalid__border {
+    outline: 2px solid red;
+    /* font-size: 10rem; */
+}
+
+.password-invalid__text {
+    margin-top: 8px;
+    color: rgba(255, 40, 40, 0.926);
+}
+
 /* User Profile style */
 .card__content {
     background-color: #fff;
