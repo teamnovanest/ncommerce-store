@@ -324,8 +324,8 @@
                                 GH₵ {{ number_format(Session::get('coupon')['balance'],2) }} </span>
                         </li>
                         <li>Coupon : ({{ Session::get('coupon')['name'] }} )
-                            <a href="{{ route('remove.coupon') }}" class="btn btn-danger btn-sm">X</a>
                             <span class="amount">{{ Session::get('coupon')['discount'] }} % </span>
+                            <a href="{{ route('remove.coupon') }}" class="btn btn-danger btn-sm ml-1">X</a>
                         </li>
                         @else
                         <li>Subtotal : <span class="amount">
