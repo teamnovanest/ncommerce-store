@@ -271,6 +271,43 @@ $(document).ready(function () {
     });
 
     //customer order update js
+    function orderUpdate(statusId, orderId, productId, orderDetailId) {
+        return $.ajax({
+            url: "/order/" + orderId + "/" + orderDetailId + "/update",
+            type: "POST",
+            cache: false,
+            dataType: "json",
+            data: {
+                statusId,
+                productId,
+            },
+            success: function (data) {
+                $("#statustd" + orderDetailId).empty();
+                $("#statustd" + orderDetailId).append(
+                    `<span class="badge badge-success">${data.status_name}</span>`
+                );
+                $(".updateCheckBox" + orderDetailId).hide();
+                $(".lable" + orderDetailId).html("Yes");
+                NProgress.done();
+                Swal.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: "Order updated successfully",
+                    showCloseButton: true,
+                });
+            },
+            error: function (error) {
+                NProgress.done();
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: error.responseJSON.message,
+                    showCloseButton: true,
+                });
+            },
+        });
+    }
+
     $(".updateRadio").on("click", function () {
         var statusId = $(this).val();
         var orderId = $(this).attr("data-order-id");
@@ -278,40 +315,20 @@ $(document).ready(function () {
         var orderDetailId = $(this).attr("data-order-datail-id");
 
         if (statusId && orderId && productId && orderDetailId) {
-            $.ajax({
-                url: "/order/" + orderId + "/" + orderDetailId + "/update",
-                type: "POST",
-                cache: false,
-                dataType: "json",
-                data: {
-                    statusId,
-                    productId,
-                },
-
-                success: function (data) {
-                    $("#statustd" + orderDetailId).empty();
-                    $("#statustd" + orderDetailId).append(
-                        `<span class="badge badge-success">${data.status_name}</span>`
-                    );
-                    $(".updateCheckBox" + orderDetailId).hide();
-                    $(".lable" + orderDetailId).html("Yes");
-                    NProgress.done();
-                    Swal.fire({
-                        icon: "success",
-                        title: "Success",
-                        text: "Order updated successfully",
-                        showCloseButton: true,
-                    });
-                },
-                error: function (error) {
-                    NProgress.done();
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: error.responseJSON.message,
-                        showCloseButton: true,
-                    });
-                },
+            Swal.fire({
+                title: "Do you want to save the changes?",
+                icon: "warning",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: `Save`,
+                denyButtonText: `Don't save`,
+            }).then((results) => {
+                if (results.isConfirmed) {
+                    orderUpdate(statusId, orderId, productId, orderDetailId);
+                } else {
+                    $(".updateRadio").prop("checked", false);
+                    Swal.fire("Changes are not saved", "", "info");
+                }
             });
         } else {
             NProgress.done();
