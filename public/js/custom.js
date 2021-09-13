@@ -694,7 +694,6 @@ $(document).ready(function () {
     //fetching questions and answers
     $("#QandATab").on("click", function (evt) {
         evt.preventDefault();
-        // var image = "<img src='../assets/img/header-cover.jpg'/>";
         const displayQA = function (value) {
             $("#productQuestionContainer").empty();
             $.each(value, function (index, data) {
