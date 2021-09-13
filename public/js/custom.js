@@ -694,7 +694,7 @@ $(document).ready(function () {
     //fetching questions and answers
     $("#QandATab").on("click", function (evt) {
         evt.preventDefault();
-
+        // var image = "<img src='../assets/img/header-cover.jpg'/>";
         const displayQA = function (value) {
             $("#productQuestionContainer").empty();
             $.each(value, function (index, data) {
@@ -702,10 +702,11 @@ $(document).ready(function () {
                     <div class="pro__review ans">
                             <div class="review__thumb">
                                 <img src=${
-                                    data.profile_secure_url !== "null"
+                                    data.profile_secure_url !== null
                                         ? data.profile_secure_url
-                                        : ""
-                                } alt="user_image" class="thumb_image">
+                                        : "/../frontend_new/images/user/user_image.svg"
+                                } alt="user_image" class="thumb_image"/>
+                                
                             </div>
                             <div class="review__details">
                                 <div class="review__info">
