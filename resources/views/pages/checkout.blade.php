@@ -318,7 +318,7 @@
                 @endif
 
             </div>
-           @if (isset($special_institution_offers) || isset($credit_offers))
+           @if (isset($special_association_offers) || isset($credit_offers))
             <div class="col-md-6 col-sm-5 col-xs-12">
                 <div class="cart_totals">
                     <h3>Cart Total</h3>
