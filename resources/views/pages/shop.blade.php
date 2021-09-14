@@ -13,7 +13,7 @@
                             @if(isset($cat_name))
                                 <h2 class="bradcaump-title">Products <span>/</span>{{$cat_name->category_name }}</h2>                                    
                             @else
-                                <h2 class="bradcaump-title">Products</h2>                                    
+                                <h2 class="bradcaump-title">All Products</h2>                                    
                             @endif
                             
                                 <!-- <nav class="bradcaump-inner">
@@ -30,10 +30,10 @@
 
         <!-- Start Our Product Area -->
         <section class="htc__product__area shop__page ptb--130 bg__white">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="htc__product__container">
                     <!-- Start Product MEnu -->
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-12">
                             <div class="filter__menu__container">
                                 <div class="product__menu">
@@ -45,14 +45,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                    
                     <!-- End Product MEnu -->
                     <div class="another-product-style">
                         <div class="row">
                             <!-- Start Single Product -->
                              @foreach($allProducts as $row)
-                            <div class="col-lg-2 single__pro col-xl-2 col-md-4 col-6 col-sm-6">
+                            <div class="col-lg-3 single__pro col-xl-3 col-md-4 col-6 col-sm-6">
                                 <div class="product foo">
                                     <div class="product__inner">
                                         <div class="pro__thumb">
