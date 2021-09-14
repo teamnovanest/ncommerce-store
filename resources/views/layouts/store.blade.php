@@ -38,6 +38,10 @@ $setting = DB::table('sitesettings')->first();
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/frontend_new/css/images/favicon.ico') }}">
     <link rel="apple-touch-icon" href="{{ asset('/frontend_new/css/apple-touch-icon.png') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
 
     <!-- All css files are included here. -->
@@ -118,9 +122,9 @@ $setting = DB::table('sitesettings')->first();
             <div id="sticky-header-with-topbar" class="mainmenu__area sticky__header">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3 col-lg-2  col-sm-8 col-3">
+                        <div class="col-md-3 col-lg-2 col-sm-8 col-3">
                             <div class="logo">
-                               <h5><a href="/">Vestashi</a></h5>
+                               <h5><a class="logo__text" href="/">vestashi</a></h5>
                             </div>
                         </div>
                         <!-- Start MAinmenu Ares -->

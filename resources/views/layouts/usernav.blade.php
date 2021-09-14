@@ -55,6 +55,9 @@ $user_profile_photo = DB::table('users')
     <link rel="canonical" href="https://vestashi.com/">
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
  <link rel="stylesheet" type="text/css" href="{{ asset('/lib/toastr/toastr.css') }}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -79,12 +82,12 @@ $user_profile_photo = DB::table('users')
   <div class="az-header">
     <div class="container">
       <div class="az-header-left">
-        <a href="/" class="az-logo"><span></span> Vestashi</a>
+        <a href="/" class="az-logo logo__text">Vestashi</a>
         <a href="" id="azMenuShow" class="az-header-menu-icon d-lg-none"><span></span></a>
       </div><!-- az-header-left -->
       <div class="az-header-menu">
         <div class="az-header-menu-header">
-          <a href="/" class="az-logo"><span></span>Vestashi</a>
+          <a href="/" class="az-logo logo__text"><span></span>Vestashi</a>
           <a href="" class="close">&times;</a>
         </div><!-- az-header-menu-header -->
         <ul class="nav">
