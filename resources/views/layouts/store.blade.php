@@ -1,6 +1,7 @@
  @php
 
 $seo = DB::table('seos')->where('deleted_at', NULL)->first();
+$setting = DB::table('sitesettings')->first();
 
 @endphp
 
@@ -279,9 +280,6 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
                             </ul>
                         </div>
                     </div> --}}
-                     @php
-                    $setting = DB::table('sitesettings')->first();
-                    @endphp
                     <div class="offset__sosial__share">
                         <h4 class="offset__title">Follow Us On Social</h4>
                         @if($setting)  
@@ -346,9 +344,6 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
 
 @yield('content')
     <!-- Footer -->
- @php
-$setting = DB::table('sitesettings')->first();
- @endphp
 
      <!-- Start Footer Area -->
         <footer class="htc__foooter__area gray-bg">
