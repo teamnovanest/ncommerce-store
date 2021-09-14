@@ -79,7 +79,7 @@ class OrderUpdateController extends Controller
                     $order_details = DB::table('order_details')
                     ->join('status_options','order_details.status_id','=','status_options.id')
                     ->join('products', 'order_details.product_id', '=', 'products.id')
-                    ->select('products.image_one_secure_url','products.product_name as product','order_details.quantity','order_details.totalprice','status_options.description','order_details.status_id')
+                    ->select('products.image_one_secure_url','products.product_name as product','order_details.quantity','order_details.totalprice','status_options.description','order_details.status_id','status_name')
                     ->where('order_details.order_id', $orderId)
                     ->where('order_details.product_id', $product_id)
                     ->first();

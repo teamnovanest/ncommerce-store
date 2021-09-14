@@ -220,7 +220,7 @@
                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                   <tr>
                     <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:19px;font-weight:600;letter-spacing:1.7px;line-height:1;text-align:left;text-transform:uppercase;color:#000000;">Your Order has been updated</div>
+                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:19px;font-weight:600;letter-spacing:1.7px;line-height:1;text-align:left;text-transform:uppercase;color:#000000;">{{ $order_details->status_name }}</div>
                     </td>
                   </tr>
                   <tr>
