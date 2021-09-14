@@ -279,19 +279,24 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
                             </ul>
                         </div>
                     </div> --}}
+                     @php
+                    $setting = DB::table('sitesettings')->first();
+                    @endphp
                     <div class="offset__sosial__share">
                         <h4 class="offset__title">Follow Us On Social</h4>
+                        @if($setting)  
                         <ul class="off__soaial__link">
-                            <li><a class="bg--twitter" href="#"  title="Twitter"><i class="zmdi zmdi-twitter"></i></a></li>
+                            <li><a class="bg--twitter" href="//{{ $setting->twitter ?? '' }}" title="Twitter" target="_blank"><i class="zmdi zmdi-twitter"></i></a></li>
                             
-                            <li><a class="bg--instagram" href="#" title="Instagram"><i class="zmdi zmdi-instagram"></i></a></li>
+                            <li><a class="bg--instagram" href="//{{ $setting->instagram ?? ''}}" title="Instagram" target="_blank"><i class="zmdi zmdi-instagram"></i></a></li>
 
-                            <li><a class="bg--facebook" href="#" title="Facebook"><i class="zmdi zmdi-facebook"></i></a></li>
+                            <li><a class="bg--facebook" href="//{{ $setting->facebook ?? ''}}" title="Facebook" target="_blank"><i class="zmdi zmdi-facebook"></i></a></li>
 
-                            <li><a class="bg--googleplus" href="#" title="Google Plus"><i class="zmdi zmdi-google-plus"></i></a></li>
+                            {{-- <li><a class="bg--googleplus" href="#" title="Google Plus"><i class="zmdi zmdi-google-plus"></i></a></li>
 
-                            <li><a class="bg--google" href="#" title="Google"><i class="zmdi zmdi-google"></i></a></li>
+                            <li><a class="bg--google" href="#" title="Google"><i class="zmdi zmdi-google"></i></a></li> --}}
                         </ul>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -390,10 +395,10 @@ $setting = DB::table('sitesettings')->first();
                                     </ul>
                                 </div>
                                 <ul class="social__icon">
-                                    <li><a href="{{ $setting->twitter ?? ''}}"><i class="zmdi zmdi-twitter"></i></a></li>
-                                    <li><a href="{{ $setting->instagram ?? ''}}"><i class="zmdi zmdi-instagram"></i></a></li>
-                                    <li><a href="{{ $setting->facebook ?? ''}}"><i class="zmdi zmdi-facebook"></i></a></li>
-                                    <li><a href="{{ $setting->facebook ?? ''}}"><i class="zmdi zmdi-google-plus"></i></a></li>
+                                    <li><a href="//{{ $setting->twitter ?? ''}}" target="_blank"><i class="zmdi zmdi-twitter"></i></a></li>
+                                    <li><a href="//{{ $setting->instagram ?? ''}}" target="_blank"><i class="zmdi zmdi-instagram"></i></a></li>
+                                    <li><a href="//{{ $setting->facebook ?? ''}}" target="_blank"><i class="zmdi zmdi-facebook"></i></a></li>
+                                    {{-- <li><a href="//{{ $setting->facebook ?? ''}}" target="_blank"><i class="zmdi zmdi-google-plus"></i></a></li> --}}
                                 </ul>
                             </div>
                             @endif
