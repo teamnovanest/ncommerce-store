@@ -327,6 +327,9 @@
                         <li>Subtotal : <span class="amount">
                                 GH₵ {{ number_format(Session::get('coupon')['balance'],2) }} </span>
                         </li>
+                        <li>Total : GH₵<span class="amount" id="cart-total"> 
+                                {{ number_format(Session::get   ('coupon')['balance'],2)  }} </span>
+                        </li>
                         <li>Coupon : ({{ Session::get('coupon')['name'] }} )
                             <span class="amount">{{ Session::get('coupon')['discount'] }} % </span>
                             <a href="{{ route('remove.coupon') }}" class="btn btn-danger btn-sm ml-1">X</a>
@@ -335,14 +338,7 @@
                         <li>Subtotal : <span class="amount">
                                 GH₵ {{ Cart::Subtotal() }} </span>
                         </li>
-                        @endif
-
-                        @if(Session::has('coupon'))
-                        <li>Total : GH₵<span class="amount" id="cart-total"> 
-                                {{ number_format(Session::get   ('coupon')['balance'],2)  }} </span>
-                        </li>
-                        @else
-                        <li>Total : GH₵ <span class="amount" id="cart-total">{{ Cart::Subtotal()}} </span>
+                         <li>Total : GH₵ <span class="amount" id="cart-total">{{ Cart::Subtotal()}} </span>
                         </li>
                         @endif
                     </ul>
