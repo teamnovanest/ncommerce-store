@@ -1,5 +1,6 @@
 @php
 $seo = DB::table('seos')->where('deleted_at', NULL)->first();
+$setting = DB::table('sitesettings')->first();
 
 @endphp
 
@@ -35,6 +36,10 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/frontend_new/css/images/favicon.ico') }}">
     <link rel="apple-touch-icon" href="{{ asset('/frontend_new/css/apple-touch-icon.png') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
 
     <!-- All css files are included here. -->
@@ -117,7 +122,7 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
                     <div class="row">
                         <div class="col-md-3 col-lg-2  col-sm-8 col-3">
                             <div class="logo">
-                               <h5><a href="/">Vestashi</a></h5>
+                               <h5><a class="logo__text" href="/">vestashi</a></h5>
                             </div>
                         </div>
                         <!-- Start MAinmenu Ares -->
@@ -279,15 +284,15 @@ $seo = DB::table('seos')->where('deleted_at', NULL)->first();
                     <div class="offset__sosial__share">
                         <h4 class="offset__title">Follow Us On Social</h4>
                         <ul class="off__soaial__link">
-                            <li><a class="bg--twitter" href="#"  title="Twitter"><i class="zmdi zmdi-twitter"></i></a></li>
+                            <li><a class="bg--twitter" href="//{{ $setting->twitter ?? '' }}" title="Twitter" target="_blank"><i class="zmdi zmdi-twitter"></i></a></li>
                             
-                            <li><a class="bg--instagram" href="#" title="Instagram"><i class="zmdi zmdi-instagram"></i></a></li>
+                            <li><a class="bg--instagram" href="//{{ $setting->instagram ?? ''}}" title="Instagram" target="_blank"><i class="zmdi zmdi-instagram"></i></a></li>
 
-                            <li><a class="bg--facebook" href="#" title="Facebook"><i class="zmdi zmdi-facebook"></i></a></li>
+                            <li><a class="bg--facebook" href="//{{ $setting->facebook ?? ''}}" title="Facebook" target="_blank"><i class="zmdi zmdi-facebook"></i></a></li>
 
-                            <li><a class="bg--googleplus" href="#" title="Google Plus"><i class="zmdi zmdi-google-plus"></i></a></li>
+                            {{-- <li><a class="bg--googleplus" href="#" title="Google Plus"><i class="zmdi zmdi-google-plus"></i></a></li>
 
-                            <li><a class="bg--google" href="#" title="Google"><i class="zmdi zmdi-google"></i></a></li>
+                            <li><a class="bg--google" href="#" title="Google"><i class="zmdi zmdi-google"></i></a></li> --}}
                         </ul>
                     </div>
                 </div>
@@ -387,10 +392,10 @@ $setting = DB::table('sitesettings')->first();
                                     </ul>
                                 </div>
                                 <ul class="social__icon">
-                                    <li><a href="{{ $setting->twitter ?? ''}}"><i class="zmdi zmdi-twitter"></i></a></li>
-                                    <li><a href="{{ $setting->instagram ?? ''}}"><i class="zmdi zmdi-instagram"></i></a></li>
-                                    <li><a href="{{ $setting->facebook ?? ''}}"><i class="zmdi zmdi-facebook"></i></a></li>
-                                    <li><a href="{{ $setting->facebook ?? ''}}"><i class="zmdi zmdi-google-plus"></i></a></li>
+                                     <li><a href="//{{ $setting->twitter ?? ''}}" target="_blank"><i class="zmdi zmdi-twitter"></i></a></li>
+                                    <li><a href="//{{ $setting->instagram ?? ''}}" target="_blank"><i class="zmdi zmdi-instagram"></i></a></li>
+                                    <li><a href="//{{ $setting->facebook ?? ''}}" target="_blank"><i class="zmdi zmdi-facebook"></i></a></li>
+                                    {{-- <li><a href="//{{ $setting->facebook ?? ''}}" target="_blank"><i class="zmdi zmdi-google-plus"></i></a></li> --}}
                                 </ul>
                             </div>
                             @endif
