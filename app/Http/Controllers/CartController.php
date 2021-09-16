@@ -98,6 +98,7 @@ class CartController extends Controller
   {
     try {      
       Cart::remove($rowId);
+      Session::forget('coupon');
       $notification = array(
       'messege' => 'Product removed from cart',
       'alert-type' => 'success'
