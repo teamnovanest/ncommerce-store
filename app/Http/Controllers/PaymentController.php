@@ -69,9 +69,9 @@ class PaymentController extends Controller
                     $products_prices = []; #an empty array to store the prices of the items
                     foreach ($res_data['data']['metadata']['order'] as  $value) {
                         [$products]= DB::select('SELECT SUM(selling_price - discount_price) AS price FROM products WHERE id = ?',[$value['product_id']]);
-                        array_push($products_prices,intval($products->price)); #pushing the results into the empty array variable
+                        array_push($products_prices,intval($products->price * $value['quantity'])); #pushing the results into the empty array variable
                     }   
-                    
+        
                             $sum_of_product_prices = array_sum($products_prices); #adding prices of items in the products_prices variable. ALREADY IN PESEWAS
                             //fetching the coupon balance if coupon is applied else using the sum_of_product_prices variable that is the sum of the prices of the products
                             $balance = (Session::has('coupon')) ? ((Session::get('coupon')['balance']) * 100) : $sum_of_product_prices; 
@@ -79,6 +79,7 @@ class PaymentController extends Controller
                             $total = $sum_of_product_prices - $percentage_price; //subtrating the percentage discount price from the sum of the total prices in the order
                         #NOTE::when coupon is applied to the order, the total price reduces and the amount paid by the user and the sum of the prices in the 
                         #in the order will not match. So check if the session has coupon else use the original price.
+                        // dd($sum_of_product_prices,$balance,$total);
                     if ($res_data['data']['domain'] === env('PAYMENT_ENVIRONMENT') && $res_data['data']['amount'] === intval($total) && intval($balance) === intval($total)) {
                             // insert into orders table
                             $orderId = DB::table('orders')->insertGetId([
@@ -157,6 +158,7 @@ class PaymentController extends Controller
                             return response()->json(['error'=> 'Something didnt go right. Please try again, If the issue persists contact support']);
                         }
                 } catch (\Throwable $th){
+                    dd($th->getMessage());
                     DB::rollback();
                     if (app()->environment('production')){
                         \Sentry\captureException($th);
