@@ -28,7 +28,7 @@ class CouponController extends Controller
       $total = [];
       foreach ($content as $row) {
          if ($row->options->merchant_organization_id === $check->merchant_organization_id) {
-           $percentage_price = intval($check->discount / 100 * $row->price * $row->qty);
+           $percentage_price = floatval($check->discount / 100 * $row->price * $row->qty);
            array_push($total,$percentage_price);
          }
       }
@@ -37,7 +37,7 @@ class CouponController extends Controller
              Session::put('coupon', [
               'name' => $check->coupon_name,
               'discount' => $check->discount,
-              'balance' =>   intval($this->floatvalue(Cart::Subtotal()) - array_sum($total)),
+              'balance' =>   floatval($this->floatvalue(Cart::Subtotal()) - array_sum($total)),
               'percentage_price' => array_sum($total)
             ]);
               $notification = array(
@@ -99,7 +99,7 @@ class CouponController extends Controller
   public function couponRemove(){
  	Session::forget('coupon');
  	$notification=array(
-        'messege'=>'Coupon remove Successfully',
+        'messege'=>'Coupon removed Successfully',
         'alert-type'=>'success'
         );
         return Redirect()->back()->with($notification);

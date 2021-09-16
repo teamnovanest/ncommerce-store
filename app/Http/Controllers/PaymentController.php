@@ -45,7 +45,6 @@ class PaymentController extends Controller
       $results = Mail::to($order_summary->email)->send(new OrderConfirmation($order_summary,$order_details,$order_financing,$url));
       return $results;
     }
-
     /**
      *  verify paystack payment done on the client side as recomended in the docs
      */
@@ -57,34 +56,38 @@ class PaymentController extends Controller
     // check if the sum of the items purchased is the same as the amount paid before accepting order and redirecting the user
     // check also the test or prod env
         if($transactionref){
-            $url = "https://api.paystack.co/transaction/verify/" . $transactionref;
-            $res = Http::withHeaders([
-                'Authorization' => 'Bearer ' . env('PAYMENT_SECRET_KEY'),
-            ])->get($url);
-    
-            if($res->failed()){
-                return  $res->failed();
-            }else{
-                try {
+            try {
+                $url = "https://api.paystack.co/transaction/verify/" . $transactionref;
+                $res = Http::withHeaders([
+                    'Authorization' => 'Bearer ' . env('PAYMENT_SECRET_KEY'),
+                ])->get($url);
+        
                     DB::beginTransaction();
                     $res_data = $res->json();
-                            $totalamount = [];
-                            foreach ($res_data['data']['metadata']['order'] as  $value) {
-                            array_push($totalamount,$value['totalprice']);
-                            }
-                            $sum_of_totalprices_in_order = array_sum($totalamount) * 100;
-                            $balance = (Session::has('coupon')) ? (intval(Session::get('coupon')['balance']) * 100) : $sum_of_totalprices_in_order; //fetching the balance that is cart::subtotal minus coupon percentage price
-                            $percentage_price = (Session::has('coupon')) ? (intval(Session::get('coupon')['percentage_price']) * 100) : 0; //fetching the coupon percentage price if coupon has been applied                          
-                            $total = $sum_of_totalprices_in_order - $percentage_price; //subtrating the percentage discount price from the sum of the total prices in the order
+ 
+                    #fetching the product prices from the products table in the db
+                    $products_prices = []; #an empty array to store the prices of the items
+                    foreach ($res_data['data']['metadata']['order'] as  $value) {
+                        [$products]= DB::select('SELECT SUM(selling_price - discount_price) AS price FROM products WHERE id = ?',[$value['product_id']]);
+                        array_push($products_prices,intval($products->price * $value['quantity'])); #pushing the results into the empty array variable
+                    }   
+        
+                            $sum_of_product_prices = array_sum($products_prices); #adding prices of items in the products_prices variable. ALREADY IN PESEWAS
+                            //fetching the coupon balance if coupon is applied else using the sum_of_product_prices variable that is the sum of the prices of the products
+                            $balance = (Session::has('coupon')) ? ((Session::get('coupon')['balance']) * 100) : $sum_of_product_prices; 
+                            $percentage_price = (Session::has('coupon')) ? ((Session::get('coupon')['percentage_price']) * 100) : 0; //fetching the coupon percentage price if coupon has been applied                          
+                            $total = $sum_of_product_prices - $percentage_price; //subtrating the percentage discount price from the sum of the total prices in the order
                         #NOTE::when coupon is applied to the order, the total price reduces and the amount paid by the user and the sum of the prices in the 
                         #in the order will not match. So check if the session has coupon else use the original price.
-                    if ($res_data['data']['domain'] === env('PAYMENT_ENVIRONMENT') && $res_data['data']['amount'] === $total && $balance === $total) {
+                       
+                    if ($res_data['data']['domain'] === env('PAYMENT_ENVIRONMENT') && $res_data['data']['amount'] === intval($total) && intval($balance) === intval($total)) {
                             // insert into orders table
                             $orderId = DB::table('orders')->insertGetId([
-                                'user_id' => $res_data['data']['metadata']['customerId'],
+                                'user_id' => $res_data['data']['metadata']['customerId'], 
                                 'order_code' => crc32(time()),
                                 'subtotal' => $res_data['data']['amount'],
                                 'total' => $res_data['data']['amount'],
+                                'total_financed' => $res_data['data']['amount'],
                                 'status_code' => crc32(uniqid()),
                                 'created_at' => now(),
                             ]);
@@ -161,7 +164,6 @@ class PaymentController extends Controller
                     }
                     return response()->json(['error'=> 'Something didnt go right. Please try again, If the issue persists contact support'],500);
                 }
-            }
         }else{
             return response()->json(['error'=> 'Something didnt go right. Please try again, If the issue persists contact support']);
         }
