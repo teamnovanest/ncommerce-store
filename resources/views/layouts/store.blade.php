@@ -244,8 +244,8 @@ $setting = DB::table('sitesettings')->first();
                     </div>
                     <div class="off__contact">
                         <div class="logo">
-                            <a href="/">
-                                <h1>Vestashi</h1>
+                            <a href="/" class="logo__text">
+                                Vestashi
                             </a>
                         </div>
                         {{-- <p>Lorem ipsum dolor sit amet consectetu adipisicing elit sed do eiusmod tempor incididunt ut labore.</p> --}}
@@ -285,8 +285,8 @@ $setting = DB::table('sitesettings')->first();
                         </div>
                     </div> --}}
                     <div class="offset__sosial__share">
-                        <h4 class="offset__title">Follow Us On Social</h4>
                         @if($setting)  
+                        <h4 class="offset__title">Follow Us On Social</h4>
                         <ul class="off__soaial__link">
                             <li><a class="bg--twitter" href="//{{ $setting->twitter ?? '' }}" title="Twitter" target="_blank"><i class="zmdi zmdi-twitter"></i></a></li>
                             
