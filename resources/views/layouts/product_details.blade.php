@@ -241,8 +241,8 @@ $setting = DB::table('sitesettings')->first();
                     </div>
                     <div class="off__contact">
                         <div class="logo">
-                            <a href="/">
-                                <h1>Vestashi</h1>
+                            <a href="/" class="logo__text">
+                                Vestashi
                             </a>
                         </div>
                         {{-- <p>Lorem ipsum dolor sit amet consectetu adipisicing elit sed do eiusmod tempor incididunt ut labore.</p> --}}
