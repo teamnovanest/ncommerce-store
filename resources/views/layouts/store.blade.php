@@ -361,7 +361,6 @@ $setting = DB::table('sitesettings')->first();
                                 <div class="ft__logo">
                                     <a href="#">
                                       {{ $setting->company_name ?? ''}}
-                                       Vestashi
                                     </a>
                                    
                                 </div>
