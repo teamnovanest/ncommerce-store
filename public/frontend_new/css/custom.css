@@ -1114,4 +1114,30 @@ select.list-dt:focus {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    position: relative;
+}
+
+.logo__text::before,
+.logo__text::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 0px;
+    height: 4px;
+    margin: 5px 0 0;
+    opacity: 0;
+    transition: all 0.2s cubic-bezier(1, 0, 0.43, 0.73);
+    transition-duration: 0.75s;
+    background-image: linear-gradient(to right, #ff0a7c, #1c448e);
+}
+
+.logo__text:hover {
+    color: transparent;
+}
+
+.logo__text:hover::before,
+.logo__text:hover::after {
+    width: 100%;
+    opacity: 1;
 }
