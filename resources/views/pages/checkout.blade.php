@@ -318,17 +318,16 @@
                 @endif
 
             </div>
-           @if (isset($special_association_offers) || isset($credit_offers))
             <div class="col-md-6 col-sm-5 col-xs-12">
                 <div class="cart_totals">
                     <h3>Cart Total</h3>
                     <ul>
                         @if(Session::has('coupon'))
                         <li>Subtotal : <span class="amount">
-                                GH₵ {{ number_format(Session::get('coupon')['balance'],2) }} </span>
+                            GH₵ {{ number_format(Session::get('coupon')['balance'],2) }} </span>
                         </li>
                         <li>Total : GH₵<span class="amount" id="cart-total"> 
-                                {{ number_format(Session::get   ('coupon')['balance'],2)  }} </span>
+                            {{ number_format(Session::get   ('coupon')['balance'],2)  }} </span>
                         </li>
                         <li>Coupon : ({{ Session::get('coupon')['name'] }} )
                             <span class="amount">{{ Session::get('coupon')['discount'] }} % </span>
@@ -337,12 +336,13 @@
                         @else
                         <li>Subtotal : <span class="amount">
                                 GH₵ {{ Cart::Subtotal() }} </span>
-                        </li>
-                         <li>Total : GH₵ <span class="amount" id="cart-total">{{ Cart::Subtotal()}} </span>
-                        </li>
+                            </li>
+                            <li>Total : GH₵ <span class="amount" id="cart-total">{{ Cart::Subtotal()}} </span>
+                            </li>
                         @endif
                     </ul>
-
+                    
+                    @if (isset($special_association_offers) || isset($credit_offers))
                     <div>
                         <span class="wc-proceed-to-checkout">
                             <button id="checkout" class="checkout-btn btn" type="button">CHECKOUT WITH FINANCE</button>
@@ -351,9 +351,9 @@
                             <button style="height: 50px; background: black;" type="button" class="btn btn-danger">CANCEL</button>
                         </span> --}}
                     </div>
+                    @endif
                 </div>
             </div>
-              @endif
         </div>
         @else
         <div></div>
