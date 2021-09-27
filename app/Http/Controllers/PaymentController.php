@@ -77,10 +77,14 @@ class PaymentController extends Controller
                             $balance = (Session::has('coupon')) ? ((Session::get('coupon')['balance']) * 100) : $sum_of_product_prices; 
                             $percentage_price = (Session::has('coupon')) ? ((Session::get('coupon')['percentage_price']) * 100) : 0; //fetching the coupon percentage price if coupon has been applied                          
                             $total = $sum_of_product_prices - $percentage_price; //subtrating the percentage discount price from the sum of the total prices in the order
+
+                            #$sum_of_product_prices is equal to the sum of all the products prices.
+                            #$balance is the amount left if coupon is applied to the other
+                            #$percentage_price is the how much that was  deducted when coupon was applied.
                         #NOTE::when coupon is applied to the order, the total price reduces and the amount paid by the user and the sum of the prices in the 
                         #in the order will not match. So check if the session has coupon else use the original price.
                        
-                    if ($res_data['data']['domain'] === env('PAYMENT_ENVIRONMENT') && $res_data['data']['amount'] === intval($total) && intval($balance) === intval($total)) {
+                    if ($res_data['data']['domain'] === env('PAYMENT_ENVIRONMENT') && $res_data['data']['amount'] === intval($total) && intval($balance) === intval($total) && $res_data['data']['status'] === 'success') {
                             // insert into orders table
                             $orderId = DB::table('orders')->insertGetId([
                                 'user_id' => $res_data['data']['metadata']['customerId'], 
