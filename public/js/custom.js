@@ -131,7 +131,7 @@ $(document).ready(function () {
     $(".btn-update-qty").prop("disabled", true);
 
     // Enable quantity update button if quantity input valu changes
-    $(".qty").on("change click", function (evt) {
+    $(".qty").on("change keyup", function (evt) {
         $(this).siblings(".btn-update-qty").prop("disabled", false);
     });
 
