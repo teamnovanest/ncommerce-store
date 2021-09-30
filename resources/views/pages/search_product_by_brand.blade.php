@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="bradcaump__inner text-center">
-                                <h2 class="bradcaump-title">Products/Brands</h2>
+                                <h2 class="bradcaump-title">Brand/{{app('request')->brand_name}}</h2>
                             </div>
                         </div>
                     </div>
@@ -25,9 +25,9 @@
                 <div class="row">
                     <div class="col-lg-3 col-xl-3 col-md-12 col-12">
 						  <!-- Start Product Cat -->
-                         {{-- <div class="categories-menu">
+                         <div class="categories-menu">
                                 <div class="category-heading">
-                               <h3>Product Categories</h3>
+                               <h3>Categories</h3>
                                    </div>
                             <div class="category-menu-list"> 
                                 <ul class="sidebar__list">
@@ -40,7 +40,7 @@
                                 </ul>
                             </div>    
                         </div>
-                        <br> --}}
+                        <br>
                             <!-- End Product Cat -->
 							<!-- brands -->
 						 <div class="categories-menu">
