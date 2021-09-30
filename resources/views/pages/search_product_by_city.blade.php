@@ -26,7 +26,7 @@
                               <!-- Start Product Cat -->
                             <div class="categories-menu">
                                 <div class="category-heading">
-                               <h3>Product Categories</h3>
+                               <h3>Categories</h3>
                                    </div>
                             <div class="category-menu-list"> 
                                 <ul class="sidebar__list">

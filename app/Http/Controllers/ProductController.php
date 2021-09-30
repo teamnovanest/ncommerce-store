@@ -15,7 +15,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ProductController extends Controller
 {
-    public function productView($id)
+    public function productView($id)  //fetch details about a product and displaying it on the product details page
     {
       try {
     
@@ -55,7 +55,7 @@ class ProductController extends Controller
       }
     }
 
-public function addCart(Request $request, $id){
+public function addCart(Request $request, $id){  //Adding product to cart
   try {
     $product = DB::table('products')->where('id',$id)->first();
   
@@ -92,7 +92,7 @@ public function addCart(Request $request, $id){
 }
 
 
-public function productsView(Request $request){
+public function searchProductBySubcategory(Request $request){ //fetching products by subcategory_id
 
   try {
     $subcategoryId = $request->id;
@@ -123,7 +123,7 @@ public function productsView(Request $request){
 	   
 	}
 
-	public function categoryView(Request $request){
+	public function searchProductByCategory(Request $request){ //fetching products by categoryId searchProductByCategory
     try {
       $categoryId = $request->id;   
       $category_all =  DB::table('products')
@@ -148,7 +148,7 @@ public function productsView(Request $request){
 
   }
   
-	public function searchProductByBrand(Request $request){
+	public function searchProductByBrand(Request $request){ //fetching products by brand id
     try {
     $brandId = $request->id;
     $products =  DB::table('products')
@@ -175,7 +175,7 @@ public function productsView(Request $request){
 
   
 
-    public function search(Request $request){
+    public function search(Request $request){ //using the search on the page to find products
       try {
         $item = $request->search;
         

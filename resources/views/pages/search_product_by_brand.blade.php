@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="bradcaump__inner text-center">
-                                <h2 class="bradcaump-title">Products/Brands</h2>
+                                <h2 class="bradcaump-title">Brand/{{app('request')->brand_name}}</h2>
                             </div>
                         </div>
                     </div>
