@@ -19,7 +19,7 @@ class CouponController extends Controller
   {
     try {
     $coupon = $request->coupon;
-    $check = DB::table('coupons')->where('coupon_name', $coupon)->first(); //first
+    $check = DB::table('coupons')->where('coupon_name',$coupon)->where('deleted_at',null)->first(); //first
 
     $content = Cart::content();
 

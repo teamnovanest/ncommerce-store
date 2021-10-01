@@ -185,7 +185,14 @@
                                                 @endif
                                             </label>
                                         </div>
+                                    @else
+                                        @if (auth()->user()->lender_organization_id)
+                                            <div class="finance-offer__error">
+                                                <p>Your cart subtotal is greater than the maximum amount your organization is willing to finance.</p>
+                                                <p>Your subtotal should be less than GHC {{ number_format($offer->max_financed / 100,2) }}. </p>
+                                            </div>
                                         @endif
+                                    @endif
                                 </div>
                             </div>
                         </li>
@@ -279,8 +286,8 @@
                 @else
                 @if (auth()->user()->lender_organization_id)
                 <div class="finance-offer__error">
-                    <h4>Your cart subtotal is greater than the maximum amount your organization is willing to finance</h4>
-                    <h5>Your subtotal should be less than GHC {{ $amount->max_financed }} </h5>
+                    <p>Your cart subtotal is greater than the maximum amount your organization is willing to finance.</p>
+                    <p>Your subtotal should be less than GHC {{ $amount->max_financed }}. </p>
                 </div>
                 @endif
                 @endif

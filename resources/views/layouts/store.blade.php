@@ -467,7 +467,7 @@ $setting = DB::table('sitesettings')->first();
                         <div class="col-lg-12 col-xl-12 col-md-12 col-12">
                             <div class="copyright__inner">
                                 <div class="copyright">
-                                    <p>© <script>document.write(new Date().getFullYear());</script> <a href="#">Vestashi</a>
+                                    <p>© <script>document.write(new Date().getFullYear());</script> <a href="/">Vestashi</a>
                                     All Right Reserved.</p>
                                 </div>
                                 <ul class="footer__menu">
@@ -528,8 +528,9 @@ $setting = DB::table('sitesettings')->first();
     <script   src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.8.3/dist/instantsearch.production.min.js" integrity="sha256-LAGhRRdtVoD6RLo2qDQsU2mp+XVSciKRC8XPOBWmofM=" crossorigin="anonymous"></script>
 
     <!-- jquery latest version -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> --}}
     
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <!-- Paystack -->
     <script src="https://js.paystack.co/v2/inline.js"></script>
 
