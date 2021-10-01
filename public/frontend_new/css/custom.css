@@ -592,7 +592,7 @@
     color: #545863;
 }
 
-.finance-offer__error h5 {
+.finance-offer__error p {
     text-align: left;
     background-image: linear-gradient(to right, #ea3546, #c7182a);
     background-clip: text;
